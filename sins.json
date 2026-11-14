@@ -618,6 +618,34 @@
           "title": "A story"
         }
       ]
+    },
+    {
+      "id": "Shame-and-guilt",
+      "name": "Shame and guilt",
+      "kind": "inner-battle",
+      "tagline": "Feeling bad about what you did, or about who you are, and what to do with it.",
+      "topics": [
+        {
+          "id": "what-it-is",
+          "title": "What it is"
+        },
+        {
+          "id": "root-causes",
+          "title": "Root causes"
+        },
+        {
+          "id": "effects",
+          "title": "Effects on life"
+        },
+        {
+          "id": "how-to-overcome",
+          "title": "How to overcome it"
+        },
+        {
+          "id": "stories",
+          "title": "A story"
+        }
+      ]
     }
   ]
 }
