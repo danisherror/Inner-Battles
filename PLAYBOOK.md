@@ -184,20 +184,22 @@ Measure first; the site is small.
 
 ## 12. Completion plan (suggested order)
 
-| # | Task | Priority | Done when |
-|---|---|---|---|
-| 1 | Structure check: all 210 files exist, non-empty, and match `sins.json` | P1 | Script exits 0 |
-| 2 | Link and DOI check over all `.md` files | P1 | Checker reports 0 broken links; output saved |
-| 3 | Quote and verse verification pass for Lust, Greed, Envy, Gluttony, Wrath, Sloth (Pride already done) | P0 | Each checked item recorded in README with date |
-| 4 | Sources section present in all articles; unchecked points labelled | P1 | `grep -L "Sources"` over articles returns nothing |
-| 5 | Add SRI to `marked` (or vendor it) | P2 | Page still renders; browser console clean |
-| 6 | Decide on `Inner-Battles.md` (link, move or delete) | P2 | Decision recorded in README |
-| 7 | Error states: distinguish 404 from network/JSON failure; handle `sins.json` failure on the home page | P2 | Verified by blocking the request in DevTools |
-| 8 | Accessibility fixes (tabs pattern, live region, headings, contrast) | P2 | axe reports 0 serious issues on sampled pages |
-| 9 | Responsive and dark-mode check at 360 / 768 / 1280px | P3 | Screenshots reviewed, no overflow |
-| 10 | SEO basics: meta, OG, robots, sitemap, favicon | P2 | Tags present in page source; social preview tested |
-| 11 | Footer disclaimer on the site | P2 | Visible on both pages |
-| 12 | Deploy (for example Vercel), add security headers, smoke test the live URL | P2 | Home and 3 random article URLs load over HTTPS |
+| # | Task | Priority | Done when | Status (2026-11-14) |
+|---|---|---|---|---|
+| 1 | Structure check: all 210 files exist, non-empty, and match `sins.json` | P1 | Script exits 0 | DONE: 210/210 present, none empty |
+| 2 | Link and DOI check over all `.md` files | P1 | Checker reports 0 broken links; output saved | DONE: 310 URLs checked; 22 DOI 403s are publisher bot-blocking and resolve in doi.org (links exist; claims not checked) |
+| 3 | Quote and verse verification pass for Lust, Greed, Envy, Gluttony, Wrath, Sloth (Pride already done) | P0 | Each checked item recorded in README with date | IN PROGRESS: Pride done earlier. Lust: quotes and Gita claims checked. Other five sins: Bible quotes spot-checked (NRSV, match); about 60 non-Bible quotes unverified |
+| 4 | Sources section present in all articles; unchecked points labelled | P1 | `grep -L "Sources"` over articles returns nothing | DONE: every article has a Sources heading (Lust root-causes/modern notes none cited) |
+| 5 | Add SRI to `marked` (or vendor it) | P2 | Page still renders; browser console clean | DONE: sha512 integrity matches cdnjs; renders in Chrome |
+| 6 | Decide on `Inner-Battles.md` (link, move or delete) | P2 | Decision recorded in README | PARKED by user |
+| 7 | Error states: distinguish 404 from network/JSON failure; handle `sins.json` failure on the home page | P2 | Verified by blocking the request in DevTools | DONE: 404 and network failure checked; `sins.json` failure path not exercised |
+| 8 | Accessibility fixes (tabs pattern, live region, headings, contrast) | P2 | axe reports 0 serious issues on sampled pages | PARTIAL: aria-pressed, aria-live, focus outlines added; no axe/Lighthouse run, headings and contrast not checked |
+| 9 | Responsive and dark-mode check at 360 / 768 / 1280px | P3 | Screenshots reviewed, no overflow | TODO |
+| 10 | SEO basics: meta, OG, robots, sitemap, favicon | P2 | Tags present in page source; social preview tested | TODO |
+| 11 | Footer disclaimer on the site | P2 | Visible on both pages | DONE: footer on both pages |
+| 12 | Deploy (for example Vercel), add security headers, smoke test the live URL | P2 | Home and 3 random article URLs load over HTTPS | TODO |
+
+**Next up:** step 3 for Greed, Envy, Gluttony, Wrath and Sloth. Fetch each non-Bible quotation's source from a plain-text site (sacred-texts.com, Wikisource raw text, Perseus), then fix the wording or drop the quotation marks if it can't be confirmed. Start with the Upanishad lines in Greed and Gluttony (the Isha "enjoy through renunciation" line probably differs from the cited translation). Then the Lust leftovers (Catechism, suttas, Plato and Stoic points), then steps 8, 9, 10 and 12.
 
 ## 13. Release readiness checklist
 
