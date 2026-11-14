@@ -10,7 +10,7 @@ A quality and completion checklist for this project, adapted from the general Vi
 |---|---|
 | Type | Static content site (marketing/reference), no backend, no auth, no database, no user input |
 | Stack | Plain HTML and CSS. `build.js` renders the Markdown to static HTML with `marked` 4.3.0 at build time (generated pages are committed) |
-| Content | 7 sins + 1 inner battle (Procrastination, pilot) = 8 entries x 5 topics x 6 lenses = 240 articles (`<Entry>/<topic>/<lens>.md`), driven by `sins.json`; more inner battles are planned in `Inner-Battles.md` |
+| Content | 7 sins + 2 inner battles (Procrastination, Overthinking) = 9 entries x 5 topics x 6 lenses = 270 articles (`<Entry>/<topic>/<lens>.md`), driven by `sins.json`; more inner battles are planned in `Inner-Battles.md` |
 | Hosting | Vercel Hobby (free), https://seven-sins-liard.vercel.app |
 | Main risk | Wrong or unsourced claims about scripture, philosophy and research. Technical risk is low |
 
@@ -40,7 +40,7 @@ A quality and completion checklist for this project, adapted from the general Vi
 | Tests / CI | FAIL (P2) | None. A small script can replace them (see 4) |
 | Disclaimer on site | PASS | Footer on both pages |
 | Docs | PASS | README covers run, layout, adding a sin, writing guidelines, sources |
-| Inner battles | PARTIAL | Decided 2026-11-14: `sins.json` has a `kind` field (`sin` or `inner-battle`), the home page has a separate section, `Inner-Battles.md` is the plan (19 topics, phased). Pilot Procrastination written (30 articles); quotes read against sources, research claims only via abstracts; not checked in a browser. Phases 1-4 not started |
+| Inner battles | PARTIAL | Decided 2026-11-14: `sins.json` has a `kind` field (`sin` or `inner-battle`), the home page has a separate section, `Inner-Battles.md` is the plan (19 topics, phased). Pilot Procrastination and phase 1 Overthinking written (60 articles); quotes read against sources, research claims only via abstracts; not checked in a browser. Rest of phase 1 and phases 2-4 not started |
 
 ## 2. Content integrity (highest priority for this project)
 
@@ -199,7 +199,7 @@ Measure first; the site is small.
 | 11 | Footer disclaimer on the site | P2 | Visible on both pages | DONE: footer on both pages |
 | 12 | Deploy (for example Vercel), add security headers, smoke test the live URL | P2 | Home and 3 random article URLs load over HTTPS | DONE: Vercel Hobby (free) project `seven-sins`, https://seven-sins-liard.vercel.app; home, 3 articles, `sins.json`, `robots.txt` return 200; `vercel.json` sets CSP, nosniff, Referrer-Policy, X-Frame-Options; HSTS from Vercel; page renders with clean console (2026-11-14) |
 
-**Note on counts (2026-11-14):** the audit figures in this file (210 articles, 212 pages, 310 URLs and so on) were taken before Procrastination was added; the site now has 240 articles and 243 generated pages. Re-run the checks over the new pages before the next release; `npm run check` and the structure check pass.
+**Note on counts (2026-11-14):** the audit figures in this file (210 articles, 212 pages, 310 URLs and so on) were taken before Procrastination was added; the site now has 270 articles and 273 generated pages. Re-run the checks over the new pages before the next release; `npm run check` and the structure check pass.
 
 **Next up:** finish step 3: check the other Buddhist articles still noted "from memory" with the `bilarasuttas` API (`https://suttacentral.net/api/bilarasuttas/<uid>/sujato?lang=en`), then any remaining paraphrase-only summaries (Kant in Lust, a few Buddhist summaries). After that: label what was left unchecked in the 58 Sources sections (2.2), a real keyboard-only walk-through, a check in the platforms' own preview tools (step 10), and a decision on a sanitizer for the XSS item (5).
 

@@ -19,6 +19,7 @@ There is no backend. Articles are written in Markdown and pre-rendered to static
 | Pride | Written (5 topics × 6 lenses). Links, DOIs, Bible, Upanishad (Müller), Stoic and Aristotle quotations checked 2026-11-14; other references are from memory, see the note at the end of each article |
 | Greed, Envy, Gluttony, Wrath, Sloth | Written (5 topics × 6 lenses each). Links and DOIs checked 2026-11-14, as for Pride |
 | Procrastination (inner battle, pilot) | Written (5 topics × 6 lenses), 2026-11-14. See "Inner battles" below |
+| Overthinking (inner battle, phase 1) | Written (5 topics × 6 lenses), 2026-11-14. See "Inner battles" below |
 
 Inner battles are not sins, so `sins.json` marks them `"kind": "inner-battle"` and the home page lists them in their own section. The plan is in `Inner-Battles.md`: 19 topics in phases, one topic per batch, each checked before the next.
 
@@ -32,6 +33,8 @@ Procrastination (the pilot, written 2026-11-14) follows the same layout as the s
 - Research claims were read only in abstracts or secondary summaries: Steel (2007) in the Europe PMC abstract; Tice and Baumeister (1997), Sirois and Pychyl (2013), Wohl et al. (2010) and Gollwitzer and Sheeran (2006) through search results that quote or summarise the abstracts. None was read in full text. Each article says so.
 - The 49 external links in the articles were fetched. Four DOI links returned 403 to a bot (publisher blocking) and all five DOIs resolve at doi.org.
 - Not checked: the Sanskrit and Pali terms against a dictionary, the Marcus Aurelius paragraph number in Book 2, the *Confessions* section numbers (taken from the New Advent chapter headings), and the pages in a browser (the local server could not be started in this session).
+
+Overthinking (phase 1, written 2026-11-14; covers rumination, worry and restlessness) follows the same layout. Checked: every quotation from the Gita (6.26, 6.33-35, 2.62-63, 2.66, 2.70), the Katha and Mundaka Upanishads (Müller), the Bible (NRSV), Evagrius (Dysinger), the suttas and Dhammapada (Sujato via SuttaCentral: MN 19, SN 36.6, SN 46.51, Dhp 33-36), Epictetus (Higginson), Marcus Aurelius (Long), Seneca's Letters 13 and 98 (Gummere) and Pascal (Trotter, Gutenberg) was compared with the text of its page on the same date. Research claims (Watkins 2008, Watkins and Roberts 2020, Nolen-Hoeksema, Wisco and Lyubomirsky 2008, Killingsworth and Gilbert 2010, Kross et al. 2014) were read in the abstracts in Europe PMC, not in the full texts. All 36 external links were fetched; the four DOI links returned 403 to a bot and all five DOIs resolve at doi.org. Not checked: the Evagrius chapter number (the page gives none), the Marcus Aurelius section number (8.47, taken from the standard numbering), the Pascal passage number in other editions, Sanskrit and Pali terms against a dictionary, and the pages in a browser.
 
 ## Run locally
 

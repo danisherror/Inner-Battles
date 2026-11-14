@@ -254,6 +254,34 @@
           "title": "A story"
         }
       ]
+    },
+    {
+      "id": "Overthinking",
+      "name": "Overthinking",
+      "kind": "inner-battle",
+      "tagline": "Going round the same thoughts about the past or the future, unable to settle or to act.",
+      "topics": [
+        {
+          "id": "what-it-is",
+          "title": "What it is"
+        },
+        {
+          "id": "root-causes",
+          "title": "Root causes"
+        },
+        {
+          "id": "effects",
+          "title": "Effects on life"
+        },
+        {
+          "id": "how-to-overcome",
+          "title": "How to overcome it"
+        },
+        {
+          "id": "stories",
+          "title": "A story"
+        }
+      ]
     }
   ]
 }
