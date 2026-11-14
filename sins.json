@@ -534,6 +534,34 @@
           "title": "A story"
         }
       ]
+    },
+    {
+      "id": "Ego-and-validation",
+      "name": "Ego and validation",
+      "kind": "inner-battle",
+      "tagline": "Needing approval and praise to feel worthy.",
+      "topics": [
+        {
+          "id": "what-it-is",
+          "title": "What it is"
+        },
+        {
+          "id": "root-causes",
+          "title": "Root causes"
+        },
+        {
+          "id": "effects",
+          "title": "Effects on life"
+        },
+        {
+          "id": "how-to-overcome",
+          "title": "How to overcome it"
+        },
+        {
+          "id": "stories",
+          "title": "A story"
+        }
+      ]
     }
   ]
 }
