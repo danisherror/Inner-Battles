@@ -282,6 +282,34 @@
           "title": "A story"
         }
       ]
+    },
+    {
+      "id": "Perfectionism",
+      "name": "Perfectionism",
+      "kind": "inner-battle",
+      "tagline": "Holding yourself to standards so high that starting, finishing or being seen feels unsafe.",
+      "topics": [
+        {
+          "id": "what-it-is",
+          "title": "What it is"
+        },
+        {
+          "id": "root-causes",
+          "title": "Root causes"
+        },
+        {
+          "id": "effects",
+          "title": "Effects on life"
+        },
+        {
+          "id": "how-to-overcome",
+          "title": "How to overcome it"
+        },
+        {
+          "id": "stories",
+          "title": "A story"
+        }
+      ]
     }
   ]
 }
