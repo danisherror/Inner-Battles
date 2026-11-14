@@ -12,4 +12,4 @@ Envy damages the mind, and the community.
 - [Sn 4.11, Kalahavivada Sutta](https://suttacentral.net/snp4.11)
 - [Vinaya, Cullavagga 7 (Devadatta)](https://suttacentral.net/pli-tv-kd17)
 
-Summaries were from memory. The Cullavagga link is an approximate pointer: the Devadatta chapter number and the SuttaCentral address should be checked.
+The Devadatta schism is in Cullavagga chapter 7, which is Khandhaka 17 on SuttaCentral (https://suttacentral.net/pli-tv-kd17, link returns 200; contents not read). Sutta numbers, titles and the points cited (Sn 4.11 on quarrels and stinginess) were checked against Sujato's translation via the SuttaCentral bilarasuttas API (https://suttacentral.net/api/bilarasuttas/<uid>/sujato?lang=en) on 2026-11-14; other summaries were not compared with a translation.

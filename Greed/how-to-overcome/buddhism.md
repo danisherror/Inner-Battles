@@ -14,4 +14,4 @@ Buddhism's remedies are generosity, contentment and insight.
 - [AN 5.177](https://suttacentral.net/an5.177)
 - [SN 22.59](https://suttacentral.net/sn22.59)
 
-Summaries were from memory and not compared with a translation here. Practices like retreats and merit-sharing vary between schools.
+Summaries were from memory and not compared with a translation here. Practices like retreats and merit-sharing vary between schools. Sutta numbers, titles and the points cited (Sn 2.4, AN 5.177, SN 22.59) were checked against Sujato's translation via the SuttaCentral bilarasuttas API (https://suttacentral.net/api/bilarasuttas/<uid>/sujato?lang=en) on 2026-11-14; other summaries were not compared with a translation.

@@ -12,4 +12,4 @@ Buddhism explains conceit through **craving, ignorance and the idea of a fixed s
 - [MN 135, Culakammavibhanga Sutta](https://suttacentral.net/mn135)
 - [SN 22.89, Khemaka Sutta](https://suttacentral.net/sn22.89)
 
-Summaries were written from memory and not checked against a translation here. The links are to SuttaCentral's sutta pages.
+Summaries were written from memory and not checked against a translation here. The links are to SuttaCentral's sutta pages. Sutta numbers, titles and the points cited (SN 22.59, MN 135) were checked against Sujato's translation via the SuttaCentral bilarasuttas API (https://suttacentral.net/api/bilarasuttas/<uid>/sujato?lang=en) on 2026-11-14; other summaries were not compared with a translation.

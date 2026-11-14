@@ -13,4 +13,4 @@ Buddhism treats sloth as a hindrance with practical remedies.
 - [AN 4.13](https://suttacentral.net/an4.13)
 - [SN 45.2, Upaddha Sutta](https://suttacentral.net/sn45.2)
 
-Summaries were from memory and not compared with a translation; sutta numbers (especially AN 6.19-20 as cited in the text) should be checked.
+Sutta numbers, titles and the points cited (AN 4.13, AN 6.19-20) were checked against Sujato's translation via the SuttaCentral bilarasuttas API (https://suttacentral.net/api/bilarasuttas/<uid>/sujato?lang=en) on 2026-11-14; other summaries were not compared with a translation.

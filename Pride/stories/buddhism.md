@@ -1,8 +1,8 @@
 **Ambattha and his ancestors**
 
-In the Ambattha Sutta (DN 3), a young brahmin named Ambattha, proud of his high caste and learning, visits the Buddha. He speaks scornfully of the Shakyans, the Buddha's own people, and calls them menials who do not honour brahmins.
+In the Ambattha Sutta (DN 3), a young brahmin named Ambattha, proud of his high caste and learning, visits the Buddha. He speaks scornfully of the Shakyans, the Buddha's own people, and calls them rude "primitives" who do not honour brahmins.
 
-The Buddha asks him questions. Whose family is Ambattha from? The Buddha shows, from traditions Ambattha accepts, that his own ancestor was the son of a slave woman of King Okkaka, so by his own standard he has little to boast of. When Ambattha refuses to answer, the Buddha warns him that his head may split if he keeps refusing.
+The Buddha asks him questions. Whose family is Ambattha from? The Buddha shows, from traditions Ambattha accepts, that his own ancestor was the son of a slave woman of King Okkaka, so by his own standard he has little to boast of. When Ambattha refuses to answer, the Buddha warns him that anyone who fails to answer a legitimate question asked three times has their head explode into seven pieces, and the spirit Vajirapani stands ready to do it.
 
 The Buddha then teaches that what matters is not birth but conduct and knowledge: in the realm of *vijja* (knowledge) and *carana* (conduct), claims of caste do not count. Ambattha leaves shaken, and he is not recorded as a convert in this sutta.
 

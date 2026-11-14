@@ -11,4 +11,4 @@ Greed keeps the cycle of suffering turning.
 - [Dhammapada 186-187](https://suttacentral.net/dhp179-196), [355](https://suttacentral.net/dhp334-359), [177](https://suttacentral.net/dhp167-178)
 - [SN 22.59](https://suttacentral.net/sn22.59)
 
-Summaries were from memory and not compared with a translation. The "karma" line is a standard teaching summary.
+Summaries were from memory and not compared with a translation. The "karma" line is a standard teaching summary. Sutta numbers, titles and the points cited (SN 22.59) were checked against Sujato's translation via the SuttaCentral bilarasuttas API (https://suttacentral.net/api/bilarasuttas/<uid>/sujato?lang=en) on 2026-11-14; other summaries were not compared with a translation.
