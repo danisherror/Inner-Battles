@@ -23,4 +23,4 @@ It took months. He lost some weight, but the bigger change was that food stopped
 
 **Sources**
 
-- Illustrative composite. The steps reflect the advice in [How to overcome it](?id=Gluttony&topic=how-to-overcome&lens=modern) and are not drawn from a specific study. This is not medical advice.
+- Illustrative composite. The steps reflect the advice in [How to overcome it](../how-to-overcome/modern.html) and are not drawn from a specific study. This is not medical advice.

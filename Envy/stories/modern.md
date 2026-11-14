@@ -22,4 +22,4 @@ The friendship came back, more honest than before.
 
 **Sources**
 
-- Illustrative composite. The steps reflect the advice in [How to overcome it](?id=Envy&topic=how-to-overcome&lens=modern) and are not drawn from a specific study.
+- Illustrative composite. The steps reflect the advice in [How to overcome it](../how-to-overcome/modern.html) and are not drawn from a specific study.

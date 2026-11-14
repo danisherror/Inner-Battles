@@ -9,7 +9,7 @@ A quality and completion checklist for this project, adapted from the general Vi
 | Property | Value |
 |---|---|
 | Type | Static content site (marketing/reference), no backend, no auth, no database, no user input |
-| Stack | Plain HTML, CSS, JS. `marked` 4.3.0 from cdnjs renders Markdown in the browser |
+| Stack | Plain HTML and CSS. `build.js` renders the Markdown to static HTML with `marked` 4.3.0 at build time (generated pages are committed) |
 | Content | 7 sins x 5 topics x 6 lenses = 210 articles (`<Sin>/<topic>/<lens>.md`), driven by `sins.json` |
 | Hosting | Vercel Hobby (free), https://seven-sins-liard.vercel.app |
 | Main risk | Wrong or unsourced claims about scripture, philosophy and research. Technical risk is low |
@@ -31,7 +31,7 @@ A quality and completion checklist for this project, adapted from the general Vi
 | All 7 sins written | PASS | 210/210 files present and non-empty, all 210 article URLs render at 360px and 768px |
 | Links and DOIs | PARTIAL | 310 URLs checked 2026-11-14 (22 DOI 403s are bot-blocking). Re-run after content edits |
 | Scripture and quote accuracy | PARTIAL | Pride and Lust checked; Greed/Gluttony Upanishads, philosophical lens and Christianity non-Bible items checked and fixed. Buddhist suttas, Evagrius and Aquinas still open (see step 3) |
-| Security (XSS) | PARTIAL | `sin.html` renders `marked.parse(md)` through `innerHTML`; marked 4.x does not sanitize. Safe only while all Markdown is first-party. See 5 |
+| Security (XSS) | PARTIAL | `sin.html` renders `marked.parse(md)` through `innerHTML`; marked 4.x does not sanitize. Safe only while all Markdown is first-party. See 5 | Update 2026-11-14: Markdown is now rendered at build time by `build.js`; `sin.html` no longer runs `marked`.
 | Supply chain | PASS | `sin.html` loads `marked` 4.3.0 with a sha512 `integrity` hash that matches the cdnjs API value; page still renders it (checked in Chrome 2026-11-14) |
 | SEO / social previews | PARTIAL | Meta description, Open Graph, Twitter card, favicon, canonical (home), `robots.txt` and `sitemap.xml` added. `og.png` (1200x630) and `summary_large_image` Twitter card added 2026-11-14; live tags and image fetched with Facebook and Twitter crawler user agents (200, image/png). Platform preview tools (login required) not used. Crawlers do not run JS, so every article URL shares the generic `sin.html` title and description in its preview |
 | SEO of article content | FAIL (P2) | Articles load via `fetch` after page load and the URL uses a query string, so crawlers see an empty shell. Acceptable only if search traffic is not a goal |
@@ -116,10 +116,10 @@ process.exit(bad ? 1 : 0);
 
 ## 5. Security (proportionate to a static site)
 
-- [ ] **XSS:** `marked.parse` output goes into `innerHTML` unsanitized. Today all Markdown is first-party, so the risk is low. If articles ever come from contributors or another source, add DOMPurify. Test by adding `<script>` and `<img onerror>` to a scratch article and confirming the outcome.
-- [x] **SRI:** add `integrity` and `crossorigin="anonymous"` to the `marked` script tag, or vendor the file into the repo. Either removes the cdnjs runtime dependency risk. Compute the hash from the file you actually verified.
+- [ ] **XSS:** `marked.parse` output is written into the static pages unsanitized at build time. Today all Markdown is first-party, so the risk is low. If articles ever come from contributors or another source, add DOMPurify. Test by adding `<script>` and `<img onerror>` to a scratch article and confirming the outcome.
+- [x] **SRI:** add `integrity` and `crossorigin="anonymous"` to the `marked` script tag, or vendor the file into the repo. Either removes the cdnjs runtime dependency risk. Compute the hash from the file you actually verified. Moot since 2026-11-14: `marked` no longer loads in the browser.
 - [x] Query parameters (`id`, `topic`, `lens`) are used only to look up entries in `sins.json`, never concatenated into a fetch path directly. Confirm this still holds after edits.
-- [x] Security headers at the host (Vercel `vercel.json` or equivalent): `X-Content-Type-Options: nosniff`, `Referrer-Policy`, and a CSP allowing only `self` and `cdnjs.cloudflare.com` for scripts.
+- [x] Security headers at the host (Vercel `vercel.json` or equivalent): `X-Content-Type-Options: nosniff`, `Referrer-Policy`, and a CSP allowing only `self` (and inline scripts) for scripts; cdnjs was removed from the CSP when `marked` stopped loading in the browser.
 - [x] HTTPS enforced by the host.
 - [x] No secrets, analytics tokens or personal data committed (pattern scan of `git log -p` found none; Gitleaks itself not run).
 - [x] No tracking or cookies unless deliberately added; `localStorage` currently stores only the chosen lens, wrapped in try/catch.
@@ -133,15 +133,15 @@ process.exit(bad ? 1 : 0);
 - [x] Copy a deep link, open it in a new tab: same article loads. Checked 2026-11-14 in Chrome against https://seven-sins-liard.vercel.app (the deployed site, not a local server): `id=Wrath&topic=what-it-is&lens=upanishads` in a fresh tab selected the same topic and lens and loaded the Upanishads article.
 - [x] Remembered lens persists across sins and survives `localStorage` being blocked. Checked 2026-11-14 in Chrome against https://seven-sins-liard.vercel.app (the deployed site, not a local server): chose Buddhism on Pride, opened `id=Greed&topic=what-it-is` with no `lens`, and Buddhism was selected. Blocked storage was simulated by making the `localStorage` getter throw, after which `store.get`/`store.set` returned null / did nothing without throwing; a full page load with storage blocked was not run.
 - [x] Distinguish error cases: 404 file ("not written yet") vs network or JSON failure ("could not load, retry"). Add an error message to `index.html`.
-- [x] Loading state works and does not flash incorrectly. Read from the code on 2026-11-14, not observed in a browser: `body.pending` hides `#article` and the footer until the first fetch settles (success or failure both call `ready()`); on a tab or lens switch the article shows "Loading..." in place. A real-browser pass with network throttling is still open.
-- [x] Open the site from `file://` and confirm the README's explanation (fetch blocked) is accurate; consider a visible hint. Source for the claim: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS/Errors/CORSRequestNotHttp (MDN says `fetch` to a `file:///` URL fails). Added a `file:` hint to the error path of `index.html` and `sin.html`, and cited the source in the README. Not run from `file://` in a browser: the Chrome extension cannot open `file://` URLs.
+- [x] Loading state works and does not flash incorrectly. Read from the code on 2026-11-14, not observed in a browser: `body.pending` hides `#article` and the footer until the first fetch settles (success or failure both call `ready()`); on a tab or lens switch the article shows "Loading..." in place. A real-browser pass with network throttling is still open. Superseded 2026-11-14: pages are pre-rendered, so there is no loading state any more.
+- [x] Open the site from `file://` and confirm the README's explanation (fetch blocked) is accurate; consider a visible hint. Source for the claim: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS/Errors/CORSRequestNotHttp (MDN says `fetch` to a `file:///` URL fails). Added a `file:` hint to the error path of `index.html` and `sin.html`, and cited the source in the README. Not run from `file://` in a browser: the Chrome extension cannot open `file://` URLs. Superseded 2026-11-14: the pages no longer use `fetch`, so `file://` works; the hint was removed with the `fetch` code.
 
 ## 7. SEO and sharing (do only if discoverability matters)
 
 - [x] Unique `<title>` and meta description per page. `sin.html` already sets a title per sin; add the topic and lens.
 - [x] Canonical URL, Open Graph (title, description, image) and Twitter card (home page canonical only; article pages share generic Open Graph text because the tags are set by JS).
 - [x] `robots.txt` and `sitemap.xml` listing the pages.
-- [ ] Articles are rendered client-side, so search engines may index little. Options if this matters: pre-render the Markdown to static HTML at build time (one HTML page per article), or accept the limitation and note it here.
+- [x] Articles were rendered client-side, so search engines may index little. Done 2026-11-14: `build.js` pre-renders each article to `<Sin>/<topic>/<lens>.html` (210 pages, each with its own title, description, canonical URL and Open Graph tags), and `index.html` links to them directly. `sitemap.xml` lists all 211 URLs. Old `sin.html?id=...` links redirect to the matching page. Checked by script: every `href`/`src` in the 213 generated pages resolves to an existing file, each article page has one `h1`, the redirect and lens scripts behave as intended for valid, bogus, `constructor` and path-like inputs, and `npm run check` reports no stale files. Not checked: the pages in a real browser, the Vercel deployment, or what Google actually indexes after the change.
 - [x] Favicon.
 - [x] `lang="en"` is already set.
 
@@ -160,14 +160,14 @@ process.exit(bad ? 1 : 0);
 Measure first; the site is small.
 
 - [x] Lighthouse on the home page and a sample article: LCP <= 2.5s, CLS <= 0.1, INP <= 200ms. Local run: LCP 0.9s and 1.6s, CLS 0 and 0.037, TBT 0 ms (INP not measured). Live URL after redeploy (2026-11-14): home performance 100 (LCP 0.8s, CLS 0, TBT 40 ms); article 99 (LCP 1.8s, CLS 0, TBT 0 ms); accessibility, best-practices and SEO 100 on both.
-- [ ] Each article is a separate small `fetch` (about 1 to 2 KB each); confirm no waterfall beyond `sins.json` then article.
-- [ ] `marked` is the only third-party script; consider `defer`, or vendoring to remove the extra origin.
+- [x] Each article is a separate small `fetch` (about 1 to 2 KB each); confirm no waterfall beyond `sins.json` then article. Moot 2026-11-14: articles are static pages, with no `fetch` at all.
+- [x] `marked` is the only third-party script; consider `defer`, or vendoring to remove the extra origin. Moot 2026-11-14: no third-party script remains; `marked` runs only in `build.js`.
 - [x] Cache headers for `.md` and `sins.json` at the host.
 
 ## 10. Code quality and maintainability
 
 - [ ] `sin.html` and `index.html` stay small; extract a shared JS file only if duplication grows.
-- [ ] HTML escaping: titles and taglines from `sins.json` are interpolated into `innerHTML`. They are first-party, but escape them or use `textContent` if the data ever becomes external.
+- [x] HTML escaping: titles and taglines from `sins.json` are interpolated into `innerHTML`. They are first-party, but escape them or use `textContent` if the data ever becomes external. Done 2026-11-14: `build.js` escapes titles and taglines with `esc`.
 - [ ] No dead code, unused CSS or unused files.
 - [ ] README stays in sync with reality (status table, layout, sources). Update it whenever content or structure changes.
 - [ ] `sins.json` is the single source of truth for sins, topics and lenses.

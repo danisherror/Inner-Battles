@@ -22,4 +22,4 @@ She did not finish early, but she finished on time and the work was fine.
 
 **Sources**
 
-- Illustrative composite. The steps reflect the advice in [How to overcome it](?id=Sloth&topic=how-to-overcome&lens=modern) and are not drawn from a specific study. If low mood lasts, please see a doctor.
+- Illustrative composite. The steps reflect the advice in [How to overcome it](../how-to-overcome/modern.html) and are not drawn from a specific study. If low mood lasts, please see a doctor.

@@ -19,31 +19,30 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='28'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="pending">
+<body>
   <div class="wrap">
     <header class="hero">
       <h1>The Seven Sins</h1>
       <p>Understand the habits that hold us back through six lenses (modern, Hinduism, Upanishads, Christianity, Buddhism and philosophy) and learn how to leave them behind.</p>
     </header>
-    <main class="grid" id="grid"></main>
+    <main class="grid">
+      <a class="card" href="Pride/what-it-is/modern.html"><h2>Pride</h2><p>Valuing yourself above truth, and above other people.</p></a>
+      <a class="card" href="Greed/what-it-is/modern.html"><h2>Greed</h2><p>Wanting more than you need, and never feeling you have enough.</p></a>
+      <a class="card" href="Lust/what-it-is/modern.html"><h2>Lust</h2><p>Desire that overrides respect, commitment and judgment.</p></a>
+      <a class="card" href="Envy/what-it-is/modern.html"><h2>Envy</h2><p>Pain at another person's good fortune.</p></a>
+      <a class="card" href="Gluttony/what-it-is/modern.html"><h2>Gluttony</h2><p>Over-indulgence, taking more than you need.</p></a>
+      <a class="card" href="Wrath/what-it-is/modern.html"><h2>Wrath</h2><p>Uncontrolled anger, resentment and the wish to get even.</p></a>
+      <a class="card" href="Sloth/what-it-is/modern.html"><h2>Sloth</h2><p>Neglecting what matters, from laziness, apathy or avoidance.</p></a>
+    </main>
   </div>
   <footer>A read-only guide for self-improvement. Educational and reflective content, not medical, psychological or religious authority. If a habit is harming your life, please talk to a doctor, therapist or a trusted person.</footer>
   <script>
-    fetch("sins.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(({ sins }) => {
-      document.getElementById("grid").innerHTML = sins.map(s => {
-        const ready = !!s.topics;
-        const inner = `<h2>${s.name}</h2><p>${s.tagline}</p>${ready ? "" : '<span class="soon">Coming soon</span>'}`;
-        return ready
-          ? `<a class="card" href="sin.html?id=${s.id}">${inner}</a>`
-          : `<div class="card disabled">${inner}</div>`;
-      }).join("");
-      document.body.classList.remove("pending");
-    }).catch(() => {
-      document.getElementById("grid").innerHTML = location.protocol === "file:"
-        ? '<p>This site loads its content with <code>fetch</code>, which browsers block on <code>file://</code> pages. Serve the folder over HTTP (for example <code>python3 -m http.server 8000</code>) and open <code>http://localhost:8000</code>.</p>'
-        : "<p>Could not load the list of sins. Check your connection and reload.</p>";
-      document.body.classList.remove("pending");
-    });
+    // Cards link to the first lens; swap in the lens the reader chose last.
+    try {
+      const lens = localStorage.getItem("lens");
+      if (["modern","hinduism","upanishads","christianity","buddhism","philosophical"].includes(lens))
+        for (const a of document.querySelectorAll("a.card[href]")) a.href = a.getAttribute("href").replace(/[^/]+\.html$/, lens + ".html");
+    } catch (e) {}
   </script>
 </body>
 </html>

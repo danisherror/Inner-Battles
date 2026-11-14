@@ -23,4 +23,4 @@ He still got angry. But the blasts became rarer and shorter, and he repaired the
 
 **Sources**
 
-- Illustrative composite. The steps reflect the advice in [How to overcome it](?id=Wrath&topic=how-to-overcome&lens=modern) and are not drawn from a specific study. If anger leads to violence, seek help.
+- Illustrative composite. The steps reflect the advice in [How to overcome it](../how-to-overcome/modern.html) and are not drawn from a specific study. If anger leads to violence, seek help.

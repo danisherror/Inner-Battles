@@ -22,4 +22,4 @@ The business grew more slowly. He slept better and was at the next recital.
 
 **Sources**
 
-- Illustrative composite. The steps reflect the advice in [How to overcome it](?id=Greed&topic=how-to-overcome&lens=modern) and are not drawn from a specific study.
+- Illustrative composite. The steps reflect the advice in [How to overcome it](../how-to-overcome/modern.html) and are not drawn from a specific study.

@@ -9,7 +9,7 @@ A read-only guide to the seven deadly sins: what each one is, where it comes fro
 - **Buddhist**
 - **Philosophical** (Plato, Aristotle, the Stoics, Kant)
 
-There is no backend. It is plain HTML, CSS and JavaScript, with articles written in Markdown.
+There is no backend. Articles are written in Markdown and pre-rendered to static HTML (one page per article) by `build.js`, so the pages work without JavaScript and search engines can read them.
 
 ## Status
 
@@ -23,40 +23,51 @@ Structure and link audit, 2026-11-14: all 210 articles exist and every article h
 
 ## Run locally
 
-The site loads `.md` files with `fetch`, so it must be served over HTTP. Opening `index.html` directly from disk will not work. Browsers block `fetch` of `file://` URLs ([MDN: CORS request not HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS/Errors/CORSRequestNotHttp)), so both pages show a hint to use a local server when opened that way.
+The pages are generated, plain HTML with relative links and no `fetch`, so you can open `index.html` from disk or serve the folder:
 
 ```sh
 cd Sins
 python3 -m http.server 8000
 ```
 
-Then open <http://localhost:8000>. An internet connection is needed because the Markdown renderer ([marked](https://cdnjs.com/libraries/marked) 4.3.0) is loaded from cdnjs.
+Then open <http://localhost:8000>.
 
-The site can be deployed to any static host, such as Vercel, as it is. It is currently deployed on the free Vercel Hobby plan at <https://seven-sins-liard.vercel.app>; `vercel.json` sets the security headers. To redeploy, run `vercel deploy --prod` in this folder (the project name `seven-sins` is saved in the untracked `.vercel` folder).
+After editing any `.md` file or `sins.json`, regenerate the pages and commit the result:
+
+```sh
+npm install        # once; installs marked 4.3.0, used only at build time
+npm run render     # rewrites the article pages, index.html, sin.html and sitemap.xml
+npm run check      # exits 1 if a generated file is stale
+```
+
+The site can be deployed to any static host, such as Vercel, as it is. It is currently deployed on the free Vercel Hobby plan at <https://seven-sins-liard.vercel.app>; `vercel.json` sets the security headers. The generated HTML is committed, so the host runs no build step. To redeploy, run `vercel deploy --prod` in this folder (the project name `seven-sins` is saved in the untracked `.vercel` folder).
 
 ## Project layout
 
 ```
 Sins/
-  index.html      home page: one card per sin
-  sin.html        sin page: topic buttons, lens tabs, rendered article
+  build.js        generates every .html page and sitemap.xml (npm run render)
+  index.html      generated home page: one card per sin
+  sin.html        generated redirect for old sin.html?id=... links
   style.css       styles (light and dark)
   sins.json       list of lenses, sins and each sin's topics
   Lust/ Pride/ Greed/ Envy/ Gluttony/ Wrath/ Sloth/   (each has the same five topic folders)
     what-it-is/       modern.md  hinduism.md  upanishads.md  christianity.md  buddhism.md  philosophical.md
+                      (plus a generated .html page next to each .md)
     root-causes/
     effects/
     how-to-overcome/
     stories/
 ```
 
-Article files follow the pattern `<Sin>/<topic>/<lens>.md`.
+Article files follow the pattern `<Sin>/<topic>/<lens>.md`, and the generated page is `<Sin>/<topic>/<lens>.html`. Links between articles in Markdown should point at the `.html` page (for example `../how-to-overcome/modern.html`).
 
 ## Adding a sin
 
 1. Create a folder named after the sin, for example `Pride/`, matching its `id` in `sins.json`.
 2. For each topic, add a subfolder with six files: `modern.md`, `hinduism.md`, `upanishads.md`, `christianity.md`, `buddhism.md`, `philosophical.md`.
 3. Add a `topics` list to that sin in `sins.json`. A sin without `topics` is shown as "Coming soon".
+4. Run `npm run render` and commit the generated pages.
 
 ```json
 "topics": [

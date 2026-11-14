@@ -62,21 +62,19 @@ article li { margin: var(--space-2) 0; }
 nav.pager { display: flex; justify-content: space-between; gap: var(--space-3); padding: var(--space-5) 0 var(--space-7); border-top: 1px solid var(--line); }
 nav.pager a { color: var(--accent); text-decoration: none; }
 footer { text-align: center; color: var(--muted); font-size: .9rem; padding: 0 var(--space-4) var(--space-6); }
-/* hidden until the page content has loaded, so late-injected content does not count as layout shift */
-body.pending footer, body.pending #article { visibility: hidden; }
-
 /* topic + lens navigation */
 .sin-title { font-size: clamp(2rem, 5vw, 3rem); margin: var(--space-3) 0 var(--space-1); color: var(--accent); }
 .sin-tag { color: var(--muted); font-style: italic; margin: 0 0 var(--space-4); font-size: 1.1rem; }
 .topics, .lenses { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: var(--space-3) 0; }
-.topics button, .lenses button {
-  font: inherit; cursor: pointer; color: var(--text); background: var(--card);
+.topics a, .lenses a {
+  display: inline-flex; align-items: center; color: var(--text); background: var(--card); text-decoration: none;
   border: 1px solid var(--line); border-radius: var(--radius-pill); padding: var(--space-2) var(--space-4); min-height: 44px;
 }
-.topics button.on { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.topics a:hover, .lenses a:hover { border-color: var(--accent); }
+.topics a[aria-current] { background: var(--accent); border-color: var(--accent); color: var(--bg); }
 .lenses { border-bottom: 1px solid var(--line); padding-bottom: var(--space-3); }
-.topics button:focus-visible, .lenses button:focus-visible, .card:focus-visible, a.back:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.lenses button.on { border-color: var(--good); color: var(--good); font-weight: bold; }
+.topics a:focus-visible, .lenses a:focus-visible, .card:focus-visible, a.back:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.lenses a[aria-current] { border-color: var(--good); color: var(--good); font-weight: bold; }
 article.md { padding: var(--space-2) 0 var(--space-7); }
 article.md h2 { margin: var(--space-4) 0 var(--space-2); font-size: 1.5rem; }
 article.md h3 { margin: var(--space-5) 0 var(--space-2); font-size: 1.2rem; }

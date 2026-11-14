@@ -3,97 +3,28 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sin - The Seven Sins</title>
+  <title>The Seven Sins</title>
   <meta name="description" content="Understand the seven deadly sins through six lenses (modern, Hinduism, Upanishads, Christianity, Buddhism and philosophy) and learn how to leave them behind.">
-  <meta property="og:type" content="article">
-  <meta property="og:title" content="The Seven Sins">
-  <meta property="og:url" content="https://seven-sins-liard.vercel.app/sin.html">
-  <meta property="og:description" content="Understand the seven deadly sins through six lenses (modern, Hinduism, Upanishads, Christianity, Buddhism and philosophy) and learn how to leave them behind.">
-  <meta property="og:image" content="https://seven-sins-liard.vercel.app/og.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="The Seven Sins: Pride, Greed, Lust, Envy, Gluttony, Wrath, Sloth">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://seven-sins-liard.vercel.app/og.png">
+  <meta name="robots" content="noindex">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='28'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="pending">
+<body>
   <main class="wrap">
     <a class="back" href="index.html">&larr; All sins</a>
-    <h1 class="sin-title" id="title"></h1>
-    <p class="sin-tag" id="tag"></p>
-    <div class="topics" id="topics"></div>
-    <div class="lenses" id="lenses" role="group" aria-label="Lens"></div>
-    <article class="md" id="article" aria-live="polite">Loading...</article>
+    <p>That sin isn't available yet.</p>
   </main>
-  <footer>Educational and reflective content, not medical, psychological or religious authority. If a habit is harming your life, please talk to a doctor, therapist or a trusted person.</footer>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js" integrity="sha512-zAs8dHhwlTbfcVGRX1x0EZAH/L99NjAFzX6muwOcOJc7dbGFNaW4O7b9QOyCMRYBNjO+E0Kx6yLDsiPQhhWm7g==" crossorigin="anonymous"></script>
   <script>
-    const params = new URLSearchParams(location.search);
-    const el = id => document.getElementById(id);
-    const ready = () => document.body.classList.remove("pending");
-    let data, sin, topic, lens;
-
-    const store = {
-      get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
-      set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
-    };
-
-    fetch("sins.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(d => {
-      data = d;
-      sin = d.sins.find(s => s.id === params.get("id") && s.topics);
-      if (!sin) { el("title").textContent = "Not found"; el("article").innerHTML = "<p>That sin isn't available yet.</p>"; ready(); return; }
-      topic = sin.topics.find(t => t.id === params.get("topic")) || sin.topics[0];
-      lens = d.lenses.find(l => l.id === (params.get("lens") || store.get("lens"))) || d.lenses[0];
-      el("title").textContent = sin.name;
-      el("tag").textContent = sin.tagline;
-      render();
-    }).catch(() => {
-      el("article").innerHTML = location.protocol === "file:"
-        ? '<p>This site loads its content with <code>fetch</code>, which browsers block on <code>file://</code> pages. Serve the folder over HTTP (for example <code>python3 -m http.server 8000</code>) and open <code>http://localhost:8000</code>.</p>'
-        : "<p>Could not load the page data. Check your connection and reload.</p>";
-      ready();
-    });
-
-    function render() {
-      el("topics").innerHTML = sin.topics.map(t =>
-        `<button aria-pressed="${t.id === topic.id}" class="${t.id === topic.id ? "on" : ""}" data-topic="${t.id}">${t.title}</button>`).join("");
-      el("lenses").innerHTML = data.lenses.map(l =>
-        `<button aria-pressed="${l.id === lens.id}" class="${l.id === lens.id ? "on" : ""}" data-lens="${l.id}">${l.name}</button>`).join("");
-      history.replaceState(null, "", `?id=${sin.id}&topic=${topic.id}&lens=${lens.id}`);
-      document.title = `${sin.name}: ${topic.title} (${lens.name}) - The Seven Sins`;
-      const blurb = `${sin.tagline} ${topic.title} through the ${lens.name} lens.`;
-      document.querySelector('meta[name="description"]').content = blurb;
-      document.querySelector('meta[property="og:description"]').content = blurb;
-      document.querySelector('meta[property="og:title"]').content = document.title;
-      const url = `https://seven-sins-liard.vercel.app/sin.html?id=${sin.id}&topic=${topic.id}&lens=${lens.id}`;
-      document.querySelector('meta[property="og:url"]').content = url;
-      store.set("lens", lens.id);
-      load();
+    const TOPICS = {"Pride":["what-it-is","root-causes","effects","how-to-overcome","stories"],"Greed":["what-it-is","root-causes","effects","how-to-overcome","stories"],"Lust":["what-it-is","root-causes","effects","how-to-overcome","stories"],"Envy":["what-it-is","root-causes","effects","how-to-overcome","stories"],"Gluttony":["what-it-is","root-causes","effects","how-to-overcome","stories"],"Wrath":["what-it-is","root-causes","effects","how-to-overcome","stories"],"Sloth":["what-it-is","root-causes","effects","how-to-overcome","stories"]};
+    const LENSES = ["modern","hinduism","upanishads","christianity","buddhism","philosophical"];
+    const get = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+    const q = new URLSearchParams(location.search);
+    const id = q.get("id");
+    if (Object.hasOwn(TOPICS, id)) {
+      const topic = TOPICS[id].includes(q.get("topic")) ? q.get("topic") : TOPICS[id][0];
+      const lens = [q.get("lens"), get("lens")].find(l => LENSES.includes(l)) || LENSES[0];
+      location.replace(id + "/" + topic + "/" + lens + ".html");
     }
-
-    function load() {
-      el("article").innerHTML = "Loading...";
-      fetch(`${sin.id}/${topic.id}/${lens.id}.md`)
-        .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
-        .then(md => { el("article").innerHTML = `<h2>${topic.title}</h2>` + marked.parse(md); ready(); })
-        .catch(e => {
-          el("article").innerHTML = e.message === "404"
-            ? "<p>This article isn't written yet.</p>"
-            : "<p>Could not load this article. Check your connection and try again.</p>";
-          ready();
-        });
-    }
-
-    document.addEventListener("click", e => {
-      const b = e.target.closest("button");
-      if (!b) return;
-      if (b.dataset.topic) topic = sin.topics.find(t => t.id === b.dataset.topic);
-      else if (b.dataset.lens) lens = data.lenses.find(l => l.id === b.dataset.lens);
-      else return;
-      render();
-    });
   </script>
 </body>
 </html>

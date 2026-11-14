@@ -22,4 +22,4 @@ It took months, not days, and it was not a straight line. But the relationship s
 
 **Sources**
 
-- This is an illustrative composite. The steps reflect the general advice in [How to overcome it](?id=Lust&topic=how-to-overcome&lens=modern) and are not drawn from a specific study.
+- This is an illustrative composite. The steps reflect the general advice in [How to overcome it](../how-to-overcome/modern.html) and are not drawn from a specific study.

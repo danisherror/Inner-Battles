@@ -22,4 +22,4 @@ It was uncomfortable and slow. But within months people were bringing him proble
 
 **Sources**
 
-- Illustrative composite. The steps reflect the advice in [How to overcome it](?id=Pride&topic=how-to-overcome&lens=modern) and are not drawn from a specific study.
+- Illustrative composite. The steps reflect the advice in [How to overcome it](../how-to-overcome/modern.html) and are not drawn from a specific study.
