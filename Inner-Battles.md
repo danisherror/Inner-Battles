@@ -53,26 +53,26 @@ The "evil inclination" versus the good inclination (*yetzer tov*). The idea is t
 
 ## 3. Modern Psychological Battles
 
-| Battle | Basic idea |
+| Battle (✅ = written, see section 6) | Basic idea |
 |--------|-----------|
-| **Procrastination** | Delaying what matters because the present mood wins over the future self. |
-| **Self-doubt / Impostor syndrome** | Feeling like a fraud despite evidence of competence. |
-| **Perfectionism** | Standards so high that starting or finishing feels impossible. |
-| **Fear and anxiety** | The mind predicting threats that haven't happened. |
-| **Overthinking / rumination** | Looping on the past or future, unable to act. |
-| **Self-criticism / inner critic** | A harsh internal voice that punishes instead of guiding. |
+| **Procrastination** ✅ | Delaying what matters because the present mood wins over the future self. |
+| **Self-doubt / Impostor syndrome** ✅ | Feeling like a fraud despite evidence of competence. |
+| **Perfectionism** ✅ | Standards so high that starting or finishing feels impossible. |
+| **Fear and anxiety** ✅ | The mind predicting threats that haven't happened. |
+| **Overthinking / rumination** ✅ | Looping on the past or future, unable to act. |
+| **Self-criticism / inner critic** ✅ | A harsh internal voice that punishes instead of guiding. |
 | **Shame and guilt** | Shame says "I am bad"; guilt says "I did something bad". Shame is the more corrosive. |
 | **Addiction and compulsion** | Phone, porn, substances, gambling: the pull against the decision to stop. |
 | **Comparison** | Measuring your inside against others' outsides (close to envy). |
 | **Resentment and grudges** | Holding on to old hurt, so the past keeps paying rent in your head. |
-| **Jealousy** | Fear of losing someone or something to another (differs from envy). |
+| **Jealousy** ✅ | Fear of losing someone or something to another (differs from envy). |
 | **Ego and need for validation** | Needing approval and praise to feel worthy. |
 | **Loneliness and isolation** | The urge to withdraw even while wanting connection. |
-| **Fear of failure / fear of success** | Self-sabotage to avoid risk or change. |
+| **Fear of failure / fear of success** ✅ | Self-sabotage to avoid risk or change. |
 | **Cognitive dissonance** | Discomfort from holding conflicting beliefs, leading to rationalising. |
 | **Denial and self-deception** | Not letting yourself see the truth. |
 | **Burnout and apathy** | Exhaustion that flattens motivation (modern cousin of sloth/acedia). |
-| **Impulsivity vs delayed gratification** | The "marshmallow" conflict: now versus later. |
+| **Impulsivity vs delayed gratification** ✅ | The "marshmallow" conflict: now versus later. |
 | **Hopelessness / despair** | Believing nothing will change. (Persistent low mood may be depression; seek professional help.) |
 | **Distraction / attention fragmentation** | Inability to hold focus against constant stimulation. |
 
@@ -106,29 +106,31 @@ The "evil inclination" versus the good inclination (*yetzer tov*). The idea is t
 
 The seven existing sins are excluded. Overlapping topics are merged, and anything already covered by an existing sin is dropped. Each topic would get the site's usual 5 topic pages × 6 lenses = 30 articles, so **19 topics = 570 articles**, written in phases (see below), never all at once.
 
+**Progress (updated 2026-11-14):** 9 of 19 topics are written and on the site (270 of 570 articles): Procrastination (phase 0), Overthinking, Perfectionism, Self-doubt, Self-criticism and Jealousy (phase 1, complete), and Fear and anxiety, Fear of failure and success and Impulsivity (phase 2, three of five). Remaining: Distraction and Resentment (phase 2), then phases 3 and 4. Topics marked ✅ below are done; each has its own README entry listing what was and was not checked.
+
 **Mind and emotion**
-1. Fear and anxiety
-2. Overthinking, rumination and restlessness (merges old 2 and 23; restlessness is the Buddhist hindrance)
-3. Self-doubt and impostor syndrome
-4. Perfectionism
-5. Self-criticism (the inner critic)
+1. Fear and anxiety — ✅ done 2026-11-14
+2. Overthinking, rumination and restlessness (merges old 2 and 23; restlessness is the Buddhist hindrance) — ✅ done 2026-11-14
+3. Self-doubt and impostor syndrome — ✅ done 2026-11-14
+4. Perfectionism — ✅ done 2026-11-14
+5. Self-criticism (the inner critic) — ✅ done 2026-11-14
 6. Shame and guilt
-7. Jealousy (kept apart from Envy: fear of losing, not wanting what another has)
+7. Jealousy (kept apart from Envy: fear of losing, not wanting what another has) — ✅ done 2026-11-14
 8. Resentment and grudges
 9. Hopelessness and despair
 10. Loneliness and isolation
 
 **Habits and will**
-11. Procrastination and weakness of will (merges old 12 and 17; akrasia is the philosophical frame)
+11. Procrastination and weakness of will (merges old 12 and 17; akrasia is the philosophical frame) — ✅ done 2026-11-14
 12. Addiction and compulsion
-13. Impulsivity and delayed gratification
+13. Impulsivity and delayed gratification — ✅ done 2026-11-14
 14. Distraction and attention fragmentation
 15. Burnout and apathy
 
 **Self and truth**
 16. Ego and the need for validation
 17. Denial, self-deception and cognitive dissonance (merges old 19 and 20)
-18. Fear of failure and fear of success
+18. Fear of failure and fear of success — ✅ done 2026-11-14
 19. Delusion and ignorance of the true self (merges old 22 and 24: moha and avidya)
 
 **Dropped:** Comparison (old 8) is already covered by the Envy sin and Jealousy; fold it in as a section there if wanted.
@@ -139,9 +141,9 @@ The seven existing sins are excluded. Overlapping topics are merged, and anythin
 
 | Phase | Topics | Why this order |
 |---|---|---|
-| 0 (pilot) | 11 Procrastination and weakness of will | Clear links to Buddhist sloth/torpor, Aristotle and modern research; low sensitivity. Proves the `sins.json` `kind` field, home-page section and build changes |
-| 1 | 2 Overthinking and restlessness, 4 Perfectionism, 3 Self-doubt, 5 Self-criticism, 7 Jealousy | Strong tradition fit and plentiful sources |
-| 2 | 1 Fear and anxiety, 18 Fear of failure and success, 13 Impulsivity, 14 Distraction, 8 Resentment | Moderate fit; keep claims about research tightly sourced |
+| 0 (pilot) ✅ done | 11 Procrastination and weakness of will | Clear links to Buddhist sloth/torpor, Aristotle and modern research; low sensitivity. Proves the `sins.json` `kind` field, home-page section and build changes |
+| 1 ✅ done | 2 Overthinking and restlessness, 4 Perfectionism, 3 Self-doubt, 5 Self-criticism, 7 Jealousy | Strong tradition fit and plentiful sources |
+| 2 (3 of 5 done) | 1 Fear and anxiety ✅, 18 Fear of failure and success ✅, 13 Impulsivity ✅, 14 Distraction, 8 Resentment | Moderate fit; keep claims about research tightly sourced |
 | 3 | 16 Ego and validation, 17 Denial and dissonance, 19 Delusion and true self | Closest to Hindu, Upanishadic and Buddhist terms; watch "related, not identical" notes |
 | 4 (sensitive) | 6 Shame and guilt, 9 Hopelessness, 10 Loneliness, 12 Addiction, 15 Burnout | Need a pointer to professional help and no shaming language; write last, with the most care |
 
@@ -157,4 +159,4 @@ The seven existing sins are excluded. Overlapping topics are merged, and anythin
 ## Possible Next Steps for This Project
 
 - Add a lens or section for the **Shadripu** and **Five Hindrances**, which fit the existing lens structure (Hinduism, Buddhism).
-- Add non-sin topics such as **Procrastination**, **Fear**, **Self-doubt**, **Shame** as new entries in `sins.json`.
+- Add non-sin topics such as **Procrastination**, **Fear**, **Self-doubt**, **Shame** as new entries in `sins.json`. Done for Procrastination, Fear (as Fear and anxiety, and Fear of failure and success) and Self-doubt; Shame is in phase 4.

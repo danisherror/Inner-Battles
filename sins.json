@@ -450,6 +450,34 @@
           "title": "A story"
         }
       ]
+    },
+    {
+      "id": "Impulsivity",
+      "name": "Impulsivity",
+      "kind": "inner-battle",
+      "tagline": "Acting on the urge of the moment and giving up a larger, later good for a smaller, sooner one.",
+      "topics": [
+        {
+          "id": "what-it-is",
+          "title": "What it is"
+        },
+        {
+          "id": "root-causes",
+          "title": "Root causes"
+        },
+        {
+          "id": "effects",
+          "title": "Effects on life"
+        },
+        {
+          "id": "how-to-overcome",
+          "title": "How to overcome it"
+        },
+        {
+          "id": "stories",
+          "title": "A story"
+        }
+      ]
     }
   ]
 }
