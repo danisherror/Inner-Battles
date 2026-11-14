@@ -49,8 +49,14 @@ Sins/
   build.js        generates every .html page and sitemap.xml (npm run render)
   index.html      generated home page: one card per sin
   sin.html        generated redirect for old sin.html?id=... links
+  404.html        hand-written "page not found" page
   style.css       styles (light and dark)
-  sins.json       list of lenses, sins and each sin's topics
+  sins.json       single source of truth: lenses, sins, taglines and each sin's topics
+  sitemap.xml     generated
+  robots.txt  og.png  vercel.json  package.json  package-lock.json
+  CLAUDE.md       instructions for the AI agent
+  PLAYBOOK.md     review checklist and audit notes
+  Inner-Battles.md  notes on other inner struggles; not linked from the site (undecided, see PLAYBOOK.md)
   Lust/ Pride/ Greed/ Envy/ Gluttony/ Wrath/ Sloth/   (each has the same five topic folders)
     what-it-is/       modern.md  hinduism.md  upanishads.md  christianity.md  buddhism.md  philosophical.md
                       (plus a generated .html page next to each .md)

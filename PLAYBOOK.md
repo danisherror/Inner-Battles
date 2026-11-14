@@ -168,9 +168,9 @@ Measure first; the site is small.
 
 - [ ] `sin.html` and `index.html` stay small; extract a shared JS file only if duplication grows.
 - [x] HTML escaping: titles and taglines from `sins.json` are interpolated into `innerHTML`. They are first-party, but escape them or use `textContent` if the data ever becomes external. Done 2026-11-14: `build.js` escapes titles and taglines with `esc`.
-- [ ] No dead code, unused CSS or unused files.
-- [ ] README stays in sync with reality (status table, layout, sources). Update it whenever content or structure changes.
-- [ ] `sins.json` is the single source of truth for sins, topics and lenses.
+- [x] No dead code, unused CSS or unused files. Done 2026-11-14: removed unused rules (`.card .v`, `article h1`, `.tag`, `.virtue`, `.practice`, `nav.pager`) and the unused `connect-src` CSP directive; `Inner-Battles.md` is the one unlinked file, parked by the user (see item 6).
+- [x] README stays in sync with reality (status table, layout, sources). Update it whenever content or structure changes. Layout section updated 2026-11-14 to list every tracked top-level file.
+- [x] `sins.json` is the single source of truth for sins, topics and lenses. Done 2026-11-14: `build.js` now derives the lens list, lens count and sin names in meta text from `sins.json` instead of hardcoding them. The README's lens list and the "seven" and "six" in prose are still hand-written.
 - [x] Commit messages follow CLAUDE.md: short imperative subject, optional body, no AI attribution lines.
 
 ## 11. Working with the AI agent on this repo
