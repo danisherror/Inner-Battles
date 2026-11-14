@@ -422,6 +422,34 @@
           "title": "A story"
         }
       ]
+    },
+    {
+      "id": "Fear-of-failure-and-success",
+      "name": "Fear of failure and success",
+      "kind": "inner-battle",
+      "tagline": "Staying out of the attempt because you dread falling short, or dread what succeeding would bring.",
+      "topics": [
+        {
+          "id": "what-it-is",
+          "title": "What it is"
+        },
+        {
+          "id": "root-causes",
+          "title": "Root causes"
+        },
+        {
+          "id": "effects",
+          "title": "Effects on life"
+        },
+        {
+          "id": "how-to-overcome",
+          "title": "How to overcome it"
+        },
+        {
+          "id": "stories",
+          "title": "A story"
+        }
+      ]
     }
   ]
 }
