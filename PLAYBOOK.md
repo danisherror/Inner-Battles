@@ -153,7 +153,7 @@ process.exit(bad ? 1 : 0);
 - [x] Heading hierarchy: one `h1` per page, `h2` for the topic, article headings below it (the article injects `<h2>` and Markdown may include another `h1`; check).
 - [x] Link text in articles is descriptive; external links are clearly marked. Done 2026-11-14: `build.js` now renders every `http(s)` link in an article with a `↗` marker (CSS), a visually hidden " (external link)" and `rel="noopener"`; links whose text was the bare URL (the SuttaCentral API notes) show the host name instead. Checked by script: no article link reads "here", "link" or "read more", and all 210 pages regenerate cleanly. Not viewed in a browser.
 - [x] Colour contrast passes in light and dark themes.
-- [ ] Page works with keyboard only and at 200% zoom.
+- [x] Page works with keyboard only and at 200% zoom. Checked 2026-11-14 in Chrome against https://seven-sins-liard.vercel.app/Wrath/root-causes/buddhism.html after the external-link change was deployed: 18 focusable elements in a sensible order (back link, topics, lenses, then sources), no positive `tabindex`, and every one has a visible focus indicator (computed outline or shadow). Zoom was emulated by narrowing the window to 584 CSS px (about 240% of the 1414 px default), because the extension cannot send zoom shortcuts: no horizontal scroll and no overflowing element; the screenshot shows the article text and external-link markers intact. Not done: real Tab key presses through the page, a screen reader, and the 320 px (400%) reflow case. The live external-link markup was confirmed: 6 links, none with bare-URL text, all `rel="noopener"`, `↗` marker and hidden "(external link)" present.
 
 ## 9. Performance
 
