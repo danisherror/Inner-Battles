@@ -87,7 +87,7 @@ function indexPage() {
       : `<div class="card disabled">${inner}<span class="soon">Coming soon</span></div>`;
   };
   const sections = data.kinds.map(k => {
-    const items = data.sins.filter(s => kindOf(s) === k.id);
+    const items = data.sins.filter(s => kindOf(s) === k.id).sort((a, b) => a.name.localeCompare(b.name, "en"));
     return items.length ? `<section aria-labelledby="kind-${k.id}">
         <h2 class="section-title" id="kind-${k.id}">${esc(k.title)}</h2>
         <p class="section-intro">${esc(k.intro)}</p>
