@@ -1,7 +1,7 @@
 Philosophers see envy as an effect of comparison and of the love of honour.
 
 - **Equals.** Aristotle (*Rhetoric* 2.10) says we envy those near to us in time, place, age and reputation, and those who compete with us for the same honour.
-- **Wounded self-love.** Kant (*Doctrine of Virtue*, 36) describes envy as the tendency to view others' wellbeing as a reproach to ourselves.
+- **Wounded self-love.** Kant (*Doctrine of Virtue*, 36) describes envy as the tendency to view others' well-being as a reproach to ourselves.
 - **Relative standing.** Hume (*Treatise* 2.2.8) says envy comes from comparing our situation with that of someone only a little ahead, not with someone far above us.
 - **Love of honour and rank.** Rousseau's *amour-propre* (*Discourse on Inequality*) describes the habit of valuing oneself by how one stands against others.
 - **Valuing what is not in our control.** Epictetus (*Enchiridion* 25) says to ask what price the other paid for the honour, and whether you would pay it.

@@ -6,7 +6,7 @@ A read-only guide to the seven deadly sins: what each one is, where it comes fro
 - **Hinduism** (Bhagavad Gita and wider tradition)
 - **Upanishads**
 - **Christianity**
-- **Buddhist**
+- **Buddhism**
 - **Philosophical** (Plato, Aristotle, the Stoics, Kant)
 
 There is no backend. Articles are written in Markdown and pre-rendered to static HTML (one page per article) by `build.js`, so the pages work without JavaScript and search engines can read them.
@@ -87,6 +87,8 @@ The topic `id` must match the subfolder name.
 ## Writing guidelines
 
 - Describe each tradition on its own terms. Do not rank them.
+- Use British spelling in our own prose (honour, behaviour, practise as a verb, recognised, programme). Quotations, translations, titles of works and proper names keep their source's spelling (for example NRSV "honored", *Physiology & Behavior*, World Health Organization). Write "well-being" with a hyphen.
+- Name each lens after its tradition, as the lens name and the file name do: Hinduism, Christianity, Buddhism (`buddhism`). Use "Buddhist" only as an adjective ("Buddhist texts").
 - End every article with a **Sources** section. Any claim about scripture, philosophy or research needs a source URL or a book and verse reference.
 - If a point is a standard summary and has not been checked against a specific passage, say so in the Sources section.
 - The seven deadly sins are a Christian list. Where another tradition has no exact equivalent (for example, Hinduism and gluttony or sloth), use the closest related idea and say that it is related and not identical.

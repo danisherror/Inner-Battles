@@ -4,7 +4,7 @@ Philosophers define envy fairly consistently.
 
 **Plato.** In the *Philebus* (47d-50e) envy is a mixed feeling of pain and pleasure at others' misfortune. In the *Phaedrus* (247a) "jealousy has no place in the celestial choir" (Jowett translation).
 
-**Kant.** In the *Metaphysics of Morals* (Doctrine of Virtue, sections 36-37), envy, ingratitude and malice are the vices of hatred of humanity, with envy as the tendency to see others' wellbeing as a loss to oneself.
+**Kant.** In the *Metaphysics of Morals* (Doctrine of Virtue, sections 36-37), envy, ingratitude and malice are the vices of hatred of humanity, with envy as the tendency to see others' well-being as a loss to oneself.
 
 **Hume.** In the *Treatise* (2.2.8) envy arises from comparison with someone close to us.
 

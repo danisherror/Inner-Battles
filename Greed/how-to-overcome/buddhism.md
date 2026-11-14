@@ -5,7 +5,7 @@ Buddhism's remedies are generosity, contentment and insight.
 - **Right livelihood.** Earn honestly without harming others (the fifth path factor, as in AN 5.177 on trades to avoid).
 - **Reflect on impermanence and not-self.** SN 22.59 and the teaching on the aggregates loosen clinging.
 - **Renunciation practice.** Giving things up on purpose, as on retreat or uposatha days (eight precepts), trains the mind to need less.
-- **Metta** and sharing merit turn the mind toward others' wellbeing.
+- **Metta** and sharing merit turn the mind toward others' well-being.
 
 **Sources**
 
