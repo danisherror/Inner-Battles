@@ -590,6 +590,34 @@
           "title": "A story"
         }
       ]
+    },
+    {
+      "id": "Delusion-and-the-true-self",
+      "name": "Delusion and the true self",
+      "kind": "inner-battle",
+      "tagline": "Mistaking the passing parts of you for the whole of who you are.",
+      "topics": [
+        {
+          "id": "what-it-is",
+          "title": "What it is"
+        },
+        {
+          "id": "root-causes",
+          "title": "Root causes"
+        },
+        {
+          "id": "effects",
+          "title": "Effects on life"
+        },
+        {
+          "id": "how-to-overcome",
+          "title": "How to overcome it"
+        },
+        {
+          "id": "stories",
+          "title": "A story"
+        }
+      ]
     }
   ]
 }

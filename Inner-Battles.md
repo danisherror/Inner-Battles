@@ -106,7 +106,7 @@ The "evil inclination" versus the good inclination (*yetzer tov*). The idea is t
 
 The seven existing sins are excluded. Overlapping topics are merged, and anything already covered by an existing sin is dropped. Each topic would get the site's usual 5 topic pages × 6 lenses = 30 articles, so **19 topics = 570 articles**, written in phases (see below), never all at once.
 
-**Progress (updated 2026-11-14):** 13 of 19 topics are written and on the site (390 of 570 articles): Procrastination (phase 0), Overthinking, Perfectionism, Self-doubt, Self-criticism and Jealousy (phase 1, complete), and Fear and anxiety, Fear of failure and success, Impulsivity, Distraction and Resentment (phase 2, complete), Ego and validation and Denial and self-deception (phase 3, two of three). Remaining: Delusion and true self (phase 3), and phase 4 (the sensitive topics). Topics marked ✅ below are done; each has its own README entry listing what was and was not checked.
+**Progress (updated 2026-11-15):** 14 of 19 topics are written and on the site (420 of 570 articles): Procrastination (phase 0), Overthinking, Perfectionism, Self-doubt, Self-criticism and Jealousy (phase 1, complete), and Fear and anxiety, Fear of failure and success, Impulsivity, Distraction and Resentment (phase 2, complete), and Ego and validation, Denial and self-deception and Delusion and the true self (phase 3, complete). Remaining: phase 4 (the sensitive topics). Topics marked ✅ below are done; each has its own README entry listing what was and was not checked.
 
 **Mind and emotion**
 1. Fear and anxiety — ✅ done 2026-11-14
@@ -131,7 +131,7 @@ The seven existing sins are excluded. Overlapping topics are merged, and anythin
 16. Ego and the need for validation — ✅ done 2026-11-15
 17. Denial, self-deception and cognitive dissonance (merges old 19 and 20) — ✅ done 2026-11-15 (on the site as Denial and self-deception; dissonance is covered inside it)
 18. Fear of failure and fear of success — ✅ done 2026-11-14
-19. Delusion and ignorance of the true self (merges old 22 and 24: moha and avidya)
+19. Delusion and ignorance of the true self (merges old 22 and 24: moha and avidya) — ✅ done 2026-11-15 (on the site as Delusion and the true self)
 
 **Dropped:** Comparison (old 8) is already covered by the Envy sin and Jealousy; fold it in as a section there if wanted.
 
@@ -144,7 +144,7 @@ The seven existing sins are excluded. Overlapping topics are merged, and anythin
 | 0 (pilot) ✅ done | 11 Procrastination and weakness of will | Clear links to Buddhist sloth/torpor, Aristotle and modern research; low sensitivity. Proves the `sins.json` `kind` field, home-page section and build changes |
 | 1 ✅ done | 2 Overthinking and restlessness, 4 Perfectionism, 3 Self-doubt, 5 Self-criticism, 7 Jealousy | Strong tradition fit and plentiful sources |
 | 2 ✅ done | 1 Fear and anxiety ✅, 18 Fear of failure and success ✅, 13 Impulsivity ✅, 14 Distraction ✅, 8 Resentment ✅ | Moderate fit; keep claims about research tightly sourced |
-| 3 (2 of 3 done) | 16 Ego and validation ✅, 17 Denial and dissonance ✅, 19 Delusion and true self | Closest to Hindu, Upanishadic and Buddhist terms; watch "related, not identical" notes |
+| 3 ✅ done | 16 Ego and validation ✅, 17 Denial and dissonance ✅, 19 Delusion and true self ✅ | Closest to Hindu, Upanishadic and Buddhist terms; watch "related, not identical" notes |
 | 4 (sensitive) | 6 Shame and guilt, 9 Hopelessness, 10 Loneliness, 12 Addiction, 15 Burnout | Need a pointer to professional help and no shaming language; write last, with the most care |
 
 ### Rules for every topic
