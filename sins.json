@@ -478,6 +478,34 @@
           "title": "A story"
         }
       ]
+    },
+    {
+      "id": "Distraction",
+      "name": "Distraction",
+      "kind": "inner-battle",
+      "tagline": "A mind pulled in many directions at once, unable to stay with what matters.",
+      "topics": [
+        {
+          "id": "what-it-is",
+          "title": "What it is"
+        },
+        {
+          "id": "root-causes",
+          "title": "Root causes"
+        },
+        {
+          "id": "effects",
+          "title": "Effects on life"
+        },
+        {
+          "id": "how-to-overcome",
+          "title": "How to overcome it"
+        },
+        {
+          "id": "stories",
+          "title": "A story"
+        }
+      ]
     }
   ]
 }
