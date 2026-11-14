@@ -23,7 +23,7 @@ Structure and link audit, 2026-11-14: all 210 articles exist and every article h
 
 ## Run locally
 
-The site loads `.md` files with `fetch`, so it must be served over HTTP. Opening `index.html` directly from disk will not work.
+The site loads `.md` files with `fetch`, so it must be served over HTTP. Opening `index.html` directly from disk will not work. Browsers block `fetch` of `file://` URLs ([MDN: CORS request not HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS/Errors/CORSRequestNotHttp)), so both pages show a hint to use a local server when opened that way.
 
 ```sh
 cd Sins

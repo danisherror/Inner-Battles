@@ -39,7 +39,9 @@
       }).join("");
       document.body.classList.remove("pending");
     }).catch(() => {
-      document.getElementById("grid").innerHTML = "<p>Could not load the list of sins. Check your connection and reload.</p>";
+      document.getElementById("grid").innerHTML = location.protocol === "file:"
+        ? '<p>This site loads its content with <code>fetch</code>, which browsers block on <code>file://</code> pages. Serve the folder over HTTP (for example <code>python3 -m http.server 8000</code>) and open <code>http://localhost:8000</code>.</p>'
+        : "<p>Could not load the list of sins. Check your connection and reload.</p>";
       document.body.classList.remove("pending");
     });
   </script>
