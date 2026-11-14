@@ -5,6 +5,8 @@ The Upanishads rarely name anger directly. They describe the calm that is its op
 - Brihadaranyaka 5.2.3 reports the thunder's advice to humans, gods and demons: *da, da, da*, which is read as self-control, giving and compassion.
 - Katha 1.1.10 shows anger inside a family: Nachiketa asks that his father, who is angry at him, may calm down and be free of anger (*vita-manyu*).
 
+This is related to wrath and not identical to it: the texts describe calm and self-control and treat harshness as ignorance, rather than naming a sin of anger.
+
 **Sources**
 
 - [Brihadaranyaka Upanishad](https://en.wikipedia.org/wiki/Brihadaranyaka_Upanishad) 4.4.23, 5.2.3

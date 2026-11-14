@@ -6,6 +6,8 @@ The Mundaka (3.1.1-2) and Shvetashvatara (4.6-7) Upanishads give a picture of tw
 
 Envy appears here as one form of the sorrow that goes with believing you are separate and lacking.
 
+This is related to envy and not identical to it: the texts have no word for begrudging another's good fortune, and speak of the separateness underneath.
+
 **Sources**
 
 - [Isha Upanishad](https://en.wikipedia.org/wiki/Isha_Upanishad) 1, 6-7

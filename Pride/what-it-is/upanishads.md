@@ -6,6 +6,8 @@ The Upanishads rarely use a word for "pride". They go to the root: the false bel
 
 **A student's pride.** In Chandogya 6.1, Shvetaketu returns after twelve years of study, proud of his learning. His father Uddalaka asks whether he has asked for that teaching by which the unheard becomes heard, and Shvetaketu has to admit he has not.
 
+This is related to pride and not identical to it: the texts speak of conceit about knowledge and of the separate "I", not of a sin of pride.
+
 **Sources**
 
 - [Katha Upanishad](https://en.wikipedia.org/wiki/Katha_Upanishad) 1.2.5

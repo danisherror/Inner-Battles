@@ -8,6 +8,8 @@ The Brihadaranyaka Upanishad adds that a person is shaped by what they desire: a
 
 So in this view lust is desire that has taken the reins from the intellect, and has pointed the self toward the pleasant instead of the good.
 
+This is related to lust and not identical to it: the texts speak of desire (*kama*) in general, not of sexual desire as a separate sin.
+
 **Sources**
 
 - [Katha Upanishad chariot simile (Ratha Kalpana), Wikipedia](https://en.wikipedia.org/wiki/Ratha_Kalpana). This is a secondary source for 1.3.3-9.
