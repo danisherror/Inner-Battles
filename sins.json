@@ -646,6 +646,34 @@
           "title": "A story"
         }
       ]
+    },
+    {
+      "id": "Hopelessness-and-despair",
+      "name": "Hopelessness and despair",
+      "kind": "inner-battle",
+      "tagline": "Believing that nothing will change, and that nothing you do will matter.",
+      "topics": [
+        {
+          "id": "what-it-is",
+          "title": "What it is"
+        },
+        {
+          "id": "root-causes",
+          "title": "Root causes"
+        },
+        {
+          "id": "effects",
+          "title": "Effects on life"
+        },
+        {
+          "id": "how-to-overcome",
+          "title": "How to overcome it"
+        },
+        {
+          "id": "stories",
+          "title": "A story"
+        }
+      ]
     }
   ]
 }
