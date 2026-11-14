@@ -10,7 +10,7 @@ The Buddha then said: *if you keep to the holy life, I promise you five hundred 
 
 From then on, the other monks teased him, calling him a hireling who lived the holy life for the sake of nymphs. The comments shamed him, and he went off alone and practised with real effort. Before long he reached **arahantship**, full awakening. He then released the Buddha from his promise: he no longer wanted anything of the kind.
 
-**What it shows:** The Buddha did not shame or forbid Nanda at first. He showed him that desire always finds something bigger to want, and the "bigger prize" was only a way to stop the mind running in circles. The real freedom came when Nanda saw through the craving itself. The Dhammapada says, "There is no satisfying sensual desires, even with a rain of gold coins" (186). The cure was **practice, honest shame that turned into effort, and seeing craving clearly**.
+**What it shows:** The Buddha did not shame or forbid Nanda at first. He showed him that desire always finds something bigger to want, and the "bigger prize" was only a way to stop the mind running in circles. The real freedom came when Nanda saw through the craving itself. The Dhammapada says, "There is no satisfying sensual desires, even with the rain of gold coins" (186). The cure was **practice, honest shame that turned into effort, and seeing craving clearly**.
 
 **Sources**
 

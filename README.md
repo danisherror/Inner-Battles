@@ -19,7 +19,7 @@ There is no backend. It is plain HTML, CSS and JavaScript, with articles written
 | Pride | Written (5 topics × 6 lenses). Links, DOIs, Bible, Upanishad (Müller), Stoic and Aristotle quotations checked 2026-11-14; other references are from memory, see the note at the end of each article |
 | Greed, Envy, Gluttony, Wrath, Sloth | Written (5 topics × 6 lenses each). Links and DOIs checked 2026-11-14, as for Pride |
 
-Structure and link audit, 2026-11-14: all 210 articles exist and every article has a Sources section. Of 310 unique URLs, 287 returned 200; 22 DOI links returned 403 to a bot (publisher blocking) but all resolve in the doi.org registry. This shows the links exist, not that each source supports its claim; quotes and verses for the sins other than Pride have not been checked against their sources yet.
+Structure and link audit, 2026-11-14: all 210 articles exist and every article has a Sources section. Of 310 unique URLs, 287 returned 200; 22 DOI links returned 403 to a bot (publisher blocking) but all resolve in the doi.org registry. This shows the links exist, not that each source supports its claim; quotes and verses for the sins other than Pride have not been fully checked against their sources yet. Lust: every direct quotation was compared with its cited page on 2026-11-14 and four wording errors were fixed (Dhammapada 186, Augustine, Katha Upanishad, 1 Samuel 13:14); paraphrases of Gita verses, Catechism paragraphs and Buddhist suttas have not been read against the text.
 
 ## Run locally
 

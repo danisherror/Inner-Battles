@@ -2,7 +2,7 @@
 
 *From 2 Samuel 11-12, with Psalm 51.*
 
-David was Israel's greatest king, a man the Bible calls one "after God's own heart." One spring, when kings went to war, David stayed home in Jerusalem. One evening, from the roof of his palace, he saw a woman bathing. He found out she was Bathsheba, the wife of Uriah, one of his own soldiers. He sent for her and slept with her. She became pregnant.
+David was Israel's greatest king, a man God chose as one "after his own heart" (1 Samuel 13:14, NIV). One spring, when kings went to war, David stayed home in Jerusalem. One evening, from the roof of his palace, he saw a woman bathing. He found out she was Bathsheba, the wife of Uriah, one of his own soldiers. He sent for her and slept with her. She became pregnant.
 
 The problems then multiplied, as the story is careful to show:
 
@@ -24,4 +24,4 @@ Psalm 51 is traditionally read as David's prayer of repentance: "Create in me a 
 - [Psalm 51](https://www.biblegateway.com/passage/?search=Psalm+51&version=NIV)
 - [James 1:14-15](https://www.biblegateway.com/passage/?search=James+1:14-15&version=NIV)
 
-The "Create in me a pure heart" line is Psalm 51:10; the psalm's heading attributing it to David after Nathan's rebuke is traditional. The "after God's own heart" description is from 1 Samuel 13:14 and Acts 13:22, which I have not linked here.
+The "Create in me a pure heart" line is Psalm 51:10; the psalm's heading attributing it to David after Nathan's rebuke is traditional. The "after his own heart" wording is from 1 Samuel 13:14 (NIV, checked 2026-11-14); Acts 13:22 repeats it with different wording. I have not linked either passage here.

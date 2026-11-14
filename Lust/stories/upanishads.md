@@ -15,7 +15,7 @@ Yama did not want to answer. He tested him, offering instead everything the worl
 
 It is a picture of every pleasure in the world, including desire, placed in front of a young person. A lesser seeker would have taken it.
 
-Nachiketa refused. He answered that these things are of a day, that they wear out the vigour of the senses, and that even the longest life is short. "Keep your horses, your dance and your song for yourself," he said, and insisted on his question.
+Nachiketa refused. He answered that these things are of a day, that they wear out the vigour of the senses, and that even the longest life is short. "Keep your horses, dances and songs for yourself," he said, and insisted on his question.
 
 Yama was impressed. He saw that a person who could not be turned aside by pleasure was ready for the highest knowledge, and he taught him. This is where the text sets out the choice between the pleasant (*preyas*) and the good (*shreyas*).
 
@@ -26,4 +26,4 @@ Yama was impressed. He saw that a person who could not be turned aside by pleasu
 - [Katha Upanishad (Nikhilananda translation), shiningworld.com](https://shiningworld.com/katha-upanishad-2/)
 - [Katha Upanishad chariot simile (Ratha Kalpana), Wikipedia](https://en.wikipedia.org/wiki/Ratha_Kalpana)
 
-Verse numbering differs between translations. I read the offers and Nachiketa's refusal (about 1.1.23-27) from search summaries of these translations. The *shreyas/preyas* passage (1.2.1-2) should be checked in a translation.
+Verse numbering differs between translations. The offers and Nachiketa's refusal (verses 1.1.23-27 in this translation, quoted from 1.1.26) were checked on 2026-11-14 against the Nikhilananda translation linked above. The *shreyas/preyas* passage (1.2.1-2) should be checked in a translation.
