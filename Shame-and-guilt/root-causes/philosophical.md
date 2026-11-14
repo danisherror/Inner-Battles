@@ -2,7 +2,7 @@ The Stoics place the root in our judgments. Epictetus, *Enchiridion* 5: "Men are
 
 He goes on: "When therefore we are hindered, or disturbed, or grieved, let us never attribute it to others, but to ourselves; that is, to our own principles."
 
-This is related to shame and guilt and not identical to them. The passage is about being disturbed in general. Applying it to shame is ours, and it should not be read as saying that remorse for real harm is a mistake in judgment.
+This is related to shame and guilt and not identical to them. The passage is about being disturbed in general. Applying it to shame is ours, and it should not be read as saying that remorse for real harm is a mistake in judgment. Nothing here replaces a doctor or therapist, and shame that is heavy or lasting is worth telling someone about.
 
 **Sources**
 

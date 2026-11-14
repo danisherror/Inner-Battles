@@ -2,7 +2,7 @@ The Upanishads place the root of grief in not knowing the Self. In Chandogya 7.1
 
 Sanatkumara answers: "Whatever you have read, is only a name."
 
-This is related to shame and guilt and not identical to them. Narada's grief is not named as guilt or shame, and the root given is not knowing the Self. Reading it as a source of those feelings is ours.
+This is related to shame and guilt and not identical to them. Narada's grief is not named as guilt or shame, and the root given is not knowing the Self. Reading it as a source of those feelings is ours. Nothing here replaces a doctor or therapist, and shame that is heavy or lasting is worth telling someone about.
 
 **Sources**
 

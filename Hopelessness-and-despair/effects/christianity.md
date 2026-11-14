@@ -4,7 +4,7 @@ It ends without relief: "You have caused friend and neighbor to shun me; my comp
 
 Lamentations 3 adds the loss of happiness: "I have forgotten what happiness is".
 
-The Bible keeps a prayer that does not resolve, and does not say it should. Reading it as a description of hopelessness is ours. Nothing here replaces a doctor or therapist. If you are thinking of ending your life or harming yourself, please tell someone today and contact your local emergency services if you may act on it.
+This is related to hopelessness and not identical to it. The Bible keeps a prayer that does not resolve, and does not say it should. Reading it as a description of hopelessness is ours. Nothing here replaces a doctor or therapist. If you are thinking of ending your life or harming yourself, please tell someone today and contact your local emergency services if you may act on it.
 
 **Sources**
 

@@ -730,6 +730,34 @@
           "title": "A story"
         }
       ]
+    },
+    {
+      "id": "Burnout-and-apathy",
+      "name": "Burnout and apathy",
+      "kind": "inner-battle",
+      "tagline": "Exhaustion that flattens motivation.",
+      "topics": [
+        {
+          "id": "what-it-is",
+          "title": "What it is"
+        },
+        {
+          "id": "root-causes",
+          "title": "Root causes"
+        },
+        {
+          "id": "effects",
+          "title": "Effects on life"
+        },
+        {
+          "id": "how-to-overcome",
+          "title": "How to overcome it"
+        },
+        {
+          "id": "stories",
+          "title": "A story"
+        }
+      ]
     }
   ]
 }

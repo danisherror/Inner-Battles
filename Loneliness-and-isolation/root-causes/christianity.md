@@ -2,7 +2,7 @@ Ecclesiastes shows how toil can cut a person off: "Again, I saw vanity under the
 
 Elijah, after a conflict, says: "I have been very zealous for the Lord, the God of hosts, for the Israelites have forsaken your covenant, thrown down your altars, and killed your prophets with the sword. I alone am left, and they are seeking my life, to take it away" (1 Kings 19:10).
 
-The causes shown are overwork and a sense of being the only one left. The text does not give a general cause of loneliness, and reading these as one is ours. Nothing here replaces a doctor or therapist, and loneliness that is heavy or lasting is worth telling someone about.
+This is related to loneliness and not identical to it. The causes shown are overwork and a sense of being the only one left. The text does not give a general cause of loneliness, and reading these as one is ours. Nothing here replaces a doctor or therapist, and loneliness that is heavy or lasting is worth telling someone about.
 
 **Sources**
 

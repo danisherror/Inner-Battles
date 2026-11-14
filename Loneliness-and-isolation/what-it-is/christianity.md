@@ -2,7 +2,7 @@ Christianity says aloneness is a lack. In Genesis 2:18: "It is not good that the
 
 The Psalms give the voice of the lonely: "Turn to me and be gracious to me, for I am lonely and afflicted" (25:16). And the answer: "Father of orphans and protector of widows is God in his holy habitation. God gives the desolate a home to live in" (68:5-6).
 
-These passages name the want of company and a promise of a home. They do not define loneliness, and reading them together as an account of it is ours. Nothing here replaces a doctor or therapist, and loneliness that is heavy or lasting is worth telling someone about.
+This is related to loneliness and not identical to it. These passages name the want of company and a promise of a home. They do not define loneliness, and reading them together as an account of it is ours. Nothing here replaces a doctor or therapist, and loneliness that is heavy or lasting is worth telling someone about.
 
 **Sources**
 

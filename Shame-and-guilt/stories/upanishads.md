@@ -4,7 +4,7 @@ In Chandogya 7.1 Narada comes to Sanatkumara and says: "Teach me, Sir!" Sanatkum
 
 Sanatkumara's first reply is: "Whatever you have read, is only a name." A long teaching follows in the chapter.
 
-**What it shows:** Narada does not cover his grief with what he knows. He names it and asks for help. This is a moment in a dialogue and not a tale of shame or guilt, and linking it to them is ours.
+**What it shows:** Narada does not cover his grief with what he knows. He names it and asks for help. This is a moment in a dialogue and not a tale of shame or guilt, and linking it to them is ours. Nothing here replaces a doctor or therapist, and shame that is heavy or lasting is worth telling someone about.
 
 **Sources**
 

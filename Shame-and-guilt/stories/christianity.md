@@ -6,7 +6,7 @@ Then: "when he came to his senses he said, 'How many of my father's hired hands 
 
 "While he was still far off, his father saw him and was filled with compassion; he ran and put his arms around him and kissed him." The father orders a robe, a ring and sandals, and says: "this son of mine was dead and is alive again; he was lost and is found!"
 
-**What it shows:** The son's sense of unworthiness leads him to go home and say what he did, and the father does not wait for the speech to be finished. The story is about a father's welcome and not about shame as such; the link is ours.
+**What it shows:** The son's sense of unworthiness leads him to go home and say what he did, and the father does not wait for the speech to be finished. The story is about a father's welcome and not about shame as such; the link is ours. Nothing here replaces a doctor or therapist, and shame that is heavy or lasting is worth telling someone about.
 
 **Sources**
 

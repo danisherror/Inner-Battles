@@ -4,7 +4,7 @@ In Gita 1.28-30 Arjuna sees his own kinsmen arrayed for battle. "O Krishna, seei
 
 He reasons that "sin will certainly come upon us if we slay them" (1.36). The teaching of the rest of the Gita answers this distress, and the last verse read here is 18.66: "I shall liberate you from all sinful reactions; do not fear."
 
-**What it shows:** Arjuna is overwhelmed by the thought of a wrong not yet done, and what he is given is not a rule but a teaching. This is a moment in a dialogue and not a tale of shame, and linking it to shame and guilt is ours.
+**What it shows:** Arjuna is overwhelmed by the thought of a wrong not yet done, and what he is given is not a rule but a teaching. This is a moment in a dialogue and not a tale of shame, and linking it to shame and guilt is ours. Nothing here replaces a doctor or therapist, and shame that is heavy or lasting is worth telling someone about.
 
 **Sources**
 

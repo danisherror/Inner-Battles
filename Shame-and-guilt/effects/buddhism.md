@@ -2,7 +2,7 @@ The Buddhist texts set grief and joy side by side. Dhp 15-16: "Here they grieve,
 
 AN 10.1 gives a chain of effects that starts with conduct: "having no regrets is the goal and benefit of skillful ethics" and "Joy is the goal and benefit of having no regrets."
 
-This is related to shame and guilt and not identical to them. Dhp 15 is about the grief of an evildoer, and AN 10.1 is about the benefit of ethical conduct, one step of which is having no regrets. Neither describes shame as a feeling about the self, and reading them as effects of guilt is ours.
+This is related to shame and guilt and not identical to them. Dhp 15 is about the grief of an evildoer, and AN 10.1 is about the benefit of ethical conduct, one step of which is having no regrets. Neither describes shame as a feeling about the self, and reading them as effects of guilt is ours. Nothing here replaces a doctor or therapist, and shame that is heavy or lasting is worth telling someone about.
 
 **Sources**
 

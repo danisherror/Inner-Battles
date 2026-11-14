@@ -4,7 +4,7 @@ The Gita offers comfort for those who feel they have fallen. Gita 9.30-31: "Even
 
 18.66: "Abandon all varieties of dharmas and simply surrender unto Me alone. I shall liberate you from all sinful reactions; do not fear."
 
-This is related to shame and guilt and not identical to them. These verses are about devotion and knowledge and not about the feeling of shame, and they do not speak of making amends to people harmed. Reading them as comfort for guilt is ours. How the three verses fit with each other was not checked.
+This is related to shame and guilt and not identical to them. These verses are about devotion and knowledge and not about the feeling of shame, and they do not speak of making amends to people harmed. Reading them as comfort for guilt is ours. How the three verses fit with each other was not checked. Nothing here replaces a doctor or therapist, and shame that is heavy or lasting is worth telling someone about.
 
 **Sources**
 

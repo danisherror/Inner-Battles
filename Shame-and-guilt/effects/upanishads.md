@@ -2,7 +2,7 @@ The Upanishads name self-torment as a cost, and freedom from it as a result of k
 
 In Chandogya 7.1.3 Narada puts the cost plainly: "I am in grief. Do, Sir, help me over this grief of mine."
 
-This is related to shame and guilt and not identical to them. The Taittiriya verse is about the knower, and Narada's grief has no named cause. Reading these as effects of guilt or shame is ours.
+This is related to shame and guilt and not identical to them. The Taittiriya verse is about the knower, and Narada's grief has no named cause. Reading these as effects of guilt or shame is ours. Nothing here replaces a doctor or therapist, and shame that is heavy or lasting is worth telling someone about.
 
 **Sources**
 

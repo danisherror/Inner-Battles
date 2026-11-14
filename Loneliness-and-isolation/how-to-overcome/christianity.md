@@ -4,7 +4,7 @@ The Christian texts counsel asking, not going alone, and finding a home.
 2. **Do not go alone.** Ecclesiastes 4:9-10: "Two are better than one because they have a good reward for their toil. For if they fall, one will lift up the other".
 3. **Find a home.** Psalm 68:6: "God gives the desolate a home to live in".
 
-These verses do not say how a person makes a friend. Reading them as a way through loneliness is ours, and nothing here replaces a doctor or therapist. Nothing here replaces a doctor or therapist, and loneliness that is heavy or lasting is worth telling someone about.
+This is related to loneliness and not identical to it. These verses do not say how a person makes a friend. Reading them as a way through loneliness is ours, and nothing here replaces a doctor or therapist. Nothing here replaces a doctor or therapist, and loneliness that is heavy or lasting is worth telling someone about.
 
 **Sources**
 

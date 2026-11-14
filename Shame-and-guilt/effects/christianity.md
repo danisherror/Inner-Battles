@@ -4,7 +4,7 @@ Then it turns: "Then I acknowledged my sin to you, and I did not hide my iniquit
 
 Genesis 3:8 shows the hiding that comes with it: the man and woman "hid themselves from the presence of the Lord God".
 
-The Psalm connects silence with wasting and confession with forgiveness. It does not claim that every ache of conscience has this cause, and a footnote on the page says the Hebrew of verse 4 is uncertain.
+This is related to shame and guilt and not identical to them. The Psalm connects silence with wasting and confession with forgiveness. It does not claim that every ache of conscience has this cause, and a footnote on the page says the Hebrew of verse 4 is uncertain. Nothing here replaces a doctor or therapist, and shame that is heavy or lasting is worth telling someone about.
 
 **Sources**
 

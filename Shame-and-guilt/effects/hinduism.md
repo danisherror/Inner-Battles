@@ -2,7 +2,7 @@ The Gita shows what distress does to a body. Arjuna says: "My whole body shudder
 
 The same chapter lists the other side. Among the divine qualities of 16.1-3 is *hrīḥ*, translated "modesty", which the commentary explains as "sense of guilt in performing actions contrary to the injunctions of scriptures and society". An inner check is counted as a gain.
 
-This is related to shame and guilt and not identical to them. Arjuna's distress is about killing his kinsmen, and the commentary calls it remorse and fear. Reading it as an effect of guilt is ours.
+This is related to shame and guilt and not identical to them. Arjuna's distress is about killing his kinsmen, and the commentary calls it remorse and fear. Reading it as an effect of guilt is ours. Nothing here replaces a doctor or therapist, and shame that is heavy or lasting is worth telling someone about.
 
 **Sources**
 

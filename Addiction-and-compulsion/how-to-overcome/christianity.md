@@ -5,7 +5,7 @@ The Christian texts counsel not being alone in the struggle, asking to be rescue
 3. **Ask to be rescued.** Romans 7:24-25: "Wretched person that I am! Who will rescue me from this body of death? Thanks be to God through Jesus Christ our Lord!"
 4. **Stand firm.** Galatians 5:1: "For freedom Christ has set us free. Stand firm, therefore, and do not submit again to a yoke of slavery."
 
-The verses should not be read as saying that someone who slips lacked faith. Reading them as a way through addiction is ours, and nothing here replaces a doctor or therapist. Nothing here replaces a doctor or therapist, and a doctor can help with stopping safely.
+This is related to addiction and not identical to it. The verses should not be read as saying that someone who slips lacked faith. Reading them as a way through addiction is ours, and nothing here replaces a doctor or therapist. Nothing here replaces a doctor or therapist, and a doctor can help with stopping safely.
 
 **Sources**
 

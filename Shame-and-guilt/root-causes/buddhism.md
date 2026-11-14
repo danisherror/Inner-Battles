@@ -2,7 +2,7 @@ The Buddhist texts trace remorse to the deed, and the deed to heedlessness. Dhp 
 
 In MN 86 the former bandit Aṅgulimāla says: "He who once was heedless, but turned to heedfulness, shines upon this world, like the moon freed from clouds."
 
-This is related to shame and guilt and not identical to them. Dhp 15 speaks of grief at one's own deeds, and the Aṅgulimāla verse sets heedlessness before and heedfulness after, and neither describes shame as a feeling about the self. Reading them as roots of those feelings is ours.
+This is related to shame and guilt and not identical to them. Dhp 15 speaks of grief at one's own deeds, and the Aṅgulimāla verse sets heedlessness before and heedfulness after, and neither describes shame as a feeling about the self. Reading them as roots of those feelings is ours. Nothing here replaces a doctor or therapist, and shame that is heavy or lasting is worth telling someone about.
 
 **Sources**
 

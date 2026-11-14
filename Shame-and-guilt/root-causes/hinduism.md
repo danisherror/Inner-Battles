@@ -2,7 +2,7 @@ The Gita shows distress rising from fear of wrongdoing and from attachment. In A
 
 The translator's commentary on 1.28 gives a cause: "He was filled with remorse and fearful of performing his duty of fighting this war. The cause for these sentiments was his attachment towards his bodily relatives."
 
-This is related to shame and guilt and not identical to them. Arjuna dreads a wrong he has not yet done, and the cause named is attachment and forgetting that he "was not just the body", in the commentary's words. Krishna's answer comes in the chapters after and was not read here. Reading Arjuna's anguish as a root of guilt is ours.
+This is related to shame and guilt and not identical to them. Arjuna dreads a wrong he has not yet done, and the cause named is attachment and forgetting that he "was not just the body", in the commentary's words. Krishna's answer comes in the chapters after and was not read here. Reading Arjuna's anguish as a root of guilt is ours. Nothing here replaces a doctor or therapist, and shame that is heavy or lasting is worth telling someone about.
 
 **Sources**
 

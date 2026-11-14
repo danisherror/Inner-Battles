@@ -4,7 +4,7 @@ In Plato's *Symposium* Alcibiades praises Socrates in a speech. He says that Soc
 
 Then: "he is the only person who ever made me ashamed, which you might think not to be in my nature". He cannot answer Socrates, and "when I leave his presence the love of popularity gets the better of me. And therefore I run away and fly from him, and when I see him I am ashamed of what I have confessed to him."
 
-**What it shows:** Alcibiades' shame shows him what he is neglecting, and he runs from it. The scene is a speech of praise and not an account of a remedy, and reading it as a picture of shame is ours.
+**What it shows:** Alcibiades' shame shows him what he is neglecting, and he runs from it. The scene is a speech of praise and not an account of a remedy, and reading it as a picture of shame is ours. Nothing here replaces a doctor or therapist, and shame that is heavy or lasting is worth telling someone about.
 
 **Sources**
 

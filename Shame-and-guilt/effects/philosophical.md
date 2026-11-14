@@ -2,7 +2,7 @@ Aristotle describes what shame does. It "produces an effect similar to that prod
 
 He also names a use: "young people should be prone to the feeling of shame because they live by feeling and therefore commit many errors, but are restrained by shame". And a limit: "the sense of disgrace is not even characteristic of a good man, since it is consequent on bad actions".
 
-This is related to shame as people use the word now and not identical to it. Aristotle is describing disgrace before others, not shame as a belief about the self, and he says nothing of long-term effects.
+This is related to shame as people use the word now and not identical to it. Aristotle is describing disgrace before others, not shame as a belief about the self, and he says nothing of long-term effects. Nothing here replaces a doctor or therapist, and shame that is heavy or lasting is worth telling someone about.
 
 **Sources**
 

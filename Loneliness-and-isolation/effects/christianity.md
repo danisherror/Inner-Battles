@@ -4,7 +4,7 @@ It also names what company gives: "Two are better than one because they have a g
 
 The Psalmist asks for relief of the heart: "Relieve the troubles of my heart, and bring me out of my distress" (25:17).
 
-The passages describe a practical and an emotional cost of being alone. Reading them as effects of loneliness is ours. Nothing here replaces a doctor or therapist, and loneliness that is heavy or lasting is worth telling someone about.
+This is related to loneliness and not identical to it. The passages describe a practical and an emotional cost of being alone. Reading them as effects of loneliness is ours. Nothing here replaces a doctor or therapist, and loneliness that is heavy or lasting is worth telling someone about.
 
 **Sources**
 

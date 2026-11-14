@@ -6,7 +6,7 @@ Later someone throws a stone, a stick and gravel at him. he goes to the Buddha "
 
 He then speaks verses: "I used to be a bandit, the notorious Aṅgulimāla." "My name is 'Harmless', though I used to be harmful." And: "Someone whose bad deed is supplanted by the good, shines upon this world, like the moon freed from clouds."
 
-**What it shows:** Aṅgulimāla does not deny what he did, and does not stay defined by it. The sutta is about a murderer who becomes a monk and is not a tale of shame as such; the link is ours. It involves killing and harm to a body, and may be hard to read.
+**What it shows:** Aṅgulimāla does not deny what he did, and does not stay defined by it. The sutta is about a murderer who becomes a monk and is not a tale of shame as such; the link is ours. It involves killing and harm to a body, and may be hard to read. Nothing here replaces a doctor or therapist, and shame that is heavy or lasting is worth telling someone about.
 
 **Sources**
 

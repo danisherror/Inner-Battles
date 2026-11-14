@@ -4,7 +4,7 @@ The text shows fear, hiding and blame running together after a wrong.
 
 1 John 3:19-20 speaks of the heart's own verdict: "whenever our hearts condemn us, for God is greater than our hearts, and he knows everything."
 
-The causes in these verses are an act and the fear that follows it. The sentence "this is how guilt and shame begin" is ours, since the passages do not say it.
+This is related to shame and guilt and not identical to it. The causes in these verses are an act and the fear that follows it. The sentence "this is how guilt and shame begin" is ours, since the passages do not say it. Nothing here replaces a doctor or therapist, and shame that is heavy or lasting is worth telling someone about.
 
 **Sources**
 

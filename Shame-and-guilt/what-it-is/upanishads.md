@@ -2,7 +2,7 @@ The Upanishads speak of the same distress without using a word for shame. Taitti
 
 The verse names the habit of tormenting oneself over the good left undone and the bad done, and says that knowledge frees a person from it.
 
-This is related to shame and guilt and not identical to them. The verse describes a person who has already realised Brahman, and it does not say that wrongs do not matter or what to do about harm caused. How the knowledge acts on the deeds is not explained in the passage read.
+This is related to shame and guilt and not identical to them. The verse describes a person who has already realised Brahman, and it does not say that wrongs do not matter or what to do about harm caused. How the knowledge acts on the deeds is not explained in the passage read. Nothing here replaces a doctor or therapist, and shame that is heavy or lasting is worth telling someone about.
 
 **Sources**
 

@@ -6,7 +6,7 @@ The Christian texts counsel confession and receiving forgiveness.
 4. **Hear the verdict that follows.** Romans 8:1: "Therefore there is now no condemnation for those who are in Christ Jesus."
 5. **Answer a heart that condemns.** 1 John 3:19-20: "whenever our hearts condemn us, for God is greater than our hearts, and he knows everything."
 
-These verses are about sin and forgiveness before God, and they do not describe amends to people harmed, which other texts of the tradition may discuss. Reading them as a way through shame and guilt is ours, and nothing here replaces a doctor or therapist.
+This is related to shame and guilt and not identical to it. These verses are about sin and forgiveness before God, and they do not describe amends to people harmed, which other texts of the tradition may discuss. Reading them as a way through shame and guilt is ours, and nothing here replaces a doctor or therapist.
 
 **Sources**
 

@@ -2,7 +2,7 @@ Lamentations 3 shows how brooding feeds despair: "The thought of my affliction a
 
 In 1 Kings 19 the prophet Elijah, after a threat, is afraid: "he got up and fled for his life". In the wilderness he "came and sat down under a solitary broom tree. He asked that he might die, 'It is enough; now, O Lord, take away my life, for I am no better than my ancestors.'"
 
-The causes named are affliction, fear and a sense of failure. The text does not give a single cause, and reading these as roots of hopelessness is ours. Nothing here replaces a doctor or therapist. If you are thinking of ending your life or harming yourself, please tell someone today and contact your local emergency services if you may act on it.
+This is related to hopelessness and not identical to it. The causes named are affliction, fear and a sense of failure. The text does not give a single cause, and reading these as roots of hopelessness is ours. Nothing here replaces a doctor or therapist. If you are thinking of ending your life or harming yourself, please tell someone today and contact your local emergency services if you may act on it.
 
 **Sources**
 

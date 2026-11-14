@@ -5,7 +5,7 @@ The Christian texts counsel remembering, hoping and waiting, and they do not dem
 3. **Wait.** Lamentations 3:26: "It is good that one should wait quietly for the salvation of the Lord."
 4. **Let endurance work.** Romans 5:3-5: "affliction produces endurance, and endurance produces character, and character produces hope, and hope does not put us to shame".
 
-These verses do not tell anyone to feel hopeful at once, and Romans 5:3 should not be read as saying that suffering is good for you. Reading them as a way through hopelessness is ours, and nothing here replaces a doctor or therapist. Nothing here replaces a doctor or therapist. If you are thinking of ending your life or harming yourself, please tell someone today and contact your local emergency services if you may act on it.
+This is related to hopelessness and not identical to it. These verses do not tell anyone to feel hopeful at once, and Romans 5:3 should not be read as saying that suffering is good for you. Reading them as a way through hopelessness is ours, and nothing here replaces a doctor or therapist. Nothing here replaces a doctor or therapist. If you are thinking of ending your life or harming yourself, please tell someone today and contact your local emergency services if you may act on it.
 
 **Sources**
 

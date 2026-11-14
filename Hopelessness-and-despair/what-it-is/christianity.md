@@ -4,7 +4,7 @@ Paul's letter to the Corinthians says: "afflicted in every way but not crushed, 
 
 The Psalms give the question: "How long, O Lord? Will you forget me forever? How long will you hide your face from me? How long must I bear pain in my soul and have sorrow in my heart all day long?" (13:1-2).
 
-These passages describe the state and do not offer a definition. Reading them together as an account of hopelessness is ours, and how the tradition treats despair as a doctrine was not checked. Nothing here replaces a doctor or therapist. If you are thinking of ending your life or harming yourself, please tell someone today and contact your local emergency services if you may act on it.
+This is related to hopelessness and not identical to it. These passages describe the state and do not offer a definition. Reading them together as an account of hopelessness is ours, and how the tradition treats despair as a doctrine was not checked. Nothing here replaces a doctor or therapist. If you are thinking of ending your life or harming yourself, please tell someone today and contact your local emergency services if you may act on it.
 
 **Sources**
 

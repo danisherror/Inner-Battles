@@ -2,7 +2,7 @@ Aristotle gives shame a place, and says what it is not. In the *Nicomachean Ethi
 
 For him it is a bodily feeling about disgrace in the eyes of others, and not a settled quality of character.
 
-This is related to shame as people use the word now and not identical to it. The translator's "shame", "disgrace" and "dishonour" point at how one appears to others, and the passage says nothing of shame as a belief that one is bad. The Greek was not examined.
+This is related to shame as people use the word now and not identical to it. The translator's "shame", "disgrace" and "dishonour" point at how one appears to others, and the passage says nothing of shame as a belief that one is bad. The Greek was not examined. Nothing here replaces a doctor or therapist, and shame that is heavy or lasting is worth telling someone about.
 
 **Sources**
 
