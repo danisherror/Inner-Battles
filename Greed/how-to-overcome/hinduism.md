@@ -5,7 +5,7 @@ Hindu practice answers greed with giving, detachment and contentment.
 - **Dana.** Gita 17.20 describes the best gift as one given because it is right to give, to a worthy person, at the right time and place, expecting nothing in return.
 - **Offer your work.** Gita 3.9 and 3.30 say to act as a sacrifice and surrender actions to the Divine, free of "mine."
 - **Moderation.** Gita 6.16-17 advises a balanced way of living, neither too much nor too little.
-- **Isha 1.** Enjoy through letting go; do not covet.
+- **Isha 1.** Enjoy once you have surrendered all this to the Lord; do not covet.
 
 **Sources**
 

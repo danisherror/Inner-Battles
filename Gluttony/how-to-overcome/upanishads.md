@@ -8,7 +8,7 @@ The Upanishadic response is to treat food with respect and to train the "reins" 
 
 **Sources**
 
-- [Taittiriya Upanishad](https://en.wikipedia.org/wiki/Taittiriya_Upanishad) 3.7-10
+- [Taittiriya Upanishad](https://en.wikipedia.org/wiki/Taittiriya_Upanishad) 3.7-10; quotations checked against the [Müller text on Wikisource](https://en.wikisource.org/wiki/Taittiriya_Upanishad)
 - [Chandogya Upanishad](https://en.wikipedia.org/wiki/Chandogya_Upanishad) 7.26.2
 - [Katha Upanishad](https://en.wikipedia.org/wiki/Katha_Upanishad) 1.2.1-2, 1.3.3-9
 

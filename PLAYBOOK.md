@@ -188,7 +188,7 @@ Measure first; the site is small.
 |---|---|---|---|---|
 | 1 | Structure check: all 210 files exist, non-empty, and match `sins.json` | P1 | Script exits 0 | DONE: 210/210 present, none empty |
 | 2 | Link and DOI check over all `.md` files | P1 | Checker reports 0 broken links; output saved | DONE: 310 URLs checked; 22 DOI 403s are publisher bot-blocking and resolve in doi.org (links exist; claims not checked) |
-| 3 | Quote and verse verification pass for Lust, Greed, Envy, Gluttony, Wrath, Sloth (Pride already done) | P0 | Each checked item recorded in README with date | IN PROGRESS: Pride done earlier. Lust: quotes and Gita claims checked. Other five sins: Bible quotes spot-checked (NRSV, match); about 60 non-Bible quotes unverified |
+| 3 | Quote and verse verification pass for Lust, Greed, Envy, Gluttony, Wrath, Sloth (Pride already done) | P0 | Each checked item recorded in README with date | IN PROGRESS: Pride done earlier. Lust: quotes and Gita claims checked. Other five sins: Bible quotes spot-checked (NRSV, match). Greed and Gluttony Upanishad quotes checked against Müller on Wikisource (Isha lines fixed); other non-Bible quotes in Greed, Envy, Gluttony, Wrath, Sloth unverified |
 | 4 | Sources section present in all articles; unchecked points labelled | P1 | `grep -L "Sources"` over articles returns nothing | DONE: every article has a Sources heading (Lust root-causes/modern notes none cited) |
 | 5 | Add SRI to `marked` (or vendor it) | P2 | Page still renders; browser console clean | DONE: sha512 integrity matches cdnjs; renders in Chrome |
 | 6 | Decide on `Inner-Battles.md` (link, move or delete) | P2 | Decision recorded in README | PARKED by user |
@@ -199,7 +199,7 @@ Measure first; the site is small.
 | 11 | Footer disclaimer on the site | P2 | Visible on both pages | DONE: footer on both pages |
 | 12 | Deploy (for example Vercel), add security headers, smoke test the live URL | P2 | Home and 3 random article URLs load over HTTPS | TODO |
 
-**Next up:** step 3 for Greed, Envy, Gluttony, Wrath and Sloth. Fetch each non-Bible quotation's source from a plain-text site (sacred-texts.com, Wikisource raw text, Perseus), then fix the wording or drop the quotation marks if it can't be confirmed. Start with the Upanishad lines in Greed and Gluttony (the Isha "enjoy through renunciation" line probably differs from the cited translation). Then the Lust leftovers (Catechism, suttas, Plato and Stoic points), then steps 8, 9, 10 and 12.
+**Next up:** step 3 for the remaining non-Bible quotations in Greed, Envy, Gluttony, Wrath and Sloth (Buddhist suttas, Stoics, Aristotle, Plato, Augustine, Catechism, Aquinas). Sacred-texts.com blocks scripted fetches; Wikisource's `action=parse` API works with a User-Agent header. Fix the wording or drop the quotation marks if a quote can't be confirmed. Then the Lust leftovers (Catechism, suttas, Plato and Stoic points), then steps 8, 9, 10 and 12.
 
 ## 13. Release readiness checklist
 

@@ -8,7 +8,7 @@ This is related to gluttony and not identical to it: the texts speak of respect 
 
 **Sources**
 
-- [Taittiriya Upanishad](https://en.wikipedia.org/wiki/Taittiriya_Upanishad) 2.2, 3.2, 3.7-10
-- [Chandogya Upanishad](https://en.wikipedia.org/wiki/Chandogya_Upanishad) 7.26.2
+- [Taittiriya Upanishad](https://en.wikipedia.org/wiki/Taittiriya_Upanishad) 2.2, 3.2, 3.7-10; quotations checked against the [Müller text on Wikisource](https://en.wikisource.org/wiki/Taittiriya_Upanishad)
+- [Chandogya Upanishad](https://en.wikipedia.org/wiki/Chandogya_Upanishad) 7.26.2; quotation checked against the [Müller text on Wikisource](https://en.wikisource.org/wiki/Sacred_Books_of_the_East/Volume_1/Kh%C3%A2ndogya-upanishad/Seventh_Prap%C3%A2thaka)
 
 Verse numbers and key quotations were checked against Max Müller's translation (*Sacred Books of the East* 1 and 15) on sacred-texts.com on 2026-11-14; other translations differ in wording and sometimes in numbering.

@@ -1,4 +1,4 @@
-The Upanishads open with a warning against grasping. Isha 1 says that all this is pervaded by the Lord, so "enjoy through renunciation; do not covet anyone's wealth." The line can also be read as "enjoy what is given."
+The Upanishads open with a warning against grasping. Isha 1 says that all this is to be hidden in the Lord: "When thou hast surrendered all this, then thou mayest enjoy. Do not covet the wealth of any man!" (Müller translation). Other translators render the first half as "enjoy through renunciation" or "enjoy what is given."
 
 The texts also argue that wealth cannot satisfy. In Katha 1.1.27, Nachiketa tells Death that no one can be made content by wealth. In Brihadaranyaka 2.4.1-3, Yajnavalkya is about to leave his household and offers his wealth to his wife Maitreyi, who asks whether it would make her immortal. He says no: she would live as the rich do, with no hope of immortality through wealth. She asks for the teaching instead.
 
@@ -6,7 +6,7 @@ Chandogya 7.23 adds a principle: the infinite (*bhuma*) is happiness; there is n
 
 **Sources**
 
-- [Isha Upanishad](https://en.wikipedia.org/wiki/Isha_Upanishad) 1
+- [Isha Upanishad](https://en.wikipedia.org/wiki/Isha_Upanishad) 1; quotation from the [Müller translation](https://en.wikisource.org/wiki/Sacred_Books_of_the_East/Volume_1/V%C3%A2gasaneyi-samhit%C3%A2-upanishad) (verse 1)
 - [Katha Upanishad](https://en.wikipedia.org/wiki/Katha_Upanishad) 1.1.27
 - [Brihadaranyaka Upanishad](https://en.wikipedia.org/wiki/Brihadaranyaka_Upanishad) 2.4.2-3
 - [Chandogya Upanishad](https://en.wikipedia.org/wiki/Chandogya_Upanishad) 7.23
