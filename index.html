@@ -14,7 +14,7 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='28'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="pending">
   <div class="wrap">
     <header class="hero">
       <h1>The Seven Sins</h1>
@@ -32,8 +32,10 @@
           ? `<a class="card" href="sin.html?id=${s.id}">${inner}</a>`
           : `<div class="card disabled">${inner}</div>`;
       }).join("");
+      document.body.classList.remove("pending");
     }).catch(() => {
       document.getElementById("grid").innerHTML = "<p>Could not load the list of sins. Check your connection and reload.</p>";
+      document.body.classList.remove("pending");
     });
   </script>
 </body>

@@ -52,6 +52,8 @@ article li { margin: 6px 0; }
 nav.pager { display: flex; justify-content: space-between; gap: 12px; padding: 24px 0 56px; border-top: 1px solid var(--line); }
 nav.pager a { color: var(--accent); text-decoration: none; }
 footer { text-align: center; color: var(--muted); font-size: .9rem; padding: 0 16px 40px; }
+/* hidden until the page content has loaded, so late-injected content does not count as layout shift */
+body.pending footer, body.pending #article { visibility: hidden; }
 
 /* topic + lens navigation */
 .sin-title { font-size: clamp(2rem, 5vw, 3rem); margin: 12px 0 4px; color: var(--accent); }
