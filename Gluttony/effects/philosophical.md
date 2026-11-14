@@ -4,7 +4,7 @@ Philosophers describe the costs as lost freedom and lost pleasure.
 - **Self-defeat.** Aristotle (*NE* 3.12) says the intemperate person's appetite grows with indulgence, and that he cannot be rid of it by reasoning in the moment.
 - **Reduced pleasure.** Epicurus argues that luxury makes us dependent and anxious about losing it, while plain living gives security (*Letter to Menoeceus*, 130-131).
 - **Loss of reason.** The Stoics (Seneca, *Letters* 95 and 122) describe heavy eating and drinking as dulling the mind.
-- **Harm to body.** Seneca (*Letters* 95.15-18) writes that excess brings many illnesses, and that "a simple diet needs few remedies."
+- **Harm to body.** Seneca (*Letters* 95.15-18) writes that excess brings many illnesses, and that in earlier times "they enjoyed plain health. It took elaborate courses to produce elaborate diseases" (Gummere translation).
 
 **Sources**
 

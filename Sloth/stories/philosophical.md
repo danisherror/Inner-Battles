@@ -2,9 +2,9 @@
 
 Xenophon's *Memorabilia* (2.1.21-34) records a story that Socrates says he heard from the sophist Prodicus. When the young Heracles was about to enter manhood, he went to a quiet place and sat wondering which road in life to take. Two tall women came toward him.
 
-One was Vice, plump and made-up, who called herself Happiness. She promised him an easy road: pleasant food and drink, rest, and no war, no toil and no worry. "You will never need to be anxious," she said, "and all you want will be yours without effort."
+One was Vice, plump and made-up, who called herself Happiness. She offered him an easy road to happiness without toil: "I will guide you by a short and easy road to happiness" (Dakyns translation).
 
-The other was Virtue, simply dressed, with a quiet face. She told him that the gods give nothing good without toil. "If you want the favour of the gods, honour them. If you want friends, do them kindness. If you want to be admired by a city, serve it. If you want a good harvest, tend the land." She said that Vice's pleasures were not satisfying, since those who take them before they are hungry or tired are never really content.
+The other was Virtue, simply dressed, with a quiet face. She told him that "not one" of the lovely things has been given to mortals "apart from toil and pains": to win the favour of the gods he must serve them, to be loved by friends he must benefit them, and to have the earth yield fruit he must tend it (Dakyns translation). She said that Vice's pleasures were not satisfying, since those who take them before they are hungry or tired are never really content.
 
 Xenophon, as Socrates reports it, breaks off with Virtue's speech and does not record which road Heracles took.
 

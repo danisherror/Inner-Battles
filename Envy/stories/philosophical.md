@@ -2,7 +2,7 @@
 
 Plutarch, in his *Life of Aristides* (chapter 7), tells of the Athenian statesman Aristides, known as "the Just." In the 480s BC, Athenians could vote to ostracise a citizen, sending him into exile for ten years, by writing his name on a piece of pottery.
 
-Aristides was a political rival of Themistocles. As the vote was held, says Plutarch, an illiterate farmer who did not know Aristides handed him his shard and asked him to write "Aristides" on it. Aristides asked whether the man had any grievance against him. "None," said the man, "I don't even know him, but I'm tired of hearing him called the Just." Aristides wrote his own name and gave it back.
+Aristides was a political rival of Themistocles. As the vote was held, says Plutarch, an illiterate farmer who did not know Aristides handed him his shard and asked him to write "Aristides" on it. Aristides asked whether the man had any grievance against him. The man said no: "I don't even know the fellow, but I am tired of hearing him everywhere called the Just" (Perrin translation). Aristides wrote his own name and gave it back.
 
 He was ostracised. Plutarch adds that when he left, he prayed that Athens would never need him back.
 
