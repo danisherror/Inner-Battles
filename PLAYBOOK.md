@@ -166,7 +166,7 @@ Measure first; the site is small.
 
 ## 10. Code quality and maintainability
 
-- [ ] `sin.html` and `index.html` stay small; extract a shared JS file only if duplication grows.
+- [x] `sin.html` and `index.html` stay small; extract a shared JS file only if duplication grows. Checked 2026-11-14: `index.html` is 48 lines (3.4 KB) and `sin.html` 30 lines (1.9 KB), each with one inline script. The only overlap is a guarded `localStorage` read of `lens` and the lens id list, both generated from `sins.json`; no shared file extracted. Revisit if a third page needs the same script.
 - [x] HTML escaping: titles and taglines from `sins.json` are interpolated into `innerHTML`. They are first-party, but escape them or use `textContent` if the data ever becomes external. Done 2026-11-14: `build.js` escapes titles and taglines with `esc`.
 - [x] No dead code, unused CSS or unused files. Done 2026-11-14: removed unused rules (`.card .v`, `article h1`, `.tag`, `.virtue`, `.practice`, `nav.pager`) and the unused `connect-src` CSP directive; `Inner-Battles.md` is the one unlinked file, parked by the user (see item 6).
 - [x] README stays in sync with reality (status table, layout, sources). Update it whenever content or structure changes. Layout section updated 2026-11-14 to list every tracked top-level file.
