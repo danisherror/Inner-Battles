@@ -6,7 +6,7 @@ Christianity pairs **effort with grace**: you act, and you also ask for help bey
 4. **Rely on the Spirit.** Paul says to walk by the Spirit and you will not carry out the desires of the flesh (Galatians 5:16), and the fruit of the Spirit includes self-control (5:22-23).
 5. **Expect a way out.** 1 Corinthians 10:13 promises that no temptation is beyond what you can bear, and that God provides a way of escape.
 6. **Renew the mind.** Romans 12:2 speaks of being transformed by the renewing of the mind.
-7. **Seek community and confession.** The Catechism names self-mastery, supportive friendship, prayer and the sacraments as helps toward chastity (2359). James 5:16 urges confessing sins to one another.
+7. **Seek community and confession.** The Catechism names self-knowledge, ascesis, obedience to God's commandments, the moral virtues and fidelity to prayer as means to chastity (2340), and says chastity "blossoms in friendship" (2347). James 5:16 urges confessing sins to one another.
 8. **Remember forgiveness.** A fall is not the end. 1 John 1:9 promises forgiveness to those who confess.
 
 **Sources**
@@ -17,3 +17,6 @@ Christianity pairs **effort with grace**: you act, and you also ask for help bey
 - [Galatians 5:16-24](https://www.biblegateway.com/passage/?search=Galatians+5:16-24&version=NIV)
 - [1 Corinthians 10:13](https://www.biblegateway.com/passage/?search=1+Corinthians+10:13&version=NIV)
 - [Catechism of the Catholic Church 2351-2359 (Vatican)](https://www.vatican.va/archive/ENG0015/__P85.HTM)
+- Catechism of the Catholic Church, [2340](https://www.scborromeo.org/ccc/para/2340.htm) and [2347](https://www.scborromeo.org/ccc/para/2347.htm)
+
+CCC 2340 and 2347 were read at scborromeo.org on 2026-11-14. An earlier version cited 2359, which is about homosexual persons and was not the right paragraph for this point.

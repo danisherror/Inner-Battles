@@ -199,7 +199,7 @@ Measure first; the site is small.
 | 11 | Footer disclaimer on the site | P2 | Visible on both pages | DONE: footer on both pages |
 | 12 | Deploy (for example Vercel), add security headers, smoke test the live URL | P2 | Home and 3 random article URLs load over HTTPS | DONE: Vercel Hobby (free) project `seven-sins`, https://seven-sins-liard.vercel.app; home, 3 articles, `sins.json`, `robots.txt` return 200; `vercel.json` sets CSP, nosniff, Referrer-Policy, X-Frame-Options; HSTS from Vercel; page renders with clean console (2026-11-14) |
 
-**Next up:** finish step 3: check the other Buddhist articles still noted "from memory" with the `bilarasuttas` API (`https://suttacentral.net/api/bilarasuttas/<uid>/sujato?lang=en`), then the Lust leftovers (Catechism paragraphs, Plato and Stoic points). After that: an axe/Lighthouse run (step 8), a 1280px and light-mode screenshot review (step 9), and an `og:image` plus social preview test (step 10).
+**Next up:** finish step 3: check the other Buddhist articles still noted "from memory" with the `bilarasuttas` API (`https://suttacentral.net/api/bilarasuttas/<uid>/sujato?lang=en`), then the Lust Plato and Stoic points (Catechism paragraphs now done). After that: an axe/Lighthouse run (step 8), a 1280px and light-mode screenshot review (step 9), and an `og:image` plus social preview test (step 10).
 
 ## 13. Release readiness checklist
 
