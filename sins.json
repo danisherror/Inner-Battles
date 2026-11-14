@@ -366,6 +366,34 @@
           "title": "A story"
         }
       ]
+    },
+    {
+      "id": "Jealousy",
+      "name": "Jealousy",
+      "kind": "inner-battle",
+      "tagline": "The fear of losing someone or something to a rival, and the hurt and suspicion that follow.",
+      "topics": [
+        {
+          "id": "what-it-is",
+          "title": "What it is"
+        },
+        {
+          "id": "root-causes",
+          "title": "Root causes"
+        },
+        {
+          "id": "effects",
+          "title": "Effects on life"
+        },
+        {
+          "id": "how-to-overcome",
+          "title": "How to overcome it"
+        },
+        {
+          "id": "stories",
+          "title": "A story"
+        }
+      ]
     }
   ]
 }
