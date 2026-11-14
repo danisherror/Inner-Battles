@@ -76,9 +76,9 @@ Existing foundation: `style.css` already uses `:root` tokens and a dark-mode med
 - [x] Layout checked at 360px, 768px and 1280px widths, with no horizontal overflow (long Markdown tables and code blocks are the likely cause). Checked 2026-11-14: `index.html`, `404.html` and all 210 article pages (7 sins × 5 topics × 6 lenses) have `scrollWidth` equal to the viewport width at all three widths. No article contains a table or code block today, so the `style.css` has no rules for them; add overflow handling when the first one appears.
 - [x] Topic and lens buttons wrap cleanly on mobile; touch targets are at least 44px.
 - [ ] Visible keyboard focus on cards and buttons.
-- [ ] Markdown elements (tables, blockquotes, lists, links) are styled consistently.
-- [ ] Respect `prefers-reduced-motion` if any transitions are added.
-- [ ] Spacing and radius values use tokens instead of one-off numbers.
+- [x] Markdown elements (tables, blockquotes, lists, links) are styled consistently. `style.css` styles `article.md` h2/h3, lists, links, blockquotes, tables (scroll inside the block), inline code, code blocks, hr and images. Not yet checked in the browser against a real table or blockquote, since no article has one.
+- [x] Respect `prefers-reduced-motion` if any transitions are added. The only transition is the card hover; it is disabled under `prefers-reduced-motion: reduce`.
+- [x] Spacing and radius values use tokens instead of one-off numbers. `--space-1`..`--space-7` and `--radius-sm`/`--radius`/`--radius-pill` in `:root`. One-off values were snapped to the nearest token, so some gaps shift by 1-4px. Border widths, the 44px touch target and max-widths stay literal.
 
 ## 4. Tooling (small and proportionate)
 
