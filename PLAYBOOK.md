@@ -126,7 +126,7 @@ process.exit(bad ? 1 : 0);
 
 ## 6. Functional checks
 
-- [ ] `index.html` lists all 7 sins and every card links to a working `sin.html?id=...`.
+- [x] `index.html` lists all 7 sins and every card links to a working `sin.html?id=...`. Checked 2026-11-14 by running the `index.html` script against `sins.json` in a Node sandbox: 7 enabled cards, none marked "Coming soon", each linking to `sin.html?id=<Sin>` with an `id` that exists in `sins.json`, and all 30 article files present per sin. `sin.html` returned HTTP 200 for each id from `python3 -m http.server`. Not checked in a real browser (the local server for that was not allowed to run in the background), so the rendered DOM and click-through are unconfirmed.
 - [x] Every one of the 210 `sin.html?id=<Sin>&topic=<topic>&lens=<lens>` URLs renders (script-checkable).
 - [ ] Unknown `id`, `topic` or `lens` in the URL falls back gracefully (unknown id shows "Not found"; unknown topic and lens default).
 - [ ] Back/forward and refresh: the URL updates with `replaceState`, so the back button leaves the page rather than stepping through tabs. Decide whether that is intended.
