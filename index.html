@@ -14,9 +14,9 @@
     </header>
     <main class="grid" id="grid"></main>
   </div>
-  <footer>A read-only guide for self-improvement.</footer>
+  <footer>A read-only guide for self-improvement. Educational and reflective content, not medical, psychological or religious authority. If a habit is harming your life, please talk to a doctor, therapist or a trusted person.</footer>
   <script>
-    fetch("sins.json").then(r => r.json()).then(({ sins }) => {
+    fetch("sins.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(({ sins }) => {
       document.getElementById("grid").innerHTML = sins.map(s => {
         const ready = !!s.topics;
         const inner = `<h2>${s.name}</h2><p>${s.tagline}</p>${ready ? "" : '<span class="soon">Coming soon</span>'}`;
@@ -24,6 +24,8 @@
           ? `<a class="card" href="sin.html?id=${s.id}">${inner}</a>`
           : `<div class="card disabled">${inner}</div>`;
       }).join("");
+    }).catch(() => {
+      document.getElementById("grid").innerHTML = "<p>Could not load the list of sins. Check your connection and reload.</p>";
     });
   </script>
 </body>

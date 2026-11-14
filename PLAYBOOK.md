@@ -32,12 +32,13 @@ A quality and completion checklist for this project, adapted from the general Vi
 | Links and DOIs | PARTIAL | README says checked 2026-11-14 for Pride and the other six. Re-run after any edit |
 | Scripture and quote accuracy | PARTIAL | README states Bible, Müller Upanishad, Stoic and Aristotle quotes checked for Pride only. Other references "from memory" |
 | Security (XSS) | PARTIAL | `sin.html` renders `marked.parse(md)` through `innerHTML`; marked 4.x does not sanitize. Safe only while all Markdown is first-party. See 5 |
-| Supply chain | FAIL (P2) | `marked` is loaded from a CDN without a Subresource Integrity (`integrity`) attribute |
+| Supply chain | PASS | `sin.html` loads `marked` 4.3.0 with a sha512 `integrity` hash that matches the cdnjs API value; page still renders it (checked in Chrome 2026-11-14) |
 | SEO / social previews | FAIL (P2) | `index.html` and `sin.html` have no meta description, canonical, Open Graph or Twitter tags. No `sitemap.xml` or `robots.txt` in repo |
 | SEO of article content | FAIL (P2) | Articles load via `fetch` after page load and the URL uses a query string, so crawlers see an empty shell. Acceptable only if search traffic is not a goal |
-| Error states | PARTIAL | `sin.html` shows "isn't written yet" for any fetch failure, including network errors. `index.html` has no error handling if `sins.json` fails |
-| Accessibility | UNKNOWN | Lens buttons use `role="tab"` without a `tabpanel`, arrow-key handling, or `aria-controls`. Topic buttons have no pressed state. Not audited |
+| Error states | PASS | 404 shows "isn't written yet"; other failures show a retry message; `sins.json` failure handled on both pages. 404 and simulated network failure checked in Chrome 2026-11-14; `sins.json` failure path not exercised |
+| Accessibility | PARTIAL | Fake tab roles replaced by `aria-pressed` buttons, `aria-live` on the article, focus outlines added. Heading hierarchy, contrast and an axe/Lighthouse run still not done |
 | Tests / CI | FAIL (P2) | None. A small script can replace them (see 4) |
+| Disclaimer on site | PASS | Footer on both pages |
 | Docs | PASS | README covers run, layout, adding a sin, writing guidelines, sources |
 | Stray file | UNKNOWN | `Inner-Battles.md` is not linked from the site or README. Decide: link it, move it, or remove it |
 
