@@ -394,6 +394,34 @@
           "title": "A story"
         }
       ]
+    },
+    {
+      "id": "Fear-and-anxiety",
+      "name": "Fear and anxiety",
+      "kind": "inner-battle",
+      "tagline": "The mind sounding the alarm about threats that have not happened, or are far bigger in the imagination.",
+      "topics": [
+        {
+          "id": "what-it-is",
+          "title": "What it is"
+        },
+        {
+          "id": "root-causes",
+          "title": "Root causes"
+        },
+        {
+          "id": "effects",
+          "title": "Effects on life"
+        },
+        {
+          "id": "how-to-overcome",
+          "title": "How to overcome it"
+        },
+        {
+          "id": "stories",
+          "title": "A story"
+        }
+      ]
     }
   ]
 }
