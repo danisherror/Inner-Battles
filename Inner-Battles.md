@@ -67,7 +67,7 @@ The "evil inclination" versus the good inclination (*yetzer tov*). The idea is t
 | **Resentment and grudges** ✅ | Holding on to old hurt, so the past keeps paying rent in your head. |
 | **Jealousy** ✅ | Fear of losing someone or something to another (differs from envy). |
 | **Ego and need for validation** ✅ | Needing approval and praise to feel worthy. |
-| **Loneliness and isolation** | The urge to withdraw even while wanting connection. |
+| **Loneliness and isolation** ✅ | The urge to withdraw even while wanting connection. |
 | **Fear of failure / fear of success** ✅ | Self-sabotage to avoid risk or change. |
 | **Cognitive dissonance** ✅ | Discomfort from holding conflicting beliefs, leading to rationalising. |
 | **Denial and self-deception** ✅ | Not letting yourself see the truth. |
@@ -106,7 +106,7 @@ The "evil inclination" versus the good inclination (*yetzer tov*). The idea is t
 
 The seven existing sins are excluded. Overlapping topics are merged, and anything already covered by an existing sin is dropped. Each topic would get the site's usual 5 topic pages × 6 lenses = 30 articles, so **19 topics = 570 articles**, written in phases (see below), never all at once.
 
-**Progress (updated 2026-11-15):** 16 of 19 topics are written and on the site (480 of 570 articles): Procrastination (phase 0), Overthinking, Perfectionism, Self-doubt, Self-criticism and Jealousy (phase 1, complete), and Fear and anxiety, Fear of failure and success, Impulsivity, Distraction and Resentment (phase 2, complete), and Ego and validation, Denial and self-deception and Delusion and the true self (phase 3, complete). Phase 4 (the sensitive topics) so far: Shame and guilt, Hopelessness and despair. Remaining: 3 of the 5 phase 4 topics.Topics marked ✅ below are done; each has its own README entry listing what was and was not checked.
+**Progress (updated 2026-11-15):** 17 of 19 topics are written and on the site (510 of 570 articles): Procrastination (phase 0), Overthinking, Perfectionism, Self-doubt, Self-criticism and Jealousy (phase 1, complete), and Fear and anxiety, Fear of failure and success, Impulsivity, Distraction and Resentment (phase 2, complete), and Ego and validation, Denial and self-deception and Delusion and the true self (phase 3, complete). Phase 4 (the sensitive topics) so far: Shame and guilt, Hopelessness and despair, Loneliness and isolation. Remaining: 2 of the 5 phase 4 topics.Topics marked ✅ below are done; each has its own README entry listing what was and was not checked.
 
 **Mind and emotion**
 1. Fear and anxiety — ✅ done 2026-11-14
@@ -118,7 +118,7 @@ The seven existing sins are excluded. Overlapping topics are merged, and anythin
 7. Jealousy (kept apart from Envy: fear of losing, not wanting what another has) — ✅ done 2026-11-14
 8. Resentment and grudges — ✅ done 2026-11-14
 9. Hopelessness and despair — ✅ done 2026-11-15
-10. Loneliness and isolation
+10. Loneliness and isolation — ✅ done 2026-11-15
 
 **Habits and will**
 11. Procrastination and weakness of will (merges old 12 and 17; akrasia is the philosophical frame) — ✅ done 2026-11-14
@@ -145,7 +145,7 @@ The seven existing sins are excluded. Overlapping topics are merged, and anythin
 | 1 ✅ done | 2 Overthinking and restlessness, 4 Perfectionism, 3 Self-doubt, 5 Self-criticism, 7 Jealousy | Strong tradition fit and plentiful sources |
 | 2 ✅ done | 1 Fear and anxiety ✅, 18 Fear of failure and success ✅, 13 Impulsivity ✅, 14 Distraction ✅, 8 Resentment ✅ | Moderate fit; keep claims about research tightly sourced |
 | 3 ✅ done | 16 Ego and validation ✅, 17 Denial and dissonance ✅, 19 Delusion and true self ✅ | Closest to Hindu, Upanishadic and Buddhist terms; watch "related, not identical" notes |
-| 4 (sensitive), in progress | 6 Shame and guilt, 9 Hopelessness, 10 Loneliness, 12 Addiction, 15 Burnout — done so far: Shame and guilt, Hopelessness and despair | Need a pointer to professional help and no shaming language; write last, with the most care |
+| 4 (sensitive), in progress | 6 Shame and guilt, 9 Hopelessness, 10 Loneliness, 12 Addiction, 15 Burnout — done so far: Shame and guilt, Hopelessness and despair, Loneliness and isolation | Need a pointer to professional help and no shaming language; write last, with the most care |
 
 ### Rules for every topic
 
