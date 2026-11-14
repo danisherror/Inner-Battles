@@ -32,7 +32,7 @@ python3 -m http.server 8000
 
 Then open <http://localhost:8000>. An internet connection is needed because the Markdown renderer ([marked](https://cdnjs.com/libraries/marked) 4.3.0) is loaded from cdnjs.
 
-The site can be deployed to any static host, such as Vercel, as it is.
+The site can be deployed to any static host, such as Vercel, as it is. It is currently deployed on the free Vercel Hobby plan at <https://seven-sins-liard.vercel.app>; `vercel.json` sets the security headers. To redeploy, run `vercel deploy --prod` in this folder (the project name `seven-sins` is saved in the untracked `.vercel` folder).
 
 ## Project layout
 

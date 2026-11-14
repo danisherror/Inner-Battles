@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://seven-sins-liard.vercel.app/sitemap.xml
