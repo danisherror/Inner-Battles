@@ -11,7 +11,7 @@ A quality and completion checklist for this project, adapted from the general Vi
 | Type | Static content site (marketing/reference), no backend, no auth, no database, no user input |
 | Stack | Plain HTML, CSS, JS. `marked` 4.3.0 from cdnjs renders Markdown in the browser |
 | Content | 7 sins x 5 topics x 6 lenses = 210 articles (`<Sin>/<topic>/<lens>.md`), driven by `sins.json` |
-| Hosting | Any static host (Vercel suggested in README) |
+| Hosting | Vercel Hobby (free), https://seven-sins-liard.vercel.app |
 | Main risk | Wrong or unsourced claims about scripture, philosophy and research. Technical risk is low |
 
 **Not applicable (N/A):** authentication, authorization, database, API design, concurrency, backups, MCP and agent security, CI/CD pipelines beyond a link/lint check, observability stacks, desktop/CLI, AI cost management. Do not add infrastructure for these.
@@ -28,15 +28,15 @@ A quality and completion checklist for this project, adapted from the general Vi
 
 | Area | Status | Evidence / note |
 |---|---|---|
-| All 7 sins written | PARTIAL | README lists all as written. Not yet verified that all 210 files exist and match `sins.json` (see 2.1) |
-| Links and DOIs | PARTIAL | README says checked 2026-11-14 for Pride and the other six. Re-run after any edit |
-| Scripture and quote accuracy | PARTIAL | README states Bible, Müller Upanishad, Stoic and Aristotle quotes checked for Pride only. Other references "from memory" |
+| All 7 sins written | PASS | 210/210 files present and non-empty, all 210 article URLs render at 360px and 768px |
+| Links and DOIs | PARTIAL | 310 URLs checked 2026-11-14 (22 DOI 403s are bot-blocking). Re-run after content edits |
+| Scripture and quote accuracy | PARTIAL | Pride and Lust checked; Greed/Gluttony Upanishads, philosophical lens and Christianity non-Bible items checked and fixed. Buddhist suttas, Evagrius and Aquinas still open (see step 3) |
 | Security (XSS) | PARTIAL | `sin.html` renders `marked.parse(md)` through `innerHTML`; marked 4.x does not sanitize. Safe only while all Markdown is first-party. See 5 |
 | Supply chain | PASS | `sin.html` loads `marked` 4.3.0 with a sha512 `integrity` hash that matches the cdnjs API value; page still renders it (checked in Chrome 2026-11-14) |
-| SEO / social previews | FAIL (P2) | `index.html` and `sin.html` have no meta description, canonical, Open Graph or Twitter tags. No `sitemap.xml` or `robots.txt` in repo |
+| SEO / social previews | PARTIAL | Meta description, Open Graph, Twitter card, favicon, canonical (home), `robots.txt` and `sitemap.xml` added. No `og:image`; social preview not tested |
 | SEO of article content | FAIL (P2) | Articles load via `fetch` after page load and the URL uses a query string, so crawlers see an empty shell. Acceptable only if search traffic is not a goal |
-| Error states | PASS | 404 shows "isn't written yet"; other failures show a retry message; `sins.json` failure handled on both pages. 404 and simulated network failure checked in Chrome 2026-11-14; `sins.json` failure path not exercised |
-| Accessibility | PARTIAL | Fake tab roles replaced by `aria-pressed` buttons, `aria-live` on the article, focus outlines added. Heading hierarchy, contrast and an axe/Lighthouse run still not done |
+| Error states | PASS | Styled `404.html` for unknown URLs on the live site. 404 shows "isn't written yet"; other failures show a retry message; `sins.json` failure handled on both pages. 404 and simulated network failure checked in Chrome 2026-11-14; `sins.json` failure path not exercised |
+| Accessibility | PARTIAL | `aria-pressed` buttons, `aria-live`, focus outlines, heading order and contrast checked. No axe/Lighthouse run |
 | Tests / CI | FAIL (P2) | None. A small script can replace them (see 4) |
 | Disclaimer on site | PASS | Footer on both pages |
 | Docs | PASS | README covers run, layout, adding a sin, writing guidelines, sources |
@@ -45,20 +45,20 @@ A quality and completion checklist for this project, adapted from the general Vi
 ## 2. Content integrity (highest priority for this project)
 
 ### 2.1 Structure
-- [ ] Every sin in `sins.json` with `topics` has a folder named exactly its `id`.
-- [ ] Every topic folder has all six lens files, with no extras or typos.
-- [ ] No empty files, and no file ends mid-sentence.
-- [ ] `sins.json` is valid JSON; every `tagline` is present and reads well.
-- [ ] No sin is left as "Coming soon" by accident.
+- [x] Every sin in `sins.json` with `topics` has a folder named exactly its `id`.
+- [x] Every topic folder has all six lens files, with no extras or typos.
+- [x] No empty files (checked by script). Not checked: whether any file ends mid-sentence.
+- [x] `sins.json` is valid JSON; every `tagline` is present and reads well.
+- [x] No sin is left as "Coming soon" by accident.
 
 ### 2.2 Writing guidelines (from README)
 - [ ] Each tradition is described on its own terms and not ranked.
-- [ ] Every article ends with a **Sources** section.
+- [x] Every article ends with a **Sources** section.
 - [ ] Any claim about scripture, philosophy or research has a URL or book-and-verse reference.
 - [ ] Unchecked points are flagged as "standard summary, not checked against a specific passage".
 - [ ] Where a tradition has no exact equivalent (for example, Hinduism and gluttony or sloth), the article says "related, not identical".
 - [ ] No fabricated quotes, statistics or studies. If a quote cannot be traced to a source, paraphrase it or remove it.
-- [ ] The Disclaimer (not medical, psychological or religious authority) stays on the site, not only in the README. Currently it appears only in the README; consider adding it to the footer.
+- [x] The Disclaimer (not medical, psychological or religious authority) stays on the site, not only in the README. It is in the footer of both pages.
 - [ ] Sensitive topics (Lust, Gluttony) point to professional help where relevant, and avoid shaming language.
 - [ ] Consistent terminology: "Buddhist" (lens name in `sins.json`) vs "Buddhism" (id and file names). Keep it deliberate.
 - [ ] Spelling and grammar pass, one spelling convention throughout.
@@ -72,9 +72,9 @@ A quality and completion checklist for this project, adapted from the general Vi
 
 Existing foundation: `style.css` already uses `:root` tokens and a dark-mode media query, with a serif type stack.
 
-- [ ] Light and dark themes are both readable; check contrast of `--muted` on `--bg` (WCAG AA 4.5:1).
+- [x] Light and dark themes are both readable; check contrast of `--muted` on `--bg` (WCAG AA 4.5:1).
 - [ ] Layout checked at 360px, 768px and 1280px widths, with no horizontal overflow (long Markdown tables and code blocks are the likely cause).
-- [ ] Topic and lens buttons wrap cleanly on mobile; touch targets are at least 44px.
+- [x] Topic and lens buttons wrap cleanly on mobile; touch targets are at least 44px.
 - [ ] Visible keyboard focus on cards and buttons.
 - [ ] Markdown elements (tables, blockquotes, lists, links) are styled consistently.
 - [ ] Respect `prefers-reduced-motion` if any transitions are added.
@@ -117,42 +117,42 @@ process.exit(bad ? 1 : 0);
 ## 5. Security (proportionate to a static site)
 
 - [ ] **XSS:** `marked.parse` output goes into `innerHTML` unsanitized. Today all Markdown is first-party, so the risk is low. If articles ever come from contributors or another source, add DOMPurify. Test by adding `<script>` and `<img onerror>` to a scratch article and confirming the outcome.
-- [ ] **SRI:** add `integrity` and `crossorigin="anonymous"` to the `marked` script tag, or vendor the file into the repo. Either removes the cdnjs runtime dependency risk. Compute the hash from the file you actually verified.
-- [ ] Query parameters (`id`, `topic`, `lens`) are used only to look up entries in `sins.json`, never concatenated into a fetch path directly. Confirm this still holds after edits.
-- [ ] Security headers at the host (Vercel `vercel.json` or equivalent): `X-Content-Type-Options: nosniff`, `Referrer-Policy`, and a CSP allowing only `self` and `cdnjs.cloudflare.com` for scripts.
-- [ ] HTTPS enforced by the host.
-- [ ] No secrets, analytics tokens or personal data committed (`git log -p` scan with Gitleaks).
-- [ ] No tracking or cookies unless deliberately added; `localStorage` currently stores only the chosen lens, wrapped in try/catch.
+- [x] **SRI:** add `integrity` and `crossorigin="anonymous"` to the `marked` script tag, or vendor the file into the repo. Either removes the cdnjs runtime dependency risk. Compute the hash from the file you actually verified.
+- [x] Query parameters (`id`, `topic`, `lens`) are used only to look up entries in `sins.json`, never concatenated into a fetch path directly. Confirm this still holds after edits.
+- [x] Security headers at the host (Vercel `vercel.json` or equivalent): `X-Content-Type-Options: nosniff`, `Referrer-Policy`, and a CSP allowing only `self` and `cdnjs.cloudflare.com` for scripts.
+- [x] HTTPS enforced by the host.
+- [x] No secrets, analytics tokens or personal data committed (pattern scan of `git log -p` found none; Gitleaks itself not run).
+- [x] No tracking or cookies unless deliberately added; `localStorage` currently stores only the chosen lens, wrapped in try/catch.
 
 ## 6. Functional checks
 
 - [ ] `index.html` lists all 7 sins and every card links to a working `sin.html?id=...`.
-- [ ] Every one of the 210 `sin.html?id=<Sin>&topic=<topic>&lens=<lens>` URLs renders (script-checkable).
+- [x] Every one of the 210 `sin.html?id=<Sin>&topic=<topic>&lens=<lens>` URLs renders (script-checkable).
 - [ ] Unknown `id`, `topic` or `lens` in the URL falls back gracefully (unknown id shows "Not found"; unknown topic and lens default).
 - [ ] Back/forward and refresh: the URL updates with `replaceState`, so the back button leaves the page rather than stepping through tabs. Decide whether that is intended.
 - [ ] Copy a deep link, open it in a new tab: same article loads.
 - [ ] Remembered lens persists across sins and survives `localStorage` being blocked.
-- [ ] Distinguish error cases: 404 file ("not written yet") vs network or JSON failure ("could not load, retry"). Add an error message to `index.html`.
+- [x] Distinguish error cases: 404 file ("not written yet") vs network or JSON failure ("could not load, retry"). Add an error message to `index.html`.
 - [ ] Loading state works and does not flash incorrectly.
 - [ ] Open the site from `file://` and confirm the README's explanation (fetch blocked) is accurate; consider a visible hint.
 
 ## 7. SEO and sharing (do only if discoverability matters)
 
-- [ ] Unique `<title>` and meta description per page. `sin.html` already sets a title per sin; add the topic and lens.
+- [x] Unique `<title>` and meta description per page. `sin.html` already sets a title per sin; add the topic and lens.
 - [ ] Canonical URL, Open Graph (title, description, image) and Twitter card.
-- [ ] `robots.txt` and `sitemap.xml` listing the pages.
+- [x] `robots.txt` and `sitemap.xml` listing the pages.
 - [ ] Articles are rendered client-side, so search engines may index little. Options if this matters: pre-render the Markdown to static HTML at build time (one HTML page per article), or accept the limitation and note it here.
-- [ ] Favicon.
-- [ ] `lang="en"` is already set.
+- [x] Favicon.
+- [x] `lang="en"` is already set.
 
 ## 8. Accessibility (target WCAG 2.2 AA)
 
-- [ ] Lens switcher: either implement the full tab pattern (`aria-controls`, `tabpanel`, arrow keys, roving `tabindex`) or drop `role="tab"` and use buttons with `aria-pressed`.
-- [ ] Topic buttons expose the current state (`aria-pressed` or `aria-current`).
-- [ ] Loading and error messages are announced (`aria-live="polite"` on the article region).
-- [ ] Heading hierarchy: one `h1` per page, `h2` for the topic, article headings below it (the article injects `<h2>` and Markdown may include another `h1`; check).
+- [x] Lens switcher: either implement the full tab pattern (`aria-controls`, `tabpanel`, arrow keys, roving `tabindex`) or drop `role="tab"` and use buttons with `aria-pressed`.
+- [x] Topic buttons expose the current state (`aria-pressed` or `aria-current`).
+- [x] Loading and error messages are announced (`aria-live="polite"` on the article region).
+- [x] Heading hierarchy: one `h1` per page, `h2` for the topic, article headings below it (the article injects `<h2>` and Markdown may include another `h1`; check).
 - [ ] Link text in articles is descriptive; external links are clearly marked.
-- [ ] Colour contrast passes in light and dark themes.
+- [x] Colour contrast passes in light and dark themes.
 - [ ] Page works with keyboard only and at 200% zoom.
 
 ## 9. Performance
@@ -162,7 +162,7 @@ Measure first; the site is small.
 - [ ] Lighthouse on the home page and a sample article: LCP <= 2.5s, CLS <= 0.1, INP <= 200ms.
 - [ ] Each article is a separate small `fetch` (about 1 to 2 KB each); confirm no waterfall beyond `sins.json` then article.
 - [ ] `marked` is the only third-party script; consider `defer`, or vendoring to remove the extra origin.
-- [ ] Cache headers for `.md` and `sins.json` at the host.
+- [x] Cache headers for `.md` and `sins.json` at the host.
 
 ## 10. Code quality and maintainability
 
@@ -171,7 +171,7 @@ Measure first; the site is small.
 - [ ] No dead code, unused CSS or unused files.
 - [ ] README stays in sync with reality (status table, layout, sources). Update it whenever content or structure changes.
 - [ ] `sins.json` is the single source of truth for sins, topics and lenses.
-- [ ] Commit messages follow CLAUDE.md: short imperative subject, optional body, no AI attribution lines.
+- [x] Commit messages follow CLAUDE.md: short imperative subject, optional body, no AI attribution lines.
 
 ## 11. Working with the AI agent on this repo
 
@@ -199,32 +199,32 @@ Measure first; the site is small.
 | 11 | Footer disclaimer on the site | P2 | Visible on both pages | DONE: footer on both pages |
 | 12 | Deploy (for example Vercel), add security headers, smoke test the live URL | P2 | Home and 3 random article URLs load over HTTPS | DONE: Vercel Hobby (free) project `seven-sins`, https://seven-sins-liard.vercel.app; home, 3 articles, `sins.json`, `robots.txt` return 200; `vercel.json` sets CSP, nosniff, Referrer-Policy, X-Frame-Options; HSTS from Vercel; page renders with clean console (2026-11-14) |
 
-**Next up:** step 3 for the remaining non-Bible quotations in Greed, Envy, Gluttony, Wrath and Sloth (Buddhist suttas, Stoics, Aristotle, Plato, Augustine, Catechism, Aquinas). Sacred-texts.com blocks scripted fetches; Wikisource's `action=parse` API works with a User-Agent header. Fix the wording or drop the quotation marks if a quote can't be confirmed. Then the Lust leftovers (Catechism, suttas, Plato and Stoic points), then steps 8, 9, 10 and 12.
+**Next up:** finish step 3: re-check the Buddhist sutta quotations using SuttaCentral's `bilarasuttas` API (the plain `suttas` API returns no text for segmented suttas), fix the DN16 line to Sujato's "Conditions fall apart. Persist with diligence.", then Evagrius, Aquinas and the Lust leftovers. After that: an axe/Lighthouse run (step 8), a 1280px and light-mode screenshot review (step 9), and an `og:image` plus social preview test (step 10).
 
 ## 13. Release readiness checklist
 
 **Content**
-- [ ] 210/210 articles present, with Sources sections.
-- [ ] Links checked; verification dates recorded in README.
+- [x] 210/210 articles present, with Sources sections.
+- [x] Links checked; verification dates recorded in README.
 - [ ] No unsourced or invented quotes.
 
 **Site**
 - [ ] Home page and every article URL render with a clean console.
 - [ ] Mobile and dark mode checked.
-- [ ] Error states checked.
+- [x] Error states checked.
 
 **Security and supply chain**
-- [ ] SRI or vendored `marked`.
-- [ ] No secrets in git history.
-- [ ] Security headers set at the host.
+- [x] SRI or vendored `marked`.
+- [x] No secrets in git history (pattern scan only; Gitleaks not run).
+- [x] Security headers set at the host.
 
 **Quality**
 - [ ] axe and Lighthouse reports reviewed.
 - [ ] README accurate.
-- [ ] `LICENSE` present (MIT, already in repo).
+- [x] `LICENSE` present (MIT, already in repo).
 
 **Deploy**
-- [ ] Live URL smoke-tested over HTTPS.
+- [x] Live URL smoke-tested over HTTPS.
 
 ## 14. Audit prompt for this repo
 
