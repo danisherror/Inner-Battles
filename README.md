@@ -1,6 +1,6 @@
 # Sins
 
-A read-only guide to the seven deadly sins, and to other inner battles beyond them (the first is procrastination): what each one is, where it comes from, what it costs, and how to overcome it. Every topic is explained through six lenses:
+A read-only guide to the seven deadly sins, and to 19 other inner battles beyond them (procrastination, overthinking, shame, burnout and more): what each one is, where it comes from, what it costs, and how to overcome it. Every topic is explained through six lenses:
 
 - **Modern** (psychology and everyday life)
 - **Hinduism** (Bhagavad Gita and wider tradition)
@@ -113,7 +113,7 @@ The site can be deployed to any static host, such as Vercel, as it is. It is cur
 ```
 Sins/
   build.js        generates every .html page and sitemap.xml (npm run render)
-  index.html      generated home page: one card per sin
+  index.html      generated home page: one card per sin and inner battle
   sin.html        generated redirect for old sin.html?id=... links
   404.html        hand-written "page not found" page
   style.css       styles (light and dark)
@@ -124,7 +124,8 @@ Sins/
   CLAUDE.md       instructions for the AI agent
   PLAYBOOK.md     review checklist and audit notes
   Inner-Battles.md  planning list for the inner-battles section (19 topics, phased); not linked from the site. Decision 2026-11-14: keep it as the plan, and retire or link it once the topics are on the site
-  Lust/ Pride/ Greed/ Envy/ Gluttony/ Wrath/ Sloth/ Procrastination/   (each has the same five topic folders)
+  Lust/ Pride/ Greed/ Envy/ Gluttony/ Wrath/ Sloth/ and one folder per inner battle (Procrastination/, Overthinking/ ... Burnout-and-apathy/; 26 in all, 780 articles)
+                      each has the same five topic folders:
     what-it-is/       modern.md  hinduism.md  upanishads.md  christianity.md  buddhism.md  philosophical.md
                       (plus a generated .html page next to each .md)
     root-causes/
