@@ -10,4 +10,4 @@ Aquinas (*ST* II-II q.148) says the fault lies in the disordered *desire*, and t
 - [Aquinas, Summa Theologiae II-II q.148](https://www.newadvent.org/summa/3148.htm)
 - Catechism of the Catholic Church, [1809](https://www.scborromeo.org/ccc/para/1809.htm) and [2290](https://www.scborromeo.org/ccc/para/2290.htm)
 
-Bible passages: Longer quotations were checked against the NRSV text on BibleGateway on 2026-11-14; shorter phrases and paraphrases were not individually checked. Catechism and patristic references were from memory.
+Bible passages: Longer quotations were checked against the NRSV text on BibleGateway on 2026-11-14; shorter phrases and paraphrases were not individually checked. Catechism and patristic references were from memory. The Aquinas reference (ST II-II q.148 incl. Gregory's five ways, Moralia 30.18) was read at New Advent on 2026-11-14 and supports the point made.

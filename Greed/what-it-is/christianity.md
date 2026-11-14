@@ -15,4 +15,4 @@ Aquinas places avarice among the capital sins (*Summa* II-II q.118) as an immode
 - [Aquinas, Summa Theologiae II-II q.118](https://www.newadvent.org/summa/3118.htm)
 - Catechism of the Catholic Church, [2534](https://www.scborromeo.org/ccc/para/2534.htm), [2535](https://www.scborromeo.org/ccc/para/2535.htm) and [2536](https://www.scborromeo.org/ccc/para/2536.htm)
 
-Longer quotations were checked against the NRSV text on BibleGateway on 2026-11-14; shorter phrases and paraphrases were not individually checked.
+Longer quotations were checked against the NRSV text on BibleGateway on 2026-11-14; shorter phrases and paraphrases were not individually checked. The Aquinas reference (ST II-II q.118, covetousness as "immoderate love of possessing" and a capital vice) was read at New Advent on 2026-11-14 and supports the point made.

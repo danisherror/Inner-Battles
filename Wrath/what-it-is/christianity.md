@@ -10,4 +10,4 @@ Aquinas (*ST* II-II q.158) argues that anger is sinful when it goes against reas
 - [Aquinas, Summa Theologiae II-II q.158](https://www.newadvent.org/summa/3158.htm)
 - Catechism of the Catholic Church, 2302-2303: [index](https://www.vatican.va/archive/ENG0015/_INDEX.HTM)
 
-Bible passages: Longer quotations were checked against the NRSV text on BibleGateway on 2026-11-14; shorter phrases and paraphrases were not individually checked. Catechism and patristic references were from memory.
+Bible passages: Longer quotations were checked against the NRSV text on BibleGateway on 2026-11-14; shorter phrases and paraphrases were not individually checked. Catechism and patristic references were from memory. The Aquinas reference (ST II-II q.158 a.2, anger sinful when contrary to reason) was read at New Advent on 2026-11-14 and supports the point made.

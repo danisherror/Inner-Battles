@@ -12,4 +12,4 @@ Christian writers find the root in **disordered appetite and the longing to fill
 - [Genesis 25:29-34](https://www.biblegateway.com/passage/?search=Genesis+25%3A29-34&version=NRSV), [Genesis 3:6](https://www.biblegateway.com/passage/?search=Genesis+3%3A6&version=NRSV), [Matthew 4:1-4](https://www.biblegateway.com/passage/?search=Matthew+4%3A1-4&version=NRSV), [Philippians 3:19](https://www.biblegateway.com/passage/?search=Philippians+3%3A19&version=NRSV)
 - [Augustine, Confessions I.1](https://www.newadvent.org/fathers/110101.htm)
 
-Longer quotations were checked against the NRSV text on BibleGateway on 2026-11-14; shorter phrases and paraphrases were not individually checked. 
+Longer quotations were checked against the NRSV text on BibleGateway on 2026-11-14; shorter phrases and paraphrases were not individually checked.  The Aquinas reference (ST II-II q.148, inordinate desire against reason) was read at New Advent on 2026-11-14 and supports the point made.

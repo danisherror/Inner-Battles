@@ -12,4 +12,4 @@ Christian writers find sloth's roots in **weariness of spirit, loss of hope and 
 - [Aquinas, Summa Theologiae II-II q.35](https://www.newadvent.org/summa/3035.htm)
 - Evagrius Ponticus, *Praktikos* 12; not linked.
 
-Longer quotations were checked against the NRSV text on BibleGateway on 2026-11-14; shorter phrases and paraphrases were not individually checked. 
+Longer quotations were checked against the NRSV text on BibleGateway on 2026-11-14; shorter phrases and paraphrases were not individually checked.  The description of acedia ("noonday demon", fourth to eighth hour, the day seeming long, hatred of the place and manual work, desire for other places) was read in Luke Dysinger's translation of Evagrius (https://www.earlychurchtexts.com/public/evagrius_of_pontus_eight_logismoi.htm) on 2026-11-14; that page gives no chapter number, so the *Praktikos* 12 reference rests on secondary sources (for example the Wikipedia outline of the *Praktikos*) and was not checked in a printed edition. The Aquinas reference (ST II-II q.35: sorrow about spiritual good) was read at New Advent on 2026-11-14 and supports the point made.

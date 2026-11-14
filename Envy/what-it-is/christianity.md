@@ -11,4 +11,4 @@ Augustine called envy the "diabolical" sin, because it is sorrow at another's go
 - Catechism of the Catholic Church, 2538-2540: [index](https://www.vatican.va/archive/ENG0015/_INDEX.HTM)
 - Augustine, *On Holy Virginity* 31 ("the diabolical vice"); not linked.
 
-Longer quotations were checked against the NRSV text on BibleGateway on 2026-11-14; shorter phrases and paraphrases were not individually checked. 
+Longer quotations were checked against the NRSV text on BibleGateway on 2026-11-14; shorter phrases and paraphrases were not individually checked.  The Aquinas reference (ST II-II q.36) was read at New Advent on 2026-11-14 and supports the point made.

@@ -13,4 +13,4 @@ Scripture and tradition list the consequences.
 - [Luke 16:19-31](https://www.biblegateway.com/passage/?search=Luke+16%3A19-31&version=NRSV), [1 Corinthians 6:19-20](https://www.biblegateway.com/passage/?search=1+Corinthians+6%3A19-20&version=NRSV)
 - Gregory the Great, *Moralia in Job* 31.45; not linked.
 
-Longer quotations were checked against the NRSV text on BibleGateway on 2026-11-14; shorter phrases and paraphrases were not individually checked. 
+Longer quotations were checked against the NRSV text on BibleGateway on 2026-11-14; shorter phrases and paraphrases were not individually checked.  *Moralia* 31.45 was not read directly; Aquinas cites it at New Advent (https://www.newadvent.org/summa/3148.htm and https://www.newadvent.org/summa/3158.htm) as Gregory's list of the capital vices.

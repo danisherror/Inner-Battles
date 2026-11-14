@@ -12,4 +12,4 @@ Christian writers find anger's roots in **pride, wounded self-love and unforgive
 - [Aquinas, Summa Theologiae II-II q.158](https://www.newadvent.org/summa/3158.htm)
 - Gregory the Great, *Moralia in Job* 31.45; not linked.
 
-Longer quotations were checked against the NRSV text on BibleGateway on 2026-11-14; shorter phrases and paraphrases were not individually checked. 
+Longer quotations were checked against the NRSV text on BibleGateway on 2026-11-14; shorter phrases and paraphrases were not individually checked.  The Aquinas reference (ST II-II q.158, anger as desire for vengeance) was read at New Advent on 2026-11-14 and supports the point made. *Moralia* 31.45 was not read directly; Aquinas cites it at New Advent (https://www.newadvent.org/summa/3148.htm and https://www.newadvent.org/summa/3158.htm) as Gregory's list of the capital vices.

@@ -12,4 +12,4 @@ Christian writers find envy's roots in **pride, a distorted view of one's own wo
 - [Aquinas, Summa Theologiae II-II q.36](https://www.newadvent.org/summa/3036.htm)
 - Gregory the Great, *Moralia in Job* 31.45; not linked.
 
-Longer quotations were checked against the NRSV text on BibleGateway on 2026-11-14; shorter phrases and paraphrases were not individually checked. Wisdom is in Catholic and Orthodox Bibles and not in most Protestant ones.
+Longer quotations were checked against the NRSV text on BibleGateway on 2026-11-14; shorter phrases and paraphrases were not individually checked. Wisdom is in Catholic and Orthodox Bibles and not in most Protestant ones. The Aquinas reference (ST II-II q.36, envy as sorrow at another's good) was read at New Advent on 2026-11-14 and supports the point made. *Moralia* 31.45 was not read directly; Aquinas cites it at New Advent (https://www.newadvent.org/summa/3148.htm and https://www.newadvent.org/summa/3158.htm) as Gregory's list of the capital vices.
