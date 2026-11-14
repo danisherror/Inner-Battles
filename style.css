@@ -73,3 +73,5 @@ article.md a { color: var(--accent); word-break: break-word; }
 .card.disabled { opacity: .55; cursor: default; }
 .card.disabled:hover { transform: none; border-color: var(--line); }
 .soon { display: inline-block; margin-top: 10px; font-size: .8rem; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 1px 10px; }
+
+.center { text-align: center; }

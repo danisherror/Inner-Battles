@@ -1,6 +1,6 @@
 The Pali word is **dosa**, hatred or aversion, one of the three unwholesome roots with greed (*lobha*) and delusion (*moha*). Its forms include anger (*kodha*), ill will (*vyapada*), resentment (*upanaha*) and cruelty.
 
-The opening verses of the Dhammapada (3-5) describe people who keep thinking "he abused me, he beat me, he defeated me, he robbed me" and so do not still their hatred. Verse 5 says: "Hatreds never cease through hatred in this world; through non-hatred alone do they cease. This is an eternal law."
+The opening verses of the Dhammapada (3-5) describe people who keep thinking "He abused me, he struck me, he overpowered me, he robbed me" and so do not still their hatred. Verse 5 says: "Hatred is never appeased by hatred in this world; by non-hatred alone is hatred appeased. This is a law eternal" (Buddharakkhita translation).
 
 Ill will is also one of the five hindrances to meditation. Anger is not treated as a wrong to be hidden. It is to be seen clearly and let go.
 

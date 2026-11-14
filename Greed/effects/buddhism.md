@@ -1,6 +1,6 @@
 Greed keeps the cycle of suffering turning.
 
-- **Never satisfied.** Dhammapada 186-187: "Not even a rain of gold coins can satisfy sensual desires."
+- **Never satisfied.** Dhammapada 186-187: "There is no satisfying sensual desires even with the rain of gold coins" (Buddharakkhita translation).
 - **Wealth that destroys.** Dhammapada 355 says wealth destroys the foolish who do not seek the far shore.
 - **Harm to self and others.** Greed is one of three unwholesome roots, and actions driven by it produce suffering for oneself and others in the traditional teaching on karma.
 - **Fear of loss.** Clinging brings worry about losing what is held; the Buddha's teaching on impermanence says everything held will change (SN 22.59).
