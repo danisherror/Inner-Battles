@@ -310,6 +310,34 @@
           "title": "A story"
         }
       ]
+    },
+    {
+      "id": "Self-doubt",
+      "name": "Self-doubt",
+      "kind": "inner-battle",
+      "tagline": "Doubting your ability or worth, and feeling like a fraud despite what you have done.",
+      "topics": [
+        {
+          "id": "what-it-is",
+          "title": "What it is"
+        },
+        {
+          "id": "root-causes",
+          "title": "Root causes"
+        },
+        {
+          "id": "effects",
+          "title": "Effects on life"
+        },
+        {
+          "id": "how-to-overcome",
+          "title": "How to overcome it"
+        },
+        {
+          "id": "stories",
+          "title": "A story"
+        }
+      ]
     }
   ]
 }
