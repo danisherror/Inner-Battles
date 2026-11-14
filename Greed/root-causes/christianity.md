@@ -3,7 +3,7 @@ Christian writers trace greed to **fear, misplaced trust and disordered love**.
 - **Anxiety about security.** In Matthew 6:25-34 Jesus links worry about food and clothes to a lack of trust, and tells people to seek first the kingdom of God.
 - **Trusting in riches.** In Luke 12:16-21 the rich man's plan is to store everything and tell himself, "Relax, eat, drink, be merry." God calls him a fool. The root is a false sense of security.
 - **Loving the wrong thing.** 1 Timothy 6:9-10 says those who want to be rich fall into temptation, and that some have wandered from the faith through "love of money." Augustine, in *City of God* XIV.13, speaks of the soul loving lower goods above higher ones.
-- **The pull of appetite.** The tradition describes covetousness as "never having enough", the desire growing with what is fed (Ecclesiastes 5:10).
+- **The pull of appetite.** The tradition describes covetousness as never having enough, the desire growing with what is fed; Ecclesiastes 5:10 says the lover of money will not be satisfied with money.
 
 **Sources**
 

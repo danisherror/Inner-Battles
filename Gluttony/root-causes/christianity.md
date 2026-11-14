@@ -4,7 +4,7 @@ Christian writers find the root in **disordered appetite and the longing to fill
 - **The belly as god.** Philippians 3:19 describes those whose "god is the belly."
 - **Giving up what matters for pleasure.** Esau trades his birthright for a bowl of stew (Genesis 25:29-34).
 - **The first temptation.** Genesis 3:6 tells how the fruit looked "good for food." The tempting of Jesus in the desert begins with "turn these stones into bread" (Matthew 4:3).
-- **Deeper hunger.** Matthew 4:4 answers, "One does not live by bread alone." Augustine's "our heart is restless until it rests in you" (*Confessions* 1.1) names what food is sometimes asked to do.
+- **Deeper hunger.** Matthew 4:4 answers, "One does not live by bread alone." Augustine's "our hearts are restless until they rest in You" (*Confessions* 1.1, Pilkington translation) names what food is sometimes asked to do.
 
 **Sources**
 

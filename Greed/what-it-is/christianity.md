@@ -13,6 +13,6 @@ Aquinas places avarice among the capital sins (*Summa* II-II q.118) as an immode
 
 - [1 Timothy 6:6-10](https://www.biblegateway.com/passage/?search=1+Timothy+6%3A6-10&version=NRSV), [Matthew 6:24](https://www.biblegateway.com/passage/?search=Matthew+6%3A24&version=NRSV), [Luke 12:15](https://www.biblegateway.com/passage/?search=Luke+12%3A15&version=NRSV), [Colossians 3:5](https://www.biblegateway.com/passage/?search=Colossians+3%3A5&version=NRSV)
 - [Aquinas, Summa Theologiae II-II q.118](https://www.newadvent.org/summa/3118.htm)
-- Catechism of the Catholic Church, 2534-2536: [index](https://www.vatican.va/archive/ENG0015/_INDEX.HTM)
+- Catechism of the Catholic Church, [2534](https://www.scborromeo.org/ccc/para/2534.htm), [2535](https://www.scborromeo.org/ccc/para/2535.htm) and [2536](https://www.scborromeo.org/ccc/para/2536.htm)
 
 Longer quotations were checked against the NRSV text on BibleGateway on 2026-11-14; shorter phrases and paraphrases were not individually checked.
