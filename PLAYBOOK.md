@@ -10,7 +10,7 @@ A quality and completion checklist for this project, adapted from the general Vi
 |---|---|
 | Type | Static content site (marketing/reference), no backend, no auth, no database, no user input |
 | Stack | Plain HTML and CSS. `build.js` renders the Markdown to static HTML with `marked` 4.3.0 at build time (generated pages are committed) |
-| Content | 7 sins x 5 topics x 6 lenses = 210 articles (`<Sin>/<topic>/<lens>.md`), driven by `sins.json` |
+| Content | 7 sins + 1 inner battle (Procrastination, pilot) = 8 entries x 5 topics x 6 lenses = 240 articles (`<Entry>/<topic>/<lens>.md`), driven by `sins.json`; more inner battles are planned in `Inner-Battles.md` |
 | Hosting | Vercel Hobby (free), https://seven-sins-liard.vercel.app |
 | Main risk | Wrong or unsourced claims about scripture, philosophy and research. Technical risk is low |
 
@@ -40,7 +40,7 @@ A quality and completion checklist for this project, adapted from the general Vi
 | Tests / CI | FAIL (P2) | None. A small script can replace them (see 4) |
 | Disclaimer on site | PASS | Footer on both pages |
 | Docs | PASS | README covers run, layout, adding a sin, writing guidelines, sources |
-| Stray file | UNKNOWN | `Inner-Battles.md` is not linked from the site or README. Decide: link it, move it, or remove it |
+| Inner battles | PARTIAL | Decided 2026-11-14: `sins.json` has a `kind` field (`sin` or `inner-battle`), the home page has a separate section, `Inner-Battles.md` is the plan (19 topics, phased). Pilot Procrastination written (30 articles); quotes read against sources, research claims only via abstracts; not checked in a browser. Phases 1-4 not started |
 
 ## 2. Content integrity (highest priority for this project)
 
@@ -191,13 +191,15 @@ Measure first; the site is small.
 | 3 | Quote and verse verification pass for Lust, Greed, Envy, Gluttony, Wrath, Sloth (Pride already done) | P0 | Each checked item recorded in README with date | IN PROGRESS: Pride done earlier. Lust: quotes and Gita claims checked. Other five sins: Bible quotes spot-checked (NRSV, match). Greed and Gluttony Upanishad quotes checked against Müller on Wikisource (Isha lines fixed). Philosophical-lens quotes in Greed, Envy, Gluttony, Wrath and Sloth checked by script against MIT Classics, Wikisource, Perseus and Gutenberg; five wording errors fixed. Christianity non-Bible items checked (Catechism, Augustine; three fixes). Buddhist second pass: Dhammapada 3-5, 74, 177, 186-187, 280, 355, 365 (Buddharakkhita) and DN16, SN 7.2, SN 3.13, AN 7.61, SN 45.2 (Sujato) checked; DN16 line, two stories and Dhp 5/365 wording fixed. MN 2, SN 1.71, AN 7.64, SN 46.51, AN 3.39, AN 3.61 also checked (three wording fixes); the remaining "from memory" Buddhist summaries (suttas cited in text now all checked for number, title and point), Lust Catechism and Plato/Aristotle/Epictetus points checked; Aquinas references read at New Advent (OK); Evagrius checked against Dysinger translation (no chapter number on page); Gregory Moralia only via Aquinas |
 | 4 | Sources section present in all articles; unchecked points labelled | P1 | `grep -L "Sources"` over articles returns nothing | DONE: every article has a Sources heading (Lust root-causes/modern notes none cited) |
 | 5 | Add SRI to `marked` (or vendor it) | P2 | Page still renders; browser console clean | DONE: sha512 integrity matches cdnjs; renders in Chrome |
-| 6 | Decide on `Inner-Battles.md` (link, move or delete) | P2 | Decision recorded in README | PARKED by user |
+| 6 | Decide on `Inner-Battles.md` (link, move or delete) | P2 | Decision recorded in README | DONE 2026-11-14: kept as the plan for the inner-battles section, not linked; retire or link it once those topics are on the site (recorded in README) |
 | 7 | Error states: distinguish 404 from network/JSON failure; handle `sins.json` failure on the home page | P2 | Verified by blocking the request in DevTools | DONE: 404 and network failure checked; `sins.json` failure path not exercised |
 | 8 | Accessibility fixes (tabs pattern, live region, headings, contrast) | P2 | axe reports 0 serious issues on sampled pages | PARTIAL: aria-pressed, aria-live, focus outlines added; heading order (h1, h2) and contrast checked; axe-core run on home, one article (before and after a topic switch) and 404: 0 violations after the `<main>` fix; Lighthouse accessibility 100 on home and an article; axe on the live article page 0 violations after redeploy |
 | 9 | Responsive and dark-mode check at 360 / 768 / 1280px | P3 | Screenshots reviewed, no overflow | PARTIAL: 1280px dark and light-mode screenshots of an article reviewed 2026-11-14 (no clipping, buttons wrap cleanly, contrast fine); home at 1280px dark reviewed; all 210 article URLs and index.html load at 360px and 768px with no horizontal overflow (checked in Chrome via iframes, 2026-11-14); light and dark contrast pass AA (computed ratios, lowest 5.35:1); touch targets raised to 44px; no screenshot review at 1280px or of light mode |
 | 10 | SEO basics: meta, OG, robots, sitemap, favicon | P2 | Tags present in page source; social preview tested | PARTIAL: description, Open Graph, Twitter card, favicon, canonical and `og:url` on the home page, per-article title/description/`og:url`, `robots.txt` and `sitemap.xml` (211 URLs) added. `og.png` and large Twitter card added and checked live with crawler user agents; per-article pages carry their own tags since pre-rendering; platform preview tools not used; the vercel.app domain is a placeholder if a custom domain is added later |
 | 11 | Footer disclaimer on the site | P2 | Visible on both pages | DONE: footer on both pages |
 | 12 | Deploy (for example Vercel), add security headers, smoke test the live URL | P2 | Home and 3 random article URLs load over HTTPS | DONE: Vercel Hobby (free) project `seven-sins`, https://seven-sins-liard.vercel.app; home, 3 articles, `sins.json`, `robots.txt` return 200; `vercel.json` sets CSP, nosniff, Referrer-Policy, X-Frame-Options; HSTS from Vercel; page renders with clean console (2026-11-14) |
+
+**Note on counts (2026-11-14):** the audit figures in this file (210 articles, 212 pages, 310 URLs and so on) were taken before Procrastination was added; the site now has 240 articles and 243 generated pages. Re-run the checks over the new pages before the next release; `npm run check` and the structure check pass.
 
 **Next up:** finish step 3: check the other Buddhist articles still noted "from memory" with the `bilarasuttas` API (`https://suttacentral.net/api/bilarasuttas/<uid>/sujato?lang=en`), then any remaining paraphrase-only summaries (Kant in Lust, a few Buddhist summaries). After that: label what was left unchecked in the 58 Sources sections (2.2), a real keyboard-only walk-through, a check in the platforms' own preview tools (step 10), and a decision on a sanitizer for the XSS item (5).
 

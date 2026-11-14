@@ -25,6 +25,18 @@
       "name": "Philosophical"
     }
   ],
+  "kinds": [
+    {
+      "id": "sin",
+      "title": "The seven deadly sins",
+      "intro": "The classic list, read through each lens."
+    },
+    {
+      "id": "inner-battle",
+      "title": "Inner battles",
+      "intro": "Not sins, but other struggles where the opponent is our own mind, explored through the same lenses."
+    }
+  ],
   "sins": [
     {
       "id": "Pride",
@@ -192,6 +204,34 @@
       "id": "Sloth",
       "name": "Sloth",
       "tagline": "Neglecting what matters, from laziness, apathy or avoidance.",
+      "topics": [
+        {
+          "id": "what-it-is",
+          "title": "What it is"
+        },
+        {
+          "id": "root-causes",
+          "title": "Root causes"
+        },
+        {
+          "id": "effects",
+          "title": "Effects on life"
+        },
+        {
+          "id": "how-to-overcome",
+          "title": "How to overcome it"
+        },
+        {
+          "id": "stories",
+          "title": "A story"
+        }
+      ]
+    },
+    {
+      "id": "Procrastination",
+      "name": "Procrastination",
+      "kind": "inner-battle",
+      "tagline": "Putting off what matters until later, though you know the delay will cost you.",
       "topics": [
         {
           "id": "what-it-is",

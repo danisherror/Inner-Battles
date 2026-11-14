@@ -10,10 +10,13 @@ const DISCLAIMER = "If a habit is harming your life, please talk to a doctor, th
 
 const data = JSON.parse(fs.readFileSync("sins.json", "utf8"));
 const sins = data.sins.filter(s => s.topics);
+const kindOf = s => s.kind || "sin";
+const sinCount = data.sins.filter(s => kindOf(s) === "sin").length;
 const lensIds = data.lenses.map(l => l.id);
 const lensList = data.lenses.map(l => l.name).slice(0, -1).join(", ") + " and " + data.lenses.at(-1).name;
-const count = ["no", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"][data.lenses.length];
-const DESCRIPTION = `Understand the seven deadly sins through ${count} lenses (${lensList}) and learn how to leave them behind.`;
+const words = ["no", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
+const count = words[data.lenses.length];
+const DESCRIPTION = `Understand the ${words[sinCount]} deadly sins, and the inner battles beyond them, through ${count} lenses (${lensList}) and learn how to leave them behind.`;
 
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const articlePath = (s, t, l) => `${s.id}/${t.id}/${l.id}.html`;
@@ -47,7 +50,7 @@ ${robots ? `  <meta name="robots" content="${robots}">\n` : ""}${url ? `  <link 
   <meta property="og:image" content="${SITE}/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="The Seven Sins: ${data.sins.map(s => s.name).join(', ')}">
+  <meta property="og:image:alt" content="The Seven Sins: ${data.sins.filter(s => kindOf(s) === "sin").map(s => s.name).join(', ')}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="${SITE}/og.png">
 ` : ""}  <link rel="icon" href="${ICON}">
@@ -62,7 +65,7 @@ function articlePage(sin, topic, lens, md) {
   const link = (href, text, on) => `<a href="${href}"${on ? ' aria-current="page"' : ""}>${esc(text)}</a>`;
   return head({ title, description, url: `${SITE}/${articlePath(sin, topic, lens)}`, type: "article", depth: 2 }) + `<body>
   <main class="wrap">
-    <a class="back" href="../../index.html">&larr; All sins</a>
+    <a class="back" href="../../index.html">&larr; All topics</a>
     <h1 class="sin-title">${esc(sin.name)}</h1>
     <p class="sin-tag">${esc(sin.tagline)}</p>
     <nav class="topics" aria-label="Topic">${sin.topics.map(t => link(`../${t.id}/${lens.id}.html`, t.title, t.id === topic.id)).join("")}</nav>
@@ -77,20 +80,30 @@ function articlePage(sin, topic, lens, md) {
 }
 
 function indexPage() {
-  const cards = data.sins.map(s => {
-    const inner = `<h2>${esc(s.name)}</h2><p>${esc(s.tagline)}</p>`;
+  const card = s => {
+    const inner = `<h3>${esc(s.name)}</h3><p>${esc(s.tagline)}</p>`;
     return s.topics
       ? `<a class="card" href="${articlePath(s, s.topics[0], data.lenses[0])}">${inner}</a>`
       : `<div class="card disabled">${inner}<span class="soon">Coming soon</span></div>`;
-  }).join("\n      ");
+  };
+  const sections = data.kinds.map(k => {
+    const items = data.sins.filter(s => kindOf(s) === k.id);
+    return items.length ? `<section aria-labelledby="kind-${k.id}">
+        <h2 class="section-title" id="kind-${k.id}">${esc(k.title)}</h2>
+        <p class="section-intro">${esc(k.intro)}</p>
+        <div class="grid">
+          ${items.map(card).join("\n          ")}
+        </div>
+      </section>` : "";
+  }).filter(Boolean).join("\n      ");
   return head({ title: "The Seven Sins", description: DESCRIPTION, url: `${SITE}/`, type: "website", depth: 0 }) + `<body>
   <div class="wrap">
     <header class="hero">
       <h1>The Seven Sins</h1>
-      <p>Understand the habits that hold us back through ${count} lenses (${lensList}) and learn how to leave them behind.</p>
+      <p>Understand the habits and struggles that hold us back through ${count} lenses (${lensList}) and learn how to leave them behind.</p>
     </header>
-    <main class="grid">
-      ${cards}
+    <main>
+      ${sections}
     </main>
   </div>
   <footer>A read-only guide for self-improvement. Educational and reflective content, not medical, psychological or religious authority. ${DISCLAIMER}</footer>
@@ -112,8 +125,8 @@ function redirectPage() {
   const topics = Object.fromEntries(sins.map(s => [s.id, s.topics.map(t => t.id)]));
   return head({ title: "The Seven Sins", description: DESCRIPTION, depth: 0, robots: "noindex" }) + `<body>
   <main class="wrap">
-    <a class="back" href="index.html">&larr; All sins</a>
-    <p>That sin isn't available yet.</p>
+    <a class="back" href="index.html">&larr; All topics</a>
+    <p>That page isn't available yet.</p>
   </main>
   <script>
     const TOPICS = ${JSON.stringify(topics)};

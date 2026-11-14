@@ -40,6 +40,8 @@ body {
 header.hero { padding: var(--space-7) 0 var(--space-5); text-align: center; }
 header.hero h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); margin: 0 0 var(--space-3); letter-spacing: .02em; }
 header.hero p { color: var(--muted); max-width: 560px; margin: 0 auto; font-size: 1.1rem; }
+.section-title { font-size: 1.5rem; margin: var(--space-6) 0 var(--space-1); }
+.section-intro { color: var(--muted); margin: 0; }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: var(--space-4); padding: var(--space-5) 0 var(--space-7); }
 .card {
   display: block; background: var(--card); border: 1px solid var(--line);
@@ -47,7 +49,7 @@ header.hero p { color: var(--muted); max-width: 560px; margin: 0 auto; font-size
   transition: transform .15s, border-color .15s;
 }
 .card:hover { transform: translateY(-3px); border-color: var(--accent); }
-.card h2 { margin: 0 0 var(--space-1); color: var(--accent); }
+.card h3 { margin: 0 0 var(--space-1); font-size: 1.5rem; color: var(--accent); }
 .card p { margin: var(--space-3) 0 0; color: var(--muted); }
 a.back { display: inline-block; margin: var(--space-5) 0 0; color: var(--muted); text-decoration: none; }
 a.back:hover { color: var(--accent); }
