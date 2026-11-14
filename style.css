@@ -59,7 +59,7 @@ footer { text-align: center; color: var(--muted); font-size: .9rem; padding: 0 1
 .topics, .lenses { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
 .topics button, .lenses button {
   font: inherit; cursor: pointer; color: var(--text); background: var(--card);
-  border: 1px solid var(--line); border-radius: 999px; padding: 6px 16px;
+  border: 1px solid var(--line); border-radius: 999px; padding: 6px 16px; min-height: 44px;
 }
 .topics button.on { background: var(--accent); border-color: var(--accent); color: var(--bg); }
 .lenses { border-bottom: 1px solid var(--line); padding-bottom: 12px; }

@@ -3,7 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sin</title>
+  <title>Sin - The Seven Sins</title>
+  <meta name="description" content="Understand the seven deadly sins through six lenses (modern, Hinduism, Upanishads, Christianity, Buddhism and philosophy) and learn how to leave them behind.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Seven Sins">
+  <meta property="og:description" content="Understand the seven deadly sins through six lenses (modern, Hinduism, Upanishads, Christianity, Buddhism and philosophy) and learn how to leave them behind.">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='28'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -33,7 +39,6 @@
       if (!sin) { el("title").textContent = "Not found"; el("article").innerHTML = "<p>That sin isn't available yet.</p>"; return; }
       topic = sin.topics.find(t => t.id === params.get("topic")) || sin.topics[0];
       lens = d.lenses.find(l => l.id === (params.get("lens") || store.get("lens"))) || d.lenses[0];
-      document.title = sin.name + " - The Seven Sins";
       el("title").textContent = sin.name;
       el("tag").textContent = sin.tagline;
       render();
@@ -45,6 +50,11 @@
       el("lenses").innerHTML = data.lenses.map(l =>
         `<button aria-pressed="${l.id === lens.id}" class="${l.id === lens.id ? "on" : ""}" data-lens="${l.id}">${l.name}</button>`).join("");
       history.replaceState(null, "", `?id=${sin.id}&topic=${topic.id}&lens=${lens.id}`);
+      document.title = `${sin.name}: ${topic.title} (${lens.name}) - The Seven Sins`;
+      const blurb = `${sin.tagline} ${topic.title} through the ${lens.name} lens.`;
+      document.querySelector('meta[name="description"]').content = blurb;
+      document.querySelector('meta[property="og:description"]').content = blurb;
+      document.querySelector('meta[property="og:title"]').content = document.title;
       store.set("lens", lens.id);
       load();
     }
