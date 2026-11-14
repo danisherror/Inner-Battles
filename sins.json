@@ -562,6 +562,34 @@
           "title": "A story"
         }
       ]
+    },
+    {
+      "id": "Denial-and-self-deception",
+      "name": "Denial and self-deception",
+      "kind": "inner-battle",
+      "tagline": "Not letting yourself see the truth, and explaining away the discomfort that follows.",
+      "topics": [
+        {
+          "id": "what-it-is",
+          "title": "What it is"
+        },
+        {
+          "id": "root-causes",
+          "title": "Root causes"
+        },
+        {
+          "id": "effects",
+          "title": "Effects on life"
+        },
+        {
+          "id": "how-to-overcome",
+          "title": "How to overcome it"
+        },
+        {
+          "id": "stories",
+          "title": "A story"
+        }
+      ]
     }
   ]
 }
