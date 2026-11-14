@@ -7,3 +7,7 @@ Lust that feels out of control rarely starts with desire alone. It usually grows
 - **Shame cycles.** Guilt after a lapse feels bad, and the quickest relief from bad feelings is the same behaviour, so the cycle repeats.
 
 The practical point is that willpower alone is aimed at the wrong target. Finding the cue and the need underneath tends to work better than fighting the urge head-on. This is general self-help reasoning rather than a cited research finding.
+
+**Sources**
+
+No specific study is cited. This is a standard summary of habit-loop and shame-cycle reasoning from self-help and psychology writing, and it has not been checked against a particular paper or book.
