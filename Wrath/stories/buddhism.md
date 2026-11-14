@@ -1,14 +1,14 @@
 **The gift that was not accepted**
 
-In the *Akkosa Sutta* (SN 7.2), a brahmin named Akkosaka Bharadvaja hears that a relative has left his family to follow the Buddha. Furious, he goes to the Buddha and abuses him with harsh and rude words.
+In the *Akkosa Sutta* (SN 7.2), the brahmin Bharadvaja "the Rude" hears that a brahmin of his clan has left home to follow the Buddha. Angry and displeased, he goes to the Buddha and abuses him with harsh and rude words.
 
-The Buddha waits until he has finished, then asks calmly: "What do you think, brahmin? Do your friends and relatives come to visit you as guests?" "Sometimes," says the brahmin. "And do you serve them food?" "Sometimes." "And if they don't accept it, to whom does the food belong?" "To us, then."
+The Buddha waits until he has finished, then asks calmly: "What do you think, brahmin? Do friends and colleagues, relatives and kin, and guests still come to visit you?" "Sometimes they do." "Do you then serve them with fresh and cooked foods and savories?" "Sometimes I do." "But if they don't accept it, brahmin, who does it belong to?" "In that case it still belongs to me."
 
-"In the same way, brahmin," says the Buddha, "you have abused us, and we do not accept it. It stays with you."
+"In the same way, brahmin," says the Buddha, "when you abuse, harass, and attack us who do not abuse, harass, and attack, we don't accept it. It still belongs to you, brahmin, it still belongs to you!"
 
-The Buddha adds that anyone who returns anger for anger is like one who eats a meal together with another. He says that one who does not return anger wins a battle hard to win.
+He adds that someone who answers abuse with abuse is said to "eat the food and have a reaction to it," and that "when you don't get angry at an angry person you win a battle hard to win" (Sujato's translation).
 
-Bharadvaja asks forgiveness, and later he joins the Sangha and becomes an arahant.
+Bharadvaja goes for refuge and asks for ordination. The sutta says that not long after, living alone and diligent, he became one of the perfected (an arahant).
 
 **What it shows:** The Buddha does not answer anger with more anger, and does not suppress it either. He shows that an insult only lands if it is accepted.
 
@@ -16,4 +16,4 @@ Bharadvaja asks forgiveness, and later he joins the Sangha and becomes an arahan
 
 - [SN 7.2, Akkosa Sutta](https://suttacentral.net/sn7.2)
 
-Retold from memory and shortened; wording is paraphrased, so check a translation. Details of what happened to Bharadvaja afterwards follow the traditional telling.
+Quotations were checked against Sujato's translation via the SuttaCentral bilarasuttas API (https://suttacentral.net/api/bilarasuttas/sn7.2/sujato?lang=en) on 2026-11-14; the retelling is shortened.

@@ -4,7 +4,7 @@ Buddhism treats sloth as a hindrance with practical remedies.
 - **Specific remedies.** The suttas and commentaries suggest: change posture, walk, splash water on the face, look at light, reflect on the Dhamma, and avoid overeating (as in AN 7.61, Pacalayamana Sutta, on the monk nodding).
 - **Right effort.** The four efforts: prevent unwholesome states, abandon those that have arisen, develop wholesome states, maintain them (AN 4.13 and the eightfold path).
 - **Reflect on urgency.** Death is certain and the time is unknown (AN 6.19-20, mindfulness of death).
-- **Friends.** Good company (*kalyana-mitta*) is "the whole of the holy life" (SN 45.2).
+- **Friends.** Good company (*kalyana-mitta*) is "the whole of the spiritual life" (SN 45.2, Sujato's translation).
 
 **Sources**
 
