@@ -1,0 +1,17 @@
+The research read here finds that recovery is common and that help takes several forms. Kelly and colleagues, in a survey of US adults, found a "Weighted prevalence of problem resolution" of 9.1%, concluding that "Tens of millions of Americans have successfully resolved an AOD problem using a variety of traditional and non-traditional means", and that 53.9% reported "assisted" pathways, with mutual help most used (45.1%), then treatment (27.6%). Those are self-reports. The Cochrane review, for alcohol use disorder, found "high quality evidence that manualized AA/TSF interventions are more effective than other established treatments, such as CBT, for increasing abstinence", and that "Non-manualized AA/TSF may perform as well". The steps below are common advice.
+
+1. **Tell someone.** Secrecy helps the pattern. That is common advice.
+2. **See a doctor.** A doctor can assess what is going on, advise on stopping safely, and discuss treatment, including medicines where they are suitable. That is a standard statement, not drawn from the papers.
+3. **Use support.** Mutual-help groups, counselling and treatment are the main routes in Kelly and colleagues' survey, and no one route is right for everyone.
+4. **Change the setting.** Remove or block what triggers the habit, and tell people who can help. That is common advice; see [impulsivity](../../Impulsivity/how-to-overcome/modern.html).
+5. **Ride out urges.** Urges rise and fall; a delay, a walk or a call can get you past one. That is common advice.
+6. **Treat a slip as information.** A slip is a reason to adjust the plan and not to give up, and shame does not help. That is common advice.
+7. **Keep safe.** Struggling to stop is common, and it is nothing to be ashamed of. If you are finding it hard, please talk to a doctor, therapist or a local support service. Stopping some substances suddenly, including alcohol and certain medicines, can be dangerous, so ask a doctor before stopping on your own (a standard safety point, not drawn from the papers below). If you are in danger, or thinking of harming yourself, contact your local emergency services now; [the International Association for Suicide Prevention points to a directory of verified helplines in over 150 countries](https://www.iasp.info/crisis-centres-helplines/).
+
+**Sources**
+
+- Kelly, Bergman, Hoeppner, Vilsaint and White (2017), "Prevalence and pathways of recovery from drug and alcohol problems in the United States population," *Drug and Alcohol Dependence* 181, 162-169. [doi:10.1016/j.drugalcdep.2017.09.028](https://doi.org/10.1016/j.drugalcdep.2017.09.028)
+- Kelly, Humphreys and Ferri (2020), "Alcoholics Anonymous and other 12-step programs for alcohol use disorder," *Cochrane Database of Systematic Reviews* 2020(9). [doi:10.1002/14651858.CD012880.pub2](https://doi.org/10.1002/14651858.CD012880.pub2)
+- [International Association for Suicide Prevention, Crisis Centres & Helplines](https://www.iasp.info/crisis-centres-helplines/): read on 2026-11-15; the page says the directory it points to lists verified helplines in over 150 countries.
+
+Both papers were read in the abstracts (Europe PMC, 2026-11-15), not in full, and publication details were checked in Crossref. The survey is of US adults and relies on their own reports of a resolved problem, and the Cochrane review concerns alcohol and the 12-step approach only. Steps 1 and 3 to 6 are common advice or a reading of the survey, and are not tied to a trial of those steps.
