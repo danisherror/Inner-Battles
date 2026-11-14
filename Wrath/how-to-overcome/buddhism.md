@@ -14,4 +14,4 @@ Buddhism has detailed practice for anger.
 - [MN 21, Kakacupama Sutta](https://suttacentral.net/mn21)
 - [AN 5.161, Aghatavinaya Sutta](https://suttacentral.net/an5.161)
 
-Sutta numbers, titles and the points cited (Sn 1.8, MN 21, AN 5.161 and its five methods) were checked against Sujato's translation via the SuttaCentral bilarasuttas API (https://suttacentral.net/api/bilarasuttas/<uid>/sujato?lang=en) on 2026-11-14; other summaries were not compared with a translation.
+Sutta numbers, titles and the points cited (Sn 1.8, MN 21, AN 5.161 and its five methods) were checked against Sujato's translation via the SuttaCentral bilarasuttas API (`https://suttacentral.net/api/bilarasuttas/<uid>/sujato?lang=en`) on 2026-11-14; other summaries were not compared with a translation.

@@ -12,4 +12,4 @@ Buddhism's answer is **craving rooted in ignorance**.
 - [SN 12.2, Paticcasamuppada Sutta](https://suttacentral.net/sn12.2)
 - [SN 46.51, Ahara Sutta](https://suttacentral.net/sn46.51)
 
-Summaries were from memory and not compared with a translation here. Sutta numbers, titles and the points cited (SN 56.11, SN 22.59, SN 12.2) were checked against Sujato's translation via the SuttaCentral bilarasuttas API (https://suttacentral.net/api/bilarasuttas/<uid>/sujato?lang=en) on 2026-11-14; other summaries were not compared with a translation.
+Summaries were from memory and not compared with a translation here. Sutta numbers, titles and the points cited (SN 56.11, SN 22.59, SN 12.2) were checked against Sujato's translation via the SuttaCentral bilarasuttas API (`https://suttacentral.net/api/bilarasuttas/<uid>/sujato?lang=en`) on 2026-11-14; other summaries were not compared with a translation.

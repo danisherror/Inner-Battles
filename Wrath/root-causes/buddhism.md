@@ -14,4 +14,4 @@ Buddhism traces anger to **aversion, attachment to a self and wrong view**.
 - [Dhammapada 1-20](https://suttacentral.net/dhp1-20)
 - [MN 2](https://suttacentral.net/mn2)
 
-Summaries were from memory and not compared with a translation here. Sutta numbers, titles and the points cited (SN 56.11, SN 22.59) were checked against Sujato's translation via the SuttaCentral bilarasuttas API (https://suttacentral.net/api/bilarasuttas/<uid>/sujato?lang=en) on 2026-11-14; other summaries were not compared with a translation.
+Summaries were from memory and not compared with a translation here. Sutta numbers, titles and the points cited (SN 56.11, SN 22.59) were checked against Sujato's translation via the SuttaCentral bilarasuttas API (`https://suttacentral.net/api/bilarasuttas/<uid>/sujato?lang=en`) on 2026-11-14; other summaries were not compared with a translation.

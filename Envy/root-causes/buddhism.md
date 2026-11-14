@@ -12,4 +12,4 @@ Buddhism sees envy as coming from **aversion, attachment to self and gain, and a
 - [SN 22.89, Khemaka Sutta](https://suttacentral.net/sn22.89)
 - [SN 22.59, Anattalakkhana Sutta](https://suttacentral.net/sn22.59)
 
-Summaries were from memory; the Abhidhamma point is standard across commentarial sources, with no single passage cited. Sutta numbers, titles and the points cited (AN 8.6, SN 22.59) were checked against Sujato's translation via the SuttaCentral bilarasuttas API (https://suttacentral.net/api/bilarasuttas/<uid>/sujato?lang=en) on 2026-11-14; other summaries were not compared with a translation.
+Summaries were from memory; the Abhidhamma point is standard across commentarial sources, with no single passage cited. Sutta numbers, titles and the points cited (AN 8.6, SN 22.59) were checked against Sujato's translation via the SuttaCentral bilarasuttas API (`https://suttacentral.net/api/bilarasuttas/<uid>/sujato?lang=en`) on 2026-11-14; other summaries were not compared with a translation.

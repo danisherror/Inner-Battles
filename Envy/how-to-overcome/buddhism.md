@@ -14,4 +14,4 @@ Buddhism trains the opposite of envy: **mudita**, sympathetic joy.
 - [Dhammapada 365](https://suttacentral.net/dhp360-382)
 - [AN 8.6](https://suttacentral.net/an8.6), [SN 22.59](https://suttacentral.net/sn22.59)
 
-Summaries from memory. Meditation instructions vary by tradition; the *mudita* practice described is a common version. Sutta numbers, titles and the points cited (MN 7, Sn 1.8, AN 8.6, SN 22.59) were checked against Sujato's translation via the SuttaCentral bilarasuttas API (https://suttacentral.net/api/bilarasuttas/<uid>/sujato?lang=en) on 2026-11-14; other summaries were not compared with a translation.
+Summaries from memory. Meditation instructions vary by tradition; the *mudita* practice described is a common version. Sutta numbers, titles and the points cited (MN 7, Sn 1.8, AN 8.6, SN 22.59) were checked against Sujato's translation via the SuttaCentral bilarasuttas API (`https://suttacentral.net/api/bilarasuttas/<uid>/sujato?lang=en`) on 2026-11-14; other summaries were not compared with a translation.

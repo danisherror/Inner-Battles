@@ -12,4 +12,4 @@ Excess in eating brings heaviness, sleepiness and distraction.
 - [SN 56.11](https://suttacentral.net/sn56.11)
 - [MN 2](https://suttacentral.net/mn2), [MN 70](https://suttacentral.net/mn70)
 
-Summaries were from memory and not compared with a translation here. The five hindrances are standard across the canon. Sutta numbers, titles and the points cited (SN 56.11, MN 70) were checked against Sujato's translation via the SuttaCentral bilarasuttas API (https://suttacentral.net/api/bilarasuttas/<uid>/sujato?lang=en) on 2026-11-14; other summaries were not compared with a translation.
+Summaries were from memory and not compared with a translation here. The five hindrances are standard across the canon. Sutta numbers, titles and the points cited (SN 56.11, MN 70) were checked against Sujato's translation via the SuttaCentral bilarasuttas API (`https://suttacentral.net/api/bilarasuttas/<uid>/sujato?lang=en`) on 2026-11-14; other summaries were not compared with a translation.

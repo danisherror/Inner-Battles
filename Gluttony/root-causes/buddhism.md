@@ -13,4 +13,4 @@ Buddhism traces over-indulgence to **craving, pleasure-seeking and inattention**
 - [MN 2, Sabbasava Sutta](https://suttacentral.net/mn2)
 - [MN 39](https://suttacentral.net/mn39), [AN 3.39](https://suttacentral.net/an3.39)
 
-Summaries were from memory and not compared with a translation here. Sutta numbers, titles and the points cited (SN 56.11, MN 27, MN 2, MN 39) were checked against Sujato's translation via the SuttaCentral bilarasuttas API (https://suttacentral.net/api/bilarasuttas/<uid>/sujato?lang=en) on 2026-11-14; other summaries were not compared with a translation.
+Summaries were from memory and not compared with a translation here. Sutta numbers, titles and the points cited (SN 56.11, MN 27, MN 2, MN 39) were checked against Sujato's translation via the SuttaCentral bilarasuttas API (`https://suttacentral.net/api/bilarasuttas/<uid>/sujato?lang=en`) on 2026-11-14; other summaries were not compared with a translation.

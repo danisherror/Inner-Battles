@@ -206,11 +206,11 @@ Measure first; the site is small.
 **Content**
 - [x] 210/210 articles present, with Sources sections.
 - [x] Links checked; verification dates recorded in README.
-- [ ] No unsourced or invented quotes.
+- [ ] No unsourced or invented quotes. Still open, 2026-11-14: 259 quoted passages sit in 133 articles. The verification record in the README covers Bible, Upanishad, Catechism, Dhammapada, the cited suttas and the philosophical-lens texts, but no one-to-one list of quote against source exists, so "none invented" is not yet shown. The only quotes in articles with no link are dialogue in five modern-lens stories, each labelled an illustrative composite.
 
 **Site**
-- [ ] Home page and every article URL render with a clean console.
-- [ ] Mobile and dark mode checked.
+- [x] Home page and every article URL render with a clean console. Checked 2026-11-14 against https://seven-sins-liard.vercel.app: all 212 pages (home, 404 and 210 articles) fetched with HTTP 200, one `h1` each (404 excepted), a title, no inline handlers, and every local `href`/`src` returns 200. The console was read in Chrome only for the home page and `Wrath/root-causes/buddhism.html`: no messages. The other pages were not opened one by one, because `X-Frame-Options: DENY` blocks iframe loading. The pages carry one tiny script and the CSP blocks everything else. Found and fixed: a literal `<uid>` in 12 Buddhist articles was parsed as an HTML tag and vanished from the text; it is now in a code span.
+- [x] Mobile and dark mode checked. 360/768/1280px overflow check on all pages and the AA contrast results are recorded in section 6; 2026-11-14 a Chrome screenshot of a live article in dark mode at 570px (the smallest the window goes) shows wrapped buttons, no clipping and readable text. Not checked: a real phone, or the light theme at phone width.
 - [x] Error states checked.
 
 **Security and supply chain**
