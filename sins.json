@@ -338,6 +338,34 @@
           "title": "A story"
         }
       ]
+    },
+    {
+      "id": "Self-criticism",
+      "name": "Self-criticism",
+      "kind": "inner-battle",
+      "tagline": "A harsh inner voice that punishes mistakes instead of helping you improve.",
+      "topics": [
+        {
+          "id": "what-it-is",
+          "title": "What it is"
+        },
+        {
+          "id": "root-causes",
+          "title": "Root causes"
+        },
+        {
+          "id": "effects",
+          "title": "Effects on life"
+        },
+        {
+          "id": "how-to-overcome",
+          "title": "How to overcome it"
+        },
+        {
+          "id": "stories",
+          "title": "A story"
+        }
+      ]
     }
   ]
 }
