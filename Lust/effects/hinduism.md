@@ -11,6 +11,8 @@ The effect is less a punishment from outside than a **loss of clarity and freedo
 **Sources**
 
 - [Bhagavad Gita 2.62](https://www.holy-bhagavad-gita.org/chapter/2/verse/62/)
+- [Bhagavad Gita 2.63](https://www.holy-bhagavad-gita.org/chapter/2/verse/63/)
+- [Bhagavad Gita 3.38](https://www.holy-bhagavad-gita.org/chapter/3/verse/38/)
 - [Bhagavad Gita 3.37](https://www.holy-bhagavad-gita.org/chapter/3/verse/37/)
 - [Bhagavad Gita 16.21](https://www.holy-bhagavad-gita.org/chapter/16/verse/21/)
 

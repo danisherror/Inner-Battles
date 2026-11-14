@@ -10,6 +10,8 @@ Hindu teaching offers a path of **discipline, redirection and devotion**.
 **Sources**
 
 - [Bhagavad Gita 3.37](https://www.holy-bhagavad-gita.org/chapter/3/verse/37/)
+- [Bhagavad Gita 3.41](https://www.holy-bhagavad-gita.org/chapter/3/verse/41/)
+- [Bhagavad Gita 3.42](https://www.holy-bhagavad-gita.org/chapter/3/verse/42/)
 - [Bhagavad Gita 3.43](https://www.holy-bhagavad-gita.org/chapter/3/verse/43/)
 - [Bhagavad Gita 6.35](https://www.holy-bhagavad-gita.org/chapter/6/verse/35/)
 - [Bhagavad Gita 2.62](https://www.holy-bhagavad-gita.org/chapter/2/verse/62/)
