@@ -18,6 +18,18 @@ const DESCRIPTION = `Understand the seven deadly sins through ${count} lenses ($
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const articlePath = (s, t, l) => `${s.id}/${t.id}/${l.id}.html`;
 
+// External links get a visible marker and a screen-reader note; a link whose text is just its URL
+// is shown as the host name instead, so it reads as a destination rather than a string of characters.
+const renderer = new marked.Renderer();
+renderer.link = (href, title, text) => {
+  const t = title ? ` title="${esc(title)}"` : "";
+  if (!/^https?:\/\//.test(href)) return `<a href="${esc(href)}"${t}>${text}</a>`;
+  const host = new URL(href).hostname.replace(/^www\./, "");
+  const label = /^https?:\/\//.test(text) ? esc(host) : text;
+  return `<a class="ext" href="${esc(href)}"${t} rel="noopener">${label}<span class="sr-only"> (external link)</span></a>`;
+};
+marked.use({ renderer });
+
 function head({ title, description, url, type, depth, robots }) {
   const up = "../".repeat(depth);
   return `<!doctype html>

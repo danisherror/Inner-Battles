@@ -151,7 +151,7 @@ process.exit(bad ? 1 : 0);
 - [x] Topic buttons expose the current state (`aria-pressed` or `aria-current`).
 - [x] Loading and error messages are announced (`aria-live="polite"` on the article region).
 - [x] Heading hierarchy: one `h1` per page, `h2` for the topic, article headings below it (the article injects `<h2>` and Markdown may include another `h1`; check).
-- [ ] Link text in articles is descriptive; external links are clearly marked.
+- [x] Link text in articles is descriptive; external links are clearly marked. Done 2026-11-14: `build.js` now renders every `http(s)` link in an article with a `↗` marker (CSS), a visually hidden " (external link)" and `rel="noopener"`; links whose text was the bare URL (the SuttaCentral API notes) show the host name instead. Checked by script: no article link reads "here", "link" or "read more", and all 210 pages regenerate cleanly. Not viewed in a browser.
 - [x] Colour contrast passes in light and dark themes.
 - [ ] Page works with keyboard only and at 200% zoom.
 
