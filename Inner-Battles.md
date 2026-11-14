@@ -104,45 +104,53 @@ The "evil inclination" versus the good inclination (*yetzer tov*). The idea is t
 
 ## 6. Final Topic List (topics only)
 
-The seven existing sins are excluded. Duplicates are merged.
+The seven existing sins are excluded. Overlapping topics are merged, and anything already covered by an existing sin is dropped. Each topic would get the site's usual 5 topic pages × 6 lenses = 30 articles, so **19 topics = 570 articles**, written in phases (see below), never all at once.
 
 **Mind and emotion**
 1. Fear and anxiety
-2. Overthinking and rumination
+2. Overthinking, rumination and restlessness (merges old 2 and 23; restlessness is the Buddhist hindrance)
 3. Self-doubt and impostor syndrome
 4. Perfectionism
 5. Self-criticism (the inner critic)
 6. Shame and guilt
-7. Jealousy
-8. Comparison
-9. Resentment and grudges
-10. Hopelessness and despair
-11. Loneliness and isolation
+7. Jealousy (kept apart from Envy: fear of losing, not wanting what another has)
+8. Resentment and grudges
+9. Hopelessness and despair
+10. Loneliness and isolation
 
 **Habits and will**
-12. Procrastination
-13. Addiction and compulsion
-14. Impulsivity and delayed gratification
-15. Distraction and attention fragmentation
-16. Burnout and apathy
-17. Weakness of will (akrasia)
+11. Procrastination and weakness of will (merges old 12 and 17; akrasia is the philosophical frame)
+12. Addiction and compulsion
+13. Impulsivity and delayed gratification
+14. Distraction and attention fragmentation
+15. Burnout and apathy
 
 **Self and truth**
-18. Ego and the need for validation
-19. Denial and self-deception
-20. Cognitive dissonance
-21. Fear of failure and fear of success
-22. Delusion and attachment (moha)
-23. Restlessness
-24. Ignorance of the true self (avidya)
+16. Ego and the need for validation
+17. Denial, self-deception and cognitive dissonance (merges old 19 and 20)
+18. Fear of failure and fear of success
+19. Delusion and ignorance of the true self (merges old 22 and 24: moha and avidya)
 
-**Tradition-specific frameworks** (better as extra lenses)
-25. Shadripu: the six inner enemies (Hinduism)
-26. The Five Hindrances and Three Poisons (Buddhism)
-27. The Kleshas (Yoga)
-28. The Eight Thoughts, including acedia (Christianity)
-29. Nafs: the lower self (Islam/Sufism)
-30. Yetzer hara: the evil inclination (Judaism)
+**Dropped:** Comparison (old 8) is already covered by the Envy sin and Jealousy; fold it in as a section there if wanted.
+
+**Deferred: tradition frameworks** (old 25-30). Shadripu, the Five Hindrances and Three Poisons, the Kleshas, the Eight Thoughts, Nafs and Yetzer hara are better as extra lenses than as topics. Adding a lens means 6 more articles per topic for every sin and topic, so decide that only after the 19 topics are done.
+
+### Order of work (one topic per batch, each passing the PLAYBOOK gates before the next)
+
+| Phase | Topics | Why this order |
+|---|---|---|
+| 0 (pilot) | 11 Procrastination and weakness of will | Clear links to Buddhist sloth/torpor, Aristotle and modern research; low sensitivity. Proves the `sins.json` `kind` field, home-page section and build changes |
+| 1 | 2 Overthinking and restlessness, 4 Perfectionism, 3 Self-doubt, 5 Self-criticism, 7 Jealousy | Strong tradition fit and plentiful sources |
+| 2 | 1 Fear and anxiety, 18 Fear of failure and success, 13 Impulsivity, 14 Distraction, 8 Resentment | Moderate fit; keep claims about research tightly sourced |
+| 3 | 16 Ego and validation, 17 Denial and dissonance, 19 Delusion and true self | Closest to Hindu, Upanishadic and Buddhist terms; watch "related, not identical" notes |
+| 4 (sensitive) | 6 Shame and guilt, 9 Hopelessness, 10 Loneliness, 12 Addiction, 15 Burnout | Need a pointer to professional help and no shaming language; write last, with the most care |
+
+### Rules for every topic
+
+- Follow PLAYBOOK.md sections 2, 11 and 12: Sources section in every article, quotes checked against the source text, unchecked points labelled, "related, not identical" where a tradition has no exact equivalent, no ranking of traditions, British spelling, "well-being", lens name "Buddhism".
+- Modern lens: illustrative composites are labelled as such, and no study is cited unless it was opened and checked.
+- After each batch: `npm run render`, `npm run check`, link check, axe and overflow check on the new pages, diff read, README and PLAYBOOK updated with dates and what was not checked.
+- One commit per batch, short imperative subject, no AI attribution.
 
 ---
 
