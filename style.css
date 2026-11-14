@@ -82,7 +82,7 @@ article.md blockquote > :last-child { margin-bottom: 0; }
 article.md table { display: block; max-width: 100%; overflow-x: auto; border-collapse: collapse; margin: var(--space-5) 0; }
 article.md th, article.md td { border: 1px solid var(--line); padding: var(--space-2) var(--space-3); text-align: left; vertical-align: top; }
 article.md th { background: var(--card); }
-article.md code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .9em; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 0 var(--space-1); }
+article.md code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .9em; overflow-wrap: anywhere; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 0 var(--space-1); }
 article.md pre { max-width: 100%; overflow-x: auto; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: var(--space-3) var(--space-4); }
 article.md pre code { background: none; border: 0; padding: 0; }
 article.md hr { border: 0; border-top: 1px solid var(--line); margin: var(--space-6) 0; }

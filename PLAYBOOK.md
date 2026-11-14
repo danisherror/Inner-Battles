@@ -219,8 +219,8 @@ Measure first; the site is small.
 - [x] Security headers set at the host.
 
 **Quality**
-- [ ] axe and Lighthouse reports reviewed.
-- [ ] README accurate.
+- [x] axe and Lighthouse reports reviewed. Run 2026-11-14 on the local build (axe-core 4.14.0 through puppeteer-core, Lighthouse 12.8.2, both from the npx cache, nothing added to the repo): axe on all 212 pages at 375px in light and dark, 0 violations, 0 console warnings or errors, no horizontal overflow. Lighthouse on the home page, `Wrath/root-causes/buddhism.html` and `Lust/what-it-is/modern.html`: performance, accessibility, best practices and SEO all 100; LCP 0.8s, CLS 0, TBT 0ms. The remaining Lighthouse notes (compression, cache TTL, render-blocking `style.css`) come mostly from the Python dev server; Lighthouse was not re-run on the live URL after these changes. Two defects found and fixed along the way: the `<uid>` code span overflowed at 375px on 12 pages (`overflow-wrap: anywhere` on `code`), and `404.html` had no favicon, so the browser's `/favicon.ico` request logged a 404 in the console.
+- [x] README accurate. Read against the repo 2026-11-14: status table, run and render commands, layout and the add-a-sin steps match (`npm run check` passes). Fixed: the layout now lists `LICENSE` and `.gitignore`; a sentence saying Lust Catechism, suttas and Plato/Stoic points were unread contradicted later text and was removed; "Sources used so far" now names SuttaCentral, the Vatican Catechism, Wikisource, MIT Classics and New Advent, which the verification notes already relied on. Not changed: the Kant point and "from memory" Buddhist summaries are still listed as unverified.
 - [x] `LICENSE` present (MIT, already in repo).
 
 **Deploy**
