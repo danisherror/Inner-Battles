@@ -73,7 +73,7 @@ A quality and completion checklist for this project, adapted from the general Vi
 Existing foundation: `style.css` already uses `:root` tokens and a dark-mode media query, with a serif type stack.
 
 - [x] Light and dark themes are both readable; check contrast of `--muted` on `--bg` (WCAG AA 4.5:1).
-- [ ] Layout checked at 360px, 768px and 1280px widths, with no horizontal overflow (long Markdown tables and code blocks are the likely cause).
+- [x] Layout checked at 360px, 768px and 1280px widths, with no horizontal overflow (long Markdown tables and code blocks are the likely cause). Checked 2026-11-14: `index.html`, `404.html` and all 210 article pages (7 sins × 5 topics × 6 lenses) have `scrollWidth` equal to the viewport width at all three widths. No article contains a table or code block today, so the `style.css` has no rules for them; add overflow handling when the first one appears.
 - [x] Topic and lens buttons wrap cleanly on mobile; touch targets are at least 44px.
 - [ ] Visible keyboard focus on cards and buttons.
 - [ ] Markdown elements (tables, blockquotes, lists, links) are styled consistently.
