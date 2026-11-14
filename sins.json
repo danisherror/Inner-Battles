@@ -1,0 +1,219 @@
+{
+  "lenses": [
+    {
+      "id": "modern",
+      "name": "Modern"
+    },
+    {
+      "id": "hinduism",
+      "name": "Hinduism"
+    },
+    {
+      "id": "upanishads",
+      "name": "Upanishads"
+    },
+    {
+      "id": "christianity",
+      "name": "Christianity"
+    },
+    {
+      "id": "buddhism",
+      "name": "Buddhist"
+    },
+    {
+      "id": "philosophical",
+      "name": "Philosophical"
+    }
+  ],
+  "sins": [
+    {
+      "id": "Pride",
+      "name": "Pride",
+      "tagline": "Valuing yourself above truth, and above other people.",
+      "topics": [
+        {
+          "id": "what-it-is",
+          "title": "What it is"
+        },
+        {
+          "id": "root-causes",
+          "title": "Root causes"
+        },
+        {
+          "id": "effects",
+          "title": "Effects on life"
+        },
+        {
+          "id": "how-to-overcome",
+          "title": "How to overcome it"
+        },
+        {
+          "id": "stories",
+          "title": "A story"
+        }
+      ]
+    },
+    {
+      "id": "Greed",
+      "name": "Greed",
+      "tagline": "Wanting more than you need, and never feeling you have enough.",
+      "topics": [
+        {
+          "id": "what-it-is",
+          "title": "What it is"
+        },
+        {
+          "id": "root-causes",
+          "title": "Root causes"
+        },
+        {
+          "id": "effects",
+          "title": "Effects on life"
+        },
+        {
+          "id": "how-to-overcome",
+          "title": "How to overcome it"
+        },
+        {
+          "id": "stories",
+          "title": "A story"
+        }
+      ]
+    },
+    {
+      "id": "Lust",
+      "name": "Lust",
+      "tagline": "Desire that overrides respect, commitment and judgment.",
+      "topics": [
+        {
+          "id": "what-it-is",
+          "title": "What it is"
+        },
+        {
+          "id": "root-causes",
+          "title": "Root causes"
+        },
+        {
+          "id": "effects",
+          "title": "Effects on life"
+        },
+        {
+          "id": "how-to-overcome",
+          "title": "How to overcome it"
+        },
+        {
+          "id": "stories",
+          "title": "A story"
+        }
+      ]
+    },
+    {
+      "id": "Envy",
+      "name": "Envy",
+      "tagline": "Pain at another person's good fortune.",
+      "topics": [
+        {
+          "id": "what-it-is",
+          "title": "What it is"
+        },
+        {
+          "id": "root-causes",
+          "title": "Root causes"
+        },
+        {
+          "id": "effects",
+          "title": "Effects on life"
+        },
+        {
+          "id": "how-to-overcome",
+          "title": "How to overcome it"
+        },
+        {
+          "id": "stories",
+          "title": "A story"
+        }
+      ]
+    },
+    {
+      "id": "Gluttony",
+      "name": "Gluttony",
+      "tagline": "Over-indulgence, taking more than you need.",
+      "topics": [
+        {
+          "id": "what-it-is",
+          "title": "What it is"
+        },
+        {
+          "id": "root-causes",
+          "title": "Root causes"
+        },
+        {
+          "id": "effects",
+          "title": "Effects on life"
+        },
+        {
+          "id": "how-to-overcome",
+          "title": "How to overcome it"
+        },
+        {
+          "id": "stories",
+          "title": "A story"
+        }
+      ]
+    },
+    {
+      "id": "Wrath",
+      "name": "Wrath",
+      "tagline": "Uncontrolled anger, resentment and the wish to get even.",
+      "topics": [
+        {
+          "id": "what-it-is",
+          "title": "What it is"
+        },
+        {
+          "id": "root-causes",
+          "title": "Root causes"
+        },
+        {
+          "id": "effects",
+          "title": "Effects on life"
+        },
+        {
+          "id": "how-to-overcome",
+          "title": "How to overcome it"
+        },
+        {
+          "id": "stories",
+          "title": "A story"
+        }
+      ]
+    },
+    {
+      "id": "Sloth",
+      "name": "Sloth",
+      "tagline": "Neglecting what matters, from laziness, apathy or avoidance.",
+      "topics": [
+        {
+          "id": "what-it-is",
+          "title": "What it is"
+        },
+        {
+          "id": "root-causes",
+          "title": "Root causes"
+        },
+        {
+          "id": "effects",
+          "title": "Effects on life"
+        },
+        {
+          "id": "how-to-overcome",
+          "title": "How to overcome it"
+        },
+        {
+          "id": "stories",
+          "title": "A story"
+        }
+      ]
+    }
+  ]
+}

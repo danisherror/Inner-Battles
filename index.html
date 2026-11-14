@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Seven Sins</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <h1>The Seven Sins</h1>
+      <p>Understand the habits that hold us back through six lenses (modern, Hinduism, Upanishads, Christianity, Buddhism and philosophy) and learn how to leave them behind.</p>
+    </header>
+    <main class="grid" id="grid"></main>
+  </div>
+  <footer>A read-only guide for self-improvement.</footer>
+  <script>
+    fetch("sins.json").then(r => r.json()).then(({ sins }) => {
+      document.getElementById("grid").innerHTML = sins.map(s => {
+        const ready = !!s.topics;
+        const inner = `<h2>${s.name}</h2><p>${s.tagline}</p>${ready ? "" : '<span class="soon">Coming soon</span>'}`;
+        return ready
+          ? `<a class="card" href="sin.html?id=${s.id}">${inner}</a>`
+          : `<div class="card disabled">${inner}</div>`;
+      }).join("");
+    });
+  </script>
+</body>
+</html>
