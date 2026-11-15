@@ -44,9 +44,12 @@ marked.use({ renderer });
 
 // Every article ends with a "**Sources**" paragraph, its list and any checking notes;
 // render that tail as its own section so it can be set apart from the article text.
-function articleBody(md) {
+// On an article page the Sources heading gets an id and a link to itself; the compare page has one
+// Sources list per lens, so it passes no anchor.
+function articleBody(md, anchor) {
   const [text, ...tail] = md.split(/^\*\*Sources\*\*\s*$/m);
-  const sources = tail.length ? `<section class="sources"><h3>Sources</h3>${marked.parse(tail.join(""))}</section>` : "";
+  const h3 = anchor ? `<h3 id="sources">Sources<a class="anchor" href="#sources"><span aria-hidden="true">#</span><span class="sr-only">Link to Sources</span></a></h3>` : "<h3>Sources</h3>";
+  const sources = tail.length ? `<section class="sources">${h3}${marked.parse(tail.join(""))}</section>` : "";
   return marked.parse(text) + sources;
 }
 
@@ -75,7 +78,8 @@ const WEBSITE = { "@type": "WebSite", name: "The Seven Sins", url: `${SITE}/` };
 // Reader-selectable themes; the colours for each id are in style.css. "" follows the system light/dark setting.
 // All scripts are files, never inline: the Content-Security-Policy in vercel.json allows only script-src 'self'.
 const THEMES = [["", "Auto"], ["paper", "Paper"], ["sepia", "Sepia"], ["grey", "Grey"], ["dark", "Dark"], ["black", "Black"]];
-const themeMenu = `<details class="theme" hidden><summary><span aria-hidden="true">&#9680;</span> Theme</summary><div class="theme-menu" role="group" aria-label="Theme">${THEMES.map(([id, name]) => `<button type="button" value="${id}"><span class="swatch" aria-hidden="true"></span>${name}</button>`).join("")}</div></details>`;
+// The text size buttons sit in the same menu: the site bar has no room for them beside it on a 320px phone.
+const themeMenu = `<details class="theme" hidden><summary><span aria-hidden="true">&#9680;</span> Display</summary><div class="theme-menu"><div class="themes" role="group" aria-label="Theme">${THEMES.map(([id, name]) => `<button type="button" value="${id}"><span class="swatch" aria-hidden="true"></span>${name}</button>`).join("")}</div><div class="text-size" role="group" aria-label="Text size"><span class="label" aria-hidden="true">Text</span><button type="button" value="-1" aria-label="Smaller text">A&minus;</button><span class="size" aria-live="polite">100%</span><button type="button" value="1" aria-label="Larger text">A+</button></div></div></details>`;
 
 // The home page passes no `home` link: its hero already carries the site name.
 const siteBar = (home, back) => `<a class="skip" href="#content">Skip to content</a>
@@ -152,7 +156,7 @@ function articlePage(sin, topic, lens, md) {
       <nav class="topics" aria-label="Topic"><span class="label" aria-hidden="true">Topic</span>${sin.topics.map(t => navLink(`../${t.id}/${lens.id}.html`, t.title, t.id === topic.id)).join("")}</nav>
       <nav class="lenses" aria-label="Lens"><span class="label" aria-hidden="true">Lens</span>${data.lenses.map(l => navLink(`${l.id}.html`, l.name, l.id === lens.id)).join("")}<a class="compare-link" href="compare.html"><span aria-hidden="true">&#8644;&nbsp;</span>Compare lenses</a></nav>
     </div>
-    <article class="md" id="content"><p class="label">${esc(lens.name)} lens</p><h2>${esc(topic.title)}</h2>${articleBody(md)}</article>
+    <article class="md" id="content"><p class="label">${esc(lens.name)} lens</p><h2>${esc(topic.title)}</h2>${articleBody(md, true)}</article>
     <nav class="pager" aria-label="Continue reading">${prev}${next}</nav>${relatedNav}
   </main>
   ${footer(`Educational and reflective content, not medical, psychological or religious authority. ${DISCLAIMER}`)}

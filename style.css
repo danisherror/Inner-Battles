@@ -51,6 +51,10 @@
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+/* Text size from the Display menu (theme.js). A percentage, so it scales the reader's own browser setting. */
+:root[data-size="-1"] { font-size: 90%; }
+:root[data-size="1"] { font-size: 115%; }
+:root[data-size="2"] { font-size: 130%; }
 body {
   margin: 0;
   background: var(--bg);
@@ -87,9 +91,15 @@ p, li { text-wrap: pretty; }
 .theme summary::-webkit-details-marker { display: none; }
 .theme summary:hover, .theme[open] summary { color: var(--accent); }
 .theme-menu { position: absolute; right: 0; top: 100%; z-index: 2; min-width: 11rem; padding: var(--space-2); background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 10px 30px rgba(0, 0, 0, .18); }
-.theme-menu button { display: flex; align-items: center; gap: var(--space-3); width: 100%; min-height: 44px; padding: 0 var(--space-3); border: 0; border-radius: var(--radius-sm); background: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+.theme-menu .themes button { display: flex; align-items: center; gap: var(--space-3); width: 100%; min-height: 44px; padding: 0 var(--space-3); border: 0; border-radius: var(--radius-sm); background: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
 .theme-menu button:hover { background: var(--bg); }
-.theme-menu button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); font-weight: bold; }
+.theme-menu .themes button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); font-weight: bold; }
+.text-size { display: flex; align-items: center; gap: var(--space-1); margin-top: var(--space-2); padding: var(--space-2) 0 0 var(--space-3); border-top: 1px solid var(--line); }
+.text-size .label { margin-right: auto; }
+.text-size button { min-width: 44px; min-height: 44px; border: 0; border-radius: var(--radius-sm); background: none; color: var(--text); font: inherit; font-weight: bold; cursor: pointer; }
+.text-size button[aria-disabled="true"] { color: var(--muted); cursor: default; }
+.text-size button[aria-disabled="true"]:hover { background: none; }
+.text-size .size { min-width: 3.2em; text-align: center; font-family: var(--sans); font-size: .85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
 .swatch { flex: none; width: 18px; height: 18px; border-radius: 50%; border: 1px solid var(--muted); background: linear-gradient(90deg, #faf7f2 50%, #17140f 50%); }
 button[value="paper"] .swatch { background: #faf7f2; }
 button[value="sepia"] .swatch { background: #f1e7d0; }
@@ -206,6 +216,9 @@ article.md img { max-width: 100%; height: auto; }
 article.md .sources h3 { margin: 0 0 var(--space-3); font-family: var(--sans); font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
 article.md .sources p, article.md .sources ul, article.md .sources ol { margin-bottom: var(--space-3); }
 article.md .sources li::marker { color: var(--muted); }
+/* a link to the Sources heading itself, so the list can be shared */
+article.md a.anchor { margin-left: var(--space-2); padding: 0 var(--space-1); color: var(--muted); text-decoration: none; }
+article.md a.anchor:hover { color: var(--accent); }
 
 /* previous / next topic */
 .pager { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); padding: var(--space-4) 0 var(--space-7); }
@@ -232,6 +245,10 @@ footer p { max-width: 44rem; margin: 0 auto; }
   header.hero { padding-top: var(--space-5); }
   .grid { grid-template-columns: 1fr; }
   article.md { font-size: 1.125rem; }
+  /* At phone width a line holds about 35 characters, so a long word left whole opens a wide gap at the line end.
+     Only words of 10 or more letters are split (https://developer.mozilla.org/en-US/docs/Web/CSS/hyphenate-limit-chars);
+     at "7 3 3" Chrome broke about one line in four, which read worse than the ragged edge. */
+  article.md p, article.md li { hyphens: auto; -webkit-hyphens: auto; hyphenate-limit-chars: 10 4 4; }
   .pager { grid-template-columns: 1fr; }
   .pager .next { grid-column: 1; }
 }
@@ -245,6 +262,6 @@ footer p { max-width: 44rem; margin: 0 auto; }
 /* Print in black on white whatever theme is chosen, and spell out where each external link goes. */
 @media print {
   :root, :root[data-theme] { --bg: #fff; --card: #fff; --text: #000; --muted: #444; --accent: #000; --accent-soft: #fff; --line: #bbb; color-scheme: light; }
-  .site, .switch, .pager, .related, .skip, .jump, .filter, .reset, .resume { display: none; }
+  .site, .switch, .pager, .related, .skip, .jump, .filter, .reset, .resume, a.anchor { display: none; }
   article.md a.ext::after { content: " (" attr(href) ")"; font-size: .8em; word-break: break-all; }
 }

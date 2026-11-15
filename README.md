@@ -120,11 +120,11 @@ Sins/
   404.html        generated "page not found" page
   style.css       styles, including the reader-selectable themes (Paper, Sepia, Grey, Dark, Black)
   fonts/          Literata 5.3.0 (variable weight, latin and latin-ext, upright and italic) and its OFL licence, from https://www.npmjs.com/package/@fontsource-variable/literata
-  theme.js        theme menu in the site bar; the choice is saved in the browser
+  theme.js        Display menu in the site bar: theme and text size, both saved in the browser
   home.js         home page: search box that narrows the topic cards and lists articles whose text matches; cards open on the lens read last
   redirect.js     used by sin.html to send old links to the static page
   compare.js      used by each <Sin>/<topic>/compare.html (generated: all six lenses of one section) to choose which lenses are shown side by side
-  progress.js     reading progress: ticks on topic and lens links already read, a count on each home card, cards that open on the next unread section and a "Continue reading" link (kept in the browser only)
+  progress.js     reading progress (an article counts as read once its Sources section scrolls into view): ticks on topic and lens links already read, a count on each home card, cards that open on the next unread section and a "Continue reading" link (kept in the browser only)
   sins.json       single source of truth: lenses, sins, taglines and each sin's topics
   sitemap.xml     generated
   search.json     generated: the plain text of every article (without its Sources), fetched by home.js the first time the search box is used

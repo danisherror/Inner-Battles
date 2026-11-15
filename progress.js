@@ -1,6 +1,7 @@
 // Reader state kept in localStorage; nothing leaves the browser.
-// "read" is a list of "Topic/section/lens" keys: an article page records itself and ticks the topic and
-// lens links already read, and the home page shows a count on each card.
+// "read" is a list of "Topic/section/lens" keys: an article page records itself once the end of its text
+// (the Sources section) scrolls into view, and ticks the topic and lens links already read; the home page
+// shows a count on each card.
 // "lens" is the lens of the last article opened; home.js and redirect.js use it to pick links.
 // "last" is that article's path and title; the home page offers it as "Continue reading", and each
 // home card opens on the first section not yet read in the chosen lens.
@@ -19,12 +20,24 @@
       }));
     } catch (e) {}
     const read = load();
-    if (!read.has(key(location.pathname))) { read.add(key(location.pathname)); save(read); }
     for (const a of document.querySelectorAll(".topics a, .lenses a")) {
       if (a.hasAttribute("aria-current") || a.classList.contains("read") || !read.has(key(a.pathname))) continue;
       a.classList.add("read");
       a.insertAdjacentHTML("beforeend", '<span class="sr-only"> (read)</span>');
     }
+  };
+
+  // Reaching the end counts as reading, so a page opened and left at once is not ticked.
+  // An article short enough to fit on the screen counts as soon as it opens.
+  const markAtEnd = () => {
+    const done = () => { const read = load(); if (!read.has(key(location.pathname))) { read.add(key(location.pathname)); save(read); } };
+    const text = document.querySelector("article.md");
+    const end = text.querySelector(".sources") || text.lastElementChild;
+    if (!("IntersectionObserver" in window)) return done();
+    const seen = new IntersectionObserver(entries => {
+      if (entries.some(e => e.isIntersecting)) { done(); seen.disconnect(); }
+    });
+    seen.observe(end);
   };
 
   const home = () => {
@@ -58,4 +71,5 @@
   if (reset) reset.addEventListener("click", () => { try { localStorage.removeItem("read"); localStorage.removeItem("last"); } catch (e) {} home(); });
   // pageshow also fires when the reader comes back with the Back button, so the counts stay current.
   addEventListener("pageshow", document.querySelector("article.md") ? article : home);
+  if (document.querySelector("article.md")) markAtEnd();
 })();

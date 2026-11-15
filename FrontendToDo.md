@@ -47,15 +47,17 @@ Checked 2026-11-15 in Chrome against a local server that sends the `vercel.json`
 
 ## 5. Reading experience
 
-- [ ] **Mark as read at the end.** `progress.js` records an article as read when the page opens. Record it when the end of the article scrolls into view.
-- [ ] **Reading time** beside each article heading, computed in `build.js` from the word count.
-- [ ] **Text size control** next to the theme menu, kept in localStorage like the theme.
-- [ ] **Hyphenation and line breaking.** `style.css` has no `hyphens` rule. Check first: try `hyphens: auto` on phone widths and `text-wrap: pretty` on paragraphs.
-- [ ] **Tablet breakpoint.** The only breakpoint is 520px. Check first: look at the card grid and switcher between 600px and 900px.
-- [ ] **Compare page on phones.** Check first: side-by-side columns may be unreadable at phone width; consider one lens at a time with a swipe or tabs.
-- [ ] **Heading anchors.** Give `h2` and `h3` in articles an `id` and a link so a section or the Sources list can be shared.
-- [ ] **Glossary for Sanskrit, Pali and Greek terms.** Mark terms such as *mudita* with a `lang` attribute and a short definition (a `<dfn>` or a glossary page).
-- [ ] **Quotation styling.** Check first: review how block quotations and verse references look in each theme.
+Done 2026-11-15, checked in Chrome against a local server (pages in same-origin iframes at fixed widths, as in section 1).
+
+- [x] **Mark as read at the end.** `progress.js` now records an article as read when its Sources section (the end of the text) scrolls into view, using an `IntersectionObserver`; a browser without one records it on opening, as before. "Continue reading" and the saved lens are still set on opening. Checked: an article opened in a 300px-high frame stayed unread until its Sources were scrolled into view, and one whose Sources sat below the fold stayed unread.
+- [x] **Reading time.** Not added. Measured: 777 of the 780 articles round to "1 min" at 230 words a minute (median 153 words, longest 358), so the label would say the same thing on almost every page.
+- [x] **Text size control.** Four steps (90, 100, 115 and 130% of the browser's own size), kept in localStorage as `size` and applied in `<head>` by `theme.js` before the first paint, like the theme. It sits inside the theme menu, now called "Display", rather than next to it: at 320px the site bar has no room for two more 44px buttons beside the brand. The buttons use `aria-disabled` at either end of the range so focus is not lost, and the percentage is announced through `aria-live`. Checked: no horizontal overflow and the menu stays on screen on home, article, compare and Self-doubt pages at 320, 390, 600, 768 and 900px at every step.
+- [x] **Hyphenation and line breaking.** `text-wrap: pretty` was already on `p` and `li`. Added `hyphens: auto` for article text at 520px and below, limited to words of 10 or more letters. At `7 3 3` Chrome broke about one line in four (including "loss-es", the comma apparently counted), which read worse than the ragged edge.
+- [x] **Tablet breakpoint.** Nothing to change. Between 521 and 900px the card grid goes from one column to two (from about 600px) to three (from about 840px), with cards 250–350px wide; the article measure is capped at 42rem; the switcher takes 194–298px; the compare page shows two columns from about 700px.
+- [x] **Compare page on phones.** Nothing to change. The section 1 pass already found one column below about 700px, so lenses stack rather than sit side by side, and the "Lenses to show" buttons already work as the tabs this item suggested.
+- [x] **Heading anchors.** The article Markdown has no headings at all; the only `h2` is the title and the only `h3` is the generated Sources heading. On article pages that heading now has `id="sources"` and a "#" link to itself (hidden in print). The compare page has six Sources lists in one page, so it gets no id.
+- [ ] **Glossary for Sanskrit, Pali and Greek terms.** Not started; it is a content task more than a frontend one. There are about 450 distinct italic phrases across the articles; the commonest terms are *tamas* (24), *shadripu*, *rajas*, *shreyas*, *akrasia* and *preyas*, but many italics are English emphasis or titles. **Decision needed:** a glossary file (term, language, short definition with a source) that `build.js` uses to wrap matching `<em>` in `<dfn lang="…">`, or a glossary page; either way each definition needs checking, as the README does for quotations.
+- [x] **Quotation styling.** Nothing to change. The 29 block quotations in the articles are all the "invented composite story" notes; quotations from texts are inline, in quotation marks with the reference in parentheses. The note (italic, accent rule on the left) was checked in Dark and Sepia; its colours are the same text and accent tokens checked for contrast in section 1.
 
 ## 6. Reader features (all local, no backend)
 
@@ -95,13 +97,13 @@ Checked 2026-11-15 in Chrome against a local server that sends the `vercel.json`
 
 - [ ] **Lint and format** the five scripts and `style.css` (none is configured).
 - [ ] **Unit tests for `build.js`** helpers such as the description and excerpt functions.
-- [ ] **Document the localStorage keys** (`read`, `lens`, `last`, `compare`, theme) in one place in the README.
+- [ ] **Document the localStorage keys** (`read`, `lens`, `last`, `compare`, `theme`, `size`) in one place in the README.
 - [ ] **Unused CSS check** after the five superseded drafts were removed in `7e201f5`.
 
 ## Suggested order
 
 1. Section 1 (browser pass), because it will change the priority of everything else.
-2. Topic landing page and mark-as-read-at-the-end.
+2. Topic landing page (mark-as-read-at-the-end is done).
 3. ~~CSS/JS caching~~ (done); decide on the search index shards.
 4. CI link and accessibility checks.
 5. The rest as wanted.
