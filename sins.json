@@ -29,11 +29,13 @@
     {
       "id": "sin",
       "title": "The seven deadly sins",
+      "label": "Deadly sin",
       "intro": "The classic list, read through each lens."
     },
     {
       "id": "inner-battle",
       "title": "Inner battles",
+      "label": "Inner battle",
       "intro": "Not sins, but other struggles where the opponent is our own mind, explored through the same lenses."
     }
   ],

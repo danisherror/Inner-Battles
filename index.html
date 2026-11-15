@@ -20,14 +20,21 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <a class="skip" href="#content">Skip to content</a>
   <div class="wrap">
     <header class="hero">
+      <span class="mark" aria-hidden="true">&#10022;</span>
       <h1>The Seven Sins</h1>
-      <p>Understand the habits and struggles that hold us back through six lenses (Modern, Hinduism, Upanishads, Christianity, Buddhism and Philosophical) and learn how to leave them behind.</p>
+      <p>Understand the habits and struggles that hold us back, and learn how to leave them behind.</p>
+      <ul class="lens-list" aria-label="Every topic is read through six lenses">
+        <li class="label" aria-hidden="true">six lenses</li>
+        <li>Modern</li><li>Hinduism</li><li>Upanishads</li><li>Christianity</li><li>Buddhism</li><li>Philosophical</li>
+      </ul>
+      <nav class="jump" aria-label="Sections"><a href="#kind-sin">The seven deadly sins</a><a href="#kind-inner-battle">Inner battles</a></nav>
     </header>
-    <main>
+    <main id="content">
       <section aria-labelledby="kind-sin">
-        <h2 class="section-title" id="kind-sin">The seven deadly sins</h2>
+        <div class="section-head"><h2 class="section-title" id="kind-sin">The seven deadly sins</h2><span class="label">7 topics</span></div>
         <p class="section-intro">The classic list, read through each lens.</p>
         <div class="grid">
           <a class="card" href="Envy/what-it-is/modern.html"><h3>Envy</h3><p>Pain at another person's good fortune.</p></a>
@@ -40,7 +47,7 @@
         </div>
       </section>
       <section aria-labelledby="kind-inner-battle">
-        <h2 class="section-title" id="kind-inner-battle">Inner battles</h2>
+        <div class="section-head"><h2 class="section-title" id="kind-inner-battle">Inner battles</h2><span class="label">19 topics</span></div>
         <p class="section-intro">Not sins, but other struggles where the opponent is our own mind, explored through the same lenses.</p>
         <div class="grid">
           <a class="card" href="Addiction-and-compulsion/what-it-is/modern.html"><h3>Addiction and compulsion</h3><p>The pull toward something you have decided to stop.</p></a>
@@ -66,7 +73,7 @@
       </section>
     </main>
   </div>
-  <footer>A read-only guide for self-improvement. Educational and reflective content, not medical, psychological or religious authority. If a habit is harming your life, please talk to a doctor, therapist or a trusted person.</footer>
+  <footer><p>A read-only guide for self-improvement. Educational and reflective content, not medical, psychological or religious authority. If a habit is harming your life, please talk to a doctor, therapist or a trusted person.</p></footer>
   <script>
     // Cards link to the first lens; swap in the lens the reader chose last.
     try {

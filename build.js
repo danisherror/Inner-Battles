@@ -33,6 +33,18 @@ renderer.link = (href, title, text) => {
 };
 marked.use({ renderer });
 
+// Every article ends with a "**Sources**" paragraph, its list and any checking notes;
+// render that tail as its own section so it can be set apart from the article text.
+function articleBody(md) {
+  const [text, ...tail] = md.split(/^\*\*Sources\*\*\s*$/m);
+  const sources = tail.length ? `<section class="sources"><h3>Sources</h3>${marked.parse(tail.join(""))}</section>` : "";
+  return marked.parse(text) + sources;
+}
+
+const siteBar = (home, back) => `<a class="skip" href="#content">Skip to content</a>
+  <header class="site"><div class="wrap"><a class="brand" href="${home}"><span aria-hidden="true">&#10022;</span>The Seven Sins</a>${back}</div></header>`;
+const footer = text => `<footer><p>${text}</p></footer>`;
+
 function head({ title, description, url, type, depth, robots }) {
   const up = "../".repeat(depth);
   return `<!doctype html>
@@ -63,16 +75,29 @@ function articlePage(sin, topic, lens, md) {
   const title = `${sin.name}: ${topic.title} (${lens.name}) - The Seven Sins`;
   const description = `${sin.tagline} ${topic.title} through the ${lens.name} lens.`;
   const link = (href, text, on) => `<a href="${href}"${on ? ' aria-current="page"' : ""}>${esc(text)}</a>`;
+  const kind = data.kinds.find(k => k.id === kindOf(sin));
+  const i = sin.topics.indexOf(topic);
+  const step = (t, cls, label) => `<a class="${cls}" href="../${t.id}/${lens.id}.html"><span class="label">${label}</span>${esc(t.title)}</a>`;
+  const prev = i > 0 ? step(sin.topics[i - 1], "prev", "Previous") : "";
+  const next = i < sin.topics.length - 1
+    ? step(sin.topics[i + 1], "next", "Next")
+    : `<a class="next" href="../../index.html"><span class="label">Finished</span>Choose another topic</a>`;
   return head({ title, description, url: `${SITE}/${articlePath(sin, topic, lens)}`, type: "article", depth: 2 }) + `<body>
-  <main class="wrap">
-    <a class="back" href="../../index.html">&larr; All topics</a>
-    <h1 class="sin-title">${esc(sin.name)}</h1>
-    <p class="sin-tag">${esc(sin.tagline)}</p>
-    <nav class="topics" aria-label="Topic">${sin.topics.map(t => link(`../${t.id}/${lens.id}.html`, t.title, t.id === topic.id)).join("")}</nav>
-    <nav class="lenses" aria-label="Lens">${data.lenses.map(l => link(`${l.id}.html`, l.name, l.id === lens.id)).join("")}</nav>
-    <article class="md"><h2>${esc(topic.title)}</h2>${marked.parse(md)}</article>
+  ${siteBar("../../index.html", `<a class="back" href="../../index.html#kind-${kind.id}">&larr; All topics</a>`)}
+  <main class="wrap narrow">
+    <header class="page-head">
+      <p class="label">${esc(kind.label)}</p>
+      <h1 class="sin-title">${esc(sin.name)}</h1>
+      <p class="sin-tag">${esc(sin.tagline)}</p>
+    </header>
+    <div class="switch">
+      <nav class="topics" aria-label="Topic"><span class="label" aria-hidden="true">Topic</span>${sin.topics.map(t => link(`../${t.id}/${lens.id}.html`, t.title, t.id === topic.id)).join("")}</nav>
+      <nav class="lenses" aria-label="Lens"><span class="label" aria-hidden="true">Lens</span>${data.lenses.map(l => link(`${l.id}.html`, l.name, l.id === lens.id)).join("")}</nav>
+    </div>
+    <article class="md" id="content"><p class="label">${esc(lens.name)} lens</p><h2>${esc(topic.title)}</h2>${articleBody(md)}</article>
+    <nav class="pager" aria-label="Continue reading">${prev}${next}</nav>
   </main>
-  <footer>Educational and reflective content, not medical, psychological or religious authority. ${DISCLAIMER}</footer>
+  ${footer(`Educational and reflective content, not medical, psychological or religious authority. ${DISCLAIMER}`)}
   <script>try { localStorage.setItem("lens", ${JSON.stringify(lens.id)}); } catch (e) {}</script>
 </body>
 </html>
@@ -89,7 +114,7 @@ function indexPage() {
   const sections = data.kinds.map(k => {
     const items = data.sins.filter(s => kindOf(s) === k.id).sort((a, b) => a.name.localeCompare(b.name, "en"));
     return items.length ? `<section aria-labelledby="kind-${k.id}">
-        <h2 class="section-title" id="kind-${k.id}">${esc(k.title)}</h2>
+        <div class="section-head"><h2 class="section-title" id="kind-${k.id}">${esc(k.title)}</h2><span class="label">${items.length} topics</span></div>
         <p class="section-intro">${esc(k.intro)}</p>
         <div class="grid">
           ${items.map(card).join("\n          ")}
@@ -97,16 +122,23 @@ function indexPage() {
       </section>` : "";
   }).filter(Boolean).join("\n      ");
   return head({ title: "The Seven Sins", description: DESCRIPTION, url: `${SITE}/`, type: "website", depth: 0 }) + `<body>
+  <a class="skip" href="#content">Skip to content</a>
   <div class="wrap">
     <header class="hero">
+      <span class="mark" aria-hidden="true">&#10022;</span>
       <h1>The Seven Sins</h1>
-      <p>Understand the habits and struggles that hold us back through ${count} lenses (${lensList}) and learn how to leave them behind.</p>
+      <p>Understand the habits and struggles that hold us back, and learn how to leave them behind.</p>
+      <ul class="lens-list" aria-label="Every topic is read through ${count} lenses">
+        <li class="label" aria-hidden="true">${count} lenses</li>
+        ${data.lenses.map(l => `<li>${esc(l.name)}</li>`).join("")}
+      </ul>
+      <nav class="jump" aria-label="Sections">${data.kinds.map(k => `<a href="#kind-${k.id}">${esc(k.title)}</a>`).join("")}</nav>
     </header>
-    <main>
+    <main id="content">
       ${sections}
     </main>
   </div>
-  <footer>A read-only guide for self-improvement. Educational and reflective content, not medical, psychological or religious authority. ${DISCLAIMER}</footer>
+  ${footer(`A read-only guide for self-improvement. Educational and reflective content, not medical, psychological or religious authority. ${DISCLAIMER}`)}
   <script>
     // Cards link to the first lens; swap in the lens the reader chose last.
     try {
@@ -124,9 +156,13 @@ function indexPage() {
 function redirectPage() {
   const topics = Object.fromEntries(sins.map(s => [s.id, s.topics.map(t => t.id)]));
   return head({ title: "The Seven Sins", description: DESCRIPTION, depth: 0, robots: "noindex" }) + `<body>
-  <main class="wrap">
-    <a class="back" href="index.html">&larr; All topics</a>
-    <p>That page isn't available yet.</p>
+  ${siteBar("index.html", "")}
+  <main class="wrap narrow" id="content">
+    <header class="hero">
+      <h1>Not available yet</h1>
+      <p>That page isn't available yet.</p>
+    </header>
+    <p class="center"><a class="back" href="index.html">&larr; All topics</a></p>
   </main>
   <script>
     const TOPICS = ${JSON.stringify(topics)};
