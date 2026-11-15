@@ -118,6 +118,13 @@ header.hero p.resume { margin-top: var(--space-5); font-size: 1.05rem; }
 .filter input::placeholder { color: var(--muted); opacity: 1; }
 .filter input:focus-visible { border-radius: var(--radius-pill); border-color: var(--accent); }
 header.hero p.filter-status { min-height: 1.5em; margin-top: var(--space-3); font-size: .75rem; }
+.results { max-width: var(--measure); margin-top: var(--space-5); padding: var(--space-5) 0 var(--space-6); border-top: 1px solid var(--line); }
+.results h2 { margin: 0; }
+.results ol { list-style: none; margin: var(--space-3) 0 0; padding: 0; }
+.results li { padding: var(--space-3) 0; border-bottom: 1px solid var(--line); }
+.results a { color: var(--accent); font-weight: bold; text-underline-offset: 3px; }
+.results p { margin: var(--space-1) 0 0; color: var(--muted); font-size: .95rem; line-height: 1.5; }
+.results mark { background: var(--accent-soft); color: var(--text); padding: 0 2px; border-radius: 3px; }
 .section-title { scroll-margin-top: var(--space-5); }
 .section-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 var(--space-3); margin-top: var(--space-6); padding-top: var(--space-5); border-top: 1px solid var(--line); }
 .section-title { font-size: 1.6rem; margin: 0; }

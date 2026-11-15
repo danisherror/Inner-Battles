@@ -1,4 +1,5 @@
-// Pre-renders the site to static HTML: one page per article, plus index.html, sin.html and sitemap.xml.
+// Pre-renders the site to static HTML: one page per article, plus index.html, sin.html, sitemap.xml
+// and search.json (the article text that the home page search box reads).
 // `npm run render` writes the files (commit them; the host serves them as they are).
 // `npm run check` exits 1 if any generated file on disk is stale.
 const fs = require("fs");
@@ -40,6 +41,14 @@ function articleBody(md) {
   const [text, ...tail] = md.split(/^\*\*Sources\*\*\s*$/m);
   const sources = tail.length ? `<section class="sources"><h3>Sources</h3>${marked.parse(tail.join(""))}</section>` : "";
   return marked.parse(text) + sources;
+}
+
+// Plain text of an article without its Sources tail, for search.json.
+function articleText(md) {
+  return marked.parse(md.split(/^\*\*Sources\*\*\s*$/m)[0])
+    .replace(/<span class="sr-only">.*?<\/span>/g, "").replace(/<\/?(?:a|em|strong|code|span)\b[^>]*>/g, "").replace(/<[^>]+>/g, " ")
+    .replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, "&")
+    .replace(/\s+/g, " ").trim().normalize("NFC");
 }
 
 // Reader-selectable themes; the colours for each id are in style.css. "" follows the system light/dark setting.
@@ -154,12 +163,13 @@ function indexPage() {
       </ul>
       <nav class="jump" aria-label="Sections">${data.kinds.map(k => `<a href="#kind-${k.id}">${esc(k.title)}</a>`).join("")}</nav>
       <div class="filter" role="search" hidden>
-        <label class="sr-only" for="filter">Filter topics</label>
-        <input id="filter" type="search" placeholder="Filter the ${data.sins.length} topics" autocomplete="off" spellcheck="false">
+        <label class="sr-only" for="filter">Search topics and articles</label>
+        <input id="filter" type="search" placeholder="Search topics and articles" autocomplete="off" spellcheck="false">
         <p class="filter-status label" role="status"></p>
       </div>
     </header>
     ${sections}
+    <div class="results" role="region" aria-labelledby="results-title" hidden><h2 class="label" id="results-title"></h2><ol></ol></div>
     <p class="center"><button class="reset" type="button" hidden>Clear reading progress</button></p>
   </main>
   <script src="home.js" defer></script>
@@ -199,15 +209,19 @@ ${urls.map(u => `  <url><loc>${u}</loc></url>`).join("\n")}
 function outputs() {
   const out = new Map();
   const urls = [`${SITE}/`];
+  const articles = [];
   for (const s of sins)
     for (const t of s.topics)
       for (const l of data.lenses) {
-        out.set(articlePath(s, t, l), articlePage(s, t, l, fs.readFileSync(`${s.id}/${t.id}/${l.id}.md`, "utf8")));
+        const md = fs.readFileSync(`${s.id}/${t.id}/${l.id}.md`, "utf8");
+        out.set(articlePath(s, t, l), articlePage(s, t, l, md));
+        articles.push([`${s.id}/${t.id}/${l.id}`, s.name, t.title, l.name, articleText(md)]);
         urls.push(`${SITE}/${articlePath(s, t, l)}`);
       }
   out.set("index.html", indexPage());
   out.set("sin.html", redirectPage());
   out.set("sitemap.xml", sitemap(urls));
+  out.set("search.json", JSON.stringify({ articles }) + "\n");
   return out;
 }
 
