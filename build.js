@@ -41,8 +41,14 @@ function articleBody(md) {
   return marked.parse(text) + sources;
 }
 
+// Reader-selectable themes; the colours for each id are in style.css. "" follows the system light/dark setting.
+// 404.html is hand-written and carries a copy of the head script and this menu.
+const THEMES = [["", "Auto"], ["paper", "Paper"], ["sepia", "Sepia"], ["grey", "Grey"], ["dark", "Dark"], ["black", "Black"]];
+const themeMenu = `<details class="theme" hidden><summary><span aria-hidden="true">&#9680;</span> Theme</summary><div class="theme-menu" role="group" aria-label="Theme">${THEMES.map(([id, name]) => `<button type="button" value="${id}"><span class="swatch" aria-hidden="true"></span>${name}</button>`).join("")}</div></details>`;
+
+// The home page passes no `home` link: its hero already carries the site name.
 const siteBar = (home, back) => `<a class="skip" href="#content">Skip to content</a>
-  <header class="site"><div class="wrap"><a class="brand" href="${home}"><span aria-hidden="true">&#10022;</span>The Seven Sins</a>${back}</div></header>`;
+  <header class="site${home ? "" : " bare"}"><div class="wrap">${home ? `<a class="brand" href="${home}"><span aria-hidden="true">&#10022;</span>The Seven Sins</a>` : ""}<div class="site-actions">${back}${themeMenu}</div></div></header>`;
 const footer = text => `<footer><p>${text}</p></footer>`;
 
 function head({ title, description, url, type, depth, robots }) {
@@ -66,7 +72,9 @@ ${robots ? `  <meta name="robots" content="${robots}">\n` : ""}${url ? `  <link 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="${SITE}/og.png">
 ` : ""}  <link rel="icon" href="${ICON}">
+  <script>try { const t = localStorage.getItem("theme"); if (${JSON.stringify(THEMES.map(t => t[0]).filter(Boolean))}.includes(t)) document.documentElement.dataset.theme = t; } catch (e) {}</script>
   <link rel="stylesheet" href="${up}style.css">
+  <script src="${up}theme.js" defer></script>
 </head>
 `;
 }
@@ -122,7 +130,7 @@ function indexPage() {
       </section>` : "";
   }).filter(Boolean).join("\n      ");
   return head({ title: "The Seven Sins", description: DESCRIPTION, url: `${SITE}/`, type: "website", depth: 0 }) + `<body>
-  <a class="skip" href="#content">Skip to content</a>
+  ${siteBar(null, "")}
   <div class="wrap">
     <header class="hero">
       <span class="mark" aria-hidden="true">&#10022;</span>
