@@ -117,7 +117,7 @@ Sins/
   build.js        generates every .html page, sitemap.xml and search.json (npm run render)
   index.html      generated home page: one card per sin and inner battle
   sin.html        generated redirect for old sin.html?id=... links
-  404.html        hand-written "page not found" page
+  404.html        generated "page not found" page
   style.css       styles, including the reader-selectable themes (Paper, Sepia, Grey, Dark, Black)
   fonts/          Literata 5.3.0 (variable weight, latin and latin-ext, upright and italic) and its OFL licence, from https://www.npmjs.com/package/@fontsource-variable/literata
   theme.js        theme menu in the site bar; the choice is saved in the browser

@@ -1,5 +1,5 @@
 // Pre-renders the site to static HTML: one page per article, a compare page per topic section
-// (all the lenses side by side), plus index.html, sin.html, sitemap.xml
+// (all the lenses side by side), plus index.html, sin.html, 404.html, sitemap.xml
 // and search.json (the article text that the home page search box reads).
 // `npm run render` writes the files (commit them; the host serves them as they are).
 // `npm run check` exits 1 if any generated file on disk is stale.
@@ -66,8 +66,7 @@ const jsonLd = graph => `  <script type="application/ld+json">${JSON.stringify({
 const WEBSITE = { "@type": "WebSite", name: "The Seven Sins", url: `${SITE}/` };
 
 // Reader-selectable themes; the colours for each id are in style.css. "" follows the system light/dark setting.
-// 404.html is hand-written and carries a copy of this menu. All scripts are files, never inline:
-// the Content-Security-Policy in vercel.json allows only script-src 'self'.
+// All scripts are files, never inline: the Content-Security-Policy in vercel.json allows only script-src 'self'.
 const THEMES = [["", "Auto"], ["paper", "Paper"], ["sepia", "Sepia"], ["grey", "Grey"], ["dark", "Dark"], ["black", "Black"]];
 const themeMenu = `<details class="theme" hidden><summary><span aria-hidden="true">&#9680;</span> Theme</summary><div class="theme-menu" role="group" aria-label="Theme">${THEMES.map(([id, name]) => `<button type="button" value="${id}"><span class="swatch" aria-hidden="true"></span>${name}</button>`).join("")}</div></details>`;
 
@@ -77,7 +76,7 @@ const siteBar = (home, back) => `<a class="skip" href="#content">Skip to content
 const footer = text => `<footer><p>${text}</p></footer>`;
 
 function head({ title, description, url, type, depth, robots, graph }) {
-  const up = "../".repeat(depth);
+  const up = depth === "root" ? "/" : "../".repeat(depth); // "root": absolute paths, for a page served at any URL
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -252,6 +251,23 @@ function redirectPage() {
 `;
 }
 
+// The host serves this for any unknown URL, at whatever depth that URL has, so its links are absolute.
+function notFoundPage() {
+  return head({ title: "Page not found - The Seven Sins", description: DESCRIPTION, depth: "root", robots: "noindex" }) + `<body>
+  ${siteBar("/", "")}
+  <main class="wrap narrow" id="content">
+    <header class="hero">
+      <h1>Page not found</h1>
+      <p>That page doesn't exist, or it has moved. Try one of the topics instead.</p>
+    </header>
+    <p class="center"><a class="back" href="/">&larr; All topics</a></p>
+  </main>
+  ${footer(`A read-only guide for self-improvement. Educational and reflective content, not medical, psychological or religious authority. ${DISCLAIMER}`)}
+</body>
+</html>
+`;
+}
+
 function sitemap(urls) {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -278,6 +294,7 @@ function outputs() {
     }
   out.set("index.html", indexPage());
   out.set("sin.html", redirectPage());
+  out.set("404.html", notFoundPage());
   out.set("sitemap.xml", sitemap(urls));
   out.set("search.json", JSON.stringify({ articles }) + "\n");
   return out;
