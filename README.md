@@ -102,7 +102,7 @@ After editing any `.md` file or `sins.json`, regenerate the pages and commit the
 
 ```sh
 npm install        # once; installs marked 18.2.0, used only at build time
-npm run render     # rewrites the article pages, index.html, sin.html, sitemap.xml and search.json
+npm run render     # rewrites the article, compare and topic overview pages, index.html, sin.html, 404.html, sitemap.xml and search.json
 npm run check      # exits 1 if a generated file is stale
 ```
 
@@ -117,14 +117,16 @@ Sins/
   build.js        generates every .html page, sitemap.xml and search.json (npm run render)
   index.html      generated home page: one card per sin and inner battle
   sin.html        generated redirect for old sin.html?id=... links
-  404.html        generated "page not found" page
+  404.html        generated "page not found" page, with the search box
+  <Sin>/index.html  generated topic overview: every section in every lens, with ticks on the articles read
   style.css       styles, including the reader-selectable themes (Paper, Sepia, Grey, Dark, Black)
   fonts/          Literata 5.3.0 (variable weight, latin and latin-ext, upright and italic) and its OFL licence, from https://www.npmjs.com/package/@fontsource-variable/literata
+  site.js         on every page but sin.html: the search link in the site bar, keyboard shortcuts (/ for search, left and right arrows for previous and next) and marking the searched words on an article opened from the search results
   theme.js        Display menu in the site bar: theme and text size, both saved in the browser
-  home.js         home page: search box that narrows the topic cards and lists articles whose text matches; cards open on the lens read last
+  home.js         home page and 404 page: search box that narrows the topic cards and lists articles whose text matches; on the home page, lens buttons that choose which lens the cards open on (default: the lens read last)
   redirect.js     used by sin.html to send old links to the static page
   compare.js      used by each <Sin>/<topic>/compare.html (generated: all six lenses of one section) to choose which lenses are shown side by side
-  progress.js     reading progress (an article counts as read once its Sources section scrolls into view): ticks on topic and lens links already read, a count on each home card, cards that open on the next unread section and a "Continue reading" link (kept in the browser only)
+  progress.js     reading progress (an article counts as read once its Sources section scrolls into view): ticks on topic and lens links already read, a count on each home card and topic overview, cards and the overview's "Start reading" link that open on the next unread section, a "Continue reading" link and a random unread article (kept in the browser only)
   sins.json       single source of truth: lenses, sins, taglines and each sin's topics
   sitemap.xml     generated
   search.json     generated: the plain text of every article (without its Sources), fetched by home.js the first time the search box is used

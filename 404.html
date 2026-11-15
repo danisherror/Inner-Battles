@@ -10,18 +10,26 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <script src="/theme.js?v=4a719d9f62"></script>
   <link rel="preload" href="/fonts/literata-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/style.css?v=b0ad02ac40">
+  <link rel="stylesheet" href="/style.css?v=a21a00f7fa">
 </head>
 <body>
   <a class="skip" href="#content">Skip to content</a>
-  <header class="site"><div class="wrap"><a class="brand" href="/"><span aria-hidden="true">&#10022;</span>The Seven Sins</a><div class="site-actions"><details class="theme" hidden><summary><span aria-hidden="true">&#9680;</span> Display</summary><div class="theme-menu"><div class="themes" role="group" aria-label="Theme"><button type="button" value=""><span class="swatch" aria-hidden="true"></span>Auto</button><button type="button" value="paper"><span class="swatch" aria-hidden="true"></span>Paper</button><button type="button" value="sepia"><span class="swatch" aria-hidden="true"></span>Sepia</button><button type="button" value="grey"><span class="swatch" aria-hidden="true"></span>Grey</button><button type="button" value="dark"><span class="swatch" aria-hidden="true"></span>Dark</button><button type="button" value="black"><span class="swatch" aria-hidden="true"></span>Black</button></div><div class="text-size" role="group" aria-label="Text size"><span class="label" aria-hidden="true">Text</span><button type="button" value="-1" aria-label="Smaller text">A&minus;</button><span class="size" aria-live="polite">100%</span><button type="button" value="1" aria-label="Larger text">A+</button></div></div></details></div></div></header>
-  <main class="wrap narrow" id="content">
+  <header class="site" id="top"><div class="wrap"><a class="brand" href="/"><span aria-hidden="true">&#10022;</span>The Seven Sins</a><div class="site-actions"><details class="theme" hidden><summary><span aria-hidden="true">&#9680;</span> Display</summary><div class="theme-menu"><div class="themes" role="group" aria-label="Theme"><button type="button" value=""><span class="swatch" aria-hidden="true"></span>Auto</button><button type="button" value="paper"><span class="swatch" aria-hidden="true"></span>Paper</button><button type="button" value="sepia"><span class="swatch" aria-hidden="true"></span>Sepia</button><button type="button" value="grey"><span class="swatch" aria-hidden="true"></span>Grey</button><button type="button" value="dark"><span class="swatch" aria-hidden="true"></span>Dark</button><button type="button" value="black"><span class="swatch" aria-hidden="true"></span>Black</button></div><div class="text-size" role="group" aria-label="Text size"><span class="label" aria-hidden="true">Text</span><button type="button" value="-1" aria-label="Smaller text">A&minus;</button><span class="size" aria-live="polite">100%</span><button type="button" value="1" aria-label="Larger text">A+</button></div></div></details></div></div></header>
+  <main class="wrap narrow" id="content" data-base="/">
     <header class="hero">
       <h1>Page not found</h1>
-      <p>That page doesn't exist, or it has moved. Try one of the topics instead.</p>
+      <p>That page doesn't exist, or it has moved. Search the articles, or pick a topic from one of the lists.</p>
+      <nav class="jump" aria-label="Sections"><a href="/#kind-sin">The seven deadly sins</a><a href="/#kind-inner-battle">Inner battles</a></nav>
+      <div class="filter" id="search" role="search" hidden>
+        <label class="sr-only" for="filter">Search topics and articles</label>
+        <input id="filter" type="search" placeholder="Search topics and articles" autocomplete="off" spellcheck="false" aria-keyshortcuts="/">
+        <p class="filter-status label" role="status"></p>
+      </div>
     </header>
-    <p class="center"><a class="back" href="/">&larr; All topics</a></p>
+    <div class="results" role="region" aria-labelledby="results-title" hidden><h2 class="label" id="results-title"></h2><ol></ol></div>
   </main>
   <footer><p>A read-only guide for self-improvement. Educational and reflective content, not medical, psychological or religious authority. If a habit is harming your life, please talk to a doctor, therapist or a trusted person.</p></footer>
+  <script src="/site.js?v=09f8e50b43" defer></script>
+  <script src="/home.js?v=780dc41b50" defer></script>
 </body>
 </html>

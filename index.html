@@ -21,11 +21,11 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <script src="theme.js?v=4a719d9f62"></script>
   <link rel="preload" href="fonts/literata-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="style.css?v=b0ad02ac40">
+  <link rel="stylesheet" href="style.css?v=a21a00f7fa">
 </head>
 <body>
   <a class="skip" href="#content">Skip to content</a>
-  <header class="site bare"><div class="wrap"><div class="site-actions"><details class="theme" hidden><summary><span aria-hidden="true">&#9680;</span> Display</summary><div class="theme-menu"><div class="themes" role="group" aria-label="Theme"><button type="button" value=""><span class="swatch" aria-hidden="true"></span>Auto</button><button type="button" value="paper"><span class="swatch" aria-hidden="true"></span>Paper</button><button type="button" value="sepia"><span class="swatch" aria-hidden="true"></span>Sepia</button><button type="button" value="grey"><span class="swatch" aria-hidden="true"></span>Grey</button><button type="button" value="dark"><span class="swatch" aria-hidden="true"></span>Dark</button><button type="button" value="black"><span class="swatch" aria-hidden="true"></span>Black</button></div><div class="text-size" role="group" aria-label="Text size"><span class="label" aria-hidden="true">Text</span><button type="button" value="-1" aria-label="Smaller text">A&minus;</button><span class="size" aria-live="polite">100%</span><button type="button" value="1" aria-label="Larger text">A+</button></div></div></details></div></div></header>
+  <header class="site bare" id="top"><div class="wrap"><div class="site-actions"><details class="theme" hidden><summary><span aria-hidden="true">&#9680;</span> Display</summary><div class="theme-menu"><div class="themes" role="group" aria-label="Theme"><button type="button" value=""><span class="swatch" aria-hidden="true"></span>Auto</button><button type="button" value="paper"><span class="swatch" aria-hidden="true"></span>Paper</button><button type="button" value="sepia"><span class="swatch" aria-hidden="true"></span>Sepia</button><button type="button" value="grey"><span class="swatch" aria-hidden="true"></span>Grey</button><button type="button" value="dark"><span class="swatch" aria-hidden="true"></span>Dark</button><button type="button" value="black"><span class="swatch" aria-hidden="true"></span>Black</button></div><div class="text-size" role="group" aria-label="Text size"><span class="label" aria-hidden="true">Text</span><button type="button" value="-1" aria-label="Smaller text">A&minus;</button><span class="size" aria-live="polite">100%</span><button type="button" value="1" aria-label="Larger text">A+</button></div></div></details></div></div></header>
   <main class="wrap" id="content" data-lenses="modern hinduism upanishads christianity buddhism philosophical">
     <header class="hero">
       <span class="mark" aria-hidden="true">&#10022;</span>
@@ -33,14 +33,16 @@
       <p class="sub">and the inner battles beyond them</p>
       <p>Understand the habits and struggles that hold us back, and learn how to leave them behind.</p>
       <p class="resume" hidden><span class="label">Continue reading</span><a></a></p>
+      <p class="random" hidden><a href="">Read something at random</a></p>
       <ul class="lens-list" aria-label="Every topic is read through six lenses">
         <li class="label" aria-hidden="true">six lenses</li>
         <li>Modern</li><li>Hinduism</li><li>Upanishads</li><li>Christianity</li><li>Buddhism</li><li>Philosophical</li>
       </ul>
+      <div class="lens-list pick" role="group" aria-labelledby="pick-label" hidden><span class="label" id="pick-label">Open topics in the lens</span><button type="button" value="modern" aria-pressed="false">Modern</button><button type="button" value="hinduism" aria-pressed="false">Hinduism</button><button type="button" value="upanishads" aria-pressed="false">Upanishads</button><button type="button" value="christianity" aria-pressed="false">Christianity</button><button type="button" value="buddhism" aria-pressed="false">Buddhism</button><button type="button" value="philosophical" aria-pressed="false">Philosophical</button></div>
       <nav class="jump" aria-label="Sections"><a href="#kind-sin">The seven deadly sins</a><a href="#kind-inner-battle">Inner battles</a></nav>
-      <div class="filter" role="search" hidden>
+      <div class="filter" id="search" role="search" hidden>
         <label class="sr-only" for="filter">Search topics and articles</label>
-        <input id="filter" type="search" placeholder="Search topics and articles" autocomplete="off" spellcheck="false">
+        <input id="filter" type="search" placeholder="Search topics and articles" autocomplete="off" spellcheck="false" aria-keyshortcuts="/">
         <p class="filter-status label" role="status"></p>
       </div>
     </header>
@@ -85,8 +87,9 @@
     <div class="results" role="region" aria-labelledby="results-title" hidden><h2 class="label" id="results-title"></h2><ol></ol></div>
     <p class="center"><button class="reset" type="button" hidden>Clear reading progress</button></p>
   </main>
-  <script src="home.js?v=db68816692" defer></script>
-  <script src="progress.js?v=14b8789cc8" defer></script>
+  <script src="site.js?v=09f8e50b43" defer></script>
+  <script src="home.js?v=780dc41b50" defer></script>
+  <script src="progress.js?v=ab0606193b" defer></script>
   <footer><p>A read-only guide for self-improvement. Educational and reflective content, not medical, psychological or religious authority. If a habit is harming your life, please talk to a doctor, therapist or a trusted person.</p></footer>
 </body>
 </html>

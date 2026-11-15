@@ -1,6 +1,6 @@
 # Frontend to-do
 
-Things we can still do on the frontend, written 2026-11-15 from a read of the code (`build.js`, `style.css`, the five scripts, `vercel.json` and a few generated pages). Nothing here was checked in a browser; items that need a look before any work are marked "check first".
+Things we can still do on the frontend, written 2026-11-15 from a read of the code (`build.js`, `style.css`, the scripts, `vercel.json` and a few generated pages). Nothing here was checked in a browser; items that need a look before any work are marked "check first".
 
 Already in place, so not listed below: pre-rendered pages that work without JavaScript, six themes, article search on the home page, reading progress and "Continue reading", the compare page, related topics, previous/next pager, print styles, reduced-motion handling, view transitions, skip link, focus outlines, CSP and security headers, Open Graph tags and structured data.
 
@@ -34,16 +34,18 @@ Checked 2026-11-15 in Chrome against a local server that sends the `vercel.json`
 
 ## 4. Navigation and structure
 
-- [ ] **Topic landing page.** A home card opens `what-it-is/modern.html` and the breadcrumb's second level points there too. Add one overview page per topic with the 5 sections × 6 lenses grid and read ticks.
-- [ ] **Search from article pages.** The search box exists on the home page only. Add a search link or field to the site header.
-- [ ] **Highlight the search term on arrival.** When a result is opened, scroll to and mark the matched text (text fragment link or a small script).
-- [ ] **Sticky topic/lens switcher.** Nothing is sticky today; on a long article the switcher scrolls away. Check first on a phone, where it may take too much height.
-- [ ] **Next lens in the pager.** The pager moves between sections of one lens. Add "Same section, next lens" beside it.
-- [ ] **Back to top link** at the end of long articles.
-- [ ] **Search on the 404 page**, plus links to the two sections of the home page.
-- [ ] **Lens chooser on the home page.** The lens used by the cards is whichever was read last. Let the reader pick it directly.
-- [ ] **Random article link** ("Read something") on the home page.
-- [ ] **Keyboard shortcuts.** `/` to focus search, left and right arrows for previous and next. Today the only key handler is Escape on the theme menu.
+Done 2026-11-15, checked in Chrome against a local server (pages in same-origin iframes at fixed widths, as in section 1, plus real key presses and clicks in the tab itself).
+
+- [x] **Topic landing page.** `build.js` writes `<Topic>/index.html` for all 26 topics: every section with its six lens links and a "Compare lenses" link, a "Start reading" link and the related topics. `progress.js` ticks each article read, shows "n of 30 read", and turns the link into "Continue" pointing at the first unread section in the chosen lens (any unread article once that lens is finished). Article and compare pages end their Topic row with an "All sections" link to it, the breadcrumb structured data's second level now points to it, and it is in the sitemap as `<Topic>/`. Home cards still open an article directly (the first unread section in the chosen lens), since that is one click shorter. Checked: with three articles read, the page showed three ticks, "3 of 30 read" and "Continue: Effects on life (Buddhism)"; no overflow at 320px.
+- [x] **Search from article pages.** Article, compare and overview pages have a search link in the site bar (icon only at 520px and below, so the bar stays on one line at 320px) leading to `index.html#search`, where `home.js` focuses the box. The link is hidden without JavaScript, like the box itself. Focusing as soon as `home.js` ran did not hold when the page was reached by a link (it did on reload), so it waits for `pageshow`. Checked: clicking the link lands with the cursor in the box.
+- [x] **Highlight the search term on arrival.** A script rather than a text fragment: a fragment marks the first match in the whole page, which is often the topic name in the title or a lens link. Result links end in `#q=<words>`; `site.js` marks every match in the article text (not the title, labels or Sources) with `<mark>` and scrolls to the first. Matching ignores case and diacritics, as the search does. Checked: `#q=donapaka` marks "Doṇapāka"; a word that occurs only in the Sources marks nothing.
+- [x] **Sticky topic/lens switcher.** Not done. Measured: the switcher is 506px tall at 320px, 402px at 390px and 298px at 768 and 1024px, so pinned it would cover half a phone screen and a third of a laptop one. The pager's new "next lens" link, "Back to top" and the arrow keys cover moving on without it.
+- [x] **Next lens in the pager.** A full-width "Same section, next lens" link under Previous and Next; after the last lens it wraps to the first.
+- [x] **Back to top link** at the end of every article and compare page, leading to `#top` on the site bar so keyboard focus starts again from the top. Added to every article rather than only long ones: on a phone the switcher alone puts the end of even the shortest article two screens down.
+- [x] **Search on the 404 page**, plus links to the two sections of the home page. The 404 page has the same search box, run by `home.js` with absolute links (`data-base="/"` on `<main>`), since it is served at any depth. Checked at 320px: "mudita" lists 4 articles linking to `/Envy/...`.
+- [x] **Lens chooser on the home page.** The plain list of lens names becomes "Open topics in the lens" buttons when JavaScript runs. Picking one saves it as `lens` (the same key reading an article sets) and `progress.js` moves each card to the first unread section in that lens. Checked: picking Hinduism changed the Envy card from `effects/buddhism.html` to `what-it-is/hinduism.html`.
+- [x] **Random article link** ("Read something at random") under "Continue reading", picked from the articles not read yet, or from all of them once everything is read. Picked again on `pageshow`, so coming back with the Back button offers a new one.
+- [x] **Keyboard shortcuts** in `site.js`: `/` focuses the search box (or opens the home page one), left and right arrows follow the pager's Previous and Next. Ignored with Alt, Ctrl or Cmd held, in a form field, inside the open Display menu, or in a scrolling table or code block. The controls carry `aria-keyshortcuts`. Checked with real key presses: Right, Left and `/` on an article page.
 
 ## 5. Reading experience
 
@@ -103,7 +105,7 @@ Done 2026-11-15, checked in Chrome against a local server (pages in same-origin 
 ## Suggested order
 
 1. Section 1 (browser pass), because it will change the priority of everything else.
-2. Topic landing page (mark-as-read-at-the-end is done).
+2. ~~Topic landing page~~ (done, with the rest of section 4).
 3. ~~CSS/JS caching~~ (done); decide on the search index shards.
 4. CI link and accessibility checks.
 5. The rest as wanted.

@@ -1,13 +1,35 @@
-// Home page: cards open on the lens the reader chose last, and a search box narrows the cards and
-// lists the articles whose text matches. The box is hidden in the markup and shown here, so without
-// JavaScript the page is simply the full list.
+// Home page: cards open on the lens chosen with the lens buttons or read last, and a search box narrows
+// the cards and lists the articles whose text matches. The 404 page uses the same search box, without cards.
+// The box and the lens buttons are hidden in the markup and shown here, so without JavaScript the page is
+// simply the full list.
 (() => {
-  // Cards link to the first lens; swap in the saved one if it is still a real lens.
-  try {
-    const lens = localStorage.getItem("lens");
-    if (document.querySelector("main").dataset.lenses.split(" ").includes(lens))
-      for (const a of document.querySelectorAll("a.card[href]")) a.href = a.getAttribute("href").replace(/[^/]+\.html$/, lens + ".html");
-  } catch (e) {}
+  const main = document.querySelector("main");
+  const base = main.dataset.base || ""; // "/" on the 404 page, which is served at any depth
+  const lenses = (main.dataset.lenses || "").split(" ");
+  let lens = "";
+  try { lens = localStorage.getItem("lens") || ""; } catch (e) {}
+  if (!lenses.includes(lens)) lens = "";
+
+  // Cards link to the first lens; swap in the chosen one. progress.js then picks the section, so it is told
+  // when the lens changes.
+  const pick = document.querySelector(".lens-list.pick");
+  const useLens = () => {
+    for (const a of document.querySelectorAll("a.card[href]")) a.href = a.getAttribute("href").replace(/[^/]+\.html$/, (lens || lenses[0]) + ".html");
+    if (pick) for (const b of pick.querySelectorAll("button")) b.setAttribute("aria-pressed", String(b.value === (lens || lenses[0])));
+  };
+  if (pick) {
+    pick.addEventListener("click", e => {
+      const b = e.target.closest("button");
+      if (!b) return;
+      lens = b.value;
+      try { localStorage.setItem("lens", lens); } catch (e) {}
+      useLens();
+      document.dispatchEvent(new Event("lenschange"));
+    });
+    pick.hidden = false;
+    document.querySelector("ul.lens-list").hidden = true; // the plain list of lens names, for no JavaScript
+  }
+  useLens();
 
   const box = document.querySelector(".filter");
   if (!box) return;
@@ -21,12 +43,11 @@
   const results = document.querySelector(".results");
   const MIN = 3, MAX = 20;
   const fold = s => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-  let index = null, loading = false, lens = "";
-  try { lens = localStorage.getItem("lens") || ""; } catch (e) {}
+  let index = null, loading = false;
   const loadIndex = () => {
     if (index || loading) return;
     loading = true;
-    fetch("search.json").then(r => r.ok ? r.json() : Promise.reject()).then(d => {
+    fetch(base + "search.json").then(r => r.ok ? r.json() : Promise.reject()).then(d => {
       index = d.articles.map(([path, sin, topic, lensName, text]) =>
         ({ path, title: `${sin}: ${topic} (${lensName})`, text, hay: fold(text), head: fold(`${sin} ${topic} ${lensName}`) }));
       apply();
@@ -36,7 +57,7 @@
   const search = terms => {
     const hits = [];
     for (const a of index) {
-      let score = a.path.endsWith("/" + lens) ? 5 : 0;
+      let score = lens && a.path.endsWith("/" + lens) ? 5 : 0;
       const all = terms.every(t => {
         const n = a.hay.split(t).length - 1, inHead = a.head.includes(t);
         score += Math.min(n, 5) + (inHead ? 10 : 0);
@@ -71,7 +92,8 @@
     results.querySelector("ol").replaceChildren(...hits.slice(0, MAX).map(a => {
       const li = document.createElement("li");
       const link = document.createElement("a");
-      link.href = a.path + ".html";
+      // site.js on the article marks the searched words and scrolls to the first.
+      link.href = `${base}${a.path}.html#q=${encodeURIComponent(terms.join(" "))}`;
       link.textContent = a.title;
       li.append(link, snippet(a, terms));
       return li;
@@ -92,8 +114,10 @@
     const hits = searching ? search(terms) : [];
     show(hits, terms);
     const topics = shown ? `${shown} of ${cards.length} topics` : "No topics";
+    const articles = `${hits.length} articles`;
     status.textContent = !q ? ""
-      : searching ? (shown || hits.length ? `${topics}, ${hits.length} articles` : `Nothing matches "${typed}"`)
+      : searching ? (shown || hits.length ? (cards.length ? `${topics}, ${articles}` : articles) : `Nothing matches "${typed}"`)
+      : !cards.length ? ""
       : shown ? topics : `No topics match "${typed}"`;
   };
   input.addEventListener("input", () => { loadIndex(); apply(); });
@@ -101,4 +125,7 @@
   if (input.value.trim()) loadIndex();
   box.hidden = false;
   apply(); // the browser may restore typed text when the reader comes back to the page
+  // The search link on other pages leads here. Focusing straight away did not hold in Chrome when the page was
+  // reached by a link (it did on reload), so it waits for pageshow, which comes after load.
+  addEventListener("pageshow", () => { if (location.hash === "#search") input.focus(); });
 })();

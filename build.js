@@ -1,5 +1,6 @@
 // Pre-renders the site to static HTML: one page per article, a compare page per topic section
-// (all the lenses side by side), plus index.html, sin.html, 404.html, sitemap.xml
+// (all the lenses side by side), an overview page per topic (<Sin>/index.html: every section and lens),
+// plus index.html, sin.html, 404.html, sitemap.xml
 // and search.json (the article text that the home page search box reads).
 // `npm run render` writes the files (commit them; the host serves them as they are).
 // `npm run check` exits 1 if any generated file on disk is stale.
@@ -24,10 +25,11 @@ const DESCRIPTION = `Understand the ${words[sinCount]} deadly sins, and the inne
 // Stylesheet and script links carry a hash of the file, and vercel.json caches those files as immutable,
 // so a changed file is fetched under a new URL. Editing style.css or a script therefore makes every page stale.
 const hashed = file => `${file}?v=${crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex").slice(0, 10)}`;
-const ASSET = Object.fromEntries(["style.css", "theme.js", "home.js", "progress.js", "compare.js", "redirect.js"].map(f => [f, hashed(f)]));
+const ASSET = Object.fromEntries(["style.css", "theme.js", "site.js", "home.js", "progress.js", "compare.js", "redirect.js"].map(f => [f, hashed(f)]));
 
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const articlePath = (s, t, l) => `${s.id}/${t.id}/${l.id}.html`;
+const overviewUrl = s => `${SITE}/${s.id}/`;
 
 // External links get a visible marker and a screen-reader note; a link whose text is just its URL
 // is shown as the host name instead, so it reads as a destination rather than a string of characters.
@@ -81,9 +83,22 @@ const THEMES = [["", "Auto"], ["paper", "Paper"], ["sepia", "Sepia"], ["grey", "
 // The text size buttons sit in the same menu: the site bar has no room for them beside it on a 320px phone.
 const themeMenu = `<details class="theme" hidden><summary><span aria-hidden="true">&#9680;</span> Display</summary><div class="theme-menu"><div class="themes" role="group" aria-label="Theme">${THEMES.map(([id, name]) => `<button type="button" value="${id}"><span class="swatch" aria-hidden="true"></span>${name}</button>`).join("")}</div><div class="text-size" role="group" aria-label="Text size"><span class="label" aria-hidden="true">Text</span><button type="button" value="-1" aria-label="Smaller text">A&minus;</button><span class="size" aria-live="polite">100%</span><button type="button" value="1" aria-label="Larger text">A+</button></div></div></details>`;
 
+// A link to the search box on the home page, for pages that have no box of their own. site.js shows it,
+// since the box itself only exists with JavaScript on.
+const searchLink = home => `<a class="search-link" href="${home}#search" aria-keyshortcuts="/" hidden><svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="m13 13 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="search-text">Search</span></a>`;
 // The home page passes no `home` link: its hero already carries the site name.
+// id="top" is where the "Back to top" links lead, so keyboard focus starts again from the top too.
 const siteBar = (home, back) => `<a class="skip" href="#content">Skip to content</a>
-  <header class="site${home ? "" : " bare"}"><div class="wrap">${home ? `<a class="brand" href="${home}"><span aria-hidden="true">&#10022;</span>The Seven Sins</a>` : ""}<div class="site-actions">${back}${themeMenu}</div></div></header>`;
+  <header class="site${home ? "" : " bare"}" id="top"><div class="wrap">${home ? `<a class="brand" href="${home}"><span aria-hidden="true">&#10022;</span>The Seven Sins</a>` : ""}<div class="site-actions">${back}${themeMenu}</div></div></header>`;
+const toTop = `<p class="to-top"><a href="#top">Back to top<span aria-hidden="true"> &uarr;</span></a></p>`;
+// The search box and its results, on the home page and the 404 page; home.js runs both.
+const searchBox = `<div class="filter" id="search" role="search" hidden>
+        <label class="sr-only" for="filter">Search topics and articles</label>
+        <input id="filter" type="search" placeholder="Search topics and articles" autocomplete="off" spellcheck="false" aria-keyshortcuts="/">
+        <p class="filter-status label" role="status"></p>
+      </div>`;
+const resultsBox = `<div class="results" role="region" aria-labelledby="results-title" hidden><h2 class="label" id="results-title"></h2><ol></ol></div>`;
+const jumpNav = up => `<nav class="jump" aria-label="Sections">${data.kinds.map(k => `<a href="${up}#kind-${k.id}">${esc(k.title)}</a>`).join("")}</nav>`;
 const footer = text => `<footer><p>${text}</p></footer>`;
 
 function head({ title, description, url, type, depth, robots, graph }) {
@@ -116,6 +131,45 @@ ${robots ? `  <meta name="robots" content="${robots}">\n` : ""}${url ? `  <link 
 }
 
 const navLink = (href, text, on) => `<a href="${href}"${on ? ' aria-current="page"' : ""}>${esc(text)}</a>`;
+// Ends the Topic row on article and compare pages, as "Compare lenses" ends the Lens row.
+const overviewLink = `<a class="overview-link" href="../index.html"><span aria-hidden="true">&#9638;&nbsp;</span>All sections</a>`;
+
+// One page per topic listing every section in every lens, with a tick on each article read (progress.js)
+// and a link to the first unread one.
+function overviewPage(sin) {
+  const kind = data.kinds.find(k => k.id === kindOf(sin));
+  const total = sin.topics.length * data.lenses.length;
+  const title = `${sin.name}: all ${total} articles - The Seven Sins`;
+  const description = `${sin.tagline} ${sin.topics.length} sections, each read through ${count} lenses: ${lensList}.`;
+  const url = overviewUrl(sin);
+  const graph = [{ "@type": "BreadcrumbList", itemListElement: [["The Seven Sins", `${SITE}/`], [sin.name, url]]
+    .map(([name, item], n) => ({ "@type": "ListItem", position: n + 1, name, item })) }];
+  const related = (sin.related || []).map(id => data.sins.find(s => s.id === id)).filter(r => r && r.topics);
+  const relatedNav = related.length ? `
+    <nav class="related" aria-labelledby="related-title"><h2 class="label" id="related-title">Related topics</h2><div class="related-list">${related.map(r => `<a href="../${r.id}/index.html"><strong>${esc(r.name)}</strong><span>${esc(r.tagline)}</span></a>`).join("")}</div></nav>` : "";
+  const first = `${sin.topics[0].id}/${data.lenses[0].id}.html`;
+  return head({ title, description, url, type: "website", depth: 1, graph }) + `<body>
+  ${siteBar("../index.html", `<a class="back" href="../index.html#kind-${kind.id}">&larr; All topics</a>${searchLink("../index.html")}`)}
+  <main class="wrap narrow overview" id="content" data-total="${total}">
+    <header class="page-head">
+      <p class="label">${esc(kind.label)}</p>
+      <h1 class="sin-title">${esc(sin.name)}</h1>
+      <p class="sin-tag">${esc(sin.tagline)}</p>
+      <p class="start"><a href="${first}"><span class="label">Start reading</span>${esc(sin.topics[0].title)}: ${esc(data.lenses[0].name)}</a></p>
+      <p class="overview-progress label" hidden></p>
+    </header>
+    ${sin.topics.map(t => `<section>
+      <h2 id="sec-${t.id}">${esc(t.title)}</h2>
+      <nav class="lenses" aria-labelledby="sec-${t.id}">${data.lenses.map(l => `<a href="${t.id}/${l.id}.html">${esc(l.name)}</a>`).join("")}<a class="compare-link" href="${t.id}/compare.html"><span aria-hidden="true">&#8644;&nbsp;</span>Compare lenses</a></nav>
+    </section>`).join("\n    ")}${relatedNav}
+  </main>
+  ${footer(`Educational and reflective content, not medical, psychological or religious authority. ${DISCLAIMER}`)}
+  <script src="../${ASSET["site.js"]}" defer></script>
+  <script src="../${ASSET["progress.js"]}" defer></script>
+</body>
+</html>
+`;
+}
 
 function articlePage(sin, topic, lens, md) {
   const title = `${sin.name}: ${topic.title} (${lens.name}) - The Seven Sins`;
@@ -125,7 +179,7 @@ function articlePage(sin, topic, lens, md) {
     { "@type": "Article", headline: `${sin.name}: ${topic.title} (${lens.name})`, description, url, mainEntityOfPage: url, inLanguage: "en", image: `${SITE}/og.png`, about: sin.name, isPartOf: WEBSITE },
     { "@type": "BreadcrumbList", itemListElement: [
       ["The Seven Sins", `${SITE}/`],
-      [sin.name, `${SITE}/${articlePath(sin, sin.topics[0], lens)}`],
+      [sin.name, overviewUrl(sin)],
       [`${topic.title} (${lens.name})`, url]
     ].map(([name, item], n) => ({ "@type": "ListItem", position: n + 1, name, item })) }
   ];
@@ -136,6 +190,9 @@ function articlePage(sin, topic, lens, md) {
   const next = i < sin.topics.length - 1
     ? step(sin.topics[i + 1], "next", "Next")
     : `<a class="next" href="../../index.html"><span class="label">Finished</span>Choose another topic</a>`;
+  // The same section in the next lens, wrapping from the last lens to the first.
+  const other = data.lenses[(data.lenses.indexOf(lens) + 1) % data.lenses.length];
+  const lensNext = `<a class="lens-next" href="${other.id}.html"><span class="label">Same section, next lens</span>${esc(topic.title)}: ${esc(other.name)}</a>`;
   // Related topics open on the same section and lens the reader is on now.
   const related = (sin.related || []).map(id => {
     const r = data.sins.find(s => s.id === id);
@@ -145,7 +202,7 @@ function articlePage(sin, topic, lens, md) {
   const relatedNav = related.length ? `
     <nav class="related" aria-labelledby="related-title"><h2 class="label" id="related-title">Related topics</h2><div class="related-list">${related.map(r => `<a href="../../${articlePath(r, topic, lens)}"><strong>${esc(r.name)}</strong><span>${esc(r.tagline)}</span></a>`).join("")}</div></nav>` : "";
   return head({ title, description, url, type: "article", depth: 2, graph }) + `<body>
-  ${siteBar("../../index.html", `<a class="back" href="../../index.html#kind-${kind.id}">&larr; All topics</a>`)}
+  ${siteBar("../../index.html", `<a class="back" href="../../index.html#kind-${kind.id}">&larr; All topics</a>${searchLink("../../index.html")}`)}
   <main class="wrap narrow">
     <header class="page-head">
       <p class="label">${esc(kind.label)}</p>
@@ -153,13 +210,15 @@ function articlePage(sin, topic, lens, md) {
       <p class="sin-tag">${esc(sin.tagline)}</p>
     </header>
     <div class="switch">
-      <nav class="topics" aria-label="Topic"><span class="label" aria-hidden="true">Topic</span>${sin.topics.map(t => navLink(`../${t.id}/${lens.id}.html`, t.title, t.id === topic.id)).join("")}</nav>
+      <nav class="topics" aria-label="Topic"><span class="label" aria-hidden="true">Topic</span>${sin.topics.map(t => navLink(`../${t.id}/${lens.id}.html`, t.title, t.id === topic.id)).join("")}${overviewLink}</nav>
       <nav class="lenses" aria-label="Lens"><span class="label" aria-hidden="true">Lens</span>${data.lenses.map(l => navLink(`${l.id}.html`, l.name, l.id === lens.id)).join("")}<a class="compare-link" href="compare.html"><span aria-hidden="true">&#8644;&nbsp;</span>Compare lenses</a></nav>
     </div>
     <article class="md" id="content"><p class="label">${esc(lens.name)} lens</p><h2>${esc(topic.title)}</h2>${articleBody(md, true)}</article>
-    <nav class="pager" aria-label="Continue reading">${prev}${next}</nav>${relatedNav}
+    <nav class="pager" aria-label="Continue reading">${prev}${next}${lensNext}</nav>${relatedNav}
+    ${toTop}
   </main>
   ${footer(`Educational and reflective content, not medical, psychological or religious authority. ${DISCLAIMER}`)}
+  <script src="../../${ASSET["site.js"]}" defer></script>
   <script src="../../${ASSET["progress.js"]}" defer></script>
 </body>
 </html>
@@ -173,7 +232,7 @@ function comparePage(sin, topic, mds) {
   const kind = data.kinds.find(k => k.id === kindOf(sin));
   const title = `${sin.name}: ${topic.title}, lenses compared - The Seven Sins`;
   return head({ title, description: `${sin.tagline} ${topic.title}, read through ${count} lenses side by side.`, depth: 2, robots: "noindex" }) + `<body>
-  ${siteBar("../../index.html", `<a class="back" href="../../index.html#kind-${kind.id}">&larr; All topics</a>`)}
+  ${siteBar("../../index.html", `<a class="back" href="../../index.html#kind-${kind.id}">&larr; All topics</a>${searchLink("../../index.html")}`)}
   <main class="wrap compare" id="content">
     <header class="page-head">
       <p class="label">${esc(kind.label)}</p>
@@ -181,14 +240,16 @@ function comparePage(sin, topic, mds) {
       <p class="sin-tag">${esc(topic.title)}, read through each lens side by side.</p>
     </header>
     <div class="switch">
-      <nav class="topics" aria-label="Topic"><span class="label" aria-hidden="true">Topic</span>${sin.topics.map(t => navLink(`../${t.id}/compare.html`, t.title, t.id === topic.id)).join("")}</nav>
+      <nav class="topics" aria-label="Topic"><span class="label" aria-hidden="true">Topic</span>${sin.topics.map(t => navLink(`../${t.id}/compare.html`, t.title, t.id === topic.id)).join("")}${overviewLink}</nav>
       <div class="lenses pick" role="group" aria-label="Lenses to show" hidden><span class="label" aria-hidden="true">Lenses to show</span>${data.lenses.map(l => `<button type="button" value="${l.id}" aria-pressed="false">${esc(l.name)}</button>`).join("")}</div>
     </div>
     <div class="columns">
       ${data.lenses.map((l, n) => `<article class="md" data-lens="${l.id}"><h2>${esc(l.name)}</h2>${articleBody(mds[n])}<p class="open"><a href="${l.id}.html">Open the ${esc(l.name)} article on its own</a></p></article>`).join("\n      ")}
     </div>
+    ${toTop}
   </main>
   ${footer(`Educational and reflective content, not medical, psychological or religious authority. ${DISCLAIMER}`)}
+  <script src="../../${ASSET["site.js"]}" defer></script>
   <script src="../../${ASSET["compare.js"]}" defer></script>
 </body>
 </html>
@@ -221,21 +282,20 @@ function indexPage() {
       <p class="sub">${SUBTITLE}</p>
       <p>Understand the habits and struggles that hold us back, and learn how to leave them behind.</p>
       <p class="resume" hidden><span class="label">Continue reading</span><a></a></p>
+      <p class="random" hidden><a href="">Read something at random</a></p>
       <ul class="lens-list" aria-label="Every topic is read through ${count} lenses">
         <li class="label" aria-hidden="true">${count} lenses</li>
         ${data.lenses.map(l => `<li>${esc(l.name)}</li>`).join("")}
       </ul>
-      <nav class="jump" aria-label="Sections">${data.kinds.map(k => `<a href="#kind-${k.id}">${esc(k.title)}</a>`).join("")}</nav>
-      <div class="filter" role="search" hidden>
-        <label class="sr-only" for="filter">Search topics and articles</label>
-        <input id="filter" type="search" placeholder="Search topics and articles" autocomplete="off" spellcheck="false">
-        <p class="filter-status label" role="status"></p>
-      </div>
+      <div class="lens-list pick" role="group" aria-labelledby="pick-label" hidden><span class="label" id="pick-label">Open topics in the lens</span>${data.lenses.map(l => `<button type="button" value="${l.id}" aria-pressed="false">${esc(l.name)}</button>`).join("")}</div>
+      ${jumpNav("")}
+      ${searchBox}
     </header>
     ${sections}
-    <div class="results" role="region" aria-labelledby="results-title" hidden><h2 class="label" id="results-title"></h2><ol></ol></div>
+    ${resultsBox}
     <p class="center"><button class="reset" type="button" hidden>Clear reading progress</button></p>
   </main>
+  <script src="${ASSET["site.js"]}" defer></script>
   <script src="${ASSET["home.js"]}" defer></script>
   <script src="${ASSET["progress.js"]}" defer></script>
   ${footer(`A read-only guide for self-improvement. Educational and reflective content, not medical, psychological or religious authority. ${DISCLAIMER}`)}
@@ -266,14 +326,18 @@ function redirectPage() {
 function notFoundPage() {
   return head({ title: "Page not found - The Seven Sins", description: DESCRIPTION, depth: "root", robots: "noindex" }) + `<body>
   ${siteBar("/", "")}
-  <main class="wrap narrow" id="content">
+  <main class="wrap narrow" id="content" data-base="/">
     <header class="hero">
       <h1>Page not found</h1>
-      <p>That page doesn't exist, or it has moved. Try one of the topics instead.</p>
+      <p>That page doesn't exist, or it has moved. Search the articles, or pick a topic from one of the lists.</p>
+      ${jumpNav("/")}
+      ${searchBox}
     </header>
-    <p class="center"><a class="back" href="/">&larr; All topics</a></p>
+    ${resultsBox}
   </main>
   ${footer(`A read-only guide for self-improvement. Educational and reflective content, not medical, psychological or religious authority. ${DISCLAIMER}`)}
+  <script src="/${ASSET["site.js"]}" defer></script>
+  <script src="/${ASSET["home.js"]}" defer></script>
 </body>
 </html>
 `;
@@ -291,7 +355,9 @@ function outputs() {
   const out = new Map();
   const urls = [`${SITE}/`];
   const articles = [];
-  for (const s of sins)
+  for (const s of sins) {
+    out.set(`${s.id}/index.html`, overviewPage(s));
+    urls.push(overviewUrl(s));
     for (const t of s.topics) {
       const mds = [];
       for (const l of data.lenses) {
@@ -303,6 +369,7 @@ function outputs() {
       }
       out.set(`${s.id}/${t.id}/compare.html`, comparePage(s, t, mds));
     }
+  }
   out.set("index.html", indexPage());
   out.set("sin.html", redirectPage());
   out.set("404.html", notFoundPage());

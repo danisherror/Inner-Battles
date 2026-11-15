@@ -1,14 +1,24 @@
 // Reader state kept in localStorage; nothing leaves the browser.
 // "read" is a list of "Topic/section/lens" keys: an article page records itself once the end of its text
-// (the Sources section) scrolls into view, and ticks the topic and lens links already read; the home page
-// shows a count on each card.
-// "lens" is the lens of the last article opened; home.js and redirect.js use it to pick links.
+// (the Sources section) scrolls into view, and ticks the topic and lens links already read; the topic
+// overview page ticks every article read; the home page shows a count on each card.
+// "lens" is the lens of the last article opened, or the one picked with the lens buttons on the home page;
+// home.js and redirect.js use it to pick links.
 // "last" is that article's path and title; the home page offers it as "Continue reading", and each
-// home card opens on the first section not yet read in the chosen lens.
+// home card and the overview's "Start reading" link open on the first section not yet read in the chosen lens.
 (() => {
   const key = path => path.replace(/\.html$/, "").split("/").slice(-3).join("/");
   const load = () => { try { return new Set(JSON.parse(localStorage.getItem("read")) || []); } catch (e) { return new Set(); } };
   const save = read => { try { localStorage.setItem("read", JSON.stringify([...read])); } catch (e) {} };
+
+  const tick = (links, read) => {
+    for (const a of links) {
+      if (a.hasAttribute("aria-current") || a.classList.contains("read") || !read.has(key(a.pathname))) continue;
+      a.classList.add("read");
+      a.insertAdjacentHTML("beforeend", '<span class="sr-only"> (read)</span>');
+    }
+  };
+  const savedLens = () => { try { return localStorage.getItem("lens"); } catch (e) { return null; } };
 
   const article = () => {
     try {
@@ -19,12 +29,27 @@
         title: `${text(".sin-title")}: ${text("article.md h2")} (${text(".lenses a[aria-current]")})`
       }));
     } catch (e) {}
+    tick(document.querySelectorAll(".topics a, .lenses a"), load());
+  };
+
+  // Topic overview: a tick on each article read, a count, and "Start reading" moved on to the first
+  // unread section in the chosen lens (the first unread article in any lens once that lens is finished).
+  const overview = main => {
     const read = load();
-    for (const a of document.querySelectorAll(".topics a, .lenses a")) {
-      if (a.hasAttribute("aria-current") || a.classList.contains("read") || !read.has(key(a.pathname))) continue;
-      a.classList.add("read");
-      a.insertAdjacentHTML("beforeend", '<span class="sr-only"> (read)</span>');
-    }
+    const links = [...main.querySelectorAll(".lenses a:not(.compare-link)")];
+    tick(links, read);
+    const n = links.filter(a => read.has(key(a.pathname))).length;
+    const label = main.querySelector(".overview-progress");
+    label.textContent = n >= links.length ? `All ${links.length} read ✓` : `${n} of ${links.length} read`;
+    label.hidden = !n;
+    const file = "/" + (savedLens() ? savedLens() + ".html" : links[0].pathname.split("/").pop());
+    const unread = links.filter(a => !read.has(key(a.pathname)));
+    const next = unread.find(a => a.pathname.endsWith(file)) || unread[0];
+    if (!next) return;
+    const start = main.querySelector(".start a");
+    start.href = next.href;
+    start.lastChild.textContent = `${next.closest("section").querySelector("h2").textContent}: ${next.firstChild.textContent}`;
+    start.firstChild.textContent = n ? "Continue" : "Start reading";
   };
 
   // Reaching the end counts as reading, so a page opened and left at once is not ticked.
@@ -55,6 +80,18 @@
       label.textContent = n >= total ? `All ${total} read ✓` : `${n} of ${total} read`;
       label.classList.toggle("done", n >= total);
     }
+    // "Read something at random": any article not read yet, or any article once all are read.
+    const all = [];
+    const lenses = document.querySelector("main").dataset.lenses.split(" ");
+    for (const card of document.querySelectorAll("a.card[data-topics]")) {
+      const id = card.getAttribute("href").split("/")[0];
+      for (const t of card.dataset.topics.split(" ")) for (const l of lenses) all.push(`${id}/${t}/${l}`);
+    }
+    const unread = all.filter(k => !read.includes(k));
+    const pool = unread.length ? unread : all;
+    const random = document.querySelector(".random");
+    random.querySelector("a").href = pool[Math.floor(Math.random() * pool.length)] + ".html";
+    random.hidden = !pool.length;
     const reset = document.querySelector(".reset");
     if (reset) reset.hidden = !read.length;
     const resume = document.querySelector(".resume");
@@ -70,6 +107,8 @@
   const reset = document.querySelector(".reset");
   if (reset) reset.addEventListener("click", () => { try { localStorage.removeItem("read"); localStorage.removeItem("last"); } catch (e) {} home(); });
   // pageshow also fires when the reader comes back with the Back button, so the counts stay current.
-  addEventListener("pageshow", document.querySelector("article.md") ? article : home);
-  if (document.querySelector("article.md")) markAtEnd();
+  const main = document.querySelector("main");
+  if (document.querySelector("article.md")) { addEventListener("pageshow", article); markAtEnd(); }
+  else if (main.classList.contains("overview")) addEventListener("pageshow", () => overview(main));
+  else { addEventListener("pageshow", home); document.addEventListener("lenschange", home); }
 })();

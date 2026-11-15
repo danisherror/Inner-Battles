@@ -84,6 +84,8 @@ p, li { text-wrap: pretty; }
 .site a.back { margin: 0; white-space: nowrap; }
 .site.bare { border-bottom: 0; }
 .site-actions { display: flex; align-items: center; gap: var(--space-4); margin-left: auto; }
+.search-link { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; color: var(--muted); text-decoration: none; font-size: .95rem; }
+.search-link:hover { color: var(--accent); }
 
 /* theme menu */
 .theme { position: relative; font-size: .95rem; }
@@ -118,9 +120,12 @@ header.hero p.sub { color: var(--accent); font-style: italic; font-size: clamp(1
 header.hero p.resume { margin-top: var(--space-5); font-size: 1.05rem; }
 .resume .label { display: block; margin-bottom: var(--space-1); }
 .resume a { color: var(--accent); font-weight: bold; text-underline-offset: 3px; }
+header.hero p.random { margin-top: var(--space-3); font-size: .95rem; }
+.random a { display: inline-block; padding: var(--space-2) 0; color: var(--accent); text-underline-offset: 3px; }
 .lens-list { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--space-2); margin: var(--space-5) auto 0; padding: 0; max-width: 48rem; }
 .lens-list li { border: 1px solid var(--line); border-radius: var(--radius-pill); padding: var(--space-1) var(--space-3); font-size: .9rem; color: var(--muted); }
 .lens-list li.label { border: 0; padding-left: 0; font-size: .75rem; }
+.lens-list.pick > .label { flex: 0 0 100%; }
 .jump { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-2) var(--space-5); margin-top: var(--space-5); font-size: .95rem; }
 .jump a { color: var(--accent); text-underline-offset: 3px; padding: var(--space-2) 0; }
 .filter { margin: var(--space-5) auto 0; max-width: 26rem; }
@@ -176,8 +181,19 @@ a.card:hover::after { color: var(--accent); opacity: 1; transform: translateX(3p
 .topics a[aria-current] { background: var(--accent); border-color: var(--accent); color: var(--bg); font-weight: bold; }
 .topics a.read::after, .lenses a.read::after { content: "\2713"; margin-left: var(--space-2); font-size: .8em; color: var(--accent); }
 .lenses a[aria-current], .pick button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: bold; }
-.lenses a.compare-link { border-style: dashed; color: var(--muted); }
+.lenses a.compare-link, .topics a.overview-link { border-style: dashed; color: var(--muted); }
 .pick button { font-family: inherit; cursor: pointer; }
+
+/* topic overview: every section, each with its lenses */
+.overview .start { margin: var(--space-5) 0 0; }
+.overview .start a { display: inline-block; border: 1px solid var(--accent); border-radius: var(--radius); background: var(--card); padding: var(--space-3) var(--space-5); color: var(--accent); text-decoration: none; font-weight: bold; }
+.overview .start a:hover { background: var(--accent-soft); }
+.overview .start .label { display: block; margin-bottom: var(--space-1); }
+.page-head .overview-progress { margin: var(--space-3) 0 0; }
+.overview section { border-top: 1px solid var(--line); padding: var(--space-4) 0; }
+.overview section h2 { margin: 0 0 var(--space-1); font-size: 1.3rem; }
+.overview section:last-of-type { border-bottom: 1px solid var(--line); margin-bottom: var(--space-6); }
+.overview .related { padding-top: 0; border-top: 0; }
 
 /* compare page: the chosen lenses of one section in columns */
 .wrap.compare { max-width: 1400px; }
@@ -219,6 +235,8 @@ article.md .sources li::marker { color: var(--muted); }
 /* a link to the Sources heading itself, so the list can be shared */
 article.md a.anchor { margin-left: var(--space-2); padding: 0 var(--space-1); color: var(--muted); text-decoration: none; }
 article.md a.anchor:hover { color: var(--accent); }
+/* the words searched for, when the article was opened from the search results (site.js) */
+article.md mark { background: var(--accent-soft); color: var(--text); padding: 0 2px; border-radius: 3px; }
 
 /* previous / next topic */
 .pager { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); padding: var(--space-4) 0 var(--space-7); }
@@ -226,6 +244,7 @@ article.md a.anchor:hover { color: var(--accent); }
 .pager a:hover { border-color: var(--accent); color: var(--accent); }
 .pager .label { display: block; margin-bottom: var(--space-1); }
 .pager .next { grid-column: 2; text-align: right; }
+.pager .lens-next { grid-column: 1 / -1; text-align: center; font-weight: normal; }
 
 /* related topics */
 .related { border-top: 1px solid var(--line); padding: var(--space-5) 0 var(--space-8); }
@@ -235,6 +254,10 @@ article.md a.anchor:hover { color: var(--accent); }
 .related strong { display: block; margin-bottom: var(--space-1); color: var(--accent); font-size: 1.1rem; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .related a:hover strong { text-decoration-thickness: 2px; }
 
+.to-top { margin: 0; padding: 0 0 var(--space-6); text-align: center; font-size: .95rem; }
+.to-top a { display: inline-block; padding: var(--space-2) var(--space-3); color: var(--muted); }
+.to-top a:hover { color: var(--accent); }
+
 footer { margin-top: auto; border-top: 1px solid var(--line); text-align: center; color: var(--muted); font-size: .9rem; padding: var(--space-5) var(--space-5) var(--space-6); }
 footer p { max-width: 44rem; margin: 0 auto; }
 .center { text-align: center; }
@@ -242,6 +265,10 @@ footer p { max-width: 44rem; margin: 0 auto; }
 @media (max-width: 520px) {
   .wrap { padding: 0 var(--space-4); }
   .site a.back { display: none; } /* the brand beside it already links home, and the bar has no room for both */
+  .site-actions { gap: var(--space-3); }
+  /* the icon alone, so it fits beside the brand and the Display menu at 320px; the word stays for screen readers */
+  .search-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .search-link { min-width: 44px; justify-content: center; }
   header.hero { padding-top: var(--space-5); }
   .grid { grid-template-columns: 1fr; }
   article.md { font-size: 1.125rem; }
@@ -250,7 +277,7 @@ footer p { max-width: 44rem; margin: 0 auto; }
      at "7 3 3" Chrome broke about one line in four, which read worse than the ragged edge. */
   article.md p, article.md li { hyphens: auto; -webkit-hyphens: auto; hyphenate-limit-chars: 10 4 4; }
   .pager { grid-template-columns: 1fr; }
-  .pager .next { grid-column: 1; }
+  .pager .next, .pager .lens-next { grid-column: 1; }
 }
 @media (prefers-reduced-motion: no-preference) {
   @view-transition { navigation: auto; }
@@ -262,6 +289,7 @@ footer p { max-width: 44rem; margin: 0 auto; }
 /* Print in black on white whatever theme is chosen, and spell out where each external link goes. */
 @media print {
   :root, :root[data-theme] { --bg: #fff; --card: #fff; --text: #000; --muted: #444; --accent: #000; --accent-soft: #fff; --line: #bbb; color-scheme: light; }
-  .site, .switch, .pager, .related, .skip, .jump, .filter, .reset, .resume, a.anchor { display: none; }
+  .site, .switch, .pager, .related, .skip, .jump, .filter, .reset, .resume, .random, .pick, .start, .to-top, a.anchor { display: none; }
+  article.md mark { background: none; color: inherit; padding: 0; }
   article.md a.ext::after { content: " (" attr(href) ")"; font-size: .8em; word-break: break-all; }
 }
