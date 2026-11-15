@@ -6,6 +6,7 @@ const { marked } = require("marked");
 
 const SITE = "https://seven-sins-liard.vercel.app";
 const ICON = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='28'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E";
+const SUBTITLE = "and the inner battles beyond them";
 const DISCLAIMER = "If a habit is harming your life, please talk to a doctor, therapist or a trusted person.";
 
 const data = JSON.parse(fs.readFileSync("sins.json", "utf8"));
@@ -68,7 +69,7 @@ ${robots ? `  <meta name="robots" content="${robots}">\n` : ""}${url ? `  <link 
   <meta property="og:image" content="${SITE}/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="The Seven Sins: ${data.sins.filter(s => kindOf(s) === "sin").map(s => s.name).join(', ')}">
+  <meta property="og:image:alt" content="The Seven Sins ${SUBTITLE}. ${data.sins.length} topics, each read through ${count} lenses: ${lensList}.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="${SITE}/og.png">
 ` : ""}  <link rel="icon" href="${ICON}">
@@ -129,12 +130,13 @@ function indexPage() {
         </div>
       </section>` : "";
   }).filter(Boolean).join("\n      ");
-  return head({ title: "The Seven Sins", description: DESCRIPTION, url: `${SITE}/`, type: "website", depth: 0 }) + `<body>
+  return head({ title: `The Seven Sins ${SUBTITLE}`, description: DESCRIPTION, url: `${SITE}/`, type: "website", depth: 0 }) + `<body>
   ${siteBar(null, "")}
   <main class="wrap" id="content">
     <header class="hero">
       <span class="mark" aria-hidden="true">&#10022;</span>
       <h1>The Seven Sins</h1>
+      <p class="sub">${SUBTITLE}</p>
       <p>Understand the habits and struggles that hold us back, and learn how to leave them behind.</p>
       <ul class="lens-list" aria-label="Every topic is read through ${count} lenses">
         <li class="label" aria-hidden="true">${count} lenses</li>

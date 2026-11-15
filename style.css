@@ -94,9 +94,10 @@ a.back { display: inline-block; margin: var(--space-5) 0 0; color: var(--muted);
 /* home */
 header.hero { padding: var(--space-7) 0 var(--space-6); text-align: center; }
 .hero .mark { display: block; color: var(--accent); font-size: 1.5rem; line-height: 1; margin-bottom: var(--space-4); }
-header.hero h1 { font-size: clamp(2.6rem, 7vw, 4.25rem); margin: 0 0 var(--space-4); letter-spacing: -.01em; line-height: 1.05; }
+header.hero h1 { font-size: clamp(2.6rem, 7vw, 4.25rem); margin: 0 0 var(--space-2); letter-spacing: -.01em; line-height: 1.05; }
 header.hero p { color: var(--muted); max-width: 34rem; margin: 0 auto; font-size: 1.2rem; }
-.lens-list { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--space-2); margin: var(--space-5) auto 0; padding: 0; max-width: 40rem; }
+header.hero p.sub { color: var(--accent); font-style: italic; font-size: clamp(1.25rem, 3.4vw, 1.7rem); line-height: 1.3; margin-bottom: var(--space-5); }
+.lens-list { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--space-2); margin: var(--space-5) auto 0; padding: 0; max-width: 48rem; }
 .lens-list li { border: 1px solid var(--line); border-radius: var(--radius-pill); padding: var(--space-1) var(--space-3); font-size: .9rem; color: var(--muted); }
 .lens-list li.label { border: 0; padding-left: 0; font-size: .75rem; }
 .jump { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-2) var(--space-5); margin-top: var(--space-5); font-size: .95rem; }
