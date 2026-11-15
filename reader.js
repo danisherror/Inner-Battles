@@ -22,7 +22,6 @@
     }
     return out;
   };
-  const main = document.querySelector("main");
 
   // --- article page ---
   const text = document.querySelector("article.md");

@@ -566,11 +566,15 @@ function outputs() {
   return out;
 }
 
-const stale = [...outputs()].filter(([p, content]) => !fs.existsSync(p) || fs.readFileSync(p, "utf8") !== content);
-if (process.argv.includes("--check")) {
-  stale.forEach(([p]) => console.log("STALE", p));
-  console.log(stale.length ? `${stale.length} stale file(s); run npm run render` : "generated files are up to date");
-  process.exit(stale.length ? 1 : 0);
+// build.test.js requires this file for its helpers, so the files are only compared and written when it is run directly.
+module.exports = { esc, articleBody, articleText, summary, outputs };
+if (require.main === module) {
+  const stale = [...outputs()].filter(([p, content]) => !fs.existsSync(p) || fs.readFileSync(p, "utf8") !== content);
+  if (process.argv.includes("--check")) {
+    stale.forEach(([p]) => console.log("STALE", p));
+    console.log(stale.length ? `${stale.length} stale file(s); run npm run render` : "generated files are up to date");
+    process.exit(stale.length ? 1 : 0);
+  }
+  for (const [p, content] of stale) fs.writeFileSync(p, content);
+  console.log(`wrote ${stale.length} file(s)`);
 }
-for (const [p, content] of stale) fs.writeFileSync(p, content);
-console.log(`wrote ${stale.length} file(s)`);

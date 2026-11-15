@@ -101,10 +101,10 @@ Done 2026-11-15, checked in Chrome against a local server that sends the `vercel
 
 ## 9. Housekeeping
 
-- [ ] **Lint and format** the five scripts and `style.css` (none is configured).
-- [ ] **Unit tests for `build.js`** helpers such as the description and excerpt functions.
+- [x] **Lint and format** the scripts and `style.css`: `npm run lint` runs ESLint and Stylelint with their recommended rules, in CI too. It found one unused variable in `reader.js`, a duplicate `.section-title` rule and two deprecated CSS forms (`word-break: break-word`, `clip: rect()`), all fixed. Empty `catch` blocks are allowed because the scripts use them on purpose, and Stylelint's `no-descending-specificity` is off because it flags unrelated components. No formatter: reformatting would change every asset hash and rewrite all the pages.
+- [x] **Unit tests for `build.js`**: `build.test.js` (`npm test`, Node's built-in test runner, in CI) covers `esc`, `summary`, `articleText` and `articleBody`. `build.js` now only writes files when it is run directly.
 - [x] **Document the localStorage keys** in one place in the README: done with section 6, which added `saved`, `notes` and `highlights`.
-- [ ] **Unused CSS check** after the five superseded drafts were removed in `7e201f5`.
+- [x] **Unused CSS check**: nothing was unused (the drafts removed in `7e201f5` were Markdown only). `npm test` now fails if a class or id in `style.css` is in no generated page's attributes and in no script.
 
 ## Suggested order
 

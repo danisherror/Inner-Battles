@@ -101,17 +101,21 @@ Then open <http://localhost:8000>.
 After editing any `.md` file or `sins.json`, regenerate the pages and commit the result:
 
 ```sh
-npm install        # once; installs marked 18.2.0, used only at build time
+npm install        # once; installs marked 18.2.0 (used at build time) and the linters
 npm run render     # rewrites the article, compare and topic overview pages, index.html, progress.html, sin.html, 404.html, offline.html, sitemap.xml, sw.js, dates.json and search.json
 npm run check      # exits 1 if a generated file is stale
+npm test           # unit tests for the build.js helpers, and a check that every class and id in style.css is used
+npm run lint       # ESLint on the scripts and Stylelint on style.css, recommended rules only
 npm run og         # redraws the share image of each topic (og/<Sin>.png) with headless Chrome; then run npm run render
 ```
+
+The linters check for likely mistakes, not layout: no formatter is set up, because reformatting would change every script's hash and so rewrite all the pages for no change in behaviour.
 
 Run `npm run og` after adding a topic or changing a topic's name or tagline. It is kept out of `render` and `check` because drawing text needs a browser; it looks for Chrome at the usual macOS and Linux paths, or at `CHROME`. A topic with no image yet uses `og.png`.
 
 Each article's dates (in the sitemap's `lastmod` and the `datePublished` and `dateModified` of its structured data) are kept in `dates.json` with a hash of its Markdown. When `npm run render` finds the hash changed, the article's modified date becomes the day of the render. The dates are not read from git at build time because the commit date is not known until the commit that would have to contain it; the first dates were seeded from git history (the commit adding each `.md` and the last one changing it).
 
-GitHub Actions runs `npm run check` on every pull request and on every push to `main` (`.github/workflows/check.yml`), so a stale page fails the run.
+GitHub Actions runs `npm run check`, `npm run lint` and `npm test` on every pull request and on every push to `main` (`.github/workflows/check.yml`), so a stale page, a lint error or a failing test fails the run.
 
 The site can be deployed to any static host, such as Vercel, as it is. It is currently deployed on the free Vercel Hobby plan at <https://seven-sins-liard.vercel.app>; `vercel.json` sets the security headers and the caching: fonts, `style.css` and the scripts are cached for a year as immutable, which is safe because every page links them with a hash of the file (`style.css?v=…`), so editing one of them and running `npm run render` rewrites every page. It also sends the manifest as `application/manifest+json`, and a `Speculation-Rules` header pointing at `speculation-rules.json`, which asks the browser to prefetch (download only, no scripts run) a pager link or home card when the reader hovers it (<https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Speculation-Rules>; the file must be served as `application/speculationrules+json`). The generated HTML is committed, so the host runs no build step. To redeploy, run `vercel deploy --prod` in this folder (the project name `seven-sins` is saved in the untracked `.vercel` folder).
 
@@ -121,6 +125,8 @@ The site can be deployed to any static host, such as Vercel, as it is. It is cur
 Sins/
   build.js        generates every .html page, sitemap.xml, sw.js, dates.json and search.json (npm run render)
   og.js           draws og/<Sin>.png, the share image of each topic (npm run og)
+  build.test.js   unit tests for build.js and the unused-CSS check (npm test)
+  eslint.config.js  .stylelintrc.json   linter settings (npm run lint)
   sw.js           generated service worker: keeps the stylesheet, scripts, fonts and every page opened, so they open offline
   offline.html    generated page the service worker shows offline for a page not kept, listing the pages that are
   dates.json      generated: when each article was first published and last changed, with a hash of its Markdown

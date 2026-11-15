@@ -142,9 +142,8 @@ header.hero p.filter-status { min-height: 1.5em; margin-top: var(--space-3); fon
 .results a { color: var(--accent); font-weight: bold; text-underline-offset: 3px; }
 .results p { margin: var(--space-1) 0 0; color: var(--muted); font-size: .95rem; line-height: 1.5; }
 .results mark { background: var(--accent-soft); color: var(--text); padding: 0 2px; border-radius: 3px; }
-.section-title { scroll-margin-top: var(--space-5); }
 .section-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 var(--space-3); margin-top: var(--space-6); padding-top: var(--space-5); border-top: 1px solid var(--line); }
-.section-title { font-size: 1.6rem; margin: 0; }
+.section-title { font-size: 1.6rem; margin: 0; scroll-margin-top: var(--space-5); }
 .section-head .label { white-space: nowrap; }
 .section-intro { color: var(--muted); margin: var(--space-1) 0 0; }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: var(--space-4); padding: var(--space-5) 0 var(--space-5); }
@@ -214,10 +213,13 @@ article.md p { margin: 0 0 var(--space-5); }
 article.md ul, article.md ol { margin: 0 0 var(--space-5); padding-left: var(--space-5); }
 article.md li { margin: var(--space-2) 0; padding-left: var(--space-1); }
 article.md li::marker { color: var(--accent); }
-article.md a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; word-break: break-word; }
+/* overflow-wrap: anywhere is what the deprecated word-break: break-word stood for, and clip-path: inset(50%) replaces the
+   deprecated clip: rect(0 0 0 0) in the visually hidden rules below
+   (https://developer.mozilla.org/en-US/docs/Web/CSS/word-break, https://developer.mozilla.org/en-US/docs/Web/CSS/clip). */
+article.md a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; overflow-wrap: anywhere; }
 article.md a:hover { text-decoration-thickness: 2px; }
 article.md a.ext::after { content: " \2197"; text-decoration: none; display: inline-block; font-size: .8em; }
-.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 article.md blockquote { margin: var(--space-5) 0; padding: var(--space-1) 0 var(--space-1) var(--space-5); border-left: 3px solid var(--accent); font-style: italic; }
 article.md blockquote > :first-child { margin-top: 0; }
 article.md blockquote > :last-child { margin-bottom: 0; }
@@ -303,7 +305,7 @@ header.hero p.mine-link { margin-top: var(--space-1); font-size: .95rem; }
 .reading .nojs, .reading .kept { color: var(--muted); }
 .transfer p { max-width: var(--measure); }
 .transfer-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
-.transfer .import input { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.transfer .import input { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .transfer .import:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
 .transfer-status { min-height: 1.6em; font-family: var(--sans); font-size: .9rem; color: var(--muted); }
 .reading section:last-child { margin-bottom: var(--space-7); }
@@ -337,7 +339,7 @@ footer p { max-width: 44rem; margin: 0 auto; }
   .site a.back { display: none; } /* the brand beside it already links home, and the bar has no room for both */
   .site-actions { gap: var(--space-3); }
   /* the icon alone, so it fits beside the brand and the Display menu at 320px; the word stays for screen readers */
-  .search-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .search-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .search-link { min-width: 44px; justify-content: center; }
   header.hero { padding-top: var(--space-5); }
   .grid { grid-template-columns: 1fr; }

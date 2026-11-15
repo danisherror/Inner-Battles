@@ -1,5 +1,6 @@
 # The generated HTML is committed and served as it is, so a Markdown or build.js change
 # that is pushed without `npm run render` would leave stale pages live. This fails the push instead.
+# It also runs the linters and the unit tests.
 name: check
 on:
   push:
@@ -18,3 +19,5 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run check
+      - run: npm run lint
+      - run: npm test
