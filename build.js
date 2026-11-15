@@ -154,7 +154,7 @@ function indexPage() {
       <nav class="jump" aria-label="Sections">${data.kinds.map(k => `<a href="#kind-${k.id}">${esc(k.title)}</a>`).join("")}</nav>
       <div class="filter" role="search" hidden>
         <label class="sr-only" for="filter">Filter topics</label>
-        <input id="filter" type="search" placeholder="Filter the ${data.sins.length} topics, for example &quot;fear&quot;" autocomplete="off" spellcheck="false">
+        <input id="filter" type="search" placeholder="Filter the ${data.sins.length} topics" autocomplete="off" spellcheck="false">
         <p class="filter-status label" role="status"></p>
       </div>
     </header>
