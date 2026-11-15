@@ -1,0 +1,9 @@
+{
+  "prefetch": [
+    {
+      "source": "document",
+      "where": { "selector_matches": [".pager a", "a.card"] },
+      "eagerness": "moderate"
+    }
+  ]
+}

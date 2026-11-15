@@ -108,7 +108,7 @@ npm run check      # exits 1 if a generated file is stale
 
 GitHub Actions runs `npm run check` on every pull request and on every push to `main` (`.github/workflows/check.yml`), so a stale page fails the run.
 
-The site can be deployed to any static host, such as Vercel, as it is. It is currently deployed on the free Vercel Hobby plan at <https://seven-sins-liard.vercel.app>; `vercel.json` sets the security headers. The generated HTML is committed, so the host runs no build step. To redeploy, run `vercel deploy --prod` in this folder (the project name `seven-sins` is saved in the untracked `.vercel` folder).
+The site can be deployed to any static host, such as Vercel, as it is. It is currently deployed on the free Vercel Hobby plan at <https://seven-sins-liard.vercel.app>; `vercel.json` sets the security headers and the caching: fonts, `style.css` and the scripts are cached for a year as immutable, which is safe because every page links them with a hash of the file (`style.css?v=…`), so editing one of them and running `npm run render` rewrites every page. It also sends a `Speculation-Rules` header pointing at `speculation-rules.json`, which asks the browser to prefetch (download only, no scripts run) a pager link or home card when the reader hovers it (<https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Speculation-Rules>; the file must be served as `application/speculationrules+json`). The generated HTML is committed, so the host runs no build step. To redeploy, run `vercel deploy --prod` in this folder (the project name `seven-sins` is saved in the untracked `.vercel` folder).
 
 ## Project layout
 
@@ -129,6 +129,7 @@ Sins/
   sitemap.xml     generated
   search.json     generated: the plain text of every article (without its Sources), fetched by home.js the first time the search box is used
   favicon.svg  apple-touch-icon.png   the site mark as a tab icon and as the 180px home-screen icon
+  speculation-rules.json  links to prefetch on hover (pager and home cards), sent by vercel.json in a Speculation-Rules header
   robots.txt  og.png  vercel.json  package.json  package-lock.json  .gitignore
   LICENSE         MIT
   CLAUDE.md       instructions for the AI agent

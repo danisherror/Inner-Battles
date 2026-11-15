@@ -24,11 +24,13 @@ Done 2026-11-15 in Chrome against a local server (so without the `vercel.json` h
 
 ## 3. Performance
 
-- [ ] **Smaller search index.** `search.json` is 783 KB (about 234 KB gzipped) and is fetched whole when the search box gets focus. Split it per topic, or ship headings and excerpts first and full text on demand.
-- [ ] **Caching for CSS and JS.** `vercel.json` sets long caching for fonts only. Add a content hash to `style.css` and the script file names in `build.js`, then cache them as immutable.
-- [ ] **Font loading.** Check first: confirm `font-display` and that the italic and latin-ext files load only when a page uses them.
-- [ ] **Speculative loading.** Add a speculation rules block (or prefetch on hover) for the pager's "Next" link and the home cards. This needs a CSP change for inline rules, or an external rules file.
-- [ ] **Compare page weight.** Each compare page carries all six lenses. Check first: measure the largest one before deciding whether to do anything.
+Checked 2026-11-15 in Chrome against a local server that sends the `vercel.json` headers. None of this has been checked on the deployed site yet.
+
+- [ ] **Smaller search index.** Measured: `search.json` is 783 KB, 234 KB with gzip and 179 KB with Brotli (Vercel compresses responses, so a reader downloads about the Brotli size). It holds 780 articles, and the article text is 91% of the file (the rest is paths and titles), so there is no structure to strip. It is fetched only when the search box first gets focus, and the browser keeps it with `must-revalidate`, so later visits cost one 304. Splitting it per topic does not work, because a search covers every article. Sharding per lens (about 30 KB each, the reader's lens first) would show the first results sooner, but the list would then reorder as the other shards arrive. **Decision needed:** leave it as it is (recommended for now), or build the lens shards.
+- [x] **Caching for CSS and JS.** `build.js` now links `style.css` and the five scripts with a hash of the file (`style.css?v=538093b936`), and `vercel.json` caches those six files for a year as immutable. A query string was used instead of a hashed file name, so no second copy of each file is committed. Vercel matches header `source` on the path alone, without the query string (<https://vercel.com/docs/project-configuration/vercel-json#headers>). Cost: editing `style.css` or a script and running `npm run render` rewrites all 913 pages, and `npm run check` fails until then. Checked locally: on a second page the stylesheet and scripts came from cache (transfer size 0), and search still works.
+- [x] **Font loading.** Nothing to change. All four `@font-face` rules have `font-display: swap` and a `unicode-range`. `Envy/what-it-is/modern.html` loads only the latin upright and italic files. `Addiction-and-compulsion/stories/buddhism.html` (which has "ā") also loads latin-ext upright, but not latin-ext italic, because no ā appears in italics there.
+- [~] **Speculative loading.** Added `speculation-rules.json` (prefetch `.pager a` and `a.card` with `moderate` eagerness: hover for 200 ms on desktop, or pointerdown), sent on every page by a `Speculation-Rules` header in `vercel.json` with the required `application/speculationrules+json` type. No CSP change is needed because there is no inline script. It uses prefetch, not prerender: prerender runs the page's scripts, and `progress.js` would then mark an article as read on hover (<https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script/type/speculationrules>). Checked locally: Chrome fetches the rules file and logs no CSP or parse error. **Still to do:** confirm that a prefetch actually happens, in Chrome DevTools → Application → Speculative loads on the deployed site. The test browser prefetched nothing, not even from a bare test page with inline rules and no CSP, so speculative loading is switched off there.
+- [x] **Compare page weight.** Nothing to change. The largest is `Lust/stories/compare.html` at 20.7 KB (7.6 KB gzipped), against 10.8 KB (3.7 KB gzipped) for the largest single article.
 
 ## 4. Navigation and structure
 
@@ -100,6 +102,6 @@ Done 2026-11-15 in Chrome against a local server (so without the `vercel.json` h
 
 1. Section 1 (browser pass), because it will change the priority of everything else.
 2. Topic landing page and mark-as-read-at-the-end.
-3. Smaller search index and CSS/JS caching.
+3. ~~CSS/JS caching~~ (done); decide on the search index shards.
 4. CI link and accessibility checks.
 5. The rest as wanted.

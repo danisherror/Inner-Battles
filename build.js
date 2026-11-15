@@ -4,6 +4,7 @@
 // `npm run render` writes the files (commit them; the host serves them as they are).
 // `npm run check` exits 1 if any generated file on disk is stale.
 const fs = require("fs");
+const crypto = require("crypto");
 const { marked } = require("marked");
 
 const SITE = "https://seven-sins-liard.vercel.app";
@@ -19,6 +20,11 @@ const lensList = data.lenses.map(l => l.name).slice(0, -1).join(", ") + " and " 
 const words = ["no", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
 const count = words[data.lenses.length];
 const DESCRIPTION = `Understand the ${words[sinCount]} deadly sins, and the inner battles beyond them, through ${count} lenses (${lensList}) and learn how to leave them behind.`;
+
+// Stylesheet and script links carry a hash of the file, and vercel.json caches those files as immutable,
+// so a changed file is fetched under a new URL. Editing style.css or a script therefore makes every page stale.
+const hashed = file => `${file}?v=${crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex").slice(0, 10)}`;
+const ASSET = Object.fromEntries(["style.css", "theme.js", "home.js", "progress.js", "compare.js", "redirect.js"].map(f => [f, hashed(f)]));
 
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const articlePath = (s, t, l) => `${s.id}/${t.id}/${l.id}.html`;
@@ -98,9 +104,9 @@ ${robots ? `  <meta name="robots" content="${robots}">\n` : ""}${url ? `  <link 
   <meta name="twitter:image" content="${SITE}/og.png">
 ` : ""}${graph ? jsonLd(graph) : ""}  <link rel="icon" href="${up}favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="${up}apple-touch-icon.png">
-  <script src="${up}theme.js"></script>
+  <script src="${up}${ASSET["theme.js"]}"></script>
   <link rel="preload" href="${up}fonts/literata-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="${up}style.css">
+  <link rel="stylesheet" href="${up}${ASSET["style.css"]}">
 </head>
 `;
 }
@@ -150,7 +156,7 @@ function articlePage(sin, topic, lens, md) {
     <nav class="pager" aria-label="Continue reading">${prev}${next}</nav>${relatedNav}
   </main>
   ${footer(`Educational and reflective content, not medical, psychological or religious authority. ${DISCLAIMER}`)}
-  <script src="../../progress.js" defer></script>
+  <script src="../../${ASSET["progress.js"]}" defer></script>
 </body>
 </html>
 `;
@@ -179,7 +185,7 @@ function comparePage(sin, topic, mds) {
     </div>
   </main>
   ${footer(`Educational and reflective content, not medical, psychological or religious authority. ${DISCLAIMER}`)}
-  <script src="../../compare.js" defer></script>
+  <script src="../../${ASSET["compare.js"]}" defer></script>
 </body>
 </html>
 `;
@@ -226,8 +232,8 @@ function indexPage() {
     <div class="results" role="region" aria-labelledby="results-title" hidden><h2 class="label" id="results-title"></h2><ol></ol></div>
     <p class="center"><button class="reset" type="button" hidden>Clear reading progress</button></p>
   </main>
-  <script src="home.js" defer></script>
-  <script src="progress.js" defer></script>
+  <script src="${ASSET["home.js"]}" defer></script>
+  <script src="${ASSET["progress.js"]}" defer></script>
   ${footer(`A read-only guide for self-improvement. Educational and reflective content, not medical, psychological or religious authority. ${DISCLAIMER}`)}
 </body>
 </html>
@@ -246,7 +252,7 @@ function redirectPage() {
     </header>
     <p class="center"><a class="back" href="index.html">&larr; All topics</a></p>
   </main>
-  <script src="redirect.js"></script>
+  <script src="${ASSET["redirect.js"]}"></script>
 </body>
 </html>
 `;
