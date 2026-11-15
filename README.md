@@ -127,6 +127,7 @@ Sins/
   sins.json       single source of truth: lenses, sins, taglines and each sin's topics
   sitemap.xml     generated
   search.json     generated: the plain text of every article (without its Sources), fetched by home.js the first time the search box is used
+  favicon.svg  apple-touch-icon.png   the site mark as a tab icon and as the 180px home-screen icon
   robots.txt  og.png  vercel.json  package.json  package-lock.json  .gitignore
   LICENSE         MIT
   CLAUDE.md       instructions for the AI agent

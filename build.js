@@ -6,7 +6,6 @@ const fs = require("fs");
 const { marked } = require("marked");
 
 const SITE = "https://seven-sins-liard.vercel.app";
-const ICON = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='28'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E";
 const SUBTITLE = "and the inner battles beyond them";
 const DISCLAIMER = "If a habit is harming your life, please talk to a doctor, therapist or a trusted person.";
 
@@ -51,6 +50,20 @@ function articleText(md) {
     .replace(/\s+/g, " ").trim().normalize("NFC");
 }
 
+// The meta description is the opening of the article itself, cut at a word near 155 characters.
+function summary(text) {
+  if (text.length <= 155) return text;
+  const cut = text.slice(0, text.lastIndexOf(" ", 155)).replace(/[\s,;:(]+$/, "");
+  return /[.!?]["')]?$/.test(cut) ? cut : cut + "…";
+}
+
+// Structured data for search engines. A script of type application/ld+json is a data block: the browser
+// never runs it, so the script-src 'self' policy in vercel.json does not apply to it
+// (https://html.spec.whatwg.org/multipage/scripting.html#prepare-the-script-element, the step that
+// returns early when the type is not a JavaScript, module or import-map type).
+const jsonLd = graph => `  <script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@graph": graph }).replace(/</g, "\\u003c")}</script>\n`;
+const WEBSITE = { "@type": "WebSite", name: "The Seven Sins", url: `${SITE}/` };
+
 // Reader-selectable themes; the colours for each id are in style.css. "" follows the system light/dark setting.
 // 404.html is hand-written and carries a copy of this menu. All scripts are files, never inline:
 // the Content-Security-Policy in vercel.json allows only script-src 'self'.
@@ -62,7 +75,7 @@ const siteBar = (home, back) => `<a class="skip" href="#content">Skip to content
   <header class="site${home ? "" : " bare"}"><div class="wrap">${home ? `<a class="brand" href="${home}"><span aria-hidden="true">&#10022;</span>The Seven Sins</a>` : ""}<div class="site-actions">${back}${themeMenu}</div></div></header>`;
 const footer = text => `<footer><p>${text}</p></footer>`;
 
-function head({ title, description, url, type, depth, robots }) {
+function head({ title, description, url, type, depth, robots, graph }) {
   const up = "../".repeat(depth);
   return `<!doctype html>
 <html lang="en">
@@ -82,7 +95,8 @@ ${robots ? `  <meta name="robots" content="${robots}">\n` : ""}${url ? `  <link 
   <meta property="og:image:alt" content="The Seven Sins ${SUBTITLE}. ${data.sins.length} topics, each read through ${count} lenses: ${lensList}.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="${SITE}/og.png">
-` : ""}  <link rel="icon" href="${ICON}">
+` : ""}${graph ? jsonLd(graph) : ""}  <link rel="icon" href="${up}favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="${up}apple-touch-icon.png">
   <script src="${up}theme.js"></script>
   <link rel="preload" href="${up}fonts/literata-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="${up}style.css">
@@ -92,7 +106,16 @@ ${robots ? `  <meta name="robots" content="${robots}">\n` : ""}${url ? `  <link 
 
 function articlePage(sin, topic, lens, md) {
   const title = `${sin.name}: ${topic.title} (${lens.name}) - The Seven Sins`;
-  const description = `${sin.tagline} ${topic.title} through the ${lens.name} lens.`;
+  const description = summary(articleText(md));
+  const url = `${SITE}/${articlePath(sin, topic, lens)}`;
+  const graph = [
+    { "@type": "Article", headline: `${sin.name}: ${topic.title} (${lens.name})`, description, url, mainEntityOfPage: url, inLanguage: "en", image: `${SITE}/og.png`, about: sin.name, isPartOf: WEBSITE },
+    { "@type": "BreadcrumbList", itemListElement: [
+      ["The Seven Sins", `${SITE}/`],
+      [sin.name, `${SITE}/${articlePath(sin, sin.topics[0], lens)}`],
+      [`${topic.title} (${lens.name})`, url]
+    ].map(([name, item], n) => ({ "@type": "ListItem", position: n + 1, name, item })) }
+  ];
   const link = (href, text, on) => `<a href="${href}"${on ? ' aria-current="page"' : ""}>${esc(text)}</a>`;
   const kind = data.kinds.find(k => k.id === kindOf(sin));
   const i = sin.topics.indexOf(topic);
@@ -109,7 +132,7 @@ function articlePage(sin, topic, lens, md) {
   }).filter(r => r.topics && r.topics.some(t => t.id === topic.id));
   const relatedNav = related.length ? `
     <nav class="related" aria-labelledby="related-title"><h2 class="label" id="related-title">Related topics</h2><div class="related-list">${related.map(r => `<a href="../../${articlePath(r, topic, lens)}"><strong>${esc(r.name)}</strong><span>${esc(r.tagline)}</span></a>`).join("")}</div></nav>` : "";
-  return head({ title, description, url: `${SITE}/${articlePath(sin, topic, lens)}`, type: "article", depth: 2 }) + `<body>
+  return head({ title, description, url, type: "article", depth: 2, graph }) + `<body>
   ${siteBar("../../index.html", `<a class="back" href="../../index.html#kind-${kind.id}">&larr; All topics</a>`)}
   <main class="wrap narrow">
     <header class="page-head">
@@ -148,7 +171,7 @@ function indexPage() {
         </div>
       </section>` : "";
   }).filter(Boolean).join("\n      ");
-  return head({ title: `The Seven Sins ${SUBTITLE}`, description: DESCRIPTION, url: `${SITE}/`, type: "website", depth: 0 }) + `<body>
+  return head({ title: `The Seven Sins ${SUBTITLE}`, description: DESCRIPTION, url: `${SITE}/`, type: "website", depth: 0, graph: [{ ...WEBSITE, description: DESCRIPTION, inLanguage: "en" }] }) + `<body>
   ${siteBar(null, "")}
   <main class="wrap" id="content" data-lenses="${lensIds.join(" ")}">
     <header class="hero">
