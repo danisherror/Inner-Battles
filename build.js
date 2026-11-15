@@ -126,7 +126,7 @@ function indexPage() {
   const card = s => {
     const inner = `<h3>${esc(s.name)}</h3><p>${esc(s.tagline)}</p>`;
     return s.topics
-      ? `<a class="card" href="${articlePath(s, s.topics[0], data.lenses[0])}" data-total="${s.topics.length * data.lenses.length}">${inner}</a>`
+      ? `<a class="card" href="${articlePath(s, s.topics[0], data.lenses[0])}" data-topics="${s.topics.map(t => t.id).join(" ")}" data-total="${s.topics.length * data.lenses.length}">${inner}</a>`
       : `<div class="card disabled">${inner}<span class="soon">Coming soon</span></div>`;
   };
   const sections = data.kinds.map(k => {
@@ -147,6 +147,7 @@ function indexPage() {
       <h1>The Seven Sins</h1>
       <p class="sub">${SUBTITLE}</p>
       <p>Understand the habits and struggles that hold us back, and learn how to leave them behind.</p>
+      <p class="resume" hidden><span class="label">Continue reading</span><a></a></p>
       <ul class="lens-list" aria-label="Every topic is read through ${count} lenses">
         <li class="label" aria-hidden="true">${count} lenses</li>
         ${data.lenses.map(l => `<li>${esc(l.name)}</li>`).join("")}
