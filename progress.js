@@ -1,12 +1,14 @@
-// Reading progress, kept in localStorage as a list of "Topic/section/lens" keys.
-// An article page records itself and ticks the topic and lens links already read;
-// the home page shows a count on each card. Nothing leaves the browser.
+// Reader state kept in localStorage; nothing leaves the browser.
+// "read" is a list of "Topic/section/lens" keys: an article page records itself and ticks the topic and
+// lens links already read, and the home page shows a count on each card.
+// "lens" is the lens of the last article opened; home.js and redirect.js use it to pick links.
 (() => {
   const key = path => path.replace(/\.html$/, "").split("/").slice(-3).join("/");
   const load = () => { try { return new Set(JSON.parse(localStorage.getItem("read")) || []); } catch (e) { return new Set(); } };
   const save = read => { try { localStorage.setItem("read", JSON.stringify([...read])); } catch (e) {} };
 
   const article = () => {
+    try { localStorage.setItem("lens", key(location.pathname).split("/")[2]); } catch (e) {}
     const read = load();
     if (!read.has(key(location.pathname))) { read.add(key(location.pathname)); save(read); }
     for (const a of document.querySelectorAll(".topics a, .lenses a")) {

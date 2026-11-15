@@ -43,7 +43,8 @@ function articleBody(md) {
 }
 
 // Reader-selectable themes; the colours for each id are in style.css. "" follows the system light/dark setting.
-// 404.html is hand-written and carries a copy of the head script and this menu.
+// 404.html is hand-written and carries a copy of this menu. All scripts are files, never inline:
+// the Content-Security-Policy in vercel.json allows only script-src 'self'.
 const THEMES = [["", "Auto"], ["paper", "Paper"], ["sepia", "Sepia"], ["grey", "Grey"], ["dark", "Dark"], ["black", "Black"]];
 const themeMenu = `<details class="theme" hidden><summary><span aria-hidden="true">&#9680;</span> Theme</summary><div class="theme-menu" role="group" aria-label="Theme">${THEMES.map(([id, name]) => `<button type="button" value="${id}"><span class="swatch" aria-hidden="true"></span>${name}</button>`).join("")}</div></details>`;
 
@@ -73,10 +74,9 @@ ${robots ? `  <meta name="robots" content="${robots}">\n` : ""}${url ? `  <link 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="${SITE}/og.png">
 ` : ""}  <link rel="icon" href="${ICON}">
-  <script>try { const t = localStorage.getItem("theme"); if (${JSON.stringify(THEMES.map(t => t[0]).filter(Boolean))}.includes(t)) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+  <script src="${up}theme.js"></script>
   <link rel="preload" href="${up}fonts/literata-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="${up}style.css">
-  <script src="${up}theme.js" defer></script>
 </head>
 `;
 }
@@ -116,7 +116,6 @@ function articlePage(sin, topic, lens, md) {
     <nav class="pager" aria-label="Continue reading">${prev}${next}</nav>${relatedNav}
   </main>
   ${footer(`Educational and reflective content, not medical, psychological or religious authority. ${DISCLAIMER}`)}
-  <script>try { localStorage.setItem("lens", ${JSON.stringify(lens.id)}); } catch (e) {}</script>
   <script src="../../progress.js" defer></script>
 </body>
 </html>
@@ -142,7 +141,7 @@ function indexPage() {
   }).filter(Boolean).join("\n      ");
   return head({ title: `The Seven Sins ${SUBTITLE}`, description: DESCRIPTION, url: `${SITE}/`, type: "website", depth: 0 }) + `<body>
   ${siteBar(null, "")}
-  <main class="wrap" id="content">
+  <main class="wrap" id="content" data-lenses="${lensIds.join(" ")}">
     <header class="hero">
       <span class="mark" aria-hidden="true">&#10022;</span>
       <h1>The Seven Sins</h1>
@@ -165,43 +164,24 @@ function indexPage() {
   <script src="home.js" defer></script>
   <script src="progress.js" defer></script>
   ${footer(`A read-only guide for self-improvement. Educational and reflective content, not medical, psychological or religious authority. ${DISCLAIMER}`)}
-  <script>
-    // Cards link to the first lens; swap in the lens the reader chose last.
-    try {
-      const lens = localStorage.getItem("lens");
-      if (${JSON.stringify(lensIds)}.includes(lens))
-        for (const a of document.querySelectorAll("a.card[href]")) a.href = a.getAttribute("href").replace(/[^/]+\\.html$/, lens + ".html");
-    } catch (e) {}
-  </script>
 </body>
 </html>
 `;
 }
 
-// Old links look like sin.html?id=Pride&topic=effects&lens=buddhism; send them to the static page.
+// Old links look like sin.html?id=Pride&topic=effects&lens=buddhism; redirect.js sends them to the static page.
 function redirectPage() {
   const topics = Object.fromEntries(sins.map(s => [s.id, s.topics.map(t => t.id)]));
   return head({ title: "The Seven Sins", description: DESCRIPTION, depth: 0, robots: "noindex" }) + `<body>
   ${siteBar("index.html", "")}
-  <main class="wrap narrow" id="content">
+  <main class="wrap narrow" id="content" data-topics="${esc(JSON.stringify(topics))}" data-lenses="${lensIds.join(" ")}">
     <header class="hero">
       <h1>Not available yet</h1>
       <p>That page isn't available yet.</p>
     </header>
     <p class="center"><a class="back" href="index.html">&larr; All topics</a></p>
   </main>
-  <script>
-    const TOPICS = ${JSON.stringify(topics)};
-    const LENSES = ${JSON.stringify(lensIds)};
-    const get = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
-    const q = new URLSearchParams(location.search);
-    const id = q.get("id");
-    if (Object.hasOwn(TOPICS, id)) {
-      const topic = TOPICS[id].includes(q.get("topic")) ? q.get("topic") : TOPICS[id][0];
-      const lens = [q.get("lens"), get("lens")].find(l => LENSES.includes(l)) || LENSES[0];
-      location.replace(id + "/" + topic + "/" + lens + ".html");
-    }
-  </script>
+  <script src="redirect.js"></script>
 </body>
 </html>
 `;

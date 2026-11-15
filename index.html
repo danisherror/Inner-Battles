@@ -17,15 +17,14 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://seven-sins-liard.vercel.app/og.png">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='28'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
-  <script>try { const t = localStorage.getItem("theme"); if (["paper","sepia","grey","dark","black"].includes(t)) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+  <script src="theme.js"></script>
   <link rel="preload" href="fonts/literata-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
-  <script src="theme.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#content">Skip to content</a>
   <header class="site bare"><div class="wrap"><div class="site-actions"><details class="theme" hidden><summary><span aria-hidden="true">&#9680;</span> Theme</summary><div class="theme-menu" role="group" aria-label="Theme"><button type="button" value=""><span class="swatch" aria-hidden="true"></span>Auto</button><button type="button" value="paper"><span class="swatch" aria-hidden="true"></span>Paper</button><button type="button" value="sepia"><span class="swatch" aria-hidden="true"></span>Sepia</button><button type="button" value="grey"><span class="swatch" aria-hidden="true"></span>Grey</button><button type="button" value="dark"><span class="swatch" aria-hidden="true"></span>Dark</button><button type="button" value="black"><span class="swatch" aria-hidden="true"></span>Black</button></div></details></div></div></header>
-  <main class="wrap" id="content">
+  <main class="wrap" id="content" data-lenses="modern hinduism upanishads christianity buddhism philosophical">
     <header class="hero">
       <span class="mark" aria-hidden="true">&#10022;</span>
       <h1>The Seven Sins</h1>
@@ -85,13 +84,5 @@
   <script src="home.js" defer></script>
   <script src="progress.js" defer></script>
   <footer><p>A read-only guide for self-improvement. Educational and reflective content, not medical, psychological or religious authority. If a habit is harming your life, please talk to a doctor, therapist or a trusted person.</p></footer>
-  <script>
-    // Cards link to the first lens; swap in the lens the reader chose last.
-    try {
-      const lens = localStorage.getItem("lens");
-      if (["modern","hinduism","upanishads","christianity","buddhism","philosophical"].includes(lens))
-        for (const a of document.querySelectorAll("a.card[href]")) a.href = a.getAttribute("href").replace(/[^/]+\.html$/, lens + ".html");
-    } catch (e) {}
-  </script>
 </body>
 </html>

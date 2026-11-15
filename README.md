@@ -119,7 +119,8 @@ Sins/
   style.css       styles, including the reader-selectable themes (Paper, Sepia, Grey, Dark, Black)
   fonts/          Literata 5.3.0 (variable weight, latin and latin-ext, upright and italic) and its OFL licence, from https://www.npmjs.com/package/@fontsource-variable/literata
   theme.js        theme menu in the site bar; the choice is saved in the browser
-  home.js         home page filter box over the topic cards
+  home.js         home page: filter box over the topic cards; cards open on the lens read last
+  redirect.js     used by sin.html to send old links to the static page
   progress.js     reading progress: ticks on topic and lens links already read, a count on each home card (kept in the browser only)
   sins.json       single source of truth: lenses, sins, taglines and each sin's topics
   sitemap.xml     generated

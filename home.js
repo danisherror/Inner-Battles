@@ -1,6 +1,13 @@
-// Home page: a filter box over the topic cards. The box is hidden in the markup and shown here,
-// so without JavaScript the page is simply the full list.
+// Home page: cards open on the lens the reader chose last, and a filter box narrows the cards.
+// The box is hidden in the markup and shown here, so without JavaScript the page is simply the full list.
 (() => {
+  // Cards link to the first lens; swap in the saved one if it is still a real lens.
+  try {
+    const lens = localStorage.getItem("lens");
+    if (document.querySelector("main").dataset.lenses.split(" ").includes(lens))
+      for (const a of document.querySelectorAll("a.card[href]")) a.href = a.getAttribute("href").replace(/[^/]+\.html$/, lens + ".html");
+  } catch (e) {}
+
   const box = document.querySelector(".filter");
   if (!box) return;
   const input = box.querySelector("input");
