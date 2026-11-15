@@ -1,0 +1,20 @@
+# The generated HTML is committed and served as it is, so a Markdown or build.js change
+# that is pushed without `npm run render` would leave stale pages live. This fails the push instead.
+name: check
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check

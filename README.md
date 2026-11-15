@@ -106,6 +106,8 @@ npm run render     # rewrites the article pages, index.html, sin.html and sitema
 npm run check      # exits 1 if a generated file is stale
 ```
 
+GitHub Actions runs `npm run check` on every pull request and on every push to `main` (`.github/workflows/check.yml`), so a stale page fails the run.
+
 The site can be deployed to any static host, such as Vercel, as it is. It is currently deployed on the free Vercel Hobby plan at <https://seven-sins-liard.vercel.app>; `vercel.json` sets the security headers. The generated HTML is committed, so the host runs no build step. To redeploy, run `vercel deploy --prod` in this folder (the project name `seven-sins` is saved in the untracked `.vercel` folder).
 
 ## Project layout
