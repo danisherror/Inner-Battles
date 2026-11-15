@@ -122,8 +122,8 @@ function indexPage() {
   const sections = data.kinds.map(k => {
     const items = data.sins.filter(s => kindOf(s) === k.id).sort((a, b) => a.name.localeCompare(b.name, "en"));
     return items.length ? `<section aria-labelledby="kind-${k.id}">
-        <div class="section-head"><h2 class="section-title" id="kind-${k.id}">${esc(k.title)}</h2><span class="label">${items.length} topics</span></div>
-        <p class="section-intro">${esc(k.intro)}</p>
+      <div class="section-head"><h2 class="section-title" id="kind-${k.id}">${esc(k.title)}</h2><span class="label">${items.length} topics</span></div>
+      <p class="section-intro">${esc(k.intro)}</p>
         <div class="grid">
           ${items.map(card).join("\n          ")}
         </div>
@@ -131,7 +131,7 @@ function indexPage() {
   }).filter(Boolean).join("\n      ");
   return head({ title: "The Seven Sins", description: DESCRIPTION, url: `${SITE}/`, type: "website", depth: 0 }) + `<body>
   ${siteBar(null, "")}
-  <div class="wrap">
+  <main class="wrap" id="content">
     <header class="hero">
       <span class="mark" aria-hidden="true">&#10022;</span>
       <h1>The Seven Sins</h1>
@@ -142,10 +142,8 @@ function indexPage() {
       </ul>
       <nav class="jump" aria-label="Sections">${data.kinds.map(k => `<a href="#kind-${k.id}">${esc(k.title)}</a>`).join("")}</nav>
     </header>
-    <main id="content">
-      ${sections}
-    </main>
-  </div>
+    ${sections}
+  </main>
   ${footer(`A read-only guide for self-improvement. Educational and reflective content, not medical, psychological or religious authority. ${DISCLAIMER}`)}
   <script>
     // Cards link to the first lens; swap in the lens the reader chose last.
