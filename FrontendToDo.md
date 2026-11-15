@@ -63,23 +63,25 @@ Done 2026-11-15, checked in Chrome against a local server (pages in same-origin 
 
 ## 6. Reader features (all local, no backend)
 
-- [ ] **Bookmarks.** Let a reader save articles and list them on the home page.
-- [ ] **Private notes.** A text box per article stored in localStorage, with a clear "stays in this browser" note.
-- [ ] **Export and import of progress** as a file, so a reader can move between devices.
-- [ ] **Share button** using the Web Share API, with copy-link as the fallback.
-- [ ] **Read aloud** using the browser's speech synthesis.
-- [ ] **Progress overview.** A page or panel showing what has been read across all 26 topics.
-- [ ] **Mark unread** for a single article; today the only control is "Clear reading progress" for everything.
-- [ ] **Text highlighter.** Let a reader highlight passages, kept in localStorage. Do it after bookmarks: the articles are short (roughly 200 words each in the Envy modern lens), so saving a whole article covers much of the same need.
-  - [ ] Select text and a small "Highlight" button appears; tapping an existing highlight removes it.
-  - [ ] One colour per theme, checked for contrast in all of them. No notes attached to highlights.
-  - [ ] Store each highlight as the quoted text plus a few words either side, not as character positions, so it survives corrections to the article. Drop it quietly when the text no longer matches.
-  - [ ] Draw highlights without changing the page markup. Check first: the CSS Custom Highlight API does this, but its browser support was not verified; older browsers would need a fallback that wraps the text in `<mark>`.
-  - [ ] Check first on a phone: selecting text brings up the system's own copy/share menu, and the "Highlight" button must not fight it.
-  - [ ] A "Your highlights" list on the home page, linking back to each article.
-  - [ ] Hidden without JavaScript, like search and the theme menu.
-  - [ ] Include highlights in the export and import item above; they are lost if the reader clears site data and do not follow them to another device.
-  - [ ] Leave highlights out of print, or print them as a light underline.
+Done 2026-11-15, checked in Chrome against a local server that sends the `vercel.json` CSP (pages at 320, 360 and 390px in same-origin iframes on a second server without headers, since `frame-ancestors 'none'` blocks them). The article tools are in a new `reader.js`; the Read toggle and the progress counts are in `progress.js`, which already owns `read`. Every control is hidden in the markup and shown by its script, so without JavaScript none of them appears (checked in sandboxed iframes with scripts off).
+
+- [x] **Bookmarks.** A Save button above each article (`aria-pressed`, star icon) keeps `saved`, a list of `{path, title}` with the newest first. The home page lists them under "Saved articles", above the topics, each with a Remove button; the list is hidden when empty and while a search is typed. Removing an item moves focus to the list heading, or to the next heading once the list is empty.
+- [x] **Private notes.** A text box under each article, kept in `notes` (path: text) as it is typed; an empty note is deleted. The note under it says it stays in this browser on this device, is never sent anywhere and goes if site data is cleared, and links to the export.
+- [x] **Export and import of progress.** On the new `progress.html` ("Your reading", linked from the home page when JavaScript runs). Export writes every key the site keeps to `seven-sins-reading-<date>.json`. Import checks the file's `format` field and every value: `read`, `saved` and highlights are merged, two different notes for one article are both kept (local first), and `theme`, `size`, `lens`, `compare` and `last` come from the file. A file that is not an export changes nothing and says so. Checked by capturing the Blob rather than downloading it: export, clear, import gave back the same `read` and `highlights`.
+- [x] **Share button.** `navigator.share` with the page's canonical address (so a `#q=` from the search results is left off); where there is no share sheet, the link is copied with `navigator.clipboard`, and "Link copied" is announced in a `role="status"` beside the tools. Hidden when neither exists. Checked with the share sheet stubbed; the clipboard fallback was not exercised.
+- [x] **Read aloud.** A Listen button using `speechSynthesis`, one utterance per heading, paragraph or list item, so the block being read gets a soft background. Pressing it again, or leaving the page, stops it. Checked with `speak()` stubbed: all nine blocks of the Envy modern article in order, and the button resets at the end. **Still to do:** listen once with a real voice; the test did not play audio.
+- [x] **Progress overview.** `progress.html`: total read out of 780, a count and bar per lens and per topic (each topic links to its overview page). The bar widths are set from script through the CSSOM, which the `style-src 'self'` policy allows. Without JavaScript the page is a plain list of the topics with a note saying why. Kept out of the sitemap and marked `noindex`, since it shows one browser's state.
+- [x] **Mark unread.** A Read toggle beside Save. It marks the article read or unread by hand, and once used, reaching the end of the text no longer marks it. Checked: unmarked, then scrolled the Sources into view, and the article stayed unread.
+- [x] **Text highlighter.** Kept in `highlights` (path: `{title, items}`).
+  - [x] Selecting text in the article (not its label, title or Sources) offers a "Highlight" button; a selection is widened to whole words. Tapping a highlight offers "Remove highlight" rather than removing it at once, so a stray tap cannot delete one. Overlapping highlights merge.
+  - [x] One colour per theme, `--hl` in `style.css`. Text on it is 7.3:1 or more in every theme (8.6 Sepia, 11.1 Paper and Grey, 7.3 Dark, 8.5 Black). In the light themes it differs from the page mostly by hue (1.2–1.3:1 in lightness), like a paper highlighter. No notes on highlights.
+  - [x] Each one is stored as its text plus up to about 40 characters either side, cut at a word. On load, a place where both sides still match is used; failing that, the text alone if it occurs once; otherwise the highlight is dropped from storage.
+  - [x] Drawn with the CSS Custom Highlight API, so the markup is untouched. MDN lists it as Baseline 2025, in all three engines since June 2025 (<https://developer.mozilla.org/en-US/docs/Web/API/CSS_Custom_Highlight_API>). A browser without it gets no highlighter, not a `<mark>` fallback, so there is one way of drawing them, and none that clashes with the search marks. `var()` works inside `::highlight()` in Chrome.
+  - [~] Phone. The button sits fixed at the foot of the screen, away from the system's own copy/share menu beside the selection, and moves to the top when the selection is in the lower 40% of the screen so it does not cover it. Pressing it keeps the selection (`pointerdown` is cancelled). **Still to do:** try it on a real iPhone and Android phone; only a desktop mouse was tested.
+  - [x] "Your highlights" on the home page, newest article first, each article title linking back to it with its quoted passages under it.
+  - [x] Hidden without JavaScript.
+  - [x] Included in the export and import.
+  - [x] Left out of print, as are the tools, notes and the Listen marking.
 
 ## 7. Offline and install
 
@@ -99,7 +101,7 @@ Done 2026-11-15, checked in Chrome against a local server (pages in same-origin 
 
 - [ ] **Lint and format** the five scripts and `style.css` (none is configured).
 - [ ] **Unit tests for `build.js`** helpers such as the description and excerpt functions.
-- [ ] **Document the localStorage keys** (`read`, `lens`, `last`, `compare`, `theme`, `size`) in one place in the README.
+- [x] **Document the localStorage keys** in one place in the README: done with section 6, which added `saved`, `notes` and `highlights`.
 - [ ] **Unused CSS check** after the five superseded drafts were removed in `7e201f5`.
 
 ## Suggested order

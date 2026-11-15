@@ -18,7 +18,7 @@
       ]
     },
     {
-      "source": "/(style\\.css|theme\\.js|site\\.js|home\\.js|progress\\.js|compare\\.js|redirect\\.js)",
+      "source": "/(style\\.css|theme\\.js|site\\.js|home\\.js|progress\\.js|reader\\.js|compare\\.js|redirect\\.js)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]

@@ -21,7 +21,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <script src="theme.js?v=4a719d9f62"></script>
   <link rel="preload" href="fonts/literata-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="style.css?v=a21a00f7fa">
+  <link rel="stylesheet" href="style.css?v=5e75a8588a">
 </head>
 <body>
   <a class="skip" href="#content">Skip to content</a>
@@ -34,6 +34,7 @@
       <p>Understand the habits and struggles that hold us back, and learn how to leave them behind.</p>
       <p class="resume" hidden><span class="label">Continue reading</span><a></a></p>
       <p class="random" hidden><a href="">Read something at random</a></p>
+      <p class="mine-link" hidden><a href="progress.html">Your reading: progress, export and import</a></p>
       <ul class="lens-list" aria-label="Every topic is read through six lenses">
         <li class="label" aria-hidden="true">six lenses</li>
         <li>Modern</li><li>Hinduism</li><li>Upanishads</li><li>Christianity</li><li>Buddhism</li><li>Philosophical</li>
@@ -46,6 +47,14 @@
         <p class="filter-status label" role="status"></p>
       </div>
     </header>
+    <section class="mine saved-list" aria-labelledby="saved-title" hidden>
+      <div class="section-head"><h2 class="section-title" id="saved-title">Saved articles</h2></div>
+      <ol></ol>
+    </section>
+    <section class="mine hl-list" aria-labelledby="hl-title" hidden>
+      <div class="section-head"><h2 class="section-title" id="hl-title">Your highlights</h2></div>
+      <ol></ol>
+    </section>
     <section aria-labelledby="kind-sin">
       <div class="section-head"><h2 class="section-title" id="kind-sin">The seven deadly sins</h2><span class="label">7 topics</span></div>
       <p class="section-intro">The classic list, read through each lens.</p>
@@ -88,8 +97,9 @@
     <p class="center"><button class="reset" type="button" hidden>Clear reading progress</button></p>
   </main>
   <script src="site.js?v=09f8e50b43" defer></script>
-  <script src="home.js?v=780dc41b50" defer></script>
-  <script src="progress.js?v=ab0606193b" defer></script>
+  <script src="home.js?v=4ad4a77660" defer></script>
+  <script src="progress.js?v=e9c989e18b" defer></script>
+  <script src="reader.js?v=456808a856" defer></script>
   <footer><p>A read-only guide for self-improvement. Educational and reflective content, not medical, psychological or religious authority. If a habit is harming your life, please talk to a doctor, therapist or a trusted person.</p></footer>
 </body>
 </html>

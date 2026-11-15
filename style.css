@@ -13,6 +13,7 @@
   --accent: #8b2e2e;
   --accent-soft: #f3e4df;
   --line: #e6dfd6;
+  --hl: #f6dc84;
   color-scheme: light;
   --space-1: 4px;
   --space-2: 8px;
@@ -39,15 +40,16 @@
     --accent: #e08a7a;
     --accent-soft: #3a2420;
     --line: #36302a;
+    --hl: #5b4813;
     color-scheme: dark;
   }
 }
 /* Themes picked from the menu (theme.js) override the system setting; paper and dark repeat the defaults above. */
-:root[data-theme="paper"] { --bg: #faf7f2; --card: #ffffff; --text: #2a2623; --muted: #6d655e; --accent: #8b2e2e; --accent-soft: #f3e4df; --line: #e6dfd6; color-scheme: light; }
-:root[data-theme="sepia"] { --bg: #f1e7d0; --card: #f8f0dc; --text: #3b2f20; --muted: #6b5a45; --accent: #7a2e1d; --accent-soft: #e6d3b3; --line: #d9c9a8; color-scheme: light; }
-:root[data-theme="grey"] { --bg: #ecedee; --card: #f7f7f8; --text: #222426; --muted: #5c6166; --accent: #8b2e2e; --accent-soft: #e5d5d3; --line: #d3d5d7; color-scheme: light; }
-:root[data-theme="dark"] { --bg: #17140f; --card: #211d17; --text: #efe9e0; --muted: #a79d92; --accent: #e08a7a; --accent-soft: #3a2420; --line: #36302a; color-scheme: dark; }
-:root[data-theme="black"] { --bg: #000000; --card: #101010; --text: #e6e1d8; --muted: #9c958b; --accent: #e08a7a; --accent-soft: #2e1b17; --line: #2a2a2a; color-scheme: dark; }
+:root[data-theme="paper"] { --bg: #faf7f2; --card: #ffffff; --text: #2a2623; --muted: #6d655e; --accent: #8b2e2e; --accent-soft: #f3e4df; --line: #e6dfd6; --hl: #f6dc84; color-scheme: light; }
+:root[data-theme="sepia"] { --bg: #f1e7d0; --card: #f8f0dc; --text: #3b2f20; --muted: #6b5a45; --accent: #7a2e1d; --accent-soft: #e6d3b3; --line: #d9c9a8; --hl: #efcf6a; color-scheme: light; }
+:root[data-theme="grey"] { --bg: #ecedee; --card: #f7f7f8; --text: #222426; --muted: #5c6166; --accent: #8b2e2e; --accent-soft: #e5d5d3; --line: #d3d5d7; --hl: #f2d97c; color-scheme: light; }
+:root[data-theme="dark"] { --bg: #17140f; --card: #211d17; --text: #efe9e0; --muted: #a79d92; --accent: #e08a7a; --accent-soft: #3a2420; --line: #36302a; --hl: #5b4813; color-scheme: dark; }
+:root[data-theme="black"] { --bg: #000000; --card: #101010; --text: #e6e1d8; --muted: #9c958b; --accent: #e08a7a; --accent-soft: #2e1b17; --line: #2a2a2a; --hl: #4a3a0c; color-scheme: dark; }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
@@ -238,6 +240,71 @@ article.md a.anchor:hover { color: var(--accent); }
 /* the words searched for, when the article was opened from the search results (site.js) */
 article.md mark { background: var(--accent-soft); color: var(--text); padding: 0 2px; border-radius: 3px; }
 
+/* reader tools above the article (reader.js; the Read toggle is progress.js) */
+.tools { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); padding: var(--space-4) 0 0; }
+.tools button, .transfer button, .transfer .import, .saved-list .remove {
+  display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; padding: var(--space-1) var(--space-3);
+  font: inherit; font-size: .9rem; color: var(--text); background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-pill); cursor: pointer;
+  transition: border-color .15s, color .15s;
+}
+.tools button:hover, .transfer button:hover, .transfer .import:hover, .saved-list .remove:hover { border-color: var(--accent); color: var(--accent); }
+.tools button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: bold; }
+.tools .icon::before { color: var(--accent); }
+.tools .save .icon::before { content: "\2606"; }
+.tools .save[aria-pressed="true"] .icon::before { content: "\2605"; }
+.tools .mark-read .icon::before { content: "\2713"; }
+.tools .share .icon::before { content: "\2197"; }
+.tools .listen .icon::before { content: "\25B6"; }
+.tools .listen[aria-pressed="true"] .icon::before { content: "\25A0"; }
+.tools-status { font-family: var(--sans); font-size: .85rem; color: var(--muted); }
+/* the block being read aloud */
+article.md .speaking { background: var(--accent-soft); box-shadow: 0 0 0 var(--space-1) var(--accent-soft); border-radius: 2px; }
+/* the reader's own highlights, drawn with the CSS Custom Highlight API (reader.js) */
+::highlight(reader) { background-color: var(--hl); color: var(--text); }
+
+/* private notes under the article */
+.notes { padding: 0 0 var(--space-5); }
+.notes .label { display: block; margin-bottom: var(--space-2); }
+.notes textarea { display: block; width: 100%; min-height: 6rem; padding: var(--space-3); font: inherit; font-size: 1rem; line-height: 1.5; color: var(--text); background: var(--card); border: 1px solid var(--muted); border-radius: var(--radius-sm); resize: vertical; }
+.notes textarea:focus-visible { border-color: var(--accent); }
+.notes p { margin: var(--space-2) 0 0; color: var(--muted); font-size: .9rem; line-height: 1.5; }
+.notes a { color: var(--accent); text-underline-offset: 3px; }
+
+/* the Highlight / Remove highlight button, at the foot of the screen, clear of the system's own selection menu */
+.hl-bar { position: fixed; left: 0; right: 0; bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px)); z-index: 3; display: flex; justify-content: center; pointer-events: none; }
+.hl-bar.top { top: calc(var(--space-4) + env(safe-area-inset-top, 0px)); bottom: auto; }
+.hl-bar button { pointer-events: auto; min-height: 48px; padding: 0 var(--space-5); font: inherit; font-weight: bold; color: var(--bg); background: var(--accent); border: 0; border-radius: var(--radius-pill); box-shadow: 0 6px 20px rgba(0, 0, 0, .25); cursor: pointer; }
+
+/* home page: saved articles and highlights (reader.js); hidden while searching */
+.searching .mine { display: none; }
+.mine ol { list-style: none; margin: var(--space-4) 0 0; padding: 0; max-width: var(--measure); }
+.mine ol > li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2) var(--space-4); padding: var(--space-3) 0; border-bottom: 1px solid var(--line); }
+.mine a { color: var(--accent); font-weight: bold; text-underline-offset: 3px; }
+.mine .remove { font-size: .8rem; min-height: 44px; color: var(--muted); }
+.hl-list ol > li { display: block; }
+.hl-list ul { margin: var(--space-2) 0 0; padding-left: var(--space-4); border-left: 3px solid var(--hl); list-style: none; }
+.hl-list ul li { margin: var(--space-1) 0; color: var(--text); font-style: italic; line-height: 1.5; }
+header.hero p.mine-link { margin-top: var(--space-1); font-size: .95rem; }
+.mine-link a { display: inline-block; padding: var(--space-2) 0; color: var(--accent); text-underline-offset: 3px; }
+
+/* progress.html */
+.reading section { padding: var(--space-4) 0; border-top: 1px solid var(--line); }
+.reading section h2 { margin: 0 0 var(--space-3); font-size: 1.3rem; }
+.reading .bars { list-style: none; margin: 0; padding: 0; }
+.reading .bars li { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 0 var(--space-3); padding: var(--space-2) 0; }
+.reading .bars a { color: var(--accent); text-underline-offset: 3px; }
+.reading .bars .count { white-space: nowrap; }
+.reading .bars .done .count { color: var(--accent); }
+.reading .bar { grid-column: 1 / -1; height: 6px; margin-top: var(--space-1); background: var(--line); border-radius: var(--radius-pill); overflow: hidden; }
+.reading .bar span { display: block; width: 0; height: 100%; background: var(--accent); }
+.reading .nojs, .reading .kept { color: var(--muted); }
+.transfer p { max-width: var(--measure); }
+.transfer-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+.transfer .import input { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.transfer .import:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
+.transfer-status { min-height: 1.6em; font-family: var(--sans); font-size: .9rem; color: var(--muted); }
+.reading section:last-child { margin-bottom: var(--space-7); }
+
 /* previous / next topic */
 .pager { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); padding: var(--space-4) 0 var(--space-7); }
 .pager a { display: block; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); padding: var(--space-4) var(--space-5); color: var(--text); text-decoration: none; font-weight: bold; transition: border-color .15s, color .15s; }
@@ -276,6 +343,8 @@ footer p { max-width: 44rem; margin: 0 auto; }
      Only words of 10 or more letters are split (https://developer.mozilla.org/en-US/docs/Web/CSS/hyphenate-limit-chars);
      at "7 3 3" Chrome broke about one line in four, which read worse than the ragged edge. */
   article.md p, article.md li { hyphens: auto; -webkit-hyphens: auto; hyphenate-limit-chars: 10 4 4; }
+  .tools { gap: var(--space-1); }
+  .tools button { padding: var(--space-1) var(--space-2); } /* so the four fit on one row from about 360px */
   .pager { grid-template-columns: 1fr; }
   .pager .next, .pager .lens-next { grid-column: 1; }
 }
@@ -289,7 +358,10 @@ footer p { max-width: 44rem; margin: 0 auto; }
 /* Print in black on white whatever theme is chosen, and spell out where each external link goes. */
 @media print {
   :root, :root[data-theme] { --bg: #fff; --card: #fff; --text: #000; --muted: #444; --accent: #000; --accent-soft: #fff; --line: #bbb; color-scheme: light; }
-  .site, .switch, .pager, .related, .skip, .jump, .filter, .reset, .resume, .random, .pick, .start, .to-top, a.anchor { display: none; }
+  .site, .switch, .pager, .related, .skip, .jump, .filter, .reset, .resume, .random, .pick, .start, .to-top, a.anchor,
+  .tools, .notes, .hl-bar, .mine-link, .transfer { display: none; }
+  ::highlight(reader) { background-color: transparent; color: inherit; }
+  article.md .speaking { background: none; box-shadow: none; }
   article.md mark { background: none; color: inherit; padding: 0; }
   article.md a.ext::after { content: " (" attr(href) ")"; font-size: .8em; word-break: break-all; }
 }

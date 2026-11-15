@@ -6,6 +6,7 @@
 // home.js and redirect.js use it to pick links.
 // "last" is that article's path and title; the home page offers it as "Continue reading", and each
 // home card and the overview's "Start reading" link open on the first section not yet read in the chosen lens.
+// The Read button on an article marks it read or unread by hand; progress.html shows the counts per topic and lens.
 (() => {
   const key = path => path.replace(/\.html$/, "").split("/").slice(-3).join("/");
   const load = () => { try { return new Set(JSON.parse(localStorage.getItem("read")) || []); } catch (e) { return new Set(); } };
@@ -54,15 +55,49 @@
 
   // Reaching the end counts as reading, so a page opened and left at once is not ticked.
   // An article short enough to fit on the screen counts as soon as it opens.
+  // The Read button sets it by hand either way, and once it is used the end of the text no longer counts.
+  let seen = null;
+  const toggle = document.querySelector(".tools .mark-read");
+  const setRead = on => {
+    const read = load();
+    if (on) read.add(key(location.pathname)); else read.delete(key(location.pathname));
+    save(read);
+    if (toggle) toggle.setAttribute("aria-pressed", String(on));
+  };
   const markAtEnd = () => {
-    const done = () => { const read = load(); if (!read.has(key(location.pathname))) { read.add(key(location.pathname)); save(read); } };
     const text = document.querySelector("article.md");
     const end = text.querySelector(".sources") || text.lastElementChild;
-    if (!("IntersectionObserver" in window)) return done();
-    const seen = new IntersectionObserver(entries => {
-      if (entries.some(e => e.isIntersecting)) { done(); seen.disconnect(); }
+    if (!("IntersectionObserver" in window)) return setRead(true);
+    seen = new IntersectionObserver(entries => {
+      if (entries.some(e => e.isIntersecting)) { setRead(true); seen.disconnect(); }
     });
     seen.observe(end);
+  };
+  if (toggle) {
+    toggle.addEventListener("click", () => {
+      if (seen) seen.disconnect();
+      setRead(toggle.getAttribute("aria-pressed") !== "true");
+    });
+    addEventListener("pageshow", () => toggle.setAttribute("aria-pressed", String(load().has(key(location.pathname)))));
+    toggle.hidden = false;
+  }
+
+  // progress.html: a count and a bar for every topic and every lens.
+  const reading = main => {
+    const read = [...load()];
+    const fill = (li, n) => {
+      const total = Number(li.dataset.total);
+      li.querySelector(".count").textContent = n >= total ? `All ${total} read ✓` : `${n} of ${total}`;
+      li.querySelector(".bar span").style.width = `${Math.min(n / total, 1) * 100}%`;
+      li.classList.toggle("done", n >= total);
+    };
+    for (const li of main.querySelectorAll("li[data-topic]")) fill(li, read.filter(k => k.startsWith(li.dataset.topic + "/")).length);
+    for (const li of main.querySelectorAll("li[data-lens]")) fill(li, read.filter(k => k.endsWith("/" + li.dataset.lens)).length);
+    const total = Number(main.dataset.total);
+    main.querySelector(".reading-total").textContent = read.length
+      ? `${read.length} of ${total} articles read.` : `None of the ${total} articles read yet. An article counts as read once you reach its end.`;
+    main.querySelector(".totals").hidden = false;
+    main.querySelector(".nojs").hidden = true;
   };
 
   const home = () => {
@@ -110,5 +145,7 @@
   const main = document.querySelector("main");
   if (document.querySelector("article.md")) { addEventListener("pageshow", article); markAtEnd(); }
   else if (main.classList.contains("overview")) addEventListener("pageshow", () => overview(main));
+  // reader.js sends "readerchange" after importing a file.
+  else if (main.classList.contains("reading")) { addEventListener("pageshow", () => reading(main)); document.addEventListener("readerchange", () => reading(main)); }
   else { addEventListener("pageshow", home); document.addEventListener("lenschange", home); }
 })();

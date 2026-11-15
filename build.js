@@ -1,6 +1,6 @@
 // Pre-renders the site to static HTML: one page per article, a compare page per topic section
 // (all the lenses side by side), an overview page per topic (<Sin>/index.html: every section and lens),
-// plus index.html, sin.html, 404.html, sitemap.xml
+// plus index.html, progress.html (the reader's own progress, saved articles and export), sin.html, 404.html, sitemap.xml
 // and search.json (the article text that the home page search box reads).
 // `npm run render` writes the files (commit them; the host serves them as they are).
 // `npm run check` exits 1 if any generated file on disk is stale.
@@ -25,7 +25,7 @@ const DESCRIPTION = `Understand the ${words[sinCount]} deadly sins, and the inne
 // Stylesheet and script links carry a hash of the file, and vercel.json caches those files as immutable,
 // so a changed file is fetched under a new URL. Editing style.css or a script therefore makes every page stale.
 const hashed = file => `${file}?v=${crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex").slice(0, 10)}`;
-const ASSET = Object.fromEntries(["style.css", "theme.js", "site.js", "home.js", "progress.js", "compare.js", "redirect.js"].map(f => [f, hashed(f)]));
+const ASSET = Object.fromEntries(["style.css", "theme.js", "site.js", "home.js", "progress.js", "reader.js", "compare.js", "redirect.js"].map(f => [f, hashed(f)]));
 
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const articlePath = (s, t, l) => `${s.id}/${t.id}/${l.id}.html`;
@@ -100,6 +100,17 @@ const searchBox = `<div class="filter" id="search" role="search" hidden>
 const resultsBox = `<div class="results" role="region" aria-labelledby="results-title" hidden><h2 class="label" id="results-title"></h2><ol></ol></div>`;
 const jumpNav = up => `<nav class="jump" aria-label="Sections">${data.kinds.map(k => `<a href="${up}#kind-${k.id}">${esc(k.title)}</a>`).join("")}</nav>`;
 const footer = text => `<footer><p>${text}</p></footer>`;
+
+// Article tools, all run in the browser by reader.js (the Read toggle by progress.js). Every control is hidden in
+// the markup and shown by the script that runs it, so without JavaScript none of them appears.
+const tools = `<div class="tools" role="group" aria-label="Article tools" hidden><button type="button" class="save" aria-pressed="false" hidden><span class="icon" aria-hidden="true"></span>Save</button><button type="button" class="mark-read" aria-pressed="false" hidden><span class="icon" aria-hidden="true"></span>Read</button><button type="button" class="share" hidden><span class="icon" aria-hidden="true"></span>Share</button><button type="button" class="listen" aria-pressed="false" hidden><span class="icon" aria-hidden="true"></span>Listen</button><span class="tools-status" role="status"></span></div>`;
+const notes = up => `<div class="notes" hidden>
+      <label class="label" for="note">Your notes</label>
+      <textarea id="note" rows="4" aria-describedby="note-hint"></textarea>
+      <p id="note-hint">Kept only in this browser on this device, and never sent anywhere. Clearing site data deletes them; <a href="${up}progress.html">Your reading</a> can export them to a file.</p>
+      <p class="hl-hint" hidden>Select a passage to highlight it; tap a highlight to remove it.</p>
+    </div>
+    <div class="hl-bar" hidden><button type="button"></button></div>`;
 
 function head({ title, description, url, type, depth, robots, graph }) {
   const up = depth === "root" ? "/" : "../".repeat(depth); // "root": absolute paths, for a page served at any URL
@@ -213,13 +224,16 @@ function articlePage(sin, topic, lens, md) {
       <nav class="topics" aria-label="Topic"><span class="label" aria-hidden="true">Topic</span>${sin.topics.map(t => navLink(`../${t.id}/${lens.id}.html`, t.title, t.id === topic.id)).join("")}${overviewLink}</nav>
       <nav class="lenses" aria-label="Lens"><span class="label" aria-hidden="true">Lens</span>${data.lenses.map(l => navLink(`${l.id}.html`, l.name, l.id === lens.id)).join("")}<a class="compare-link" href="compare.html"><span aria-hidden="true">&#8644;&nbsp;</span>Compare lenses</a></nav>
     </div>
+    ${tools}
     <article class="md" id="content"><p class="label">${esc(lens.name)} lens</p><h2>${esc(topic.title)}</h2>${articleBody(md, true)}</article>
+    ${notes("../../")}
     <nav class="pager" aria-label="Continue reading">${prev}${next}${lensNext}</nav>${relatedNav}
     ${toTop}
   </main>
   ${footer(`Educational and reflective content, not medical, psychological or religious authority. ${DISCLAIMER}`)}
   <script src="../../${ASSET["site.js"]}" defer></script>
   <script src="../../${ASSET["progress.js"]}" defer></script>
+  <script src="../../${ASSET["reader.js"]}" defer></script>
 </body>
 </html>
 `;
@@ -283,6 +297,7 @@ function indexPage() {
       <p>Understand the habits and struggles that hold us back, and learn how to leave them behind.</p>
       <p class="resume" hidden><span class="label">Continue reading</span><a></a></p>
       <p class="random" hidden><a href="">Read something at random</a></p>
+      <p class="mine-link" hidden><a href="progress.html">Your reading: progress, export and import</a></p>
       <ul class="lens-list" aria-label="Every topic is read through ${count} lenses">
         <li class="label" aria-hidden="true">${count} lenses</li>
         ${data.lenses.map(l => `<li>${esc(l.name)}</li>`).join("")}
@@ -291,6 +306,14 @@ function indexPage() {
       ${jumpNav("")}
       ${searchBox}
     </header>
+    <section class="mine saved-list" aria-labelledby="saved-title" hidden>
+      <div class="section-head"><h2 class="section-title" id="saved-title">Saved articles</h2></div>
+      <ol></ol>
+    </section>
+    <section class="mine hl-list" aria-labelledby="hl-title" hidden>
+      <div class="section-head"><h2 class="section-title" id="hl-title">Your highlights</h2></div>
+      <ol></ol>
+    </section>
     ${sections}
     ${resultsBox}
     <p class="center"><button class="reset" type="button" hidden>Clear reading progress</button></p>
@@ -298,7 +321,56 @@ function indexPage() {
   <script src="${ASSET["site.js"]}" defer></script>
   <script src="${ASSET["home.js"]}" defer></script>
   <script src="${ASSET["progress.js"]}" defer></script>
+  <script src="${ASSET["reader.js"]}" defer></script>
   ${footer(`A read-only guide for self-improvement. Educational and reflective content, not medical, psychological or religious authority. ${DISCLAIMER}`)}
+</body>
+</html>
+`;
+}
+
+// The reader's own page: how much of each topic and lens has been read (progress.js fills in the counts),
+// and export and import of everything kept in the browser (reader.js). Without JavaScript it is a plain list
+// of the topics. It is about one browser's state, so it is kept out of search results and the sitemap.
+function readingPage() {
+  const total = sins.reduce((n, s) => n + s.topics.length * data.lenses.length, 0);
+  const kinds = data.kinds.map(k => {
+    const items = sins.filter(s => kindOf(s) === k.id).sort((a, b) => a.name.localeCompare(b.name, "en"));
+    return items.length ? `<section aria-labelledby="kind-${k.id}">
+      <h2 id="kind-${k.id}">${esc(k.title)}</h2>
+      <ul class="bars">
+        ${items.map(s => `<li data-topic="${s.id}" data-total="${s.topics.length * data.lenses.length}"><a href="${s.id}/index.html">${esc(s.name)}</a><span class="count label"></span><span class="bar" aria-hidden="true"><span></span></span></li>`).join("\n        ")}
+      </ul>
+    </section>` : "";
+  }).filter(Boolean).join("\n    ");
+  return head({ title: "Your reading - The Seven Sins", description: DESCRIPTION, depth: 0, robots: "noindex" }) + `<body>
+  ${siteBar("index.html", `<a class="back" href="index.html">&larr; All topics</a>${searchLink("index.html")}`)}
+  <main class="wrap narrow reading" id="content" data-total="${total}">
+    <header class="page-head">
+      <p class="label">Kept in this browser</p>
+      <h1 class="sin-title">Your reading</h1>
+      <p class="sin-tag">What you have read, kept only in this browser on this device.</p>
+      <p class="nojs">Reading progress is kept by the site's scripts, which are not running, so this page can only list the topics.</p>
+    </header>
+    <section class="totals" aria-labelledby="totals-title" hidden>
+      <h2 id="totals-title">All topics</h2>
+      <p class="reading-total"></p>
+      <ul class="bars">
+        ${data.lenses.map(l => `<li data-lens="${l.id}" data-total="${total / data.lenses.length}"><span>${esc(l.name)}</span><span class="count label"></span><span class="bar" aria-hidden="true"><span></span></span></li>`).join("\n        ")}
+      </ul>
+    </section>
+    ${kinds}
+    <section class="transfer" aria-labelledby="transfer-title" hidden>
+      <h2 id="transfer-title">Move to another device</h2>
+      <p class="kept"></p>
+      <p>Export saves everything the site keeps in this browser (articles read, saved articles, notes, highlights and display settings) to a file. Import that file in the browser on the other device: lists are merged with what is already there, and display settings are taken from the file.</p>
+      <p class="transfer-actions"><button type="button" class="export">Export to a file</button><label class="import">Import a file<input type="file" accept=".json,application/json"></label></p>
+      <p class="transfer-status" role="status"></p>
+    </section>
+  </main>
+  ${footer(`A read-only guide for self-improvement. Educational and reflective content, not medical, psychological or religious authority. ${DISCLAIMER}`)}
+  <script src="${ASSET["site.js"]}" defer></script>
+  <script src="${ASSET["progress.js"]}" defer></script>
+  <script src="${ASSET["reader.js"]}" defer></script>
 </body>
 </html>
 `;
@@ -371,6 +443,7 @@ function outputs() {
     }
   }
   out.set("index.html", indexPage());
+  out.set("progress.html", readingPage());
   out.set("sin.html", redirectPage());
   out.set("404.html", notFoundPage());
   out.set("sitemap.xml", sitemap(urls));

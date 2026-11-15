@@ -36,7 +36,7 @@
   const input = box.querySelector("input");
   const status = box.querySelector(".filter-status");
   const cards = [...document.querySelectorAll(".grid .card")];
-  const sections = [...document.querySelectorAll("main section")];
+  const sections = [...document.querySelectorAll("main section:not(.mine)")]; // .mine: saved articles and highlights (reader.js)
 
   // Article search. search.json (written by build.js) holds the text of every article; it is fetched
   // the first time the box is used. Matching ignores case and diacritics, so "issa" finds "issā".
@@ -109,6 +109,7 @@
       if (!c.hidden) shown++;
     }
     for (const s of sections) s.hidden = !s.querySelector(".card:not([hidden])");
+    main.classList.toggle("searching", !!q); // style.css hides the saved and highlight lists while searching
     const terms = fold(typed).split(/\s+/).filter(Boolean);
     const searching = index && fold(typed).length >= MIN;
     const hits = searching ? search(terms) : [];

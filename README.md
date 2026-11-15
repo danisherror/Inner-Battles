@@ -102,7 +102,7 @@ After editing any `.md` file or `sins.json`, regenerate the pages and commit the
 
 ```sh
 npm install        # once; installs marked 18.2.0, used only at build time
-npm run render     # rewrites the article, compare and topic overview pages, index.html, sin.html, 404.html, sitemap.xml and search.json
+npm run render     # rewrites the article, compare and topic overview pages, index.html, progress.html, sin.html, 404.html, sitemap.xml and search.json
 npm run check      # exits 1 if a generated file is stale
 ```
 
@@ -116,6 +116,7 @@ The site can be deployed to any static host, such as Vercel, as it is. It is cur
 Sins/
   build.js        generates every .html page, sitemap.xml and search.json (npm run render)
   index.html      generated home page: one card per sin and inner battle
+  progress.html   generated "Your reading" page: articles read per topic and lens, and export and import of everything kept in the browser
   sin.html        generated redirect for old sin.html?id=... links
   404.html        generated "page not found" page, with the search box
   <Sin>/index.html  generated topic overview: every section in every lens, with ticks on the articles read
@@ -126,7 +127,8 @@ Sins/
   home.js         home page and 404 page: search box that narrows the topic cards and lists articles whose text matches; on the home page, lens buttons that choose which lens the cards open on (default: the lens read last)
   redirect.js     used by sin.html to send old links to the static page
   compare.js      used by each <Sin>/<topic>/compare.html (generated: all six lenses of one section) to choose which lenses are shown side by side
-  progress.js     reading progress (an article counts as read once its Sources section scrolls into view): ticks on topic and lens links already read, a count on each home card and topic overview, cards and the overview's "Start reading" link that open on the next unread section, a "Continue reading" link and a random unread article (kept in the browser only)
+  progress.js     reading progress (an article counts as read once its Sources section scrolls into view): ticks on topic and lens links already read, a count on each home card and topic overview, cards and the overview's "Start reading" link that open on the next unread section, a "Continue reading" link, a random unread article, the Read toggle on each article and the counts on progress.html (kept in the browser only)
+  reader.js       reader tools on each article (Save, Share, Listen, private notes, highlights), the saved articles and highlights on the home page, and export and import on progress.html
   sins.json       single source of truth: lenses, sins, taglines and each sin's topics
   sitemap.xml     generated
   search.json     generated: the plain text of every article (without its Sources), fetched by home.js the first time the search box is used
@@ -146,6 +148,21 @@ Sins/
     how-to-overcome/
     stories/
 ```
+
+### Kept in the browser
+
+Everything a reader does is kept in the browser's `localStorage` and never sent anywhere. `progress.html` can export all of it to a file and import it on another device.
+
+| Key | Written by | Holds |
+| --- | --- | --- |
+| `read` | progress.js | articles read, as `Topic/section/lens` keys |
+| `last` | progress.js | the article opened last (`{path, title}`), for "Continue reading" |
+| `lens` | progress.js, home.js | the lens read last or picked on the home page |
+| `compare` | compare.js | the lenses shown on compare pages |
+| `theme`, `size` | theme.js | Display menu choices |
+| `saved` | reader.js | saved articles (`[{path, title}]`, newest first) |
+| `notes` | reader.js | private notes (`{path: text}`) |
+| `highlights` | reader.js | highlights (`{path: {title, items: [{text, before, after}]}}`) |
 
 Article files follow the pattern `<Sin>/<topic>/<lens>.md`, and the generated page is `<Sin>/<topic>/<lens>.html`. Links between articles in Markdown should point at the `.html` page (for example `../how-to-overcome/modern.html`).
 
