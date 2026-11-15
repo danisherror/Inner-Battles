@@ -102,19 +102,30 @@ After editing any `.md` file or `sins.json`, regenerate the pages and commit the
 
 ```sh
 npm install        # once; installs marked 18.2.0, used only at build time
-npm run render     # rewrites the article, compare and topic overview pages, index.html, progress.html, sin.html, 404.html, sitemap.xml and search.json
+npm run render     # rewrites the article, compare and topic overview pages, index.html, progress.html, sin.html, 404.html, offline.html, sitemap.xml, sw.js, dates.json and search.json
 npm run check      # exits 1 if a generated file is stale
+npm run og         # redraws the share image of each topic (og/<Sin>.png) with headless Chrome; then run npm run render
 ```
+
+Run `npm run og` after adding a topic or changing a topic's name or tagline. It is kept out of `render` and `check` because drawing text needs a browser; it looks for Chrome at the usual macOS and Linux paths, or at `CHROME`. A topic with no image yet uses `og.png`.
+
+Each article's dates (in the sitemap's `lastmod` and the `datePublished` and `dateModified` of its structured data) are kept in `dates.json` with a hash of its Markdown. When `npm run render` finds the hash changed, the article's modified date becomes the day of the render. The dates are not read from git at build time because the commit date is not known until the commit that would have to contain it; the first dates were seeded from git history (the commit adding each `.md` and the last one changing it).
 
 GitHub Actions runs `npm run check` on every pull request and on every push to `main` (`.github/workflows/check.yml`), so a stale page fails the run.
 
-The site can be deployed to any static host, such as Vercel, as it is. It is currently deployed on the free Vercel Hobby plan at <https://seven-sins-liard.vercel.app>; `vercel.json` sets the security headers and the caching: fonts, `style.css` and the scripts are cached for a year as immutable, which is safe because every page links them with a hash of the file (`style.css?v=…`), so editing one of them and running `npm run render` rewrites every page. It also sends a `Speculation-Rules` header pointing at `speculation-rules.json`, which asks the browser to prefetch (download only, no scripts run) a pager link or home card when the reader hovers it (<https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Speculation-Rules>; the file must be served as `application/speculationrules+json`). The generated HTML is committed, so the host runs no build step. To redeploy, run `vercel deploy --prod` in this folder (the project name `seven-sins` is saved in the untracked `.vercel` folder).
+The site can be deployed to any static host, such as Vercel, as it is. It is currently deployed on the free Vercel Hobby plan at <https://seven-sins-liard.vercel.app>; `vercel.json` sets the security headers and the caching: fonts, `style.css` and the scripts are cached for a year as immutable, which is safe because every page links them with a hash of the file (`style.css?v=…`), so editing one of them and running `npm run render` rewrites every page. It also sends the manifest as `application/manifest+json`, and a `Speculation-Rules` header pointing at `speculation-rules.json`, which asks the browser to prefetch (download only, no scripts run) a pager link or home card when the reader hovers it (<https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Speculation-Rules>; the file must be served as `application/speculationrules+json`). The generated HTML is committed, so the host runs no build step. To redeploy, run `vercel deploy --prod` in this folder (the project name `seven-sins` is saved in the untracked `.vercel` folder).
 
 ## Project layout
 
 ```
 Sins/
-  build.js        generates every .html page, sitemap.xml and search.json (npm run render)
+  build.js        generates every .html page, sitemap.xml, sw.js, dates.json and search.json (npm run render)
+  og.js           draws og/<Sin>.png, the share image of each topic (npm run og)
+  sw.js           generated service worker: keeps the stylesheet, scripts, fonts and every page opened, so they open offline
+  offline.html    generated page the service worker shows offline for a page not kept, listing the pages that are
+  dates.json      generated: when each article was first published and last changed, with a hash of its Markdown
+  manifest.webmanifest  web app manifest (name, colours, icons) for installing the site
+  icons/          192 and 512px app icons and a 512px maskable one, drawn from favicon.svg
   index.html      generated home page: one card per sin and inner battle
   progress.html   generated "Your reading" page: articles read per topic and lens, and export and import of everything kept in the browser
   sin.html        generated redirect for old sin.html?id=... links
@@ -122,8 +133,8 @@ Sins/
   <Sin>/index.html  generated topic overview: every section in every lens, with ticks on the articles read
   style.css       styles, including the reader-selectable themes (Paper, Sepia, Grey, Dark, Black)
   fonts/          Literata 5.3.0 (variable weight, latin and latin-ext, upright and italic) and its OFL licence, from https://www.npmjs.com/package/@fontsource-variable/literata
-  site.js         on every page but sin.html: the search link in the site bar, keyboard shortcuts (/ for search, left and right arrows for previous and next) and marking the searched words on an article opened from the search results
-  theme.js        Display menu in the site bar: theme and text size, both saved in the browser
+  site.js         on every page but sin.html: the search link in the site bar, keyboard shortcuts (/ for search, left and right arrows for previous and next) and marking the searched words on an article opened from the search results; registers the service worker, shows "Available offline" on an article once it is kept, and lists the kept pages on offline.html
+  theme.js        Display menu in the site bar: theme and text size, both saved in the browser; also sets the browser bar colour (theme-color) to the theme picked
   home.js         home page and 404 page: search box that narrows the topic cards and lists articles whose text matches; on the home page, lens buttons that choose which lens the cards open on (default: the lens read last)
   redirect.js     used by sin.html to send old links to the static page
   compare.js      used by each <Sin>/<topic>/compare.html (generated: all six lenses of one section) to choose which lenses are shown side by side
@@ -134,6 +145,7 @@ Sins/
   search.json     generated: the plain text of every article (without its Sources), fetched by home.js the first time the search box is used
   favicon.svg  apple-touch-icon.png   the site mark as a tab icon and as the 180px home-screen icon
   speculation-rules.json  links to prefetch on hover (pager and home cards), sent by vercel.json in a Speculation-Rules header
+  og/             one 1200x630 share image per topic, drawn by og.js
   robots.txt  og.png  vercel.json  package.json  package-lock.json  .gitignore
   LICENSE         MIT
   CLAUDE.md       instructions for the AI agent
@@ -164,6 +176,8 @@ Everything a reader does is kept in the browser's `localStorage` and never sent 
 | `notes` | reader.js | private notes (`{path: text}`) |
 | `highlights` | reader.js | highlights (`{path: {title, items: [{text, before, after}]}}`) |
 
+The service worker also keeps every page opened in a cache named `pages` (Cache Storage, not `localStorage`), so it opens offline. It is not part of the export, and clearing site data deletes it.
+
 Article files follow the pattern `<Sin>/<topic>/<lens>.md`, and the generated page is `<Sin>/<topic>/<lens>.html`. Links between articles in Markdown should point at the `.html` page (for example `../how-to-overcome/modern.html`).
 
 ## Adding a sin
@@ -171,7 +185,7 @@ Article files follow the pattern `<Sin>/<topic>/<lens>.md`, and the generated pa
 1. Create a folder named after the sin, for example `Pride/`, matching its `id` in `sins.json`.
 2. For each topic, add a subfolder with six files: `modern.md`, `hinduism.md`, `upanishads.md`, `christianity.md`, `buddhism.md`, `philosophical.md`.
 3. Add a `topics` list to that sin in `sins.json`. A sin without `topics` is shown as "Coming soon". Add a `"related"` list of up to three other ids to show as "Related topics" at the end of its articles (the build fails on an unknown id). Add `"kind": "inner-battle"` for a topic that is not one of the seven sins; with no `kind` it is listed under the sins.
-4. Run `npm run render` and commit the generated pages.
+4. Run `npm run og`, then `npm run render`, and commit the generated pages and the new share image.
 
 ```json
 "topics": [

@@ -257,6 +257,9 @@ article.md mark { background: var(--accent-soft); color: var(--text); padding: 0
 .tools .listen .icon::before { content: "\25B6"; }
 .tools .listen[aria-pressed="true"] .icon::before { content: "\25A0"; }
 .tools-status { font-family: var(--sans); font-size: .85rem; color: var(--muted); }
+/* shown once the page is kept by the service worker (site.js) */
+.tools .offline-note { padding: 0 var(--space-2); }
+.tools .offline-note::before { content: "\2193\00a0"; color: var(--accent); }
 /* the block being read aloud */
 article.md .speaking { background: var(--accent-soft); box-shadow: 0 0 0 var(--space-1) var(--accent-soft); border-radius: 2px; }
 /* the reader's own highlights, drawn with the CSS Custom Highlight API (reader.js) */

@@ -1,6 +1,7 @@
 // Pre-renders the site to static HTML: one page per article, a compare page per topic section
 // (all the lenses side by side), an overview page per topic (<Sin>/index.html: every section and lens),
-// plus index.html, progress.html (the reader's own progress, saved articles and export), sin.html, 404.html, sitemap.xml
+// plus index.html, progress.html (the reader's own progress, saved articles and export), sin.html, 404.html, offline.html,
+// sitemap.xml, sw.js (the service worker), dates.json (when each article was first published and last changed)
 // and search.json (the article text that the home page search box reads).
 // `npm run render` writes the files (commit them; the host serves them as they are).
 // `npm run check` exits 1 if any generated file on disk is stale.
@@ -26,6 +27,28 @@ const DESCRIPTION = `Understand the ${words[sinCount]} deadly sins, and the inne
 // so a changed file is fetched under a new URL. Editing style.css or a script therefore makes every page stale.
 const hashed = file => `${file}?v=${crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex").slice(0, 10)}`;
 const ASSET = Object.fromEntries(["style.css", "theme.js", "site.js", "home.js", "progress.js", "reader.js", "compare.js", "redirect.js"].map(f => [f, hashed(f)]));
+
+// When each article was first published and last changed, for the sitemap and the structured data. A date taken
+// from git at build time could never be in the same commit as the pages that show it, so dates.json keeps one per
+// article with a hash of its Markdown: when the hash no longer matches, the article gets today's date as modified.
+// The first dates were seeded from git history (first commit adding each .md, last commit changing it).
+const sha = text => crypto.createHash("sha256").update(text).digest("hex").slice(0, 16);
+const today = new Date().toLocaleDateString("en-CA"); // YYYY-MM-DD in local time
+const oldDates = fs.existsSync("dates.json") ? JSON.parse(fs.readFileSync("dates.json", "utf8")) : {};
+function datesOf(path, md) {
+  const old = oldDates[path], hash = sha(md);
+  return old && old.sha === hash ? old : { published: old ? old.published : today, modified: today, sha: hash };
+}
+
+// Share image per topic, og/<Sin>.png, drawn by og.js (npm run og) since drawing text needs a browser.
+// A topic without one yet uses the site-wide og.png.
+const shareImage = sin => sin && fs.existsSync(`og/${sin.id}.png`)
+  ? { src: `${SITE}/og/${sin.id}.png`, alt: `${sin.name}: ${sin.tagline} Read through ${count} lenses on The Seven Sins.` }
+  : { src: `${SITE}/og.png`, alt: `The Seven Sins ${SUBTITLE}. ${data.sins.length} topics, each read through ${count} lenses: ${lensList}.` };
+
+// The browser bar colour (theme-color) for the default theme: the --bg of :root in style.css, light and dark.
+// theme.js changes it to the --bg of a theme the reader picks.
+const BAR = { light: "#faf7f2", dark: "#17140f" };
 
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const articlePath = (s, t, l) => `${s.id}/${t.id}/${l.id}.html`;
@@ -103,7 +126,7 @@ const footer = text => `<footer><p>${text}</p></footer>`;
 
 // Article tools, all run in the browser by reader.js (the Read toggle by progress.js). Every control is hidden in
 // the markup and shown by the script that runs it, so without JavaScript none of them appears.
-const tools = `<div class="tools" role="group" aria-label="Article tools" hidden><button type="button" class="save" aria-pressed="false" hidden><span class="icon" aria-hidden="true"></span>Save</button><button type="button" class="mark-read" aria-pressed="false" hidden><span class="icon" aria-hidden="true"></span>Read</button><button type="button" class="share" hidden><span class="icon" aria-hidden="true"></span>Share</button><button type="button" class="listen" aria-pressed="false" hidden><span class="icon" aria-hidden="true"></span>Listen</button><span class="tools-status" role="status"></span></div>`;
+const tools = `<div class="tools" role="group" aria-label="Article tools" hidden><button type="button" class="save" aria-pressed="false" hidden><span class="icon" aria-hidden="true"></span>Save</button><button type="button" class="mark-read" aria-pressed="false" hidden><span class="icon" aria-hidden="true"></span>Read</button><button type="button" class="share" hidden><span class="icon" aria-hidden="true"></span>Share</button><button type="button" class="listen" aria-pressed="false" hidden><span class="icon" aria-hidden="true"></span>Listen</button><span class="offline-note label" hidden>Available offline</span><span class="tools-status" role="status"></span></div>`;
 const notes = up => `<div class="notes" hidden>
       <label class="label" for="note">Your notes</label>
       <textarea id="note" rows="4" aria-describedby="note-hint"></textarea>
@@ -112,7 +135,7 @@ const notes = up => `<div class="notes" hidden>
     </div>
     <div class="hl-bar" hidden><button type="button"></button></div>`;
 
-function head({ title, description, url, type, depth, robots, graph }) {
+function head({ title, description, url, type, depth, robots, graph, image = shareImage() }) {
   const up = depth === "root" ? "/" : "../".repeat(depth); // "root": absolute paths, for a page served at any URL
   return `<!doctype html>
 <html lang="en">
@@ -126,14 +149,17 @@ ${robots ? `  <meta name="robots" content="${robots}">\n` : ""}${url ? `  <link 
   <meta property="og:url" content="${url}">
   <meta property="og:title" content="${esc(title)}">
   <meta property="og:description" content="${esc(description)}">
-  <meta property="og:image" content="${SITE}/og.png">
+  <meta property="og:image" content="${image.src}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="The Seven Sins ${SUBTITLE}. ${data.sins.length} topics, each read through ${count} lenses: ${lensList}.">
+  <meta property="og:image:alt" content="${esc(image.alt)}">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="${SITE}/og.png">
-` : ""}${graph ? jsonLd(graph) : ""}  <link rel="icon" href="${up}favicon.svg" type="image/svg+xml">
+  <meta name="twitter:image" content="${image.src}">
+` : ""}${graph ? jsonLd(graph) : ""}  <meta name="theme-color" content="${BAR.light}" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="${BAR.dark}" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="${up}favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="${up}apple-touch-icon.png">
+  <link rel="manifest" href="${up}manifest.webmanifest">
   <script src="${up}${ASSET["theme.js"]}"></script>
   <link rel="preload" href="${up}fonts/literata-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="${up}${ASSET["style.css"]}">
@@ -159,7 +185,7 @@ function overviewPage(sin) {
   const relatedNav = related.length ? `
     <nav class="related" aria-labelledby="related-title"><h2 class="label" id="related-title">Related topics</h2><div class="related-list">${related.map(r => `<a href="../${r.id}/index.html"><strong>${esc(r.name)}</strong><span>${esc(r.tagline)}</span></a>`).join("")}</div></nav>` : "";
   const first = `${sin.topics[0].id}/${data.lenses[0].id}.html`;
-  return head({ title, description, url, type: "website", depth: 1, graph }) + `<body>
+  return head({ title, description, url, type: "website", depth: 1, graph, image: shareImage(sin) }) + `<body>
   ${siteBar("../index.html", `<a class="back" href="../index.html#kind-${kind.id}">&larr; All topics</a>${searchLink("../index.html")}`)}
   <main class="wrap narrow overview" id="content" data-total="${total}">
     <header class="page-head">
@@ -182,12 +208,13 @@ function overviewPage(sin) {
 `;
 }
 
-function articlePage(sin, topic, lens, md) {
+function articlePage(sin, topic, lens, md, dates) {
   const title = `${sin.name}: ${topic.title} (${lens.name}) - The Seven Sins`;
   const description = summary(articleText(md));
   const url = `${SITE}/${articlePath(sin, topic, lens)}`;
+  const image = shareImage(sin);
   const graph = [
-    { "@type": "Article", headline: `${sin.name}: ${topic.title} (${lens.name})`, description, url, mainEntityOfPage: url, inLanguage: "en", image: `${SITE}/og.png`, about: sin.name, isPartOf: WEBSITE },
+    { "@type": "Article", headline: `${sin.name}: ${topic.title} (${lens.name})`, description, url, mainEntityOfPage: url, inLanguage: "en", image: image.src, datePublished: dates.published, dateModified: dates.modified, about: sin.name, isPartOf: WEBSITE },
     { "@type": "BreadcrumbList", itemListElement: [
       ["The Seven Sins", `${SITE}/`],
       [sin.name, overviewUrl(sin)],
@@ -212,7 +239,7 @@ function articlePage(sin, topic, lens, md) {
   }).filter(r => r.topics && r.topics.some(t => t.id === topic.id));
   const relatedNav = related.length ? `
     <nav class="related" aria-labelledby="related-title"><h2 class="label" id="related-title">Related topics</h2><div class="related-list">${related.map(r => `<a href="../../${articlePath(r, topic, lens)}"><strong>${esc(r.name)}</strong><span>${esc(r.tagline)}</span></a>`).join("")}</div></nav>` : "";
-  return head({ title, description, url, type: "article", depth: 2, graph }) + `<body>
+  return head({ title, description, url, type: "article", depth: 2, graph, image }) + `<body>
   ${siteBar("../../index.html", `<a class="back" href="../../index.html#kind-${kind.id}">&larr; All topics</a>${searchLink("../../index.html")}`)}
   <main class="wrap narrow">
     <header class="page-head">
@@ -415,39 +442,127 @@ function notFoundPage() {
 `;
 }
 
+// urls: [address, last modified]. The home and overview pages take the latest date of the articles they list.
+// What the service worker (sw.js) shows for a page that is not kept on the device while the reader is offline.
+// Served at whatever address failed, so its links are absolute; site.js lists the pages that are kept.
+function offlinePage() {
+  return head({ title: "Offline - The Seven Sins", description: DESCRIPTION, depth: "root", robots: "noindex" }) + `<body>
+  ${siteBar("/", "")}
+  <main class="wrap narrow" id="content">
+    <header class="hero">
+      <h1>You are offline</h1>
+      <p>This page has not been kept on this device yet. Pages you have opened before still open without a connection.</p>
+    </header>
+    <section class="mine offline-list" aria-labelledby="offline-title" hidden>
+      <h2 class="label" id="offline-title">Kept on this device</h2>
+      <ol></ol>
+    </section>
+    <p class="center"><a class="back" href="/index.html">&larr; All topics</a></p>
+  </main>
+  ${footer(`A read-only guide for self-improvement. Educational and reflective content, not medical, psychological or religious authority. ${DISCLAIMER}`)}
+  <script src="/${ASSET["site.js"]}" defer></script>
+</body>
+</html>
+`;
+}
+
+// The service worker. Pages (and search.json) go to the network first, so a reader who is online always gets the
+// current page, and each one that loads is kept in the "pages" cache to open again offline; a page not kept falls
+// back to offline.html. The stylesheet, scripts and fonts are linked with a hash or never change, so they come
+// from the cache first. The worker's own text changes whenever a hashed file does, which makes browsers install
+// the new one; its install fetches the shell, and its activate drops the previous asset cache.
+function serviceWorker() {
+  const shell = [...["style.css", "theme.js", "site.js", "home.js", "progress.js", "reader.js", "compare.js"].map(f => `/${ASSET[f]}`),
+    "/fonts/literata-latin-wght-normal.woff2", "/fonts/literata-latin-wght-italic.woff2"];
+  const pages = ["/index.html", "/offline.html"];
+  return `// Generated by build.js (serviceWorker); edit it there. See that function for what this does.
+const ASSETS = "assets-${sha(shell.join(" "))}";
+const PAGES = "pages"; // site.js reads this cache too, for the "Available offline" note and the offline page
+const SHELL = ${JSON.stringify(shell)};
+const START = ${JSON.stringify(pages)};
+
+// "/" and "/Envy/" are the same pages as "/index.html" and "/Envy/index.html"; keep one copy of each.
+const key = url => { const u = new URL(url); return u.origin + u.pathname.replace(/\\/$/, "/index.html") + u.search; };
+
+self.addEventListener("install", e => {
+  e.waitUntil(Promise.all([
+    caches.open(ASSETS).then(c => c.addAll(SHELL)),
+    caches.open(PAGES).then(c => c.addAll(START))
+  ]).then(() => self.skipWaiting()));
+});
+
+self.addEventListener("activate", e => {
+  e.waitUntil(caches.keys()
+    .then(names => Promise.all(names.filter(n => n !== ASSETS && n !== PAGES).map(n => caches.delete(n))))
+    .then(() => self.clients.claim()));
+});
+
+self.addEventListener("fetch", e => {
+  const req = e.request;
+  const url = new URL(req.url);
+  if (req.method !== "GET" || url.origin !== location.origin) return;
+  if (url.search.startsWith("?v=") || url.pathname.startsWith("/fonts/")) {
+    e.respondWith(caches.match(req).then(hit => hit || fetch(req).then(res => {
+      if (res.ok) { const copy = res.clone(); e.waitUntil(caches.open(ASSETS).then(c => c.put(req, copy))); }
+      return res;
+    // Offline, a kept page may link an older hash of a file; the current copy is the closest there is.
+    }).catch(() => caches.match(req, { ignoreSearch: true }).then(old => old || Response.error()))));
+    return;
+  }
+  e.respondWith(fetch(req).then(res => {
+    if (res.ok) { const copy = res.clone(); e.waitUntil(caches.open(PAGES).then(c => c.put(key(req.url), copy))); }
+    return res;
+  }).catch(() => caches.match(key(req.url)).then(hit => hit
+    || (req.mode === "navigate" ? caches.match("/offline.html") : Response.error()))));
+});
+`;
+}
+
 function sitemap(urls) {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map(u => `  <url><loc>${u}</loc></url>`).join("\n")}
+${urls.map(([u, d]) => `  <url><loc>${u}</loc><lastmod>${d}</lastmod></url>`).join("\n")}
 </urlset>
 `;
 }
 
 function outputs() {
   const out = new Map();
-  const urls = [`${SITE}/`];
+  const home = [`${SITE}/`, ""];
+  const urls = [home];
   const articles = [];
+  const dates = {};
+  const later = (a, b) => a > b ? a : b;
   for (const s of sins) {
     out.set(`${s.id}/index.html`, overviewPage(s));
-    urls.push(overviewUrl(s));
+    const overview = [overviewUrl(s), ""];
+    urls.push(overview);
     for (const t of s.topics) {
       const mds = [];
       for (const l of data.lenses) {
-        const md = fs.readFileSync(`${s.id}/${t.id}/${l.id}.md`, "utf8");
-        out.set(articlePath(s, t, l), articlePage(s, t, l, md));
-        articles.push([`${s.id}/${t.id}/${l.id}`, s.name, t.title, l.name, articleText(md)]);
-        urls.push(`${SITE}/${articlePath(s, t, l)}`);
+        const path = `${s.id}/${t.id}/${l.id}`;
+        const md = fs.readFileSync(`${path}.md`, "utf8");
+        const d = dates[path] = datesOf(path, md);
+        out.set(articlePath(s, t, l), articlePage(s, t, l, md, d));
+        articles.push([path, s.name, t.title, l.name, articleText(md)]);
+        urls.push([`${SITE}/${articlePath(s, t, l)}`, d.modified]);
+        overview[1] = later(overview[1], d.modified);
         mds.push(md);
       }
       out.set(`${s.id}/${t.id}/compare.html`, comparePage(s, t, mds));
     }
+    home[1] = later(home[1], overview[1]);
   }
   out.set("index.html", indexPage());
   out.set("progress.html", readingPage());
   out.set("sin.html", redirectPage());
   out.set("404.html", notFoundPage());
+  out.set("offline.html", offlinePage());
+  out.set("sw.js", serviceWorker());
   out.set("sitemap.xml", sitemap(urls));
   out.set("search.json", JSON.stringify({ articles }) + "\n");
+  // One article per line, so a content change shows as a one-line diff.
+  out.set("dates.json", `{\n${Object.entries(dates).map(([p, d]) => `${JSON.stringify(p)}: ${JSON.stringify(d)}`).join(",\n")}\n}\n`);
   return out;
 }
 

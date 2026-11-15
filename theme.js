@@ -1,6 +1,7 @@
 // Theme and text size menu. Loaded in <head> without defer so the saved theme and size are applied before
 // the first paint; the menu itself is set up once the page has parsed. It stays hidden when JavaScript is off
 // (the site then follows the system setting at the browser's own text size).
+// It also sets the browser bar colour (the theme-color meta tags) to the page colour of the theme picked.
 (() => {
   const root = document.documentElement;
   // Text size steps; style.css sets the root font size for each, and every size in style.css is in rem.
@@ -17,6 +18,14 @@
     if (!box) return;
     const buttons = box.querySelectorAll(".themes button");
     const steps = box.querySelectorAll(".text-size button");
+    // The page has one tag for light and one for dark; with a theme picked both take its --bg. The stylesheet has
+    // been applied by now: DOMContentLoaded waits for the deferred scripts, and they wait for the stylesheet.
+    const bars = [...document.querySelectorAll('meta[name="theme-color"]')];
+    const auto = bars.map(m => m.content);
+    const paintBar = () => {
+      const bg = root.dataset.theme && getComputedStyle(root).getPropertyValue("--bg").trim();
+      bars.forEach((m, i) => { m.content = bg || auto[i]; });
+    };
     const show = () => {
       const current = root.dataset.theme || "";
       for (const b of buttons) b.setAttribute("aria-pressed", String(b.value === current));
@@ -24,6 +33,7 @@
       box.querySelector(".size").textContent = SIZES[size];
       // aria-disabled rather than disabled, so focus stays on the button at the end of the range
       for (const b of steps) b.setAttribute("aria-disabled", String(!(size + Number(b.value) in SIZES)));
+      paintBar();
     };
     box.addEventListener("click", e => {
       const b = e.target.closest(".themes button");

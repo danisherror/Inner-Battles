@@ -3,7 +3,8 @@
   "description": "Build tooling for The Seven Sins. The site itself is plain static files.",
   "scripts": {
     "render": "node build.js",
-    "check": "node build.js --check"
+    "check": "node build.js --check",
+    "og": "node og.js"
   },
   "devDependencies": {
     "marked": "18.2.0"
