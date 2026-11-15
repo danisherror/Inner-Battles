@@ -118,6 +118,7 @@ Sins/
   404.html        hand-written "page not found" page
   style.css       styles, including the reader-selectable themes (Paper, Sepia, Grey, Dark, Black)
   theme.js        theme menu in the site bar; the choice is saved in the browser
+  home.js         home page filter box over the topic cards
   sins.json       single source of truth: lenses, sins, taglines and each sin's topics
   sitemap.xml     generated
   robots.txt  og.png  vercel.json  package.json  package-lock.json  .gitignore

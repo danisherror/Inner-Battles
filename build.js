@@ -143,9 +143,15 @@ function indexPage() {
         ${data.lenses.map(l => `<li>${esc(l.name)}</li>`).join("")}
       </ul>
       <nav class="jump" aria-label="Sections">${data.kinds.map(k => `<a href="#kind-${k.id}">${esc(k.title)}</a>`).join("")}</nav>
+      <div class="filter" role="search" hidden>
+        <label class="sr-only" for="filter">Filter topics</label>
+        <input id="filter" type="search" placeholder="Filter the ${data.sins.length} topics, for example &quot;fear&quot;" autocomplete="off" spellcheck="false">
+        <p class="filter-status label" role="status"></p>
+      </div>
     </header>
     ${sections}
   </main>
+  <script src="home.js" defer></script>
   ${footer(`A read-only guide for self-improvement. Educational and reflective content, not medical, psychological or religious authority. ${DISCLAIMER}`)}
   <script>
     // Cards link to the first lens; swap in the lens the reader chose last.

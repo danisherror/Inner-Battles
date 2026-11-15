@@ -35,6 +35,11 @@
         <li>Modern</li><li>Hinduism</li><li>Upanishads</li><li>Christianity</li><li>Buddhism</li><li>Philosophical</li>
       </ul>
       <nav class="jump" aria-label="Sections"><a href="#kind-sin">The seven deadly sins</a><a href="#kind-inner-battle">Inner battles</a></nav>
+      <div class="filter" role="search" hidden>
+        <label class="sr-only" for="filter">Filter topics</label>
+        <input id="filter" type="search" placeholder="Filter the 26 topics, for example &quot;fear&quot;" autocomplete="off" spellcheck="false">
+        <p class="filter-status label" role="status"></p>
+      </div>
     </header>
     <section aria-labelledby="kind-sin">
       <div class="section-head"><h2 class="section-title" id="kind-sin">The seven deadly sins</h2><span class="label">7 topics</span></div>
@@ -75,6 +80,7 @@
         </div>
       </section>
   </main>
+  <script src="home.js" defer></script>
   <footer><p>A read-only guide for self-improvement. Educational and reflective content, not medical, psychological or religious authority. If a habit is harming your life, please talk to a doctor, therapist or a trusted person.</p></footer>
   <script>
     // Cards link to the first lens; swap in the lens the reader chose last.
