@@ -101,7 +101,7 @@ Then open <http://localhost:8000>.
 After editing any `.md` file or `sins.json`, regenerate the pages and commit the result:
 
 ```sh
-npm install        # once; installs marked 4.3.0, used only at build time
+npm install        # once; installs marked 18.2.0, used only at build time
 npm run render     # rewrites the article pages, index.html, sin.html, sitemap.xml and search.json
 npm run check      # exits 1 if a generated file is stale
 ```

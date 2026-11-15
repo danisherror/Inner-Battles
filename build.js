@@ -25,8 +25,9 @@ const articlePath = (s, t, l) => `${s.id}/${t.id}/${l.id}.html`;
 
 // External links get a visible marker and a screen-reader note; a link whose text is just its URL
 // is shown as the host name instead, so it reads as a destination rather than a string of characters.
-const renderer = new marked.Renderer();
-renderer.link = (href, title, text) => {
+const renderer = {};
+renderer.link = function ({ href, title, tokens }) {
+  const text = this.parser.parseInline(tokens);
   const t = title ? ` title="${esc(title)}"` : "";
   if (!/^https?:\/\//.test(href)) return `<a href="${esc(href)}"${t}>${text}</a>`;
   const host = new URL(href).hostname.replace(/^www\./, "");

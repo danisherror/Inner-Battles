@@ -9,7 +9,7 @@ A quality and completion checklist for this project, adapted from the general Vi
 | Property | Value |
 |---|---|
 | Type | Static content site (marketing/reference), no backend, no auth, no database, no user input |
-| Stack | Plain HTML and CSS. `build.js` renders the Markdown to static HTML with `marked` 4.3.0 at build time (generated pages are committed) |
+| Stack | Plain HTML and CSS. `build.js` renders the Markdown to static HTML with `marked` 18.2.0 at build time (upgraded from 4.3.0 on 2026-11-15; all 910 generated files came out byte for byte the same) (generated pages are committed) |
 | Content | 7 sins + 19 inner battles (Procrastination, Overthinking, Perfectionism, Self-doubt, Self-criticism, Jealousy, Fear and anxiety, Fear of failure and success, Impulsivity, Distraction, Resentment, Ego and validation, Denial and self-deception, Delusion and the true self, Shame and guilt, Hopelessness and despair, Loneliness and isolation, Addiction and compulsion, Burnout and apathy) = 26 entries x 5 topics x 6 lenses = 780 articles (`<Entry>/<topic>/<lens>.md`), driven by `sins.json`; more inner battles are planned in `Inner-Battles.md` |
 | Hosting | Vercel Hobby (free), https://seven-sins-liard.vercel.app |
 | Main risk | Wrong or unsourced claims about scripture, philosophy and research. Technical risk is low |
