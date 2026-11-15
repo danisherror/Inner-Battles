@@ -74,6 +74,7 @@ ${robots ? `  <meta name="robots" content="${robots}">\n` : ""}${url ? `  <link 
   <meta name="twitter:image" content="${SITE}/og.png">
 ` : ""}  <link rel="icon" href="${ICON}">
   <script>try { const t = localStorage.getItem("theme"); if (${JSON.stringify(THEMES.map(t => t[0]).filter(Boolean))}.includes(t)) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+  <link rel="preload" href="${up}fonts/literata-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="${up}style.css">
   <script src="${up}theme.js" defer></script>
 </head>

@@ -117,6 +117,7 @@ Sins/
   sin.html        generated redirect for old sin.html?id=... links
   404.html        hand-written "page not found" page
   style.css       styles, including the reader-selectable themes (Paper, Sepia, Grey, Dark, Black)
+  fonts/          Literata 5.3.0 (variable weight, latin and latin-ext, upright and italic) and its OFL licence, from https://www.npmjs.com/package/@fontsource-variable/literata
   theme.js        theme menu in the site bar; the choice is saved in the browser
   home.js         home page filter box over the topic cards
   progress.js     reading progress: ticks on topic and lens links already read, a count on each home card (kept in the browser only)
