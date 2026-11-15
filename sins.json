@@ -44,6 +44,7 @@
       "id": "Pride",
       "name": "Pride",
       "tagline": "Valuing yourself above truth, and above other people.",
+      "related": ["Ego-and-validation", "Envy", "Denial-and-self-deception"],
       "topics": [
         {
           "id": "what-it-is",
@@ -71,6 +72,7 @@
       "id": "Greed",
       "name": "Greed",
       "tagline": "Wanting more than you need, and never feeling you have enough.",
+      "related": ["Envy", "Gluttony", "Addiction-and-compulsion"],
       "topics": [
         {
           "id": "what-it-is",
@@ -98,6 +100,7 @@
       "id": "Lust",
       "name": "Lust",
       "tagline": "Desire that overrides respect, commitment and judgment.",
+      "related": ["Impulsivity", "Addiction-and-compulsion", "Gluttony"],
       "topics": [
         {
           "id": "what-it-is",
@@ -125,6 +128,7 @@
       "id": "Envy",
       "name": "Envy",
       "tagline": "Pain at another person's good fortune.",
+      "related": ["Jealousy", "Resentment", "Ego-and-validation"],
       "topics": [
         {
           "id": "what-it-is",
@@ -152,6 +156,7 @@
       "id": "Gluttony",
       "name": "Gluttony",
       "tagline": "Over-indulgence, taking more than you need.",
+      "related": ["Impulsivity", "Addiction-and-compulsion", "Greed"],
       "topics": [
         {
           "id": "what-it-is",
@@ -179,6 +184,7 @@
       "id": "Wrath",
       "name": "Wrath",
       "tagline": "Uncontrolled anger, resentment and the wish to get even.",
+      "related": ["Resentment", "Impulsivity", "Pride"],
       "topics": [
         {
           "id": "what-it-is",
@@ -206,6 +212,7 @@
       "id": "Sloth",
       "name": "Sloth",
       "tagline": "Neglecting what matters, from laziness, apathy or avoidance.",
+      "related": ["Procrastination", "Burnout-and-apathy", "Distraction"],
       "topics": [
         {
           "id": "what-it-is",
@@ -234,6 +241,7 @@
       "name": "Procrastination",
       "kind": "inner-battle",
       "tagline": "Putting off what matters until later, though you know the delay will cost you.",
+      "related": ["Perfectionism", "Fear-of-failure-and-success", "Distraction"],
       "topics": [
         {
           "id": "what-it-is",
@@ -262,6 +270,7 @@
       "name": "Overthinking",
       "kind": "inner-battle",
       "tagline": "Going round the same thoughts about the past or the future, unable to settle or to act.",
+      "related": ["Fear-and-anxiety", "Self-doubt", "Perfectionism"],
       "topics": [
         {
           "id": "what-it-is",
@@ -290,6 +299,7 @@
       "name": "Perfectionism",
       "kind": "inner-battle",
       "tagline": "Holding yourself to standards so high that starting, finishing or being seen feels unsafe.",
+      "related": ["Self-criticism", "Fear-of-failure-and-success", "Procrastination"],
       "topics": [
         {
           "id": "what-it-is",
@@ -318,6 +328,7 @@
       "name": "Self-doubt",
       "kind": "inner-battle",
       "tagline": "Doubting your ability or worth, and feeling like a fraud despite what you have done.",
+      "related": ["Self-criticism", "Fear-of-failure-and-success", "Ego-and-validation"],
       "topics": [
         {
           "id": "what-it-is",
@@ -346,6 +357,7 @@
       "name": "Self-criticism",
       "kind": "inner-battle",
       "tagline": "A harsh inner voice that punishes mistakes instead of helping you improve.",
+      "related": ["Shame-and-guilt", "Perfectionism", "Self-doubt"],
       "topics": [
         {
           "id": "what-it-is",
@@ -374,6 +386,7 @@
       "name": "Jealousy",
       "kind": "inner-battle",
       "tagline": "The fear of losing someone or something to a rival, and the hurt and suspicion that follow.",
+      "related": ["Envy", "Fear-and-anxiety", "Resentment"],
       "topics": [
         {
           "id": "what-it-is",
@@ -402,6 +415,7 @@
       "name": "Fear and anxiety",
       "kind": "inner-battle",
       "tagline": "The mind sounding the alarm about threats that have not happened, or are far bigger in the imagination.",
+      "related": ["Overthinking", "Fear-of-failure-and-success", "Hopelessness-and-despair"],
       "topics": [
         {
           "id": "what-it-is",
@@ -430,6 +444,7 @@
       "name": "Fear of failure and success",
       "kind": "inner-battle",
       "tagline": "Staying out of the attempt because you dread falling short, or dread what succeeding would bring.",
+      "related": ["Perfectionism", "Self-doubt", "Procrastination"],
       "topics": [
         {
           "id": "what-it-is",
@@ -458,6 +473,7 @@
       "name": "Impulsivity",
       "kind": "inner-battle",
       "tagline": "Acting on the urge of the moment and giving up a larger, later good for a smaller, sooner one.",
+      "related": ["Distraction", "Addiction-and-compulsion", "Wrath"],
       "topics": [
         {
           "id": "what-it-is",
@@ -486,6 +502,7 @@
       "name": "Distraction",
       "kind": "inner-battle",
       "tagline": "A mind pulled in many directions at once, unable to stay with what matters.",
+      "related": ["Procrastination", "Impulsivity", "Overthinking"],
       "topics": [
         {
           "id": "what-it-is",
@@ -514,6 +531,7 @@
       "name": "Resentment",
       "kind": "inner-battle",
       "tagline": "Holding on to an old hurt, so the past keeps paying rent in your head.",
+      "related": ["Wrath", "Envy", "Shame-and-guilt"],
       "topics": [
         {
           "id": "what-it-is",
@@ -542,6 +560,7 @@
       "name": "Ego and validation",
       "kind": "inner-battle",
       "tagline": "Needing approval and praise to feel worthy.",
+      "related": ["Pride", "Self-doubt", "Delusion-and-the-true-self"],
       "topics": [
         {
           "id": "what-it-is",
@@ -570,6 +589,7 @@
       "name": "Denial and self-deception",
       "kind": "inner-battle",
       "tagline": "Not letting yourself see the truth, and explaining away the discomfort that follows.",
+      "related": ["Delusion-and-the-true-self", "Pride", "Addiction-and-compulsion"],
       "topics": [
         {
           "id": "what-it-is",
@@ -598,6 +618,7 @@
       "name": "Delusion and the true self",
       "kind": "inner-battle",
       "tagline": "Mistaking the passing parts of you for the whole of who you are.",
+      "related": ["Ego-and-validation", "Denial-and-self-deception", "Pride"],
       "topics": [
         {
           "id": "what-it-is",
@@ -626,6 +647,7 @@
       "name": "Shame and guilt",
       "kind": "inner-battle",
       "tagline": "Feeling bad about what you did, or about who you are, and what to do with it.",
+      "related": ["Self-criticism", "Hopelessness-and-despair", "Resentment"],
       "topics": [
         {
           "id": "what-it-is",
@@ -654,6 +676,7 @@
       "name": "Hopelessness and despair",
       "kind": "inner-battle",
       "tagline": "Believing that nothing will change, and that nothing you do will matter.",
+      "related": ["Burnout-and-apathy", "Loneliness-and-isolation", "Shame-and-guilt"],
       "topics": [
         {
           "id": "what-it-is",
@@ -682,6 +705,7 @@
       "name": "Loneliness and isolation",
       "kind": "inner-battle",
       "tagline": "The urge to withdraw even while wanting connection.",
+      "related": ["Hopelessness-and-despair", "Shame-and-guilt", "Ego-and-validation"],
       "topics": [
         {
           "id": "what-it-is",
@@ -710,6 +734,7 @@
       "name": "Addiction and compulsion",
       "kind": "inner-battle",
       "tagline": "The pull toward something you have decided to stop.",
+      "related": ["Impulsivity", "Lust", "Denial-and-self-deception"],
       "topics": [
         {
           "id": "what-it-is",
@@ -738,6 +763,7 @@
       "name": "Burnout and apathy",
       "kind": "inner-battle",
       "tagline": "Exhaustion that flattens motivation.",
+      "related": ["Sloth", "Hopelessness-and-despair", "Perfectionism"],
       "topics": [
         {
           "id": "what-it-is",

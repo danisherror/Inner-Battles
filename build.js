@@ -91,6 +91,14 @@ function articlePage(sin, topic, lens, md) {
   const next = i < sin.topics.length - 1
     ? step(sin.topics[i + 1], "next", "Next")
     : `<a class="next" href="../../index.html"><span class="label">Finished</span>Choose another topic</a>`;
+  // Related topics open on the same section and lens the reader is on now.
+  const related = (sin.related || []).map(id => {
+    const r = data.sins.find(s => s.id === id);
+    if (!r) throw new Error(`${sin.id}: unknown related id "${id}" in sins.json`);
+    return r;
+  }).filter(r => r.topics && r.topics.some(t => t.id === topic.id));
+  const relatedNav = related.length ? `
+    <nav class="related" aria-labelledby="related-title"><h2 class="label" id="related-title">Related topics</h2><div class="related-list">${related.map(r => `<a href="../../${articlePath(r, topic, lens)}"><strong>${esc(r.name)}</strong><span>${esc(r.tagline)}</span></a>`).join("")}</div></nav>` : "";
   return head({ title, description, url: `${SITE}/${articlePath(sin, topic, lens)}`, type: "article", depth: 2 }) + `<body>
   ${siteBar("../../index.html", `<a class="back" href="../../index.html#kind-${kind.id}">&larr; All topics</a>`)}
   <main class="wrap narrow">
@@ -104,7 +112,7 @@ function articlePage(sin, topic, lens, md) {
       <nav class="lenses" aria-label="Lens"><span class="label" aria-hidden="true">Lens</span>${data.lenses.map(l => link(`${l.id}.html`, l.name, l.id === lens.id)).join("")}</nav>
     </div>
     <article class="md" id="content"><p class="label">${esc(lens.name)} lens</p><h2>${esc(topic.title)}</h2>${articleBody(md)}</article>
-    <nav class="pager" aria-label="Continue reading">${prev}${next}</nav>
+    <nav class="pager" aria-label="Continue reading">${prev}${next}</nav>${relatedNav}
   </main>
   ${footer(`Educational and reflective content, not medical, psychological or religious authority. ${DISCLAIMER}`)}
   <script>try { localStorage.setItem("lens", ${JSON.stringify(lens.id)}); } catch (e) {}</script>

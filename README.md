@@ -143,7 +143,7 @@ Article files follow the pattern `<Sin>/<topic>/<lens>.md`, and the generated pa
 
 1. Create a folder named after the sin, for example `Pride/`, matching its `id` in `sins.json`.
 2. For each topic, add a subfolder with six files: `modern.md`, `hinduism.md`, `upanishads.md`, `christianity.md`, `buddhism.md`, `philosophical.md`.
-3. Add a `topics` list to that sin in `sins.json`. A sin without `topics` is shown as "Coming soon". Add `"kind": "inner-battle"` for a topic that is not one of the seven sins; with no `kind` it is listed under the sins.
+3. Add a `topics` list to that sin in `sins.json`. A sin without `topics` is shown as "Coming soon". Add a `"related"` list of up to three other ids to show as "Related topics" at the end of its articles (the build fails on an unknown id). Add `"kind": "inner-battle"` for a topic that is not one of the seven sins; with no `kind` it is listed under the sins.
 4. Run `npm run render` and commit the generated pages.
 
 ```json
