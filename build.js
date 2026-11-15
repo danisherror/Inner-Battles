@@ -108,6 +108,7 @@ function articlePage(sin, topic, lens, md) {
   </main>
   ${footer(`Educational and reflective content, not medical, psychological or religious authority. ${DISCLAIMER}`)}
   <script>try { localStorage.setItem("lens", ${JSON.stringify(lens.id)}); } catch (e) {}</script>
+  <script src="../../progress.js" defer></script>
 </body>
 </html>
 `;
@@ -117,7 +118,7 @@ function indexPage() {
   const card = s => {
     const inner = `<h3>${esc(s.name)}</h3><p>${esc(s.tagline)}</p>`;
     return s.topics
-      ? `<a class="card" href="${articlePath(s, s.topics[0], data.lenses[0])}">${inner}</a>`
+      ? `<a class="card" href="${articlePath(s, s.topics[0], data.lenses[0])}" data-total="${s.topics.length * data.lenses.length}">${inner}</a>`
       : `<div class="card disabled">${inner}<span class="soon">Coming soon</span></div>`;
   };
   const sections = data.kinds.map(k => {
@@ -150,8 +151,10 @@ function indexPage() {
       </div>
     </header>
     ${sections}
+    <p class="center"><button class="reset" type="button" hidden>Clear reading progress</button></p>
   </main>
   <script src="home.js" defer></script>
+  <script src="progress.js" defer></script>
   ${footer(`A read-only guide for self-improvement. Educational and reflective content, not medical, psychological or religious authority. ${DISCLAIMER}`)}
   <script>
     // Cards link to the first lens; swap in the lens the reader chose last.

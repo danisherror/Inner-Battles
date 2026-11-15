@@ -114,7 +114,11 @@ header.hero p.filter-status { min-height: 1.5em; margin-top: var(--space-3); fon
 .section-head .label { white-space: nowrap; }
 .section-intro { color: var(--muted); margin: var(--space-1) 0 0; }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: var(--space-4); padding: var(--space-5) 0 var(--space-5); }
-main > section:last-child .grid { padding-bottom: var(--space-8); }
+.card .progress { display: block; margin-top: var(--space-3); font-size: .7rem; }
+.card .progress.done { color: var(--accent); }
+.reset { margin: 0 0 var(--space-8); padding: var(--space-2) var(--space-4); min-height: 44px; font: inherit; font-size: .9rem; color: var(--muted); background: none; border: 1px solid var(--line); border-radius: var(--radius-pill); cursor: pointer; }
+.reset:hover { color: var(--accent); border-color: var(--accent); }
+main > section:last-of-type .grid { padding-bottom: var(--space-7); }
 .card {
   position: relative; display: block; background: var(--card); border: 1px solid var(--line);
   border-radius: var(--radius); padding: var(--space-5); color: inherit; text-decoration: none;
@@ -143,6 +147,7 @@ a.card:hover::after { color: var(--accent); opacity: 1; transform: translateX(3p
 }
 .topics a:hover, .lenses a:hover { border-color: var(--accent); color: var(--accent); }
 .topics a[aria-current] { background: var(--accent); border-color: var(--accent); color: var(--bg); font-weight: bold; }
+.topics a.read::after, .lenses a.read::after { content: "\2713"; margin-left: var(--space-2); font-size: .8em; color: var(--accent); }
 .lenses a[aria-current] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: bold; }
 
 /* article body */
