@@ -1,4 +1,5 @@
-// Pre-renders the site to static HTML: one page per article, plus index.html, sin.html, sitemap.xml
+// Pre-renders the site to static HTML: one page per article, a compare page per topic section
+// (all the lenses side by side), plus index.html, sin.html, sitemap.xml
 // and search.json (the article text that the home page search box reads).
 // `npm run render` writes the files (commit them; the host serves them as they are).
 // `npm run check` exits 1 if any generated file on disk is stale.
@@ -104,6 +105,8 @@ ${robots ? `  <meta name="robots" content="${robots}">\n` : ""}${url ? `  <link 
 `;
 }
 
+const navLink = (href, text, on) => `<a href="${href}"${on ? ' aria-current="page"' : ""}>${esc(text)}</a>`;
+
 function articlePage(sin, topic, lens, md) {
   const title = `${sin.name}: ${topic.title} (${lens.name}) - The Seven Sins`;
   const description = summary(articleText(md));
@@ -116,7 +119,6 @@ function articlePage(sin, topic, lens, md) {
       [`${topic.title} (${lens.name})`, url]
     ].map(([name, item], n) => ({ "@type": "ListItem", position: n + 1, name, item })) }
   ];
-  const link = (href, text, on) => `<a href="${href}"${on ? ' aria-current="page"' : ""}>${esc(text)}</a>`;
   const kind = data.kinds.find(k => k.id === kindOf(sin));
   const i = sin.topics.indexOf(topic);
   const step = (t, cls, label) => `<a class="${cls}" href="../${t.id}/${lens.id}.html"><span class="label">${label}</span>${esc(t.title)}</a>`;
@@ -141,14 +143,43 @@ function articlePage(sin, topic, lens, md) {
       <p class="sin-tag">${esc(sin.tagline)}</p>
     </header>
     <div class="switch">
-      <nav class="topics" aria-label="Topic"><span class="label" aria-hidden="true">Topic</span>${sin.topics.map(t => link(`../${t.id}/${lens.id}.html`, t.title, t.id === topic.id)).join("")}</nav>
-      <nav class="lenses" aria-label="Lens"><span class="label" aria-hidden="true">Lens</span>${data.lenses.map(l => link(`${l.id}.html`, l.name, l.id === lens.id)).join("")}</nav>
+      <nav class="topics" aria-label="Topic"><span class="label" aria-hidden="true">Topic</span>${sin.topics.map(t => navLink(`../${t.id}/${lens.id}.html`, t.title, t.id === topic.id)).join("")}</nav>
+      <nav class="lenses" aria-label="Lens"><span class="label" aria-hidden="true">Lens</span>${data.lenses.map(l => navLink(`${l.id}.html`, l.name, l.id === lens.id)).join("")}<a class="compare-link" href="compare.html"><span aria-hidden="true">&#8644;&nbsp;</span>Compare lenses</a></nav>
     </div>
     <article class="md" id="content"><p class="label">${esc(lens.name)} lens</p><h2>${esc(topic.title)}</h2>${articleBody(md)}</article>
     <nav class="pager" aria-label="Continue reading">${prev}${next}</nav>${relatedNav}
   </main>
   ${footer(`Educational and reflective content, not medical, psychological or religious authority. ${DISCLAIMER}`)}
   <script src="../../progress.js" defer></script>
+</body>
+</html>
+`;
+}
+
+// One section of one topic with every lens in the page. compare.js shows the chosen lenses side by side;
+// without JavaScript all of them are shown. The text is the articles' own, so the page is kept out of
+// search results and the sitemap.
+function comparePage(sin, topic, mds) {
+  const kind = data.kinds.find(k => k.id === kindOf(sin));
+  const title = `${sin.name}: ${topic.title}, lenses compared - The Seven Sins`;
+  return head({ title, description: `${sin.tagline} ${topic.title}, read through ${count} lenses side by side.`, depth: 2, robots: "noindex" }) + `<body>
+  ${siteBar("../../index.html", `<a class="back" href="../../index.html#kind-${kind.id}">&larr; All topics</a>`)}
+  <main class="wrap compare" id="content">
+    <header class="page-head">
+      <p class="label">${esc(kind.label)}</p>
+      <h1 class="sin-title">${esc(sin.name)}</h1>
+      <p class="sin-tag">${esc(topic.title)}, read through each lens side by side.</p>
+    </header>
+    <div class="switch">
+      <nav class="topics" aria-label="Topic"><span class="label" aria-hidden="true">Topic</span>${sin.topics.map(t => navLink(`../${t.id}/compare.html`, t.title, t.id === topic.id)).join("")}</nav>
+      <div class="lenses pick" role="group" aria-label="Lenses to show" hidden><span class="label" aria-hidden="true">Lenses to show</span>${data.lenses.map(l => `<button type="button" value="${l.id}" aria-pressed="false">${esc(l.name)}</button>`).join("")}</div>
+    </div>
+    <div class="columns">
+      ${data.lenses.map((l, n) => `<article class="md" data-lens="${l.id}"><h2>${esc(l.name)}</h2>${articleBody(mds[n])}<p class="open"><a href="${l.id}.html">Open the ${esc(l.name)} article on its own</a></p></article>`).join("\n      ")}
+    </div>
+  </main>
+  ${footer(`Educational and reflective content, not medical, psychological or religious authority. ${DISCLAIMER}`)}
+  <script src="../../compare.js" defer></script>
 </body>
 </html>
 `;
@@ -234,13 +265,17 @@ function outputs() {
   const urls = [`${SITE}/`];
   const articles = [];
   for (const s of sins)
-    for (const t of s.topics)
+    for (const t of s.topics) {
+      const mds = [];
       for (const l of data.lenses) {
         const md = fs.readFileSync(`${s.id}/${t.id}/${l.id}.md`, "utf8");
         out.set(articlePath(s, t, l), articlePage(s, t, l, md));
         articles.push([`${s.id}/${t.id}/${l.id}`, s.name, t.title, l.name, articleText(md)]);
         urls.push(`${SITE}/${articlePath(s, t, l)}`);
+        mds.push(md);
       }
+      out.set(`${s.id}/${t.id}/compare.html`, comparePage(s, t, mds));
+    }
   out.set("index.html", indexPage());
   out.set("sin.html", redirectPage());
   out.set("sitemap.xml", sitemap(urls));

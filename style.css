@@ -157,15 +157,24 @@ a.card:hover::after { color: var(--accent); opacity: 1; transform: translateX(3p
 .switch { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: var(--space-3) 0; }
 .topics, .lenses { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin: var(--space-2) 0; }
 .switch .label { flex: 0 0 100%; }
-.topics a, .lenses a {
+.topics a, .lenses a, .pick button {
   display: inline-flex; align-items: center; color: var(--text); background: var(--card); text-decoration: none;
   border: 1px solid var(--line); border-radius: var(--radius-pill); padding: var(--space-1) var(--space-3); min-height: 44px;
   font-size: .9rem; transition: border-color .15s, color .15s;
 }
-.topics a:hover, .lenses a:hover { border-color: var(--accent); color: var(--accent); }
+.topics a:hover, .lenses a:hover, .pick button:hover { border-color: var(--accent); color: var(--accent); }
 .topics a[aria-current] { background: var(--accent); border-color: var(--accent); color: var(--bg); font-weight: bold; }
 .topics a.read::after, .lenses a.read::after { content: "\2713"; margin-left: var(--space-2); font-size: .8em; color: var(--accent); }
-.lenses a[aria-current] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: bold; }
+.lenses a[aria-current], .pick button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: bold; }
+.lenses a.compare-link { border-style: dashed; color: var(--muted); }
+.pick button { font-family: inherit; cursor: pointer; }
+
+/* compare page: the chosen lenses of one section in columns */
+.wrap.compare { max-width: 1400px; }
+.columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr)); align-items: start; gap: var(--space-6); padding: var(--space-6) 0 var(--space-7); }
+.compare article.md { min-width: 0; max-width: var(--measure); padding: 0; font-size: 1.0625rem; line-height: 1.65; }
+.compare article.md > h2 { margin-bottom: var(--space-4); padding-bottom: var(--space-2); border-bottom: 2px solid var(--accent); font-size: 1.4rem; }
+.compare .open { margin: var(--space-4) 0 0; font-size: .9rem; }
 
 /* article body */
 article.md { padding: var(--space-6) 0 var(--space-5); font-size: 1.1875rem; line-height: 1.7; }
