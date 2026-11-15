@@ -24,6 +24,8 @@
       show();
     });
     document.addEventListener("click", e => { if (!box.contains(e.target)) box.open = false; });
+    // Tabbing out of the menu closes it too, so it does not stay open over the page.
+    box.addEventListener("focusout", e => { if (e.relatedTarget && !box.contains(e.relatedTarget)) box.open = false; });
     document.addEventListener("keydown", e => {
       if (e.key === "Escape" && box.open) { box.open = false; box.querySelector("summary").focus(); }
     });

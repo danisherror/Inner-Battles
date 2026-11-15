@@ -6,11 +6,13 @@ Already in place, so not listed below: pre-rendered pages that work without Java
 
 ## 1. Verify what exists
 
-- [ ] **Browser pass.** Open the home page, an article, a compare page and `404.html` at phone, tablet and desktop widths in each theme. The README lists "the pages in a browser" as not checked for most topics.
-- [ ] **Contrast in every theme.** Measure text, muted text, links, the "read" tick and focus outlines against WCAG AA in Paper, Sepia, Grey, Dark and Black.
-- [ ] **Keyboard and screen reader pass.** Tab through the theme menu, search, topic/lens switcher and compare buttons; listen to one article with VoiceOver.
-- [ ] **Print pass.** Print an article and a compare page to PDF and read the result.
-- [ ] **No-JavaScript pass.** Confirm that search, theme menu and reset stay hidden and every page is still usable.
+Done 2026-11-15 in Chrome against a local server (so without the `vercel.json` headers). Pages were loaded in same-origin iframes at fixed widths, because the window could not be resized.
+
+- [x] **Browser pass.** Home, `Envy/what-it-is/modern.html`, `Envy/what-it-is/compare.html`, `Self-doubt/root-causes/buddhism.html` and `404.html` at 320, 390, 768, 1024 and 1440px in all five themes: no horizontal overflow anywhere. Phone and tablet screenshots looked right. Notes for later items: on a phone the topic/lens switcher takes about 330px before the article starts (see "Sticky topic/lens switcher"), and the compare page shows one column below about 700px, so lenses stack rather than sit side by side (see "Compare page on phones").
+- [x] **Contrast in every theme.** Every text pair passes AA (4.5:1) in all five themes; the lowest is 5.34:1 (muted text in Grey). The pairs checked were text, muted text and accent on the page and on cards; accent on accent-soft (current lens, pressed buttons, "read" tick); page colour on accent (current topic); text on accent-soft (search `<mark>`). Focus outlines are 6.45:1 or more against both page and card. `--line` borders are only 1.24–1.46:1 against the page. For the pills that is fine, since their text identifies them, but the search box had nothing else marking its edge, so it now uses `--muted` as its border (5.3:1 or more).
+- [~] **Keyboard and screen reader pass.** Keyboard done: Tab order is skip link, theme, Continue reading, jump links, search, cards. Every focus has a visible outline. Enter opens the theme menu, Enter picks a theme and Escape closes it and returns focus to the summary. Space toggles a compare button and updates `aria-pressed`. The search status is `role="status"`, and the input has a label. Fixed: the theme menu stayed open after Tab moved focus out of it; `theme.js` now closes it on `focusout`. **Still to do:** listen to one article with VoiceOver; that needs a person.
+- [x] **Print pass.** Printed the article and the compare page to PDF with headless Chrome: 2 pages each. Then checked the print stylesheet by applying it on screen, with the Black theme chosen. The output is black on white; the site bar, switcher, pager and related topics are gone; external links show their URL after the link text. The compare page prints only the lenses chosen on screen, one under another, each under its own heading.
+- [x] **No-JavaScript pass.** Loaded each page in a sandboxed iframe with scripts off. Theme menu, search, reset, Continue reading and the compare buttons are all hidden. The home page shows all 26 cards, and the compare page shows all six lenses. No page overflows at 390px. One limit: old `sin.html?id=…` links cannot redirect without JavaScript and show "Not available yet" with a link home.
 
 ## 2. Automated checks
 

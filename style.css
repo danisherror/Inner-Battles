@@ -114,7 +114,7 @@ header.hero p.resume { margin-top: var(--space-5); font-size: 1.05rem; }
 .jump { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-2) var(--space-5); margin-top: var(--space-5); font-size: .95rem; }
 .jump a { color: var(--accent); text-underline-offset: 3px; padding: var(--space-2) 0; }
 .filter { margin: var(--space-5) auto 0; max-width: 26rem; }
-.filter input { width: 100%; min-height: 48px; padding: 0 var(--space-5); font: inherit; color: var(--text); background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-pill); text-align: center; }
+.filter input { width: 100%; min-height: 48px; padding: 0 var(--space-5); font: inherit; color: var(--text); background: var(--card); border: 1px solid var(--muted); border-radius: var(--radius-pill); text-align: center; } /* --line is under 3:1 against the page in every theme, too faint to find the box by */
 .filter input::placeholder { color: var(--muted); opacity: 1; }
 .filter input:focus-visible { border-radius: var(--radius-pill); border-color: var(--accent); }
 header.hero p.filter-status { min-height: 1.5em; margin-top: var(--space-3); font-size: .75rem; }
