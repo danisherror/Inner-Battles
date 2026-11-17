@@ -63,7 +63,7 @@
 
     // Listen: one utterance per block (heading, paragraph, list item), so the block being read can be marked.
     // A single passage (a selection or a highlight, further down) is read the same way, as a list of
-    // {words, mark} parts; passageEnd is its hook for when the reading stops, however it stops.
+    // {words, mark, box} parts; passageEnd is its hook for when the reading stops, however it stops.
     const listen = tools.querySelector(".listen");
     const canSpeak = "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
     const blocks = () => [...text.children].flatMap(el =>
@@ -78,11 +78,23 @@
       listen.setAttribute("aria-pressed", "false");
       passageEnd();
     };
+    // The page follows the reading: a part that starts outside the screen, or at its edge under the buttons,
+    // is brought to the middle (a part taller than the screen, to its top). Only while the part before it is
+    // still on screen, so a reader who has scrolled away to look at something else is left there.
+    const still = matchMedia("(prefers-reduced-motion: reduce)");
+    const follow = (b, prev) => {
+      if (prev.bottom <= 0 || prev.top >= innerHeight) return;
+      const edge = innerHeight * 0.15;
+      if (b.top >= edge && b.bottom <= innerHeight - edge) return;
+      const top = b.height > innerHeight - 2 * edge ? b.top - edge : b.top + b.height / 2 - innerHeight / 2;
+      scrollBy({ top, behavior: still.matches ? "auto" : "smooth" });
+    };
     const speak = (parts, i, token) => {
       if (token !== run) return;
       unmark();
       if (i >= parts.length) return stop();
       parts[i].mark();
+      if (i) follow(parts[i].box(), parts[i - 1].box());
       const u = new SpeechSynthesisUtterance(parts[i].words);
       u.lang = document.documentElement.lang;
       u.onend = () => speak(parts, i + 1, token);
@@ -94,7 +106,7 @@
         if (listen.getAttribute("aria-pressed") === "true") return stop();
         stop();
         listen.setAttribute("aria-pressed", "true");
-        speak(blocks().map(el => ({ words: el.textContent, mark: () => el.classList.add("speaking") })), 0, run);
+        speak(blocks().map(el => ({ words: el.textContent, mark: () => el.classList.add("speaking"), box: () => el.getBoundingClientRect() })), 0, run);
       });
       addEventListener("pagehide", stop);
       listen.hidden = false;
@@ -205,21 +217,24 @@
       return out.filter(p => flat.slice(...p).trim());
     };
 
-    // Two buttons, fixed at the foot of the screen so they stay clear of the system's own menu beside a selection,
+    // Three buttons, fixed at the foot of the screen so they stay clear of the system's own menu beside a selection,
     // or at the top when the selection is in the lower part of the screen, so they do not cover it. The first
-    // highlights the selection or removes the tapped highlight; the second reads that passage aloud, and only it.
+    // highlights the selection or removes the tapped highlight; the second reads that passage aloud, and only it;
+    // the third reads from the start of that passage to the end of the article.
     const bar = document.querySelector(".hl-bar");
-    const [act, hear] = bar.querySelectorAll("button");
+    const [act, hear, onward] = bar.querySelectorAll("button");
     let pending = null; // ["add", span] or ["remove", index]
-    let reading = null; // the span being read aloud, kept as it was when Listen was pressed
+    let reading = null; // the passage a reading was started from, kept as it was when the button was pressed
     const target = () => pending && (pending[0] === "add" ? pending[1] : spans[pending[1]]);
-    // "Stop" while the offered passage is the one being read; a different passage offers "Listen", which
-    // changes over to it. While a passage is read the bar stays up, so Stop is always within reach.
+    // Only "Stop" while the offered passage is the one a reading was started from; a different passage offers
+    // "Listen" and "From here", which change over to it. While a reading goes on the bar stays up, so Stop is
+    // always within reach.
     const reads = span => reading && (!span || (span[0] === reading[0] && span[1] === reading[1]));
     const show = () => {
       act.hidden = !pending;
       hear.hidden = !canSpeak || !(pending || reading);
       hear.textContent = reads(target()) ? "Stop" : "Listen";
+      onward.hidden = !canSpeak || !pending || reads(target());
       bar.hidden = act.hidden && hear.hidden;
     };
     const hide = () => { pending = null; show(); };
@@ -260,18 +275,25 @@
     // Keep the selection and the focus where they are when a button is pressed.
     act.addEventListener("pointerdown", e => e.preventDefault());
     hear.addEventListener("pointerdown", e => e.preventDefault());
+    onward.addEventListener("pointerdown", e => e.preventDefault());
     // The passage is read from a copy of its span, so highlighting it, removing its highlight or selecting
     // something else meanwhile does not change what is being read.
-    hear.addEventListener("click", () => {
-      const span = target();
-      const again = reads(span);
-      if (!span && !again) return;
+    const begin = (span, end) => {
       stop();
-      if (again) return;
       reading = [...span];
       const mark = p => { const h = new Highlight(toRange(p)); h.priority = 1; return h; }; // drawn over a highlight
-      speak(pieces(span).map(p => ({ words: flat.slice(...p), mark: () => CSS.highlights.set("speaking", mark(p)) })), 0, run);
+      speak(pieces([span[0], end]).map(p => ({ words: flat.slice(...p), mark: () => CSS.highlights.set("speaking", mark(p)), box: () => toRange(p).getBoundingClientRect() })), 0, run);
       show();
+    };
+    hear.addEventListener("click", () => {
+      const span = target();
+      if (reads(span)) return stop();
+      if (span) begin(span, span[1]);
+    });
+    // The text ends before the Sources, as it does for the article's own Listen.
+    onward.addEventListener("click", () => {
+      const span = target();
+      if (span) begin(span, flat.length);
     });
     act.addEventListener("click", () => {
       if (!pending) return;
