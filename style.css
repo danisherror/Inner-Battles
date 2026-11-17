@@ -269,6 +269,8 @@ article.md mark { background: var(--accent-soft); color: var(--text); padding: 0
 article.md .speaking { background: var(--accent-soft); box-shadow: 0 0 0 var(--space-1) var(--accent-soft); border-radius: 2px; }
 /* the reader's own highlights, drawn with the CSS Custom Highlight API (reader.js) */
 ::highlight(reader) { background-color: var(--hl); color: var(--text); }
+/* the selection or highlight being read aloud, the colour of the block marking above */
+::highlight(speaking) { background-color: var(--accent-soft); color: var(--text); }
 
 /* private notes under the article */
 .notes { padding: 0 0 var(--space-5); }
@@ -278,10 +280,11 @@ article.md .speaking { background: var(--accent-soft); box-shadow: 0 0 0 var(--s
 .notes p { margin: var(--space-2) 0 0; color: var(--muted); font-size: .9rem; line-height: 1.5; }
 .notes a { color: var(--accent); text-underline-offset: 3px; }
 
-/* the Highlight / Remove highlight button, at the foot of the screen, clear of the system's own selection menu */
-.hl-bar { position: fixed; left: 0; right: 0; bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px)); z-index: 3; display: flex; justify-content: center; pointer-events: none; }
+/* the Highlight / Remove highlight button and Listen / Stop beside it, at the foot of the screen, clear of the system's own selection menu */
+.hl-bar { position: fixed; left: 0; right: 0; bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px)); z-index: 3; display: flex; justify-content: center; gap: var(--space-2); pointer-events: none; }
 .hl-bar.top { top: calc(var(--space-4) + env(safe-area-inset-top, 0px)); bottom: auto; }
 .hl-bar button { pointer-events: auto; min-height: 48px; padding: 0 var(--space-5); font: inherit; font-weight: bold; color: var(--bg); background: var(--accent); border: 0; border-radius: var(--radius-pill); box-shadow: 0 6px 20px rgba(0, 0, 0, .25); cursor: pointer; }
+.hl-bar button + button { color: var(--accent); background: var(--card); }
 
 /* home page: saved articles and highlights (reader.js); hidden while searching, as is "Clear reading progress" */
 .searching .mine, .searching .reset { display: none; }
@@ -372,7 +375,7 @@ footer p { max-width: 44rem; margin: 0 auto; }
   :root, :root[data-theme] { --bg: #fff; --card: #fff; --text: #000; --muted: #444; --accent: #000; --accent-soft: #fff; --line: #bbb; color-scheme: light; }
   .site, .switch, .pager, .related, .skip, .jump, .filter, .reset, .resume, .random, .pick, .start, .to-top, a.anchor,
   .tools, .notes, .hl-bar, .mine-link, .transfer { display: none; }
-  ::highlight(reader) { background-color: transparent; color: inherit; }
+  ::highlight(reader), ::highlight(speaking) { background-color: transparent; color: inherit; }
   article.md .speaking { background: none; box-shadow: none; }
   article.md mark { background: none; color: inherit; padding: 0; }
   article.md a.ext::after { content: " (" attr(href) ")"; font-size: .8em; word-break: break-all; }

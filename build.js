@@ -140,9 +140,9 @@ const notes = up => `<div class="notes" hidden>
       <label class="label" for="note">Your notes</label>
       <textarea id="note" rows="4" aria-describedby="note-hint"></textarea>
       <p id="note-hint">Kept only in this browser on this device, and never sent anywhere. Clearing site data deletes them; <a href="${up}progress.html">Your reading</a> can export them to a file.</p>
-      <p class="hl-hint" hidden>Select a passage to highlight it; tap a highlight to remove it.</p>
+      <p class="hl-hint" hidden>Select a passage to highlight it or hear it read aloud; tap a highlight for the same, or to remove it.</p>
     </div>
-    <div class="hl-bar" hidden><button type="button"></button></div>`;
+    <div class="hl-bar" hidden><button type="button"></button><button type="button">Listen</button></div>`;
 
 function head({ title, description, url, type, depth, robots, graph, image = shareImage() }) {
   const up = depth === "root" ? "/" : "../".repeat(depth); // "root": absolute paths, for a page served at any URL

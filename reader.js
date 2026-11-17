@@ -62,34 +62,39 @@
     }
 
     // Listen: one utterance per block (heading, paragraph, list item), so the block being read can be marked.
+    // A single passage (a selection or a highlight, further down) is read the same way, as a list of
+    // {words, mark} parts; passageEnd is its hook for when the reading stops, however it stops.
     const listen = tools.querySelector(".listen");
-    if ("speechSynthesis" in window && "SpeechSynthesisUtterance" in window) {
-      const blocks = () => [...text.children].flatMap(el =>
-        el.matches(".label, .sources") ? [] : el.matches("ul, ol") ? [...el.children] : el.matches("blockquote") ? [...el.children] : [el]);
-      let run = 0;
-      const stop = () => {
-        run++;
-        speechSynthesis.cancel();
-        for (const el of text.querySelectorAll(".speaking")) el.classList.remove("speaking");
-        listen.setAttribute("aria-pressed", "false");
-      };
-      const speak = (list, i, token) => {
-        if (token !== run) return;
-        for (const el of text.querySelectorAll(".speaking")) el.classList.remove("speaking");
-        if (i >= list.length) return stop();
-        const el = list[i];
-        el.classList.add("speaking");
-        const u = new SpeechSynthesisUtterance(el.textContent);
-        u.lang = document.documentElement.lang;
-        u.onend = () => speak(list, i + 1, token);
-        u.onerror = () => { if (token === run) stop(); };
-        speechSynthesis.speak(u);
-      };
+    const canSpeak = "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
+    const blocks = () => [...text.children].flatMap(el =>
+      el.matches(".label, .sources") ? [] : el.matches("ul, ol") ? [...el.children] : el.matches("blockquote") ? [...el.children] : [el]);
+    let run = 0;
+    let passageEnd = () => {};
+    const unmark = () => { for (const el of text.querySelectorAll(".speaking")) el.classList.remove("speaking"); };
+    const stop = () => {
+      run++;
+      speechSynthesis.cancel();
+      unmark();
+      listen.setAttribute("aria-pressed", "false");
+      passageEnd();
+    };
+    const speak = (parts, i, token) => {
+      if (token !== run) return;
+      unmark();
+      if (i >= parts.length) return stop();
+      parts[i].mark();
+      const u = new SpeechSynthesisUtterance(parts[i].words);
+      u.lang = document.documentElement.lang;
+      u.onend = () => speak(parts, i + 1, token);
+      u.onerror = () => { if (token === run) stop(); };
+      speechSynthesis.speak(u);
+    };
+    if (canSpeak) {
       listen.addEventListener("click", () => {
         if (listen.getAttribute("aria-pressed") === "true") return stop();
         stop();
         listen.setAttribute("aria-pressed", "true");
-        speak(blocks(), 0, run);
+        speak(blocks().map(el => ({ words: el.textContent, mark: () => el.classList.add("speaking") })), 0, run);
       });
       addEventListener("pagehide", stop);
       listen.hidden = false;
@@ -186,17 +191,48 @@
     const draw = () => CSS.highlights.set("reader", new Highlight(...spans.map(toRange)));
     draw();
 
-    // One button, fixed at the foot of the screen so it stays clear of the system's own menu beside a selection,
-    // or at the top when the selection is in the lower part of the screen, so it does not cover it.
+    // A span cut into one piece per block, each read as one utterance, as for the whole article.
+    const pieces = ([s, e]) => {
+      const list = blocks(), out = [];
+      let last;
+      for (const { node, idx } of nodes) {
+        const a = Math.max(s, idx[0]), b = Math.min(e, idx.at(-1));
+        const block = a < b && list.find(el => el.contains(node));
+        if (!block) continue; // outside the span, or the white space between two blocks
+        if (block === last) out.at(-1)[1] = b; else out.push([a, b]);
+        last = block;
+      }
+      return out.filter(p => flat.slice(...p).trim());
+    };
+
+    // Two buttons, fixed at the foot of the screen so they stay clear of the system's own menu beside a selection,
+    // or at the top when the selection is in the lower part of the screen, so they do not cover it. The first
+    // highlights the selection or removes the tapped highlight; the second reads that passage aloud, and only it.
     const bar = document.querySelector(".hl-bar");
-    const act = bar.querySelector("button");
+    const [act, hear] = bar.querySelectorAll("button");
     let pending = null; // ["add", span] or ["remove", index]
-    const hide = () => { pending = null; bar.hidden = true; };
+    let reading = null; // the span being read aloud, kept as it was when Listen was pressed
+    const target = () => pending && (pending[0] === "add" ? pending[1] : spans[pending[1]]);
+    // "Stop" while the offered passage is the one being read; a different passage offers "Listen", which
+    // changes over to it. While a passage is read the bar stays up, so Stop is always within reach.
+    const reads = span => reading && (!span || (span[0] === reading[0] && span[1] === reading[1]));
+    const show = () => {
+      act.hidden = !pending;
+      hear.hidden = !canSpeak || !(pending || reading);
+      hear.textContent = reads(target()) ? "Stop" : "Listen";
+      bar.hidden = act.hidden && hear.hidden;
+    };
+    const hide = () => { pending = null; show(); };
     const offer = (what, label, range) => {
       pending = what;
       act.textContent = label;
       bar.classList.toggle("top", range.getBoundingClientRect().bottom > innerHeight * 0.6);
-      bar.hidden = false;
+      show();
+    };
+    passageEnd = () => {
+      reading = null;
+      CSS.highlights.delete("speaking");
+      show();
     };
     let wait;
     document.addEventListener("selectionchange", () => {
@@ -216,9 +252,27 @@
       if (i < 0) hide(); else offer(["remove", i], "Remove highlight", toRange(spans[i]));
     });
     document.addEventListener("click", e => { if (!text.contains(e.target) && !bar.contains(e.target)) hide(); });
-    document.addEventListener("keydown", e => { if (e.key === "Escape") hide(); });
-    // Keep the selection and the focus where they are when the button is pressed.
+    document.addEventListener("keydown", e => {
+      if (e.key !== "Escape") return;
+      if (reading) stop();
+      hide();
+    });
+    // Keep the selection and the focus where they are when a button is pressed.
     act.addEventListener("pointerdown", e => e.preventDefault());
+    hear.addEventListener("pointerdown", e => e.preventDefault());
+    // The passage is read from a copy of its span, so highlighting it, removing its highlight or selecting
+    // something else meanwhile does not change what is being read.
+    hear.addEventListener("click", () => {
+      const span = target();
+      const again = reads(span);
+      if (!span && !again) return;
+      stop();
+      if (again) return;
+      reading = [...span];
+      const mark = p => { const h = new Highlight(toRange(p)); h.priority = 1; return h; }; // drawn over a highlight
+      speak(pieces(span).map(p => ({ words: flat.slice(...p), mark: () => CSS.highlights.set("speaking", mark(p)) })), 0, run);
+      show();
+    });
     act.addEventListener("click", () => {
       if (!pending) return;
       const [kind, value] = pending;
