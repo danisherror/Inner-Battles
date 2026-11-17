@@ -283,8 +283,8 @@ article.md .speaking { background: var(--accent-soft); box-shadow: 0 0 0 var(--s
 .hl-bar.top { top: calc(var(--space-4) + env(safe-area-inset-top, 0px)); bottom: auto; }
 .hl-bar button { pointer-events: auto; min-height: 48px; padding: 0 var(--space-5); font: inherit; font-weight: bold; color: var(--bg); background: var(--accent); border: 0; border-radius: var(--radius-pill); box-shadow: 0 6px 20px rgba(0, 0, 0, .25); cursor: pointer; }
 
-/* home page: saved articles and highlights (reader.js); hidden while searching */
-.searching .mine { display: none; }
+/* home page: saved articles and highlights (reader.js); hidden while searching, as is "Clear reading progress" */
+.searching .mine, .searching .reset { display: none; }
 .mine ol { list-style: none; margin: var(--space-4) 0 0; padding: 0; max-width: var(--measure); }
 .mine ol > li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2) var(--space-4); padding: var(--space-3) 0; border-bottom: 1px solid var(--line); }
 .mine a { color: var(--accent); font-weight: bold; text-underline-offset: 3px; }
