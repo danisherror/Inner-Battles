@@ -323,8 +323,7 @@ function indexPage() {
       <p class="sub">${SUBTITLE}</p>
       <p>Understand the habits and struggles that hold us back, and learn how to leave them behind.</p>
       <p class="resume" hidden><span class="label">Continue reading</span><a></a></p>
-      <p class="random" hidden><a href="">Read something at random</a></p>
-      <p class="mine-link" hidden><a href="progress.html">Your reading: progress, export and import</a></p>
+      <p class="more"><a class="random" href="" hidden>Read something at random</a><a class="mine-link" href="progress.html" hidden>Your reading</a></p>
       <ul class="lens-list" aria-label="Every topic is read through ${count} lenses">
         <li class="label" aria-hidden="true">${count} lenses</li>
         ${data.lenses.map(l => `<li>${esc(l.name)}</li>`).join("")}

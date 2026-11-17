@@ -83,6 +83,14 @@ Done 2026-11-15, checked in Chrome against a local server that sends the `vercel
   - [x] Included in the export and import.
   - [x] Left out of print, as are the tools, notes and the Listen marking.
 
+## 6a. Phone layout
+
+Done 2026-11-17, checked in Chrome against a local server (pages in same-origin iframes at 320 and 390px, and the home page in the window itself).
+
+- [x] **Article text higher up on a phone.** At 520px and below the Topic and Lens rows of an article or compare page take one line each and scroll sideways, where they wrapped onto two or three; `site.js` scrolls each row so the current one is in view. The overview page keeps its wrapped rows, since it is the full list. Measured at 390px: the article starts 461px down, where it started 709px down; no horizontal page overflow at 320 or 390px. On `Envy/stories/philosophical.html` the last pill of each row was in view on arrival.
+- [x] **Shorter home page hero.** "Read something at random" and "Your reading" (shortened from "Your reading: progress, export and import") share one line, and the gaps between the hero's rows are smaller. Measured with a "Continue reading" link showing: the first card is 857px down at 390px, where it was about 1,000px; in a 1400px-wide window it is 822px down (755px without the link). The 404 and offline pages share the hero's padding.
+- [x] **Sources "#" link** is 24px square, where it was 18 by 14px.
+
 ## 7. Offline and install
 
 Done 2026-11-15, checked in Chrome against a local server that sends the `vercel.json` headers. Not checked: installing the site on a phone, or the deployed site.

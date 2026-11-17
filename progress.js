@@ -125,7 +125,7 @@
     const unread = all.filter(k => !read.includes(k));
     const pool = unread.length ? unread : all;
     const random = document.querySelector(".random");
-    random.querySelector("a").href = pool[Math.floor(Math.random() * pool.length)] + ".html";
+    random.href = pool[Math.floor(Math.random() * pool.length)] + ".html";
     random.hidden = !pool.length;
     const reset = document.querySelector(".reset");
     if (reset) reset.hidden = !read.length;

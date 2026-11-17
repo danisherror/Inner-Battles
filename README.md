@@ -139,7 +139,7 @@ Sins/
   <Sin>/index.html  generated topic overview: every section in every lens, with ticks on the articles read
   style.css       styles, including the reader-selectable themes (Paper, Sepia, Grey, Dark, Black)
   fonts/          Literata 5.3.0 (variable weight, latin and latin-ext, upright and italic) and its OFL licence, from https://www.npmjs.com/package/@fontsource-variable/literata
-  site.js         on every page but sin.html: the search link in the site bar, keyboard shortcuts (/ for search, left and right arrows for previous and next) and marking the searched words on an article opened from the search results; registers the service worker, shows "Available offline" on an article once it is kept, and lists the kept pages on offline.html
+  site.js         on every page but sin.html: the search link in the site bar, keyboard shortcuts (/ for search, left and right arrows for previous and next), scrolling the current topic and lens into view on a phone, where those rows take one line each, and marking the searched words on an article opened from the search results; registers the service worker, shows "Available offline" on an article once it is kept, and lists the kept pages on offline.html
   theme.js        Display menu in the site bar: theme and text size, both saved in the browser; also sets the browser bar colour (theme-color) to the theme picked
   home.js         home page and 404 page: search box that narrows the topic cards and lists articles whose text matches; on the home page, lens buttons that choose which lens the cards open on (default: the lens read last)
   redirect.js     used by sin.html to send old links to the static page
