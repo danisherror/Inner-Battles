@@ -1,5 +1,6 @@
 // Home page: cards open on the lens chosen with the lens buttons or read last, and a search box narrows
-// the cards and lists the articles whose text matches. The 404 page uses the same search box, without cards.
+// the cards and lists the articles whose text matches, and the reader's own notes that match (reader.js keeps
+// them in localStorage as "notes"). The 404 page uses the same search box, without cards or notes.
 // The box and the lens buttons are hidden in the markup and shown here, so without JavaScript the page is
 // simply the full list.
 (() => {
@@ -40,7 +41,7 @@
 
   // Article search. search.json (written by build.js) holds the text of every article; it is fetched
   // the first time the box is used. Matching ignores case and diacritics, so "issa" finds "issā".
-  const results = document.querySelector(".results");
+  const results = document.querySelector(".results:not(.note-results)");
   const MIN = 3, MAX = 20;
   const fold = s => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
   let index = null, loading = false;
@@ -86,6 +87,34 @@
     p.append(a.text.slice(at, end) + (end < a.text.length ? " …" : ""));
     return p;
   };
+  // The reader's notes: every term must appear in the note or in its article's title. They are read from
+  // localStorage each time, so a note written in another tab is found; build.js puts the names on <main>.
+  const noteBox = document.querySelector(".note-results");
+  let names = {};
+  try { names = JSON.parse(main.dataset.names); } catch (e) {}
+  const name = (kind, id) => (names[kind] && names[kind][id]) || id;
+  const searchNotes = terms => {
+    let notes = null;
+    try { notes = JSON.parse(localStorage.getItem("notes")); } catch (e) {}
+    if (!notes || typeof notes !== "object" || Array.isArray(notes)) return [];
+    return Object.entries(notes).filter(([path, t]) => /^[\w-]+\/[\w-]+\/[\w-]+$/.test(path) && typeof t === "string").map(([path, t]) => {
+      const [sin, section, lensId] = path.split("/");
+      const title = `${name("sins", sin)}: ${name("sections", section)} (${name("lenses", lensId)})`;
+      const text = t.trim().replace(/\s+/g, " ");
+      return { path, title, text, hay: fold(text), head: fold(title) };
+    }).filter(n => n.text && terms.every(t => n.hay.includes(t) || n.head.includes(t)));
+  };
+  const showNotes = (hits, terms) => {
+    noteBox.hidden = !hits.length;
+    noteBox.querySelector("ol").replaceChildren(...hits.map(n => {
+      const li = document.createElement("li");
+      const link = document.createElement("a");
+      link.href = `${base}${n.path}.html#note`; // the note box under the article
+      link.textContent = n.title;
+      li.append(link, snippet(n, terms));
+      return li;
+    }));
+  };
   const show = (hits, terms) => {
     results.hidden = !hits.length;
     results.querySelector("h2").textContent = hits.length > MAX ? `In the articles: first ${MAX} of ${hits.length}` : "In the articles";
@@ -114,12 +143,15 @@
     const searching = index && fold(typed).length >= MIN;
     const hits = searching ? search(terms) : [];
     show(hits, terms);
+    const notes = noteBox && fold(typed).length >= MIN ? searchNotes(terms) : [];
+    if (noteBox) showNotes(notes, terms);
     const topics = shown ? `${shown} of ${cards.length} topics` : "No topics";
     const articles = `${hits.length} articles`;
+    const own = notes.length ? `, ${notes.length} of your notes` : "";
     status.textContent = !q ? ""
-      : searching ? (shown || hits.length ? (cards.length ? `${topics}, ${articles}` : articles) : `Nothing matches "${typed}"`)
+      : searching ? (shown || hits.length || notes.length ? (cards.length ? `${topics}, ${articles}` : articles) + own : `Nothing matches "${typed}"`)
       : !cards.length ? ""
-      : shown ? topics : `No topics match "${typed}"`;
+      : shown || notes.length ? topics + own : `No topics match "${typed}"`;
   };
   input.addEventListener("input", () => { loadIndex(); apply(); });
   input.addEventListener("focus", loadIndex);

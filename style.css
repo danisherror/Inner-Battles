@@ -138,6 +138,7 @@ header.hero p.more { display: flex; flex-wrap: wrap; justify-content: center; ga
 header.hero p.filter-status { min-height: 1.5em; margin-top: var(--space-2); font-size: .75rem; }
 .results { max-width: var(--measure); margin-top: var(--space-5); padding: var(--space-5) 0 var(--space-6); border-top: 1px solid var(--line); }
 .results h2 { margin: 0; }
+.note-results { padding-bottom: 0; } /* the article results follow with their own space */
 .results ol { list-style: none; margin: var(--space-3) 0 0; padding: 0; }
 .results li { padding: var(--space-3) 0; border-bottom: 1px solid var(--line); }
 .results a { color: var(--accent); font-weight: bold; text-underline-offset: 3px; }
@@ -244,7 +245,7 @@ article.md a.anchor:hover { color: var(--accent); }
 article.md mark { background: var(--accent-soft); color: var(--text); padding: 0 2px; border-radius: 3px; }
 
 /* reader tools above the article (reader.js; the Read toggle is progress.js) */
-.tools { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); padding: var(--space-4) 0 0; }
+.tools { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); padding: var(--space-4) 0 0; }
 .tools button, .transfer button, .transfer .import, .saved-list .remove {
   display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; padding: var(--space-1) var(--space-3);
   font: inherit; font-size: .9rem; color: var(--text); background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-pill); cursor: pointer;
@@ -259,7 +260,8 @@ article.md mark { background: var(--accent-soft); color: var(--text); padding: 0
 .tools .share .icon::before { content: "\2197"; }
 .tools .listen .icon::before { content: "\25B6"; }
 .tools .listen[aria-pressed="true"] .icon::before { content: "\25A0"; }
-.tools-status { font-family: var(--sans); font-size: .85rem; color: var(--muted); }
+/* "Saved", "Link copied" and the like: placed in the gap under the buttons, so the text below does not move when it appears */
+.tools-status { position: absolute; left: 0; top: 100%; margin-top: var(--space-1); font-family: var(--sans); font-size: .85rem; line-height: 1.3; color: var(--muted); }
 /* shown once the page is kept by the service worker (site.js) */
 .tools .offline-note { padding: 0 var(--space-2); }
 .tools .offline-note::before { content: "\2193\00a0"; color: var(--accent); }
@@ -271,7 +273,7 @@ article.md .speaking { background: var(--accent-soft); box-shadow: 0 0 0 var(--s
 /* private notes under the article */
 .notes { padding: 0 0 var(--space-5); }
 .notes .label { display: block; margin-bottom: var(--space-2); }
-.notes textarea { display: block; width: 100%; min-height: 6rem; padding: var(--space-3); font: inherit; font-size: 1rem; line-height: 1.5; color: var(--text); background: var(--card); border: 1px solid var(--muted); border-radius: var(--radius-sm); resize: vertical; }
+.notes textarea { scroll-margin-top: var(--space-7); display: block; width: 100%; min-height: 6rem; padding: var(--space-3); font: inherit; font-size: 1rem; line-height: 1.5; color: var(--text); background: var(--card); border: 1px solid var(--muted); border-radius: var(--radius-sm); resize: vertical; }
 .notes textarea:focus-visible { border-color: var(--accent); }
 .notes p { margin: var(--space-2) 0 0; color: var(--muted); font-size: .9rem; line-height: 1.5; }
 .notes a { color: var(--accent); text-underline-offset: 3px; }
@@ -287,7 +289,9 @@ article.md .speaking { background: var(--accent-soft); box-shadow: 0 0 0 var(--s
 .mine ol > li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2) var(--space-4); padding: var(--space-3) 0; border-bottom: 1px solid var(--line); }
 .mine a { color: var(--accent); font-weight: bold; text-underline-offset: 3px; }
 .mine .remove { font-size: .8rem; min-height: 44px; color: var(--muted); }
-.hl-list ol > li { display: block; }
+.hl-list ol > li, .notes-list ol > li { display: block; }
+/* progress.html: every note, as it was typed */
+.notes-list p { margin: var(--space-2) 0 0; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.5; }
 .hl-list ul { margin: var(--space-2) 0 0; padding-left: var(--space-4); border-left: 3px solid var(--hl); list-style: none; }
 .hl-list ul li { margin: var(--space-1) 0; color: var(--text); font-style: italic; line-height: 1.5; }
 

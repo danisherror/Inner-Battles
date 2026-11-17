@@ -91,6 +91,14 @@ Done 2026-11-17, checked in Chrome against a local server (pages in same-origin 
 - [x] **Shorter home page hero.** "Read something at random" and "Your reading" (shortened from "Your reading: progress, export and import") share one line, and the gaps between the hero's rows are smaller. Measured with a "Continue reading" link showing: the first card is 857px down at 390px, where it was about 1,000px; in a 1400px-wide window it is 822px down (755px without the link). The 404 and offline pages share the hero's padding.
 - [x] **Sources "#" link** is 24px square, where it was 18 by 14px.
 
+## 6b. Notes
+
+Done 2026-11-17, checked in Chrome against a local server with two test notes (the window at 1400px, and pages in same-origin iframes at 320px).
+
+- [x] **Tool messages no longer move the text.** "Saved; it is listed on the home page" and the like took a line of their own under the article tools, so the article jumped down for four seconds. The message is now placed in the gap under the buttons. Measured at 320, 390 and 640px with the longest message: the article moves 0px and the message ends 14px above the lens label.
+- [x] **All notes in one place.** `progress.html` lists every note in full under its article's title, as typed (line breaks kept), each title linking to the note box on that article (`#note`). Before, a note could only be found by opening its article or exporting the file. `build.js` puts the topic, section and lens names on `<main>` (`data-names`), because a note is stored under its path alone.
+- [x] **Search covers notes.** On the home page the search box also matches the reader's notes, by the note's text or its article's title, from three letters, ignoring case and diacritics like the article search. They are listed as "In your notes" above the article results and counted in the status line. The notes are read from `localStorage`, so `search.json` is unchanged. Checked: "mudita" found a note containing "muditā" beside the 4 articles; a note containing `<b>` was shown as text. Not on the 404 page, and highlights are not searched.
+
 ## 7. Offline and install
 
 Done 2026-11-15, checked in Chrome against a local server that sends the `vercel.json` headers. Not checked: installing the site on a phone, or the deployed site.

@@ -3,8 +3,8 @@
 // of path: text), Share, Listen (the browser's own speech synthesis) and highlights ("highlights", an object of
 // path: {title, items}). Each highlight is stored as its text with a few words either side, not as character
 // positions, so it survives corrections to the article; one whose text is no longer found is dropped.
-// On the home page: the saved articles and the highlights, as lists. On progress.html: export and import of
-// everything the site keeps in the browser, as a file. The Read toggle beside these tools is run by progress.js.
+// On the home page: the saved articles and the highlights, as lists. On progress.html: every note, each under
+// its article, and export and import of everything the site keeps in the browser, as a file. The Read toggle beside these tools is run by progress.js.
 (() => {
   const PATH = /^[\w-]+\/[\w-]+\/[\w-]+$/;
   const get = (name, fallback) => { try { return JSON.parse(localStorage.getItem(name)) ?? fallback; } catch (e) { return fallback; } };
@@ -287,9 +287,32 @@
     addEventListener("pageshow", lists);
   }
 
-  // --- progress.html: export and import ---
+  // --- progress.html: notes, export and import ---
   const transfer = document.querySelector(".transfer");
   if (!transfer) return;
+  // A note is kept under its article's path; build.js puts the names for the three parts of a path on <main>.
+  let names = {};
+  try { names = JSON.parse(document.querySelector("main").dataset.names); } catch (e) {}
+  const titleOf = path => {
+    const [sin, section, lens] = path.split("/");
+    const name = (kind, id) => (isObject(names[kind]) && names[kind][id]) || id;
+    return `${name("sins", sin)}: ${name("sections", section)} (${name("lenses", lens)})`;
+  };
+  const notesBox = document.querySelector(".notes-list");
+  const listNotes = () => {
+    const notes = Object.entries(notesMap()).filter(([path, t]) => PATH.test(path) && typeof t === "string" && t.trim());
+    notesBox.querySelector("ol").replaceChildren(...notes.map(([path, t]) => {
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = path + ".html#note"; // the note box under the article
+      a.textContent = titleOf(path);
+      const p = document.createElement("p");
+      p.textContent = t.trim();
+      li.append(a, p);
+      return li;
+    }));
+    notesBox.hidden = !notes.length;
+  };
   // Every key the site keeps. The first five hold JSON; the rest are plain strings.
   const JSON_KEYS = ["read", "saved", "notes", "highlights", "last"];
   const TEXT_KEYS = ["lens", "compare", "theme", "size"];
@@ -352,11 +375,12 @@
       if (!isObject(f) || f.format !== FORMAT || !isObject(f.data)) throw new Error();
       merge(f.data);
       kept();
+      listNotes();
       document.dispatchEvent(new Event("readerchange"));
       tstatus.textContent = `Imported ${file.name}. Display settings apply from the next page.`;
     }).catch(() => { tstatus.textContent = `${file.name} is not a reading file exported from this site; nothing was changed.`; });
     input.value = ""; // so the same file can be chosen again
   });
-  addEventListener("pageshow", kept);
+  addEventListener("pageshow", () => { kept(); listNotes(); });
   transfer.hidden = false;
 })();

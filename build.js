@@ -121,6 +121,15 @@ const searchBox = `<div class="filter" id="search" role="search" hidden>
         <p class="filter-status label" role="status"></p>
       </div>`;
 const resultsBox = `<div class="results" role="region" aria-labelledby="results-title" hidden><h2 class="label" id="results-title"></h2><ol></ol></div>`;
+// The reader's own notes that match the search, on the home page only (home.js); they never leave the browser.
+const noteResultsBox = `<div class="results note-results" role="region" aria-labelledby="note-results-title" hidden><h2 class="label" id="note-results-title">In your notes</h2><ol></ol></div>`;
+// A note is kept under its article's path ("Envy/what-it-is/modern"). These names let home.js and reader.js
+// show that article by its title on the pages that list or search notes.
+const NAMES = esc(JSON.stringify({
+  sins: Object.fromEntries(sins.map(s => [s.id, s.name])),
+  sections: Object.fromEntries(sins.flatMap(s => s.topics.map(t => [t.id, t.title]))),
+  lenses: Object.fromEntries(data.lenses.map(l => [l.id, l.name]))
+}));
 const jumpNav = up => `<nav class="jump" aria-label="Sections">${data.kinds.map(k => `<a href="${up}#kind-${k.id}">${esc(k.title)}</a>`).join("")}</nav>`;
 const footer = text => `<footer><p>${text}</p></footer>`;
 
@@ -316,7 +325,7 @@ function indexPage() {
   }).filter(Boolean).join("\n      ");
   return head({ title: `The Seven Sins ${SUBTITLE}`, description: DESCRIPTION, url: `${SITE}/`, type: "website", depth: 0, graph: [{ ...WEBSITE, description: DESCRIPTION, inLanguage: "en" }] }) + `<body>
   ${siteBar(null, "")}
-  <main class="wrap" id="content" data-lenses="${lensIds.join(" ")}">
+  <main class="wrap" id="content" data-lenses="${lensIds.join(" ")}" data-names="${NAMES}">
     <header class="hero">
       <span class="mark" aria-hidden="true">&#10022;</span>
       <h1>The Seven Sins</h1>
@@ -341,6 +350,7 @@ function indexPage() {
       <ol></ol>
     </section>
     ${sections}
+    ${noteResultsBox}
     ${resultsBox}
     <p class="center"><button class="reset" type="button" hidden>Clear reading progress</button></p>
   </main>
@@ -355,7 +365,7 @@ function indexPage() {
 }
 
 // The reader's own page: how much of each topic and lens has been read (progress.js fills in the counts),
-// and export and import of everything kept in the browser (reader.js). Without JavaScript it is a plain list
+// every note the reader has written, and export and import of everything kept in the browser (reader.js). Without JavaScript it is a plain list
 // of the topics. It is about one browser's state, so it is kept out of search results and the sitemap.
 function readingPage() {
   const total = sins.reduce((n, s) => n + s.topics.length * data.lenses.length, 0);
@@ -370,7 +380,7 @@ function readingPage() {
   }).filter(Boolean).join("\n    ");
   return head({ title: "Your reading - The Seven Sins", description: DESCRIPTION, depth: 0, robots: "noindex" }) + `<body>
   ${siteBar("index.html", `<a class="back" href="index.html">&larr; All topics</a>${searchLink("index.html")}`)}
-  <main class="wrap narrow reading" id="content" data-total="${total}">
+  <main class="wrap narrow reading" id="content" data-total="${total}" data-names="${NAMES}">
     <header class="page-head">
       <p class="label">Kept in this browser</p>
       <h1 class="sin-title">Your reading</h1>
@@ -385,6 +395,10 @@ function readingPage() {
       </ul>
     </section>
     ${kinds}
+    <section class="mine notes-list" aria-labelledby="notes-title" hidden>
+      <h2 id="notes-title">Your notes</h2>
+      <ol></ol>
+    </section>
     <section class="transfer" aria-labelledby="transfer-title" hidden>
       <h2 id="transfer-title">Move to another device</h2>
       <p class="kept"></p>
